@@ -52,7 +52,7 @@
   /* Typografi — modulær skala 1.25, serif for overskrifter */
   h1, h2 { font-family: var(--font-serif); font-weight: 600; letter-spacing: -0.01em; }
   h1 { font-size: clamp(2.4rem, 5vw + 1rem, 3.4rem); line-height: 1.08; margin: 0; }
-  h2 { font-size: 1.55rem; line-height: 1.2; margin: 0 0 1rem; }
+  h2 { font-size: 1.75rem; line-height: 1.2; margin: 0 0 1rem; }
   h3 { font-size: 1.0625rem; font-weight: 650; margin: 1.75rem 0 .5rem; }
   p, li { max-width: 65ch; }
 
@@ -62,7 +62,7 @@
   :focus-visible { outline: 2px solid hsl(var(--primary)); outline-offset: 2px; border-radius: 4px; }
 
   /* Hero — én ting er viktigst per skjerm */
-  .hero { padding: clamp(4rem, 10vw, 7rem) 0 clamp(2.5rem, 6vw, 4rem); text-align: left; }
+  .hero { padding: clamp(4rem, 10vw, 7rem) 0 1.5rem; text-align: left; }
   .hero .domene { font-family: var(--font-sans); font-size: .9375rem; font-weight: 600;
                   color: hsl(var(--primary)); letter-spacing: .06em; text-transform: uppercase;
                   margin: 0 0 1rem; }
@@ -70,7 +70,7 @@
                    margin: 1.25rem 0 0; }
   .hero .ingress b { color: hsl(var(--fg)); font-weight: 600; }
 
-  section { margin-block: clamp(4rem, 9vw, 6.5rem); }
+  section { margin-block: clamp(3rem, 7vw, 4.5rem); }
 
   .kort {
     background: hsl(var(--surface));
