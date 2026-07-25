@@ -1,7 +1,8 @@
 RewriteEngine On
-# Tvungen HTTPS
+# Tvungen HTTPS (kun hoveddomenet — subdomener har egne regler)
+RewriteCond %{HTTP_HOST} ^(www\.)?treni\.no$ [NC]
 RewriteCond %{HTTPS} off
 RewriteRule ^(.*)$ https://treni.no/$1 [R=301,L]
-# www -> apex (kanonisk adresse)
+# www -> apex
 RewriteCond %{HTTP_HOST} ^www\.treni\.no$ [NC]
 RewriteRule ^(.*)$ https://treni.no/$1 [R=301,L]
