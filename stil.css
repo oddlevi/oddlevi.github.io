@@ -101,6 +101,9 @@ a:hover { opacity: .72; }
 .btn-ghost:hover { opacity: 1; background: hsl(var(--surface)); border-color: hsl(var(--muted-fg) / .4); }
 
 section { margin-block: clamp(4.5rem, 10vw, 7.5rem); }
+/* undersider: strammere topp */
+.hero.smal { padding-bottom: .25rem; }
+.hero.smal ~ section:first-of-type, .hero.smal + section { margin-top: 2rem; }
 
 /* nøkkeltall-stripe */
 .tall-rad { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
