@@ -3,205 +3,91 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Treningsveilederen — treni.no</title>
-<meta name="description" content="Trenerledet løpsveiledning bygget på dine egne treningsdata. Støtte, kontakt og personvern.">
-<meta property="og:title" content="Treningsveilederen — treni.no">
+<title>Treni — en ekte trener, en analytiker som aldri sover</title>
+<meta name="description" content="Trenerledet løpsveiledning bygget på dine egne Strava-data. Konkrete ukesråd i Telegram, med skadeforebygging først.">
+<meta property="og:title" content="Treni — en ekte trener, en analytiker som aldri sover">
 <meta property="og:description" content="Trenerledet løpsveiledning bygget på dine egne treningsdata.">
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏃</text></svg>">
-<style>
-  /* Design-tokens (design-instruks DEL 4: HSL, semantisk, lys+mørk) */
-  :root {
-    --bg: 40 30% 98%;
-    --fg: 150 15% 12%;
-    --muted-fg: 150 8% 38%;
-    --surface: 145 20% 94%;
-    --border: 145 12% 86%;
-    --primary: 145 45% 24%;
-    --primary-fg: 40 30% 98%;
-    --radius: 12px;
-    --shadow-md: 0 8px 24px -8px hsl(var(--primary) / 0.14);
-    --font-serif: "New York", "Iowan Old Style", Georgia, "Times New Roman", serif;
-    --font-sans: -apple-system, system-ui, "Segoe UI", sans-serif;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: 150 12% 8%;
-      --fg: 40 20% 92%;
-      --muted-fg: 150 6% 64%;
-      --surface: 150 10% 12%;
-      --border: 150 8% 20%;
-      --primary: 145 32% 58%;
-      --primary-fg: 150 15% 8%;
-      --shadow-md: 0 8px 24px -8px hsl(0 0% 0% / 0.5);
-    }
-  }
-  * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body {
-    margin: 0;
-    background: hsl(var(--bg));
-    color: hsl(var(--fg));
-    font-family: var(--font-sans);
-    font-size: 1.0625rem;
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-  }
-  main { max-width: 44rem; margin-inline: auto; padding-inline: clamp(1.25rem, 4vw, 2rem); }
-
-  /* Typografi — modulær skala 1.25, serif for overskrifter */
-  h1, h2 { font-family: var(--font-serif); font-weight: 600; letter-spacing: -0.01em; }
-  h1 { font-size: clamp(1.9rem, 8.5vw, 3.4rem); line-height: 1.08; margin: 0; overflow-wrap: break-word; }
-  h2 { font-size: 1.75rem; line-height: 1.2; margin: 0 0 1rem; }
-  h3 { font-size: 1.0625rem; font-weight: 650; margin: 1.75rem 0 .5rem; }
-  p, li { max-width: 65ch; }
-
-  a { color: hsl(var(--primary)); text-decoration-thickness: 1px; text-underline-offset: 3px;
-      transition: opacity 160ms cubic-bezier(0.22, 1, 0.36, 1); }
-  a:hover { opacity: .75; }
-  :focus-visible { outline: 2px solid hsl(var(--primary)); outline-offset: 2px; border-radius: 4px; }
-
-  /* Hero — én ting er viktigst per skjerm */
-  .hero { padding: clamp(4rem, 10vw, 7rem) 0 1.5rem; text-align: left; }
-  .hero .domene { font-family: var(--font-sans); font-size: .9375rem; font-weight: 600;
-                  color: hsl(var(--primary)); letter-spacing: .06em; text-transform: uppercase;
-                  margin: 0 0 1rem; }
-  .hero .ingress { font-size: 1.25rem; line-height: 1.5; color: hsl(var(--muted-fg));
-                   margin: 1.25rem 0 0; }
-  .hero .ingress b { color: hsl(var(--fg)); font-weight: 600; }
-
-  section { margin-block: clamp(3rem, 7vw, 4.5rem); }
-
-  .kort {
-    background: hsl(var(--surface));
-    border: 1px solid hsl(var(--border));
-    border-radius: var(--radius);
-    padding: 1.5rem 1.75rem;
-    box-shadow: var(--shadow-md);
-  }
-
-  ul { padding-left: 1.25rem; margin: .75rem 0; }
-  li { margin-bottom: .55rem; }
-  li::marker { color: hsl(var(--primary)); }
-
-  .liten { font-size: .9375rem; color: hsl(var(--muted-fg)); }
-
-  .en-blokk { border-left: 3px solid hsl(var(--border)); padding-left: 1.25rem; }
-  .en-blokk p { color: hsl(var(--muted-fg)); }
-  .en-blokk b { color: hsl(var(--fg)); }
-
-  footer {
-    margin-top: clamp(4rem, 9vw, 6rem);
-    padding: 2rem 0 3rem;
-    border-top: 1px solid hsl(var(--border));
-    font-size: .875rem;
-    color: hsl(var(--muted-fg));
-  }
-  footer p { margin: .35rem 0; }
-
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
-    html { scroll-behavior: auto; }
-  }
-</style>
+<link rel="stylesheet" href="stil.css">
 </head>
 <body>
-<main>
+<div class="bakteppe" aria-hidden="true"></div>
+<main class="bred">
 
 <header class="hero">
-  <p class="domene">treni.no</p>
-  <h1>Treningsveilederen</h1>
-  <p class="ingress">En <b>ekte trener</b> med en analytiker som aldri sover. Øktene dine
-  hentes fra Strava, vurderes med skadeforebygging først — og hver uke får du konkrete
-  råd i Telegram, alltid med treneren din i loopen.</p>
+  <p class="kicker reveal">treni.no</p>
+  <h1 class="reveal">En ekte trener.<br>En analytiker som aldri&nbsp;sover.</h1>
+  <p class="ingress reveal">Øktene dine hentes fra Strava og vurderes hver morgen —
+  <b>skadeforebygging først</b>. Hver uke får du konkrete råd i Telegram, alltid med
+  treneren din i loopen.</p>
+  <div class="knapper reveal">
+    <a class="btn btn-primar" href="mailto:odd.levi@gmail.com?subject=Jeg%20vil%20teste%20Treni">Bli testløper</a>
+    <a class="btn btn-ghost" href="#slik">Slik virker det</a>
+  </div>
 </header>
 
-<section aria-labelledby="stotte">
-  <h2 id="stotte">Støtte og kontakt</h2>
-  <ul>
-    <li><b>Spørsmål om treningen eller rådene:</b> skriv i Telegram-gruppa di, eller tagg
-        <b>@VeilederenAIBot</b> — treneren følger med og svarer.</li>
-    <li><b>Alt annet</b> (tilgang, data, feil, ønsker): e-post til
-        <a href="mailto:odd.levi@gmail.com">odd.levi@gmail.com</a>. Du får svar innen 1–2 virkedager.</li>
-  </ul>
-
-  <h3>Koble fra / slette data</h3>
-  <ul>
-    <li>Du kan når som helst trekke tilbake Strava-tilgangen:
-        <a href="https://www.strava.com/settings/apps">strava.com/settings/apps</a> →
-        finn appen → <i>Revoke Access</i>. Da hentes ingen nye økter.</li>
-    <li>Vil du også slette dataene som allerede er analysert, send en e-post — alt slettes
-        innen 30 dager, og du får bekreftelse.</li>
+<section aria-label="Nøkkeltall">
+  <ul class="tall-rad">
+    <li><span class="tall">80/20</span><p>av tiden rolig — det er sånn form bygges</p></li>
+    <li><span class="tall">+10 %</span><p>maks volumøkning per uke. Alltid.</p></li>
+    <li><span class="tall">Hver dag</span><p>leses øktene dine — og følges opp</p></li>
+    <li><span class="tall">6</span><p>løpere tester nå, fra mosjonist til fjelløper</p></li>
   </ul>
 </section>
 
-<section aria-labelledby="personvern">
-  <h2 id="personvern">Personvernerklæring</h2>
-  <p class="liten">Sist oppdatert 26. juli 2026.</p>
+<section id="slik" aria-labelledby="slik-t">
+  <p class="kicker">Slik virker det</p>
+  <h2 id="slik-t">Tre steg — så er analytikeren i gang</h2>
+  <ol class="steg">
+    <li><span class="nr">1</span><b>Koble Strava</b>
+      <p>To trykk og et tydelig samtykke. Vi henter øktene dine — distanse, tid, puls,
+      drag — automatisk hver morgen.</p></li>
+    <li><span class="nr">2</span><b>Motoren vurderer</b>
+      <p>En regelmotor med skadeforebygging som førsteprioritet: belastning mot det
+      kroppen er vant til, rolig som faktisk er rolig, harde økter innenfor planen.</p></li>
+    <li><span class="nr">3</span><b>Treneren leverer</b>
+      <p>Konkrete ukesråd i Telegram — antall drag, pauser, puls — alltid sett over av
+      en ekte trener. Still spørsmål når som helst.</p></li>
+  </ol>
+</section>
 
-  <h3>Hvem er ansvarlig</h3>
-  <p>PAULSEN UTVIKLING (enkeltpersonforetak, org.nr 938 158 614, Norge) er
-  behandlingsansvarlig. Kontakt: <a href="mailto:odd.levi@gmail.com">odd.levi@gmail.com</a>.</p>
+<section aria-labelledby="prinsipp-t">
+  <blockquote class="sitat" id="prinsipp-t">Det er ikke hvor mye du løper som skader deg —
+  det er hvor mye mer enn kroppen er vant til.</blockquote>
+  <p>Prinsippet bak hver eneste vurdering. Formfølelse er ikke skadebeskyttelse.</p>
+</section>
 
-  <h3>Hvilke opplysninger vi behandler</h3>
-  <ul>
-    <li><b>Treningsdata fra Strava</b> (via offisiell API, etter ditt uttrykkelige samtykke i
-        Strava-innloggingen): økter, distanse, tid, puls, runder/drag og øktbeskrivelser.</li>
-    <li><b>Det du selv oppgir i oppstartsintervjuet:</b> mål, planlagte løp, alder,
-        terskelverdier — og eventuelle helseforhold du velger å dele, slik at rådene tar
-        hensyn til dem.</li>
-    <li><b>Meldinger i Telegram-gruppa di</b> som gjelder treningen (f.eks. «ferie neste uke»,
-        «kjente foten») — de brukes til å gi deg riktigere råd.</li>
+<section aria-labelledby="faar-t">
+  <p class="kicker">Det du får</p>
+  <h2 id="faar-t">Som å ha en trener som ser hver økt</h2>
+  <ul class="liste">
+    <li><b>Ukesråd hver mandag</b> — konkrete økter med fart, puls, drag og pauser,
+        bygget på uka du faktisk gjennomførte.</li>
+    <li><b>Daglig oppfølging</b> — øktene kvitteres og vurderes; ros når du treffer,
+        vennlig påminnelse når økta ble hardere enn planlagt.</li>
+    <li><b>En navngitt trener</b> — ikke en app alene. Rådene ses over av et menneske
+        som kjenner deg, og helse går alltid til fagpersonell, aldri til en KI.</li>
+    <li><b>Terreng eller asfalt</b> — fjelløpere veiledes på tid og puls i motbakke,
+        asfaltløpere på fart. På norsk eller engelsk.</li>
+    <li><b>Dataene forblir dine</b> — lagres lokalt hos trenerteamet, selges aldri.
+        Koble fra når som helst. <a href="personvern.html">Les personvernerklæringen</a>.</li>
   </ul>
+</section>
 
-  <h3>Hva opplysningene brukes til</h3>
-  <p>Ett formål: å gi deg personlig treningsveiledning fra din navngitte trener, med
-  skadeforebygging først. Analysen (belastning, volumutvikling, intensitetsfordeling) gjøres
-  av en deterministisk regelmotor. Ingen data selges, deles med tredjeparter for markedsføring,
-  eller brukes til noe annet enn veiledningen din. Ingen andre løpere ser dine data.</p>
-
-  <div class="kort">
-    <h3 style="margin-top:0">Åpenhet om KI (AI-transparenserklæring)</h3>
-    <p style="margin-bottom:0">Selve analysen er regelstyrt — ikke KI. Vi bruker en språkmodell
-    (Anthropic sitt API) kun til å <b>formulere</b> regelmotorens funn som lesbar tekst. Dataene
-    behandles flyktig under genereringen, lagres ikke hos leverandøren og brukes ikke til å trene
-    KI-modeller (avtalefestet i leverandørens kommersielle vilkår). Du samtykker til dette før
-    oppstart, og samtykket kan når som helst trekkes tilbake — da stopper all behandling.</p>
+<section aria-label="Bli med">
+  <div class="avslutt">
+    <h2>Vil du løpe skadefritt — og fortere?</h2>
+    <p>Vi tar inn noen få testløpere om gangen, så treneren faktisk rekker å se deg.</p>
+    <a class="btn" href="mailto:odd.levi@gmail.com?subject=Jeg%20vil%20teste%20Treni">Ta kontakt — bli testløper</a>
   </div>
-
-  <h3>Behandlingsgrunnlag, lagring og dine rettigheter</h3>
-  <ul>
-    <li><b>Grunnlag:</b> ditt samtykke (GDPR art. 6(1)(a); for helseopplysninger du selv
-        deler: art. 9(2)(a)). Samtykket kan trekkes når som helst.</li>
-    <li><b>Lagring:</b> dataene lagres lokalt hos trenerteamet i Norge, med daglig
-        sikkerhetskopiering. De beholdes så lenge du bruker tjenesten.</li>
-    <li><b>Rettigheter:</b> du kan kreve innsyn, retting, sletting, begrensning og
-        dataportabilitet — én e-post er nok. Du kan også klage til Datatilsynet
-        (<a href="https://www.datatilsynet.no">datatilsynet.no</a>).</li>
-  </ul>
-</section>
-
-<section aria-labelledby="english" class="en-blokk">
-  <h2 id="english">English summary</h2>
-  <p><b>What this is:</b> Treningsveilederen (treni.no) is a coach-led running-guidance
-  service run by PAULSEN UTVIKLING (Norwegian sole proprietorship, org. no. 938 158 614).
-  Your Strava activities are fetched with your explicit OAuth consent, analysed by a
-  deterministic rule engine focused on injury prevention, and your named coach delivers
-  weekly guidance via Telegram.</p>
-  <p><b>Support:</b> ask in your Telegram group (tag @VeilederenAIBot) or email
-  <a href="mailto:odd.levi@gmail.com">odd.levi@gmail.com</a>. <b>Disconnect any time</b> at
-  <a href="https://www.strava.com/settings/apps">strava.com/settings/apps</a> → Revoke
-  Access; email us to have stored data deleted (within 30 days, with confirmation).</p>
-  <p><b>Privacy &amp; AI transparency:</b> we process your training data, your interview
-  answers and training-related chat messages solely to provide your coaching. Analysis is
-  rule-based; a large-language-model API (Anthropic) is used only to phrase the engine's
-  findings as readable text — processed transiently, never stored by the provider, never
-  used for model training. Legal basis is your consent, withdrawable at any time. Data is
-  stored locally with the coach team in Norway, never sold or shared. You may request
-  access, rectification, deletion or portability by email.</p>
 </section>
 
 <footer>
+  <nav aria-label="Bunnmeny">
+    <a href="stotte.html">Støtte og kontakt</a>
+    <a href="personvern.html">Personvern</a>
+  </nav>
   <p>PAULSEN UTVIKLING · org.nr 938 158 614 · Norge ·
      <a href="mailto:odd.levi@gmail.com">odd.levi@gmail.com</a></p>
   <p>Powered by Strava — this service is not affiliated with or endorsed by Strava.</p>
