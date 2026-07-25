@@ -170,3 +170,26 @@ footer nav a { font-weight: 600; }
   *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
   html { scroll-behavior: auto; }
 }
+
+/* Hero-foto-variant (Simons tips 26.07): full bredde, mørkt gradient-overlegg
+   fra samme fargebase så tekst og lime-CTA leser godt. Foto: Pexels (fri lisens). */
+.hero-foto {
+  width: 100vw; margin-left: calc(50% - 50vw);
+  padding: clamp(6rem, 15vw, 9.5rem) 0 clamp(3rem, 7vw, 4.5rem);
+  position: relative;
+  background:
+    linear-gradient(100deg, hsl(162 26% 6% / .88) 22%, hsl(162 26% 6% / .55) 55%, hsl(162 26% 6% / .25) 100%),
+    linear-gradient(to top, hsl(162 26% 6% / .82) 0%, hsl(162 26% 6% / 0) 45%),
+    url("bilder/hero.jpg") center 32% / cover no-repeat;
+}
+.hero-foto .indre { max-width: 62rem; margin-inline: auto;
+                    padding-inline: clamp(1.25rem, 4vw, 2rem); }
+.hero-foto h1 { background: linear-gradient(120deg, hsl(42 30% 96%) 30%, hsl(84 60% 72%) 90%);
+                -webkit-background-clip: text; background-clip: text; }
+.hero-foto .ingress { color: hsl(40 20% 82%); }
+.hero-foto .ingress b { color: hsl(42 30% 96%); }
+.hero-foto .kicker { color: hsl(84 70% 60%); }
+.hero-foto .btn-primar { background: linear-gradient(135deg, hsl(84 70% 52%), hsl(74 75% 44%));
+                         color: hsl(162 30% 6%); }
+.hero-foto .btn-ghost { color: hsl(42 30% 96%); border-color: hsl(42 30% 96% / .35); }
+.hero-foto .btn-ghost:hover { background: hsl(42 30% 96% / .12); }
