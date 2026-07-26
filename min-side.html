@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Min side — din egen treningsoversikt | Treni</title>
+<meta name="description" content="Hver Treni-løper har sin egen side: belastning i klartekst, ukesvolum, kvalitetsminutter og alle øktene — oppdatert hver morgen fra Strava.">
+<meta property="og:title" content="Min side — din egen treningsoversikt | Treni">
+<meta property="og:description" content="Belastningen din i klartekst, oppdatert hver morgen. Personlig lenke — ingen passord.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏃</text></svg>">
+<link rel="stylesheet" href="stil.css?v=5">
+<style>
+/* Demo-dashbordet — samme formspråk som min.treni.no, scopet til .demo */
+.demo-ramme { max-width: 46rem; margin: 2.2rem auto 0; }
+.demo-merkelapp { display: inline-block; font-size: .8rem; font-weight: 700;
+  letter-spacing: .06em; text-transform: uppercase; color: hsl(var(--muted-fg));
+  border: 1.5px dashed hsl(var(--border)); border-radius: 999px;
+  padding: .3rem .9rem; margin-bottom: .9rem; }
+.demo { background: hsl(var(--bg)); border: 1px solid hsl(var(--border));
+  border-radius: calc(var(--radius) + 6px); padding: 1.4rem clamp(.9rem, 3vw, 1.8rem) 1.8rem;
+  box-shadow: var(--shadow-md); }
+.demo .merke { font-size: .8rem; font-weight: 650; letter-spacing: .09em;
+  text-transform: uppercase; color: hsl(var(--accent)); }
+.demo h3 { font-family: var(--font-serif); font-size: 1.7rem; margin: .1rem 0 .15rem; }
+.demo .undertekst { color: hsl(var(--muted-fg)); font-size: .9rem; }
+.demo .pill { display: inline-block; font-size: .83rem; font-weight: 650; margin-top: .5rem;
+  padding: .22rem .75rem; border-radius: 999px;
+  background: hsl(145 55% 32% / .14); color: hsl(145 55% 28%);
+  border: 1px solid hsl(145 55% 32% / .4); }
+@media (prefers-color-scheme: dark) { .demo .pill { color: hsl(145 55% 55%); } }
+.demo .kort { background: hsl(var(--surface)); border: 1px solid hsl(var(--border));
+  border-radius: var(--radius); padding: 1rem 1.15rem; margin-top: .9rem; }
+.demo .kort h4 { font-size: .78rem; letter-spacing: .07em; text-transform: uppercase;
+  color: hsl(var(--muted-fg)); margin: 0 0 .3rem; font-weight: 650; }
+.demo .tall-linje { font-family: var(--font-serif); font-size: 1.45rem;
+  font-variant-numeric: tabular-nums; }
+.demo .tall-linje small { font-family: var(--font-sans); font-size: .85rem;
+  color: hsl(var(--muted-fg)); }
+.demo .stabel { height: 1.25rem; border-radius: 999px; overflow: hidden; display: flex;
+  background: hsl(var(--border)); margin-top: .45rem; }
+.demo .stabel .fyll { background: hsl(var(--primary) / .82); width: 62%; }
+.demo .stabel-tekst { display: flex; justify-content: space-between; font-size: .8rem;
+  color: hsl(var(--muted-fg)); margin-top: .3rem; font-variant-numeric: tabular-nums; }
+.demo .obs { border: 1.5px solid hsl(43 85% 38% / .55); background: hsl(43 85% 38% / .09);
+  border-radius: var(--radius); padding: .9rem 1.1rem; margin-top: .9rem;
+  display: flex; gap: .6rem; font-size: .9rem; }
+.demo .obs p { margin: 0; }
+.demo .grid { display: grid; gap: .9rem; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+.demo .stor { font-family: var(--font-serif); font-size: 1.9rem; line-height: 1.05;
+  font-variant-numeric: tabular-nums; }
+.demo .stor small { font-size: .85rem; color: hsl(var(--muted-fg)); font-family: var(--font-sans); }
+.demo .delt { display: flex; align-items: baseline; justify-content: space-between; gap: .7rem; }
+.demo svg { display: block; width: 100%; height: auto; }
+.demo .akse { font: 9.5px var(--font-sans); fill: hsl(var(--muted-fg)); }
+.demo .dots { display: flex; gap: .45rem; margin-top: .3rem; }
+.demo .dot { width: 1.7rem; height: 1.7rem; border-radius: 50%; display: grid;
+  place-items: center; font-size: .72rem; font-weight: 650;
+  background: hsl(var(--primary)); color: hsl(var(--primary-fg)); }
+.demo .dot.tom { background: hsl(var(--border)); }
+.demo .dag { padding: .6rem 0; border-top: 1px solid hsl(var(--border));
+  display: grid; grid-template-columns: 2.6rem 1fr; gap: 0 .5rem; }
+.demo .dag:first-of-type { border-top: 0; }
+.demo .dag .navn { font-weight: 650; font-size: .95rem; }
+.demo .rad1 { display: flex; align-items: baseline; gap: .5rem; }
+.demo .dag .km { margin-left: auto; font-variant-numeric: tabular-nums; font-weight: 650;
+  font-size: .95rem; }
+.demo .badge { font-size: .66rem; font-weight: 700; letter-spacing: .05em;
+  text-transform: uppercase; padding: .08rem .45rem; border-radius: 999px; }
+.demo .b-rolig { background: hsl(145 55% 32% / .16); color: hsl(145 55% 28%); }
+.demo .b-hard { background: hsl(8 70% 44% / .14); color: hsl(8 70% 40%); }
+@media (prefers-color-scheme: dark) {
+  .demo .b-rolig { color: hsl(145 55% 55%); }
+  .demo .b-hard { color: hsl(8 80% 62%); }
+}
+.demo .dag .detalj { font-size: .86rem; margin-top: .1rem; font-variant-numeric: tabular-nums; }
+.demo .dag .knad { font-family: var(--font-serif); font-style: italic; font-size: .85rem;
+  color: hsl(var(--muted-fg)); margin-top: .12rem; }
+.slik-faar { max-width: 46rem; margin-inline: auto; }
+</style>
+</head>
+<body>
+<div class="bakteppe" aria-hidden="true"></div>
+<main class="bred">
+
+<header class="hero"><div class="indre">
+  <p class="kicker reveal">treni.no · min side</p>
+  <h1 class="reveal">Din egen side.<br>Bare din.</h1>
+  <p class="ingress reveal">Hver Treni-løper har sin egen side: belastningen i klartekst,
+  ukesvolumet bak den, kvalitetsminuttene — og hver eneste økt, med veilederens merknad.
+  Oppdatert automatisk hver morgen fra Strava.</p>
+  <div class="knapper reveal">
+    <a class="btn btn-primar" href="bli-testloper.php">Bli testløper</a>
+    <a class="btn btn-ghost" href="#demo">Se hvordan den ser ut</a>
+  </div>
+</div></header>
+
+<section id="demo" aria-label="Eksempel på Min side">
+  <div class="demo-ramme">
+    <span class="demo-merkelapp">Eksempel — «Ingrid» er en fiktiv løper</span>
+    <div class="demo">
+      <span class="merke">treni.no · min side</span>
+      <h3>Ingrid Eksempel</h3>
+      <span class="undertekst">Uke 30 · trinn 2 · oppdatert i dag 07:04</span><br>
+      <span class="pill">🟢 Alt i rute — fortsett sånn</span>
+
+      <div class="kort">
+        <h4>Uka så langt</h4>
+        <span class="tall-linje">34,5 <small>av 56 km — taket er normalen din + 10 %</small></span>
+        <div class="stabel"><div class="fyll"></div></div>
+        <div class="stabel-tekst"><span>4 økter</span><span>1 av 2 harde brukt</span></div>
+      </div>
+
+      <div class="obs"><span>🟡</span>
+        <p><b>Sånn sier vi ifra:</b> «Forrige uke lå du 18 % over det kroppen er vant
+        til. Det er innenfor — men neste økning bør vente ei uke.» Når tallene peker
+        mot skade, får du beskjed i klartekst — før det skjer.</p></div>
+
+      <div class="grid">
+        <div class="kort"><h4>Belastning</h4>
+          <div class="delt"><span class="stor">1,08</span>
+            <span class="undertekst">mål: 0,8–1,3</span></div>
+          <p class="undertekst" style="margin:.35rem 0 0">Siste 7 dager: 51,2 km, mot
+          47,3 km/uke som kroppen er vant til.</p></div>
+        <div class="kort"><h4>Ukesvolum — siste uker · nå</h4>
+          <svg viewBox="0 0 300 104" role="img" aria-label="Ukesvolum, fem uker og nå">
+            <rect x="6"   y="44" width="38" height="52" rx="4" fill="hsl(152 62% 20% / .45)"/>
+            <rect x="56"  y="34" width="38" height="62" rx="4" fill="hsl(152 62% 20% / .45)"/>
+            <rect x="106" y="52" width="38" height="44" rx="4" fill="hsl(152 62% 20% / .45)"/>
+            <rect x="156" y="28" width="38" height="68" rx="4" fill="hsl(152 62% 20% / .45)"/>
+            <rect x="206" y="38" width="38" height="58" rx="4" fill="hsl(152 62% 20% / .45)"/>
+            <rect x="256" y="58" width="38" height="38" rx="4" fill="hsl(84 80% 34%)"/>
+            <text class="akse" x="14"  y="102">44</text><text class="akse" x="64"  y="102">52</text>
+            <text class="akse" x="114" y="102">37</text><text class="akse" x="164" y="102">57</text>
+            <text class="akse" x="214" y="102">49</text><text class="akse" x="264" y="102">nå</text>
+          </svg></div>
+        <div class="kort"><h4>Kvalitet</h4>
+          <div class="delt"><span class="stor">38 <small>min</small></span>
+            <span class="undertekst">rom: 30–60 min</span></div>
+          <p class="undertekst" style="margin:.35rem 0 0">Minuttene som var harde nok
+          til å flytte formen.</p></div>
+        <div class="kort"><h4>Harde økter</h4>
+          <div class="delt"><span class="stor">1 <small>av 2</small></span></div>
+          <div class="dots"><span class="dot">✓</span><span class="dot tom"></span></div></div>
+      </div>
+
+      <div class="kort">
+        <h4>Denne uka</h4>
+        <div class="dag"><span class="navn">Tir</span><div>
+          <div class="rad1"><span class="badge b-rolig">rolig</span><span class="km">8,2 km</span></div>
+          <div class="detalj">Morgentur langs elva · puls 128</div>
+          <div class="knad">«Ekte rolig (snittpuls 128).»</div></div></div>
+        <div class="dag"><span class="navn">Ons</span><div>
+          <div class="rad1"><span class="badge b-hard">intervall</span><span class="km">7,4 km</span></div>
+          <div class="detalj">4×1000 m, P:90s · drag 4:45–4:52</div>
+          <div class="knad">«Hard økt — drag 4:45–4:52 · puls 158–171.»</div></div></div>
+        <div class="dag"><span class="navn">Fre</span><div>
+          <div class="rad1"><span class="badge b-rolig">rolig</span><span class="km">9,1 km</span></div>
+          <div class="detalj">Skogsrunden · puls 131</div>
+          <div class="knad">«Ekte rolig (snittpuls 131).»</div></div></div>
+        <div class="dag"><span class="navn">Søn</span><div>
+          <div class="rad1"><span class="badge b-rolig">langtur</span><span class="km">9,8 km</span></div>
+          <div class="detalj">Langtur med venninnegjengen · puls 135</div>
+          <div class="knad">«Fin og kontrollert — grunnmuren bygges her.»</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="tilgang-t" class="slik-faar">
+  <p class="kicker">Sånn får du tilgang</p>
+  <h2 id="tilgang-t">Ingen app. Ingen passord. Bare din lenke.</h2>
+  <ul class="liste">
+    <li><b>Personlig lenke</b> — som Treni-løper får du din egen lenke sendt direkte
+        til deg i Telegram-gruppa di. Ett trykk, så er du inne — og du forblir
+        innlogget på mobilen din.</li>
+    <li><b>Kun din side</b> — lenken viser deg, og bare deg. Ingen andre løpere kan
+        se dine tall, og du kan ikke se deres.</li>
+    <li><b>Alltid fersk</b> — siden oppdateres automatisk hver morgen når øktene dine
+        er hentet fra Strava og vurdert.</li>
+  </ul>
+  <p class="liten">Er du allerede testløper? Da ligger lenken din i Telegram-gruppa
+  di — send en melding der hvis du ikke finner den, så får du en ny.</p>
+</section>
+
+<section aria-label="Bli med">
+  <div class="avslutt">
+    <h2>Vil du ha din egen side?</h2>
+    <p>Vi tar inn noen få testløpere om gangen, så treneren faktisk rekker å se deg.</p>
+    <a class="btn" href="bli-testloper.php">Meld interesse — bli testløper</a>
+  </div>
+</section>
+
+<footer>
+  <nav aria-label="Bunnmeny">
+    <a href="index.html">Forsiden</a>
+    <a href="stotte.html">Støtte og kontakt</a>
+    <a href="personvern.html">Personvern</a>
+  </nav>
+  <p>PAULSEN UTVIKLING · org.nr 938 158 614 · Norge ·
+     <a href="mailto:hei@treni.no">hei@treni.no</a></p>
+  <p>Powered by Strava — this service is not affiliated with or endorsed by Strava.</p>
+</footer>
+
+</main>
+</body>
+</html>
