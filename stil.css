@@ -148,6 +148,11 @@ ul.liste li::marker { color: hsl(var(--accent)); }
 .avslutt .btn { background: hsl(var(--bg)); color: hsl(var(--fg)); box-shadow: 0 6px 20px hsl(0 0% 0% / .2); }
 
 .liten { font-size: .9375rem; color: hsl(var(--muted-fg)); }
+.liten a { color: inherit; }
+.avslutt .sitat-liten { font-family: var(--font-serif); font-size: 1.2rem;
+                        color: hsl(var(--primary-fg)); margin-bottom: .4rem; }
+.avslutt .sitat-liten span { font-family: var(--font-sans); font-size: .875rem;
+                             color: hsl(var(--primary-fg) / .7); }
 .en-blokk { border-left: 3px solid hsl(var(--border)); padding-left: 1.25rem; }
 .en-blokk p { color: hsl(var(--muted-fg)); }
 .en-blokk b { color: hsl(var(--fg)); }
@@ -193,3 +198,18 @@ footer nav a { font-weight: 600; }
                          color: hsl(162 30% 6%); }
 .hero-foto .btn-ghost { color: hsl(42 30% 96%); border-color: hsl(42 30% 96% / .35); }
 .hero-foto .btn-ghost:hover { background: hsl(42 30% 96% / .12); }
+
+/* Interesseskjema (bli-testloper.php) */
+.skjema { display: flex; flex-direction: column; gap: 1.1rem; max-width: 34rem; }
+.skjema label { display: flex; flex-direction: column; gap: .4rem;
+                font-weight: 600; font-size: .9375rem; }
+.skjema .valgfritt { font-weight: 400; color: hsl(var(--muted-fg)); }
+.skjema input, .skjema textarea {
+  font: inherit; font-weight: 400; color: hsl(var(--fg));
+  background: hsl(var(--surface)); border: 1px solid hsl(var(--border));
+  border-radius: 10px; padding: .7rem .9rem; }
+.skjema input:focus-visible, .skjema textarea:focus-visible {
+  outline: 2px solid hsl(var(--accent)); outline-offset: 1px; }
+.skjema button { align-self: flex-start; margin-top: .3rem; }
+.skjema .krukke { position: absolute; left: -9999px; }
+.skjema-feil { color: hsl(8 70% 44%); font-weight: 600; }
