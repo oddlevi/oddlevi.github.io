@@ -213,3 +213,16 @@ footer nav a { font-weight: 600; }
 .skjema button { align-self: flex-start; margin-top: .3rem; }
 .skjema .krukke { position: absolute; left: -9999px; }
 .skjema-feil { color: hsl(8 70% 44%); font-weight: 600; }
+
+/* Omtaler fra testløpere */
+.omtaler { display: grid; gap: 1.1rem; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+           margin-top: 1.75rem; }
+.omtale { margin: 0; background: hsl(var(--surface)); border: 1px solid hsl(var(--border));
+          border-radius: var(--radius); padding: 1.5rem 1.6rem; box-shadow: var(--shadow-sm);
+          display: flex; flex-direction: column; gap: .8rem; }
+.omtale blockquote { margin: 0; font-family: var(--font-serif); font-size: 1.15rem;
+          line-height: 1.45; }
+.omtale blockquote::before { content: ""; display: block; width: 2rem; height: 3px;
+          border-radius: 3px; margin-bottom: .9rem;
+          background: linear-gradient(90deg, hsl(var(--accent)), hsl(var(--accent) / 0)); }
+.omtale figcaption { color: hsl(var(--muted-fg)); font-size: .9rem; margin-top: auto; }
