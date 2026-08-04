@@ -131,7 +131,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
       <label class="radio"><input type="radio" name="sprak" value="norsk" checked> Norsk</label>
       <label class="radio"><input type="radio" name="sprak" value="engelsk"> Engelsk</label>
       <label class="radio"><input type="radio" name="sprak" value="annet"> Annet:
-        <input type="text" name="sprak_annet" placeholder="skriv her" style="width:9rem"></label>
+        <input type="text" name="sprak_annet" oninput="this.closest('fieldset').querySelector('input[value=annet]').checked = this.value.trim() !== ''" placeholder="skriv her" style="width:9rem"></label>
     </fieldset>
     <label>Litt om løpingen din <span class="valgfritt">(valgfritt — f.eks. hvor mye du løper, og hva du vil oppnå)</span>
       <textarea name="om" rows="4"><?php echo htmlspecialchars($_POST["om"] ?? ""); ?></textarea>

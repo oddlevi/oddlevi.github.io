@@ -118,7 +118,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
       <label class="radio"><input type="radio" name="sprak" value="engelsk" checked> English</label>
       <label class="radio"><input type="radio" name="sprak" value="norsk"> Norwegian</label>
       <label class="radio"><input type="radio" name="sprak" value="annet"> Other:
-        <input type="text" name="sprak_annet" placeholder="write here" style="width:9rem"></label>
+        <input type="text" name="sprak_annet" oninput="this.closest('fieldset').querySelector('input[value=annet]').checked = this.value.trim() !== ''" placeholder="write here" style="width:9rem"></label>
     </fieldset>
     <label>A bit about your running <span class="valgfritt">(optional — e.g. how much you run, and what you want to achieve)</span>
       <textarea name="om" rows="4"><?php echo htmlspecialchars($_POST["om"] ?? ""); ?></textarea>
