@@ -8,6 +8,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $epost = trim($_POST["epost"] ?? "");
     $om = trim($_POST["om"] ?? "");
     $tg = trim($_POST["telegram"] ?? "");
+    $sprak_valg = $_POST["sprak"] ?? "norsk";
+    $sprak = $sprak_valg === "annet"
+        ? (trim($_POST["sprak_annet"] ?? "") ?: "annet")
+        : (in_array($sprak_valg, ["norsk", "engelsk"], true) ? $sprak_valg : "norsk");
     $krukke = trim($_POST["nettside"] ?? "");
     if ($krukke !== "") {
         $sendt = true; // bot — lat som alt gikk bra
@@ -17,7 +21,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $tekst = "Ny testløper-interesse fra treni.no\n\n"
                . "Navn: " . $navn . "\n"
                . "E-post: " . $epost . "\n"
-               . ($tg !== "" ? "Telegram: " . $tg . "\n" : "") . "\n"
+               . ($tg !== "" ? "Telegram: " . $tg . "\n" : "")
+               . "Språk: " . $sprak . "\n\n"
                . "Om løpingen:\n" . ($om !== "" ? $om : "(ikke utfylt)") . "\n";
         $hode = "From: Treni <hei@treni.no>\r\n"
               . "Reply-To: " . str_replace(["\r", "\n"], "", $epost) . "\r\n"
@@ -43,8 +48,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     om TEXT,
                     status VARCHAR(20) NOT NULL DEFAULT 'venter'
                 ) CHARACTER SET utf8mb4");
-                $pdo->prepare("INSERT INTO venteliste (navn, epost, telegram, om) VALUES (?,?,?,?)")
-                    ->execute([$navn, $epost, $tg, $om]);
+                $pdo->prepare("INSERT INTO venteliste (navn, epost, telegram, om, sprak) VALUES (?,?,?,?,?)")
+                    ->execute([$navn, $epost, $tg, $om, $sprak]);
             } catch (Throwable $e) { /* varsling under går uansett */ }
         }
         // Telegram til treneren — garantert kanal uansett e-postlevering
@@ -80,10 +85,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <meta name="description" content="Meld interesse for å bli testløper hos Treni — trenerledet løpsveiledning bygget på dine egne Strava-data.">
 <meta name="robots" content="noindex">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏃</text></svg>">
-<link rel="stylesheet" href="stil.css?v=6">
+<link rel="stylesheet" href="stil.css?v=8">
 </head>
 <body>
 <div class="bakteppe" aria-hidden="true"></div>
+<nav class="sprakvalg" aria-label="Språk"><span aria-current="page">NO</span><a href="/en/join.php">EN</a></nav>
 <main>
 
 <header class="hero smal">
@@ -120,6 +126,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
       <input type="text" name="telegram" autocomplete="tel" placeholder="@brukernavn eller mobilnummer"
              value="<?php echo htmlspecialchars($_POST["telegram"] ?? ""); ?>">
     </label>
+    <fieldset class="sprak-felt">
+      <legend>Hvilket språk vil du ha veiledningen på?</legend>
+      <label class="radio"><input type="radio" name="sprak" value="norsk" checked> Norsk</label>
+      <label class="radio"><input type="radio" name="sprak" value="engelsk"> Engelsk</label>
+      <label class="radio"><input type="radio" name="sprak" value="annet"> Annet:
+        <input type="text" name="sprak_annet" placeholder="skriv her" style="width:9rem"></label>
+    </fieldset>
     <label>Litt om løpingen din <span class="valgfritt">(valgfritt — f.eks. hvor mye du løper, og hva du vil oppnå)</span>
       <textarea name="om" rows="4"><?php echo htmlspecialchars($_POST["om"] ?? ""); ?></textarea>
     </label>
