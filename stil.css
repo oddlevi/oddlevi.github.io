@@ -246,3 +246,11 @@ footer nav a { font-weight: 600; }
               flex-direction: row; margin-top: .5rem; }
 .sprak-felt input[type="radio"] { width: auto; margin: 0; accent-color: hsl(var(--primary)); }
 .sprak-felt input[type="text"] { margin: 0; padding: .35rem .6rem; text-align: left; }
+
+/* Liten bunnmeny med alle sidene */
+.bunnmeny { display: flex; gap: clamp(1.5rem, 5vw, 4rem); flex-wrap: wrap; }
+.bunnmeny .meny-gruppe { display: flex; flex-direction: column; gap: .35rem; }
+.bunnmeny .meny-tittel { font-size: .75rem; font-weight: 650; letter-spacing: .08em;
+      text-transform: uppercase; color: hsl(var(--muted-fg)); margin-bottom: .25rem; }
+.bunnmeny a { font-size: .9rem; color: hsl(var(--muted-fg)); text-decoration-color: hsl(var(--border)); }
+.bunnmeny a:hover { color: hsl(var(--primary)); opacity: 1; }
