@@ -23,6 +23,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                . "E-post: " . $epost . "\n"
                . ($tg !== "" ? "Telegram: " . $tg . "\n" : "")
                . "Språk: " . $sprak . "\n\n"
+               . "Inviter (send personlig): https://t.me/VeilederenAIBot?start="
+               . ($sprak === "engelsk" ? "verve_odd_en" : "verve_odd") . "\n\n"
                . "Om løpingen (engelsk):\n" . ($om !== "" ? $om : "(ikke utfylt)") . "\n";
         $hode = "From: Treni <hei@treni.no>\r\n"
               . "Reply-To: " . str_replace(["\r", "\n"], "", $epost) . "\r\n"

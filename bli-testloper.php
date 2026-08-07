@@ -23,6 +23,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                . "E-post: " . $epost . "\n"
                . ($tg !== "" ? "Telegram: " . $tg . "\n" : "")
                . "Språk: " . $sprak . "\n\n"
+               . "Inviter (send personlig): https://t.me/VeilederenAIBot?start="
+               . ($sprak === "engelsk" ? "verve_odd_en" : "verve_odd") . "\n\n"
                . "Om løpingen:\n" . ($om !== "" ? $om : "(ikke utfylt)") . "\n";
         $hode = "From: Treni <hei@treni.no>\r\n"
               . "Reply-To: " . str_replace(["\r", "\n"], "", $epost) . "\r\n"
@@ -67,6 +69,21 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                             "text" => "🏃 " . $tekst]),
                         "timeout" => 8]]));
                 $tg_ok = $svar !== false && strpos($svar, '"ok":true') !== false;
+                // Egen melding: ferdig invitasjon (kopier/videresend hele til leaden)
+                $fornavn = explode(" ", $navn)[0];
+                $invitasjon = ($sprak === "engelsk")
+                    ? "Hi " . $fornavn . "! Great that you want to try Treni 🏃\n\nEverything happens in Telegram — a messaging app just like WhatsApp, only with better support for smart bots. Tap the link at the bottom and the bot guides you through in a few minutes (connects Strava and asks a few questions about your running).\n\nPS: If you are new to Telegram, some spam from unknown foreign numbers may appear at first — sadly common for fresh accounts, and nothing to do with Treni. Quick fix: Settings → Privacy → Phone Number → Nobody. With us, everything happens in a private group with just you, the coach and the training bot.\n\nHere is your link: https://t.me/VeilederenAIBot?start=verve_odd_en"
+                    : "Hei " . $fornavn . "! Så gøy at du vil prøve Treni 🏃\n\nAlt skjer i Telegram — en meldingsapp helt lik WhatsApp, bare med bedre støtte for smarte boter. Trykk på lenken nederst, så guider boten deg gjennom på noen minutter (kobler Strava og stiller noen spørsmål om løpingen din).\n\nPS: Er du ny på Telegram, kan det dukke opp spam fra ukjente utenlandske numre i starten — det er dessverre vanlig for ferske kontoer og har ingenting med Treni å gjøre. Raskt fikset: Innstillinger → Personvern → Telefonnummer → «Ingen». Hos oss skjer alt i en privat gruppe med bare deg, treneren og treningsboten.\n\nHer er lenken din: https://t.me/VeilederenAIBot?start=verve_odd";
+                @file_get_contents(
+                    "https://api.telegram.org/bot" . TRENI_BOT_TOKEN . "/sendMessage",
+                    false,
+                    stream_context_create(["http" => [
+                        "method" => "POST",
+                        "header" => "Content-Type: application/x-www-form-urlencoded\r\n",
+                        "content" => http_build_query([
+                            "chat_id" => TRENI_TRENER_CHAT,
+                            "text" => "📨 Klar til å videresende:\n\n" . $invitasjon]),
+                        "timeout" => 8]]));
             }
         }
         $sendt = $epost_ok || $tg_ok;
