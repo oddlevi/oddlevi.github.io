@@ -7,6 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $navn = trim($_POST["navn"] ?? "");
     $epost = trim($_POST["epost"] ?? "");
     $om = trim($_POST["om"] ?? "");
+    $kilde = mb_substr(trim($_POST["kilde"] ?? ""), 0, 200);
     $tg = trim($_POST["telegram"] ?? "");
     $sprak_valg = $_POST["sprak"] ?? "engelsk";
     $sprak = $sprak_valg === "annet"
@@ -25,6 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                . "Språk: " . $sprak . "\n\n"
                . "Inviter (send personlig): https://t.me/VeilederenAIBot?start="
                . ($sprak === "engelsk" ? "verve_odd_en" : "verve_odd") . "\n\n"
+               . ($kilde !== "" ? "Tipset av: " . $kilde . "\n\n" : "")
                . "Om løpingen (engelsk):\n" . ($om !== "" ? $om : "(ikke utfylt)") . "\n";
         $hode = "From: Treni <hei@treni.no>\r\n"
               . "Reply-To: " . str_replace(["\r", "\n"], "", $epost) . "\r\n"
@@ -40,8 +42,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     "mysql:host={$konfig['db_host']};dbname={$konfig['db_name']};charset=utf8mb4",
                     $konfig['db_user'], $konfig['db_pass'],
                     [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
-                $pdo->prepare("INSERT INTO venteliste (navn, epost, telegram, om, sprak) VALUES (?,?,?,?,?)")
-                    ->execute([$navn, $epost, $tg, $om, $sprak]);
+                $pdo->prepare("INSERT INTO venteliste (navn, epost, telegram, om, sprak, kilde) VALUES (?,?,?,?,?,?)")
+                    ->execute([$navn, $epost, $tg, $om, $sprak, $kilde !== "" ? $kilde : null]);
             } catch (Throwable $e) { /* notification below goes out regardless */ }
         }
         $tg_ok = false;
@@ -122,6 +124,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
       <label class="radio"><input type="radio" name="sprak" value="annet"> Other:
         <input type="text" name="sprak_annet" oninput="this.closest('fieldset').querySelector('input[value=annet]').checked = this.value.trim() !== ''" placeholder="write here" style="width:9rem"></label>
     </fieldset>
+    <label>Who told you about Treni? <span class="valgfritt">(optional — a person, social media, your club …)</span>
+      <input type="text" name="kilde" placeholder="e.g. a friend, Instagram, my running club"
+             value="<?php echo htmlspecialchars($_POST["kilde"] ?? ""); ?>">
+    </label>
     <label>A bit about your running <span class="valgfritt">(optional — e.g. how much you run, and what you want to achieve)</span>
       <textarea name="om" rows="4"><?php echo htmlspecialchars($_POST["om"] ?? ""); ?></textarea>
     </label>

@@ -7,6 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $navn = trim($_POST["navn"] ?? "");
     $epost = trim($_POST["epost"] ?? "");
     $om = trim($_POST["om"] ?? "");
+    $kilde = mb_substr(trim($_POST["kilde"] ?? ""), 0, 200);
     $tg = trim($_POST["telegram"] ?? "");
     $sprak_valg = $_POST["sprak"] ?? "norsk";
     $sprak = $sprak_valg === "annet"
@@ -25,6 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                . "Språk: " . $sprak . "\n\n"
                . "Inviter (send personlig): https://t.me/VeilederenAIBot?start="
                . ($sprak === "engelsk" ? "verve_odd_en" : "verve_odd") . "\n\n"
+               . ($kilde !== "" ? "Tipset av: " . $kilde . "\n\n" : "")
                . "Om løpingen:\n" . ($om !== "" ? $om : "(ikke utfylt)") . "\n";
         $hode = "From: Treni <hei@treni.no>\r\n"
               . "Reply-To: " . str_replace(["\r", "\n"], "", $epost) . "\r\n"
@@ -50,8 +52,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     om TEXT,
                     status VARCHAR(20) NOT NULL DEFAULT 'venter'
                 ) CHARACTER SET utf8mb4");
-                $pdo->prepare("INSERT INTO venteliste (navn, epost, telegram, om, sprak) VALUES (?,?,?,?,?)")
-                    ->execute([$navn, $epost, $tg, $om, $sprak]);
+                $pdo->prepare("INSERT INTO venteliste (navn, epost, telegram, om, sprak, kilde) VALUES (?,?,?,?,?,?)")
+                    ->execute([$navn, $epost, $tg, $om, $sprak, $kilde !== "" ? $kilde : null]);
             } catch (Throwable $e) { /* varsling under går uansett */ }
         }
         // Telegram til treneren — garantert kanal uansett e-postlevering
@@ -150,6 +152,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
       <label class="radio"><input type="radio" name="sprak" value="annet"> Annet:
         <input type="text" name="sprak_annet" oninput="this.closest('fieldset').querySelector('input[value=annet]').checked = this.value.trim() !== ''" placeholder="skriv her" style="width:9rem"></label>
     </fieldset>
+    <label>Hvem tipset deg om Treni? <span class="valgfritt">(valgfritt — en person, sosiale medier, klubben …)</span>
+      <input type="text" name="kilde" placeholder="f.eks. en venn, Facebook, Tromsø Løpeklubb"
+             value="<?php echo htmlspecialchars($_POST["kilde"] ?? ""); ?>">
+    </label>
     <label>Litt om løpingen din <span class="valgfritt">(valgfritt — f.eks. hvor mye du løper, og hva du vil oppnå)</span>
       <textarea name="om" rows="4"><?php echo htmlspecialchars($_POST["om"] ?? ""); ?></textarea>
     </label>
