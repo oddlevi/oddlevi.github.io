@@ -254,3 +254,8 @@ footer nav a { font-weight: 600; }
       text-transform: uppercase; color: hsl(var(--muted-fg)); margin-bottom: .25rem; }
 .bunnmeny a { font-size: .9rem; color: hsl(var(--muted-fg)); text-decoration-color: hsl(var(--border)); }
 .bunnmeny a:hover { color: hsl(var(--primary)); opacity: 1; }
+
+/* Hero-linje 2 holdes samlet på brede skjermer (Odds valg 10.08) —
+   litt mindre enn linje 1 så hele setningen får plass på én linje */
+.hero-l2 { font-size: .66em; display: inline-block; margin-top: .18em; }
+@media (min-width: 720px) { .hero-l2 { white-space: nowrap; } }
