@@ -58,6 +58,22 @@
   place-items: center; font-size: .72rem; font-weight: 650;
   background: hsl(var(--primary)); color: hsl(var(--primary-fg)); }
 .demo .dot.tom { background: hsl(var(--border)); }
+.demo .temafaner { display: flex; gap: .45rem; flex-wrap: wrap; margin: 1rem 0 .2rem; }
+.demo .temafaner button { display: inline-flex; align-items: center; gap: .35rem;
+  padding: .4rem .95rem; border-radius: 999px; border: 1.5px solid hsl(var(--border));
+  background: hsl(var(--surface)); color: hsl(var(--fg));
+  font: 650 .88rem var(--font-sans); cursor: pointer; }
+.demo .temafaner button.aktiv { background: hsl(var(--primary));
+  color: hsl(var(--primary-fg)); border-color: hsl(var(--primary)); }
+.demo .tema { display: none; }
+.demo .tema.aktiv { display: block; }
+.demo .md-tabell { width: 100%; border-collapse: collapse; margin: .5rem 0; font-size: .88rem; }
+.demo .md-tabell th, .demo .md-tabell td { text-align: left; padding: .35rem .55rem;
+  border-bottom: 1px solid hsl(var(--border)); }
+.demo .md-tabell th { font-size: .74rem; text-transform: uppercase;
+  letter-spacing: .05em; color: hsl(var(--muted-fg)); }
+.demo .rad1 { display: flex; align-items: baseline; gap: .5rem; }
+.demo .dag .km2 { margin-left: auto; font-variant-numeric: tabular-nums; font-weight: 650; }
 .demo .dag { padding: .6rem 0; border-top: 1px solid hsl(var(--border));
   display: grid; grid-template-columns: 2.6rem 1fr; gap: 0 .5rem; }
 .demo .dag:first-of-type { border-top: 0; }
@@ -108,77 +124,165 @@
         <p><b>Én ting denne uka:</b> Hold igjen der du kan — taket er normalen din,
         så spar formen til neste ukes økning.</p></div>
 
-      <div class="kort">
-        <h4>Uka så langt</h4>
-        <span class="tall-linje">34,5 <small>av 47 km — denne uka er taket normalen din, ikke mer</small></span>
-        <div class="stabel"><div class="fyll"></div></div>
-        <div class="stabel-tekst"><span>4 økter</span><span>1 av 2 harde brukt</span></div>
+      <div class="temafaner" id="demo-faner">
+        <button data-tema="d-oversikt" class="aktiv">🏠 Oversikt</button>
+        <button data-tema="d-tall">📊 Tallene</button>
+        <button data-tema="d-okter">🏃 Øktene</button>
+        <button data-tema="d-plan">📋 Planen</button>
+        <button data-tema="d-rapport">📖 Rapporten</button>
+        <button data-tema="d-skadefritt">🛡️ Skadefritt</button>
+        <button data-tema="d-fjell">⛰️ Fjell</button>
       </div>
 
-      <div class="obs"><span>🟡</span>
-        <p><b>Sånn sier vi ifra:</b> «Forrige uke løp du 55,4 km — 18 % over de
-        47 km/uke kroppen din er vant til. Det er innenfor det trygge båndet, men
-        neste økning bør vente ei uke. Derfor er taket ditt denne uka normalen,
-        ikke mer.» Når tallene peker mot skade, får du beskjed i klartekst —
-        før det skjer.</p></div>
-
-      <div class="grid">
-        <div class="kort"><h4>Belastning</h4>
-          <div class="delt"><span class="stor">1,18</span>
-            <span class="undertekst">mål: 0,8–1,3</span></div>
-          <p class="undertekst" style="margin:.35rem 0 0">Forrige uke: 55,4 km, mot
-          47,0 km/uke som kroppen er vant til — den høyeste søylen i grafen.</p></div>
-        <div class="kort"><h4>Ukesvolum — siste uker · nå</h4>
-          <svg viewBox="0 0 300 104" role="img" aria-label="Ukesvolum: fire jevne uker rundt 45, så forrige uke på 55,4 — og denne uka holdes ved normalen">
-            <rect x="6"   y="47" width="38" height="49" rx="4" fill="hsl(152 62% 20% / .45)"/>
-            <rect x="56"  y="44" width="38" height="52" rx="4" fill="hsl(152 62% 20% / .45)"/>
-            <rect x="106" y="40" width="38" height="56" rx="4" fill="hsl(152 62% 20% / .45)"/>
-            <rect x="156" y="39" width="38" height="57" rx="4" fill="hsl(152 62% 20% / .45)"/>
-            <rect x="206" y="28" width="38" height="68" rx="4" fill="hsl(43 85% 38% / .75)"/>
-            <rect x="256" y="53" width="38" height="43" rx="4" fill="hsl(84 80% 34%)"/>
-            <text class="akse" x="14"  y="102">40</text><text class="akse" x="64"  y="102">42</text>
-            <text class="akse" x="114" y="102">45</text><text class="akse" x="164" y="102">46</text>
-            <text class="akse" x="214" y="102">55</text><text class="akse" x="264" y="102">nå</text>
-          </svg></div>
-        <div class="kort"><h4>Kvalitet</h4>
-          <div class="delt"><span class="stor">38 <small>min</small></span>
-            <span class="undertekst">rom: 30–60 min</span></div>
-          <p class="undertekst" style="margin:.35rem 0 0">Minuttene som var harde nok til
-          å flytte formen — godt innenfor, akkurat som ei holde-igjen-uke skal være.</p></div>
-        <div class="kort"><h4>Harde økter</h4>
-          <div class="delt"><span class="stor">1 <small>av 2</small></span></div>
-          <div class="dots"><span class="dot">✓</span><span class="dot tom"></span></div></div>
-        <div class="kort"><h4>Formkurve</h4>
-          <div class="delt"><span class="stor" style="color:hsl(152 62% 28%)">−6 <small>sek/km</small></span>
-            <span class="undertekst">vs 4-ukerssnittet</span></div>
-          <p class="undertekst" style="margin:.35rem 0 0">Farta di på rolige, flate turer
-          ved puls ~128 — seks sekunder raskere per km enn snittet. Formen peker rett vei.</p></div>
-        <div class="kort"><h4>Langtur-andel</h4>
-          <div class="delt"><span class="stor">21<small>%</small></span>
-            <span class="undertekst">mål: under 30 %</span></div>
-          <p class="undertekst" style="margin:.35rem 0 0">Lengste økt forrige uke: 11,4 av
-          55,4 km. Ingen enkeltøkt får bære for mye av uka — det er sånn skader unngås.</p></div>
+      <div class="tema aktiv" data-tema="d-oversikt">
+        <div class="kort" style="border-color:hsl(152 62% 20% / .4)">
+          <h4>🏁 Neste løp</h4>
+          <div class="delt"><span style="font-weight:700">Oslo Maraton — halvmaraton</span>
+            <span class="stor" style="font-size:1.5rem">47 dager</span></div>
+        </div>
+        <div class="kort">
+          <h4>Uka så langt</h4>
+          <span class="tall-linje">34,5 <small>av 47 km — taket er normalen din, ikke mer</small></span>
+          <div class="stabel"><div class="fyll"></div></div>
+          <div class="stabel-tekst"><span>4 økter</span><span>1 av 2 harde brukt</span></div>
+        </div>
+        <div class="obs"><span>🟡</span>
+          <p><b>Sånn sier vi ifra:</b> «Forrige uke løp du 55,4 km — 18 % over de
+          47 km/uke kroppen din er vant til. Det er innenfor det trygge båndet, men
+          neste økning bør vente ei uke.» Beskjed i klartekst — før det skjer.</p></div>
       </div>
 
-      <div class="kort">
-        <h4>Denne uka</h4>
-        <div class="dag"><span class="navn">Tir</span><div>
-          <div class="rad1"><span class="badge b-rolig">rolig</span><span class="km">8,2 km</span></div>
-          <div class="detalj">Morgentur langs elva · puls 128</div>
-          <div class="knad">«Ekte rolig (snittpuls 128).»</div></div></div>
-        <div class="dag"><span class="navn">Ons</span><div>
-          <div class="rad1"><span class="badge b-hard">intervall</span><span class="km">7,4 km</span></div>
-          <div class="detalj">4×1000 m, P:90s · drag 4:45–4:52</div>
-          <div class="knad">«Hard økt — drag 4:45–4:52 · puls 158–171.»</div></div></div>
-        <div class="dag"><span class="navn">Fre</span><div>
-          <div class="rad1"><span class="badge b-rolig">rolig</span><span class="km">9,1 km</span></div>
-          <div class="detalj">Skogsrunden · puls 131</div>
-          <div class="knad">«Ekte rolig (snittpuls 131).»</div></div></div>
-        <div class="dag"><span class="navn">Søn</span><div>
-          <div class="rad1"><span class="badge b-rolig">langtur</span><span class="km">9,8 km</span></div>
-          <div class="detalj">Langtur med venninnegjengen · puls 135</div>
-          <div class="knad">«Fin og kontrollert — akkurat sånn ei uke etter et byks skal se ut.»</div></div></div>
+      <div class="tema" data-tema="d-tall">
+        <div class="grid">
+          <div class="kort"><h4>Belastning</h4>
+            <div class="delt"><span class="stor">1,18</span>
+              <span class="undertekst">mål: 0,8–1,3</span></div>
+            <p class="undertekst" style="margin:.3rem 0 0">Forrige uke: 55,4 km mot
+            47,0 km/uke som kroppen er vant til.</p></div>
+          <div class="kort"><h4>Formkurve</h4>
+            <div class="delt"><span class="stor" style="color:hsl(152 62% 28%)">−6 <small>sek/km</small></span>
+              <span class="undertekst">vs 4-ukerssnittet</span></div>
+            <p class="undertekst" style="margin:.3rem 0 0">Farta di på rolige turer ved
+            puls ~128 — formen peker rett vei.</p></div>
+          <div class="kort"><h4>Kvalitet</h4>
+            <div class="delt"><span class="stor">38 <small>min</small></span>
+              <span class="undertekst">rom: 30–60 min</span></div>
+            <p class="undertekst" style="margin:.3rem 0 0">Minuttene som var harde nok
+            til å flytte formen.</p></div>
+          <div class="kort"><h4>Langtur-andel</h4>
+            <div class="delt"><span class="stor">21<small>%</small></span>
+              <span class="undertekst">mål: under 30 %</span></div>
+            <p class="undertekst" style="margin:.3rem 0 0">Ingen enkeltøkt får bære
+            for mye av uka.</p></div>
+        </div>
       </div>
+
+      <div class="tema" data-tema="d-okter">
+        <div class="kort">
+          <h4>Øktene dine · denne uka</h4>
+          <div class="dag"><span class="navn">Tir</span><div>
+            <div class="rad1"><span class="badge b-rolig">rolig</span><span class="km">8,2 km</span></div>
+            <div class="detalj">Morgentur langs elva · puls 128</div>
+            <div class="knad">«Ekte rolig (snittpuls 128).»</div></div></div>
+          <div class="dag"><span class="navn">Ons</span><div>
+            <div class="rad1"><span class="badge b-hard">intervall</span><span class="km">7,4 km</span></div>
+            <div class="detalj">4×1000 m, P:90s · drag 4:45–4:52</div>
+            <div class="knad">«Hard økt — drag 4:45–4:52 · puls 158–171.»</div></div></div>
+          <div class="dag"><span class="navn">Søn</span><div>
+            <div class="rad1"><span class="badge b-rolig">langtur</span><span class="km">9,8 km</span></div>
+            <div class="detalj">Langtur med venninnegjengen · puls 135</div>
+            <div class="knad">«Fin og kontrollert.»</div></div></div>
+        </div>
+      </div>
+
+      <div class="tema" data-tema="d-plan">
+        <div class="kort">
+          <h4>📋 Planen din · neste uke</h4>
+          <div class="dag"><span class="navn">Man</span><div>
+            <div class="rad1"><div class="detalj" style="flex:1">8 km rolig, puls under 138</div>
+              <span class="km2">8 km</span></div></div></div>
+          <div class="dag"><span class="navn">Ons</span><div>
+            <div class="rad1"><div class="detalj" style="flex:1">Intervall: 5×1000 m i 4:45–4:55/km</div>
+              <span class="km2">8,5 km</span></div>
+            <div class="knad">Oppvarming: 15 min rolig · Nedjogg: 10 min</div></div></div>
+          <div class="dag"><span class="navn">Fre</span><div>
+            <div class="rad1"><div class="detalj" style="flex:1">9 km rolig — tørreste dagen i Bergen</div>
+              <span class="km2">9 km</span></div></div></div>
+          <div class="dag"><span class="navn">Søn</span><div>
+            <div class="rad1"><div class="detalj" style="flex:1">Langtur 12 km, sone 1–2 hele veien</div>
+              <span class="km2">12 km</span></div></div></div>
+          <div class="rad1" style="border-top:2px solid hsl(var(--border)); margin-top:.5rem; padding-top:.5rem">
+            <b>Totalt i planen</b><span class="km2" style="font-weight:750">37,5 km</span></div>
+        </div>
+        <div class="kort">
+          <h4>📈 Trappa mot Oslo Maraton</h4>
+          <p class="undertekst" style="margin:.2rem 0 .4rem">Aldri mer enn +10 % i uka,
+          roligere uke hver fjerde, nedtrapping inn mot løpet.</p>
+          <table class="md-tabell">
+            <tr><th>Uke</th><th>km</th><th>Fokus</th></tr>
+            <tr style="background:hsl(84 80% 34% / .12); font-weight:650">
+              <td>11.–17. august ← du er her</td><td>38</td><td>Oppbygging (+10 %)</td></tr>
+            <tr><td>18.–24. august</td><td>42</td><td>Oppbygging (+10 %)</td></tr>
+            <tr><td>25.–31. august</td><td>31</td><td>Roligere uke 🌿</td></tr>
+            <tr><td>22.–28. september</td><td>23</td><td>Løpsuke — nedtrapping + løpet 🎉</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="tema" data-tema="d-rapport">
+        <div class="kort">
+          <h4>Pulssonene dine</h4>
+          <table class="md-tabell">
+            <tr><th>Sone</th><th>Puls</th></tr>
+            <tr><td>1 (lett)</td><td>t.o.m. 142</td></tr>
+            <tr><td>2 (moderat)</td><td>143–162</td></tr>
+            <tr><td>3 (terskel)</td><td>163–168</td></tr>
+            <tr><td>4 (over terskel)</td><td>169–173</td></tr>
+            <tr><td>5 (maks — VO2max)</td><td>fra 174</td></tr>
+          </table>
+        </div>
+        <div class="kort">
+          <h4>Uka som gikk · vurderingen</h4>
+          <p style="margin:.3rem 0; font-size:.9rem">Du løp mye denne uka — og nesten
+          alt var rolig. 38 minutter var harde nok til å flytte formen, midt i rommet
+          ditt på 30–60. Rolig løping er grunnmuren — akkurat sånn bygges form. 💪</p>
+          <p class="undertekst" style="margin:.4rem 0 0">Hele rapporten, hver mandag —
+          rett i fanene.</p>
+        </div>
+      </div>
+
+      <div class="tema" data-tema="d-skadefritt">
+        <div class="kort">
+          <h4>🧱 Det store prinsippet</h4>
+          <p style="margin:.3rem 0; font-size:.9rem"><b>Det er ikke hvor mye du løper som
+          skader deg — det er hvor mye mer enn kroppen er vant til.</b> Formen kommer
+          fort; sener og skjelett bruker måneder. Formfølelse er ikke skadebeskyttelse.</p>
+          <p class="undertekst" style="margin:.4rem 0 0">+ fem prinsipper til: +10 %-regelen,
+          vokt enkeltøkta, ekte rolig, hvile er trening, og når noe kjennes galt.</p>
+        </div>
+      </div>
+
+      <div class="tema" data-tema="d-fjell">
+        <div class="kort" style="border-color:hsl(84 80% 34% / .45)">
+          <h4>📚 E-bok på vei: Trening for fjelløping</h4>
+          <p style="margin:.3rem 0; font-size:.9rem">Skrevet med en av landets mest
+          erfarne fjelløpere — fysioterapeut og VM-deltager i skyrunning. Kapitlene
+          publiseres her, og du kan få varsel i Telegram når nye kommer. 🔔</p>
+        </div>
+      </div>
+
+      <script>
+      (function () {
+        var kn = document.querySelectorAll('#demo-faner button');
+        var tm = document.querySelectorAll('.demo .tema');
+        kn.forEach(function (k) {
+          k.addEventListener('click', function () {
+            kn.forEach(function (x) { x.classList.toggle('aktiv', x === k); });
+            tm.forEach(function (d) { d.classList.toggle('aktiv', d.dataset.tema === k.dataset.tema); });
+          });
+        });
+      })();
+      </script>
     </div>
   </div>
 </section>
