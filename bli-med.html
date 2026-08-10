@@ -35,8 +35,7 @@
 
 <section style="text-align:center">
   <a class="startknapp" id="strava-knapp" href="#">🔗 <span id="knapp-tekst">Koble Strava — så er du i gang</span></a>
-  <p class="liten steg" id="steg-tekst">Har du Strava-appen, åpner den seg og du trykker
-  «Autoriser». Etterpå: ett trykk til for å åpne Telegram — der får du rapportene dine.</p>
+  <p class="liten steg" id="steg-tekst">Trykk «Autoriser», åpne Telegram — det er alt.</p>
 
   <div class="vilkaar" id="vilkaar">
     <p><b id="v-tittel">Ved å koble godtar du kortvilkårene:</b></p>
@@ -67,9 +66,7 @@
     document.getElementById("tittel").innerHTML = "You're invited to test&nbsp;Treni 🏃";
     document.getElementById("ingress").textContent = "Weekly guidance based on your Strava runs.";
     document.getElementById("knapp-tekst").textContent = "Connect Strava — and you're in";
-    document.getElementById("steg-tekst").textContent = "If you have the Strava app, it " +
-      "opens and you tap “Authorize”. Afterwards: one more tap to open Telegram — " +
-      "that's where your reports arrive.";
+    document.getElementById("steg-tekst").textContent = "Tap “Authorize”, open Telegram — that's it.";
     document.getElementById("v-tittel").textContent = "By connecting you accept the short terms:";
     var sp = document.querySelectorAll("#vilkaar p span");
     sp[0].textContent = "We fetch your runs from Strava and use them + what you write " +
