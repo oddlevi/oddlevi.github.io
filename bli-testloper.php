@@ -9,6 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $om = trim($_POST["om"] ?? "");
     $kilde = mb_substr(trim($_POST["kilde"] ?? ""), 0, 200);
     $tg = trim($_POST["telegram"] ?? "");
+    $mobil = trim($_POST["mobil"] ?? "");
     $sprak_valg = $_POST["sprak"] ?? "norsk";
     $sprak = $sprak_valg === "annet"
         ? (trim($_POST["sprak_annet"] ?? "") ?: "annet")
@@ -49,11 +50,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     navn VARCHAR(120) NOT NULL,
                     epost VARCHAR(190) NOT NULL,
                     telegram VARCHAR(120) NOT NULL DEFAULT '',
+                    mobil VARCHAR(32) NOT NULL DEFAULT '',
                     om TEXT,
                     status VARCHAR(20) NOT NULL DEFAULT 'venter'
                 ) CHARACTER SET utf8mb4");
-                $pdo->prepare("INSERT INTO venteliste (navn, epost, telegram, om, sprak, kilde) VALUES (?,?,?,?,?,?)")
-                    ->execute([$navn, $epost, $tg, $om, $sprak, $kilde !== "" ? $kilde : null]);
+                $pdo->prepare("INSERT INTO venteliste (navn, epost, telegram, om, sprak, kilde, mobil) VALUES (?,?,?,?,?,?,?)")
+                    ->execute([$navn, $epost, $tg, $om, $sprak, $kilde !== "" ? $kilde : null, $mobil]);
             } catch (Throwable $e) { /* varsling under går uansett */ }
         }
         // Telegram til treneren — garantert kanal uansett e-postlevering
@@ -140,6 +142,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <label>E-post
       <input type="email" name="epost" required autocomplete="email"
              value="<?php echo htmlspecialchars($_POST["epost"] ?? ""); ?>">
+    </label>
+    <label>Mobil <span class="valgfritt">(valgfritt — så kan vi sende deg invitasjonen på SMS)</span>
+      <input type="tel" name="mobil" autocomplete="tel" placeholder="f.eks. 900 00 000"
+             value="<?php echo htmlspecialchars($_POST["mobil"] ?? ""); ?>">
     </label>
     <label>Telegram <span class="valgfritt">(valgfritt — brukernavn eller mobilnummeret Telegram-kontoen din bruker, så kan invitasjonen komme dit)</span>
       <input type="text" name="telegram" autocomplete="tel" placeholder="@brukernavn eller mobilnummer"

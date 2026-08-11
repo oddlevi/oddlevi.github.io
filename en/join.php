@@ -9,6 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $om = trim($_POST["om"] ?? "");
     $kilde = mb_substr(trim($_POST["kilde"] ?? ""), 0, 200);
     $tg = trim($_POST["telegram"] ?? "");
+    $mobil = trim($_POST["mobil"] ?? "");
     $sprak_valg = $_POST["sprak"] ?? "engelsk";
     $sprak = $sprak_valg === "annet"
         ? (trim($_POST["sprak_annet"] ?? "") ?: "annet")
@@ -42,8 +43,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     "mysql:host={$konfig['db_host']};dbname={$konfig['db_name']};charset=utf8mb4",
                     $konfig['db_user'], $konfig['db_pass'],
                     [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
-                $pdo->prepare("INSERT INTO venteliste (navn, epost, telegram, om, sprak, kilde) VALUES (?,?,?,?,?,?)")
-                    ->execute([$navn, $epost, $tg, $om, $sprak, $kilde !== "" ? $kilde : null]);
+                $pdo->prepare("INSERT INTO venteliste (navn, epost, telegram, om, sprak, kilde, mobil) VALUES (?,?,?,?,?,?,?)")
+                    ->execute([$navn, $epost, $tg, $om, $sprak, $kilde !== "" ? $kilde : null, $mobil]);
             } catch (Throwable $e) { /* notification below goes out regardless */ }
         }
         $tg_ok = false;
@@ -112,6 +113,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <label>Email
       <input type="email" name="epost" required autocomplete="email"
              value="<?php echo htmlspecialchars($_POST["epost"] ?? ""); ?>">
+    </label>
+    <label>Mobile <span class="valgfritt">(optional — so we can text you the invitation)</span>
+      <input type="tel" name="mobil" autocomplete="tel" placeholder="e.g. +47 900 00 000"
+             value="<?php echo htmlspecialchars($_POST["mobil"] ?? ""); ?>">
     </label>
     <label>Telegram <span class="valgfritt">(optional — username or the mobile number your Telegram account uses, so the invitation can go there)</span>
       <input type="text" name="telegram" autocomplete="tel" placeholder="@username or mobile number"
