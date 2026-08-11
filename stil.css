@@ -135,6 +135,8 @@ ul.liste li::marker { color: hsl(var(--accent)); }
                  margin-bottom: 1.2rem;
                  background: linear-gradient(90deg, hsl(var(--accent)), hsl(var(--primary))); }
 .sitat + p { color: hsl(var(--muted-fg)); font-size: .9375rem; margin-top: 1rem; }
+.sitat-senter { text-align: center; }
+.sitat-senter::before { margin-inline: auto; }
 
 .kort { background: hsl(var(--surface)); border: 1px solid hsl(var(--border));
         border-radius: var(--radius); padding: 1.6rem 1.8rem; box-shadow: var(--shadow-sm); }
