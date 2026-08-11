@@ -94,9 +94,37 @@
       return ("0" + x.toString(16)).slice(-2);
     }).join("");
   }
+  // «Fortsett der du slapp» (Odds funn 11.08: to løpere trykket Autoriser på
+  // nytt fordi siden ikke viste noen vei videre): etter første klikk huskes
+  // nonce-en lokalt, og ved retur vises Telegram-steget i stedet.
+  var husket = null;
+  try {
+    husket = JSON.parse(localStorage.getItem("treni_onboarding") || "null");
+    if (husket && Date.now() - husket.ts > 24 * 3600 * 1000) husket = null;
+  } catch (e) { husket = null; }
+  if (husket && husket.nonce) {
+    var boks = document.createElement("div");
+    boks.style.cssText = "margin:1rem 0;padding:1rem 1.2rem;border:2px solid " +
+      "hsl(145 55% 32% / .5);border-radius:12px;background:hsl(145 55% 32% / .08)";
+    boks.innerHTML = (en
+      ? "✅ <b>Already authorized Strava?</b> Then the next step is Telegram:<br>"
+      : "✅ <b>Allerede autorisert Strava?</b> Da er neste steg Telegram:<br>") +
+      '<a href="https://t.me/VeilederenAIBot?start=web_' + husket.nonce + '" ' +
+      'style="display:inline-block;margin-top:.6rem;font-weight:700">' +
+      (en ? "Open Telegram and finish →" : "Åpne Telegram og fullfør →") + "</a>" +
+      '<p style="margin:.5rem 0 0;font-size:.85rem;opacity:.75">' +
+      (en ? "Starting over? Just tap the button below again."
+          : "Vil du starte på nytt? Bare trykk knappen under en gang til.") + "</p>";
+    var knapp = document.getElementById("strava-knapp");
+    knapp.parentNode.insertBefore(boks, knapp);
+  }
   document.getElementById("strava-knapp").addEventListener("click", function (ev) {
     ev.preventDefault();
-    var state = "wv_" + verver + "_" + nonce() + (en ? "_en" : "");
+    var n = nonce();
+    try {
+      localStorage.setItem("treni_onboarding", JSON.stringify({nonce: n, ts: Date.now()}));
+    } catch (e) {}
+    var state = "wv_" + verver + "_" + n + (en ? "_en" : "");
     var url = "https://www.strava.com/oauth/mobile/authorize" +
       "?client_id=239111&response_type=code" +
       "&redirect_uri=" + encodeURIComponent("https://oddlevi.github.io/strava-kobling/") +
