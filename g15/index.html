@@ -157,6 +157,14 @@
     box-shadow:0 6px 24px -10px hsl(135 55% 20% / .35)}
   .innspill h2{margin-top:.1rem}
   .innspill .kick{margin-bottom:.4rem}
+  html{scroll-behavior:smooth}
+  .til-skjema{text-align:center;margin-top:2.2rem}
+  .til-skjema a{display:inline-block;background:var(--gress);color:#fff;
+    text-decoration:none;font-weight:700;font-size:1.05rem;border-radius:999px;
+    padding:.95rem 2rem;box-shadow:0 8px 24px -8px hsl(135 55% 22% / .55);
+    transition:transform .16s ease}
+  .til-skjema a:hover{transform:translateY(-2px)}
+  .til-skjema p{margin:.6rem 0 0;font-size:.85rem;color:var(--muted)}
   .sporsmal{display:flex;flex-direction:column;gap:.6rem;margin-top:.9rem}
   .sporsmal input[type=text],.sporsmal textarea{font:inherit;color:var(--fg);
     background:var(--panel);border:1px solid var(--line);border-radius:10px;
@@ -474,6 +482,11 @@
       </ul>
     </div>
   </section>
+
+  <div class="til-skjema">
+    <a href="#sporsmal">✍️ Still spørsmål før økta →</a>
+    <p>Skjemaet ligger øverst på siden — svaret går rett til treneren.</p>
+  </div>
 
   <footer>
     Basert på forskning på fotball og ungdomstrening (bl.a. Helgerud mfl.
