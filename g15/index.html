@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Løping for fotball — G15 | Treni</title>
+<meta name="description" content="Stikkord fra løpetreninga: soner uten pulsklokke, ukeplan med fotball + løping, styrke og FIFA 11+.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚽</text></svg>">
+<style>
+  :root{
+    --font-display:"Iowan Old Style","Palatino Linotype",Georgia,serif;
+    --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,sans-serif;
+    --font-mono:"SF Mono",ui-monospace,Menlo,monospace;
+    --bg:hsl(100 30% 97%);
+    --panel:#FFFFFF;
+    --line:hsl(110 20% 85%);
+    --fg:hsl(140 40% 10%);
+    --fg2:hsl(140 20% 28%);
+    --muted:hsl(140 12% 38%);
+    --gress:hsl(135 55% 28%);        /* banegrønn */
+    --lime:hsl(80 75% 42%);
+    --gul:hsl(45 95% 50%);
+    --rod:hsl(5 75% 50%);
+    --bla:hsl(210 70% 45%);
+    --shadow:0 2px 12px -4px hsl(140 40% 10% / .12);
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --bg:hsl(150 20% 6%);--panel:hsl(148 16% 10%);--line:hsl(145 12% 18%);
+      --fg:hsl(90 25% 92%);--fg2:hsl(95 15% 78%);--muted:hsl(110 8% 60%);
+      --gress:hsl(130 50% 45%);--lime:hsl(80 70% 55%);
+      --gul:hsl(45 90% 55%);--rod:hsl(5 80% 60%);--bla:hsl(210 75% 60%);
+      --shadow:0 2px 14px -4px hsl(0 0% 0% / .5);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:hsl(150 20% 6%);--panel:hsl(148 16% 10%);--line:hsl(145 12% 18%);
+    --fg:hsl(90 25% 92%);--fg2:hsl(95 15% 78%);--muted:hsl(110 8% 60%);
+    --gress:hsl(130 50% 45%);--lime:hsl(80 70% 55%);
+    --gul:hsl(45 90% 55%);--rod:hsl(5 80% 60%);--bla:hsl(210 75% 60%);
+    --shadow:0 2px 14px -4px hsl(0 0% 0% / .5);
+  }
+  :root[data-theme="light"]{
+    --bg:hsl(100 30% 97%);--panel:#FFFFFF;--line:hsl(110 20% 85%);
+    --fg:hsl(140 40% 10%);--fg2:hsl(140 20% 28%);--muted:hsl(140 12% 38%);
+    --gress:hsl(135 55% 28%);--lime:hsl(80 75% 42%);
+    --gul:hsl(45 95% 50%);--rod:hsl(5 75% 50%);--bla:hsl(210 70% 45%);
+    --shadow:0 2px 12px -4px hsl(140 40% 10% / .12);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{background:var(--bg);color:var(--fg);font-family:var(--font-sans);
+    font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:640px;margin-inline:auto;padding:0 1.1rem 3rem}
+  h1,h2{font-family:var(--font-display);font-weight:600;line-height:1.1;text-wrap:balance;margin:0}
+  p{margin:.6rem 0}
+
+  /* Hero — grønn banestripe */
+  .hero{background:linear-gradient(160deg,hsl(140 50% 14%),hsl(135 55% 22%) 60%,hsl(130 50% 28%));
+    color:hsl(90 40% 95%);padding:2.6rem 0 2.2rem;position:relative;overflow:hidden}
+  .hero::before{content:"";position:absolute;inset:0;
+    background:repeating-linear-gradient(90deg,transparent 0 60px,hsl(0 0% 100%/.03) 60px 120px)}
+  .hero .wrap{position:relative;padding-bottom:0}
+  .hero .topp{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.2em;
+    text-transform:uppercase;color:hsl(80 70% 70%);margin-bottom:.9rem}
+  .hero h1{font-size:clamp(1.9rem,7.5vw,2.7rem)}
+  .hero p{color:hsl(100 25% 82%);max-width:42ch;font-size:1.02rem}
+  .hero .ball{position:absolute;right:-8px;top:12px;font-size:5.5rem;opacity:.14;transform:rotate(12deg)}
+
+  section{margin-top:2.4rem}
+  .kick{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--gress);display:flex;align-items:center;gap:.6rem;margin-bottom:.6rem}
+  .kick::before{content:"";width:22px;height:2px;background:var(--gress);border-radius:2px}
+  h2{font-size:1.45rem;margin-bottom:.4rem}
+  .kort{background:var(--panel);border:1px solid var(--line);border-radius:14px;
+    padding:1.1rem 1.2rem;box-shadow:var(--shadow);margin-top:.9rem}
+  .kort p{margin:.35rem 0;font-size:.96rem;color:var(--fg2)}
+  .kort b{color:var(--fg)}
+
+  .tallrad{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;margin-top:1rem}
+  .tallrad div{background:var(--panel);border:1px solid var(--line);border-radius:12px;
+    padding:.8rem .6rem;text-align:center;box-shadow:var(--shadow)}
+  .tallrad .t{font-family:var(--font-display);font-size:1.5rem;font-weight:600;
+    color:var(--gress);display:block;line-height:1.1}
+  .tallrad p{font-size:.75rem;color:var(--muted);margin:.3rem 0 0;line-height:1.35}
+
+  /* Sonetabell */
+  .soner{display:flex;flex-direction:column;gap:.55rem;margin-top:1rem}
+  .sone{display:grid;grid-template-columns:8px 1fr;border:1px solid var(--line);
+    border-radius:12px;overflow:hidden;background:var(--panel);box-shadow:var(--shadow)}
+  .sone .stripe{height:100%}
+  .sone .inn{padding:.75rem .95rem}
+  .sone .navn{font-weight:700;font-size:.95rem;display:flex;justify-content:space-between;gap:.5rem;flex-wrap:wrap}
+  .sone .navn span:last-child{font-family:var(--font-mono);font-size:.68rem;color:var(--muted);
+    letter-spacing:.05em;align-self:center}
+  .sone p{margin:.2rem 0 0;font-size:.88rem;color:var(--fg2)}
+  .s1 .stripe{background:var(--bla)} .s2 .stripe{background:var(--gress)}
+  .s3 .stripe{background:var(--gul)} .s4 .stripe{background:var(--rod)}
+
+  ul{padding-left:1.15rem;margin:.6rem 0}
+  li{margin:.45rem 0;font-size:.96rem;color:var(--fg2)}
+  li b{color:var(--fg)}
+  li::marker{color:var(--gress)}
+
+  .uke{list-style:none;padding:0}
+  .uke li{display:grid;grid-template-columns:auto 1fr;gap:.7rem;align-items:start;
+    background:var(--panel);border:1px solid var(--line);border-radius:12px;
+    padding:.75rem .9rem;box-shadow:var(--shadow)}
+  .uke .em{font-size:1.25rem;line-height:1.3}
+  .uke p{margin:.15rem 0 0;font-size:.86rem;color:var(--muted)}
+  .uke li.viktig{background:color-mix(in srgb,var(--gress) 13%,var(--panel));
+    border-color:color-mix(in srgb,var(--gress) 45%,var(--line))}
+  .uke li.viktig p{color:var(--fg2)}
+
+  .ukeplaner{display:grid;gap:1rem;margin-top:1rem}
+  .ukeplan{background:var(--panel);border:1px solid var(--line);border-radius:14px;
+    overflow:hidden;box-shadow:var(--shadow)}
+  .ukeplan .tittel{background:color-mix(in srgb,var(--gress) 10%,var(--panel));
+    padding:.65rem 1rem;font-weight:700;font-size:.95rem;
+    border-bottom:1px solid var(--line)}
+  .ukeplan .tittel span{font-weight:400;color:var(--muted);font-size:.82rem}
+  .ukeplan table{width:100%;border-collapse:collapse;font-size:.88rem}
+  .ukeplan td{padding:.42rem 1rem;border-top:1px solid var(--line);color:var(--fg2)}
+  .ukeplan tr:first-child td{border-top:0}
+  .ukeplan td:first-child{font-family:var(--font-mono);font-size:.7rem;
+    text-transform:uppercase;letter-spacing:.08em;color:var(--muted);
+    width:3.4rem;white-space:nowrap}
+  .ukeplan .lop{color:var(--gress);font-weight:650;
+    background:color-mix(in srgb,var(--gress) 13%,var(--panel))}
+  .ukeplan tr:has(.lop) td{background:color-mix(in srgb,var(--gress) 13%,var(--panel))}
+  .ukeplan .kampen{font-weight:650;color:var(--fg)}
+  .ukeplan .fri{color:var(--muted)}
+  .fokus{display:grid;grid-template-columns:auto 1fr;gap:.35rem .9rem;align-items:center;
+    margin-top:.7rem;padding:.95rem 1.15rem;border-radius:14px;
+    background:linear-gradient(140deg,hsl(140 50% 18%),hsl(133 52% 27%));
+    color:hsl(90 40% 95%);box-shadow:0 4px 18px -6px hsl(135 55% 20% / .5)}
+  .fokus .merke{grid-column:1 / -1;font-family:var(--font-mono);font-size:.64rem;
+    letter-spacing:.2em;color:var(--lime)}
+  .fokus .t{font-family:var(--font-display);font-size:2.3rem;font-weight:600;
+    line-height:1;color:var(--lime)}
+  .fokus p{margin:0;font-size:.95rem;color:hsl(100 25% 88%)}
+  .fokus p b{color:#fff}
+  .videoer{display:flex;flex-direction:column;gap:.55rem;margin:.7rem 0 .3rem}
+  .videokort{display:grid;grid-template-columns:auto 1fr;gap:.9rem;align-items:center;
+    text-decoration:none;background:hsl(140 45% 12%);border-radius:12px;
+    padding:.7rem .9rem;transition:transform .16s ease, box-shadow .16s ease}
+  .videokort:hover{transform:translateY(-2px);box-shadow:0 8px 22px -8px hsl(140 45% 10% / .55);opacity:1}
+  .videokort .play{width:44px;height:32px;border-radius:8px;background:#FF0033;
+    display:grid;place-items:center;color:#fff;font-size:.85rem;flex:0 0 auto}
+  .videokort .vtekst{display:flex;flex-direction:column;gap:.1rem}
+  .videokort .vtekst b{color:hsl(90 40% 95%);font-size:.92rem;line-height:1.3}
+  .videokort .vtekst small{color:hsl(110 15% 68%);font-size:.76rem;line-height:1.35}
+  .obs{border-left:4px solid var(--gul);
+    background:color-mix(in srgb,var(--gul) 14%,var(--panel));
+    border-radius:0 12px 12px 0;
+    padding:.9rem 1.1rem;margin-top:1rem;box-shadow:var(--shadow)}
+  .obs p{margin:.3rem 0;font-size:.94rem;color:var(--fg2)}
+
+  .husk{background:linear-gradient(150deg,hsl(140 50% 16%),hsl(133 52% 24%));
+    color:hsl(90 40% 95%);border-radius:16px;padding:1.3rem 1.4rem;margin-top:1rem}
+  .husk h2{color:inherit;font-size:1.25rem}
+  .husk li{color:hsl(100 25% 85%)}
+  .husk li b{color:#fff}
+  .husk li::marker{color:var(--lime)}
+
+  footer{margin-top:2.6rem;padding-top:1.2rem;border-top:1px solid var(--line);
+    font-size:.8rem;color:var(--muted)}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <span class="ball">⚽</span>
+    <p class="topp">Løpetrening · G15</p>
+    <h1>Løp deg bedre i fotball.</h1>
+    <p>Stikkordene fra økta — sånn bruker du løping til å bli en bedre
+      fotballspiller, uten å slite deg ut.</p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section>
+    <p class="kick">Status i dag</p>
+    <h2>Treningsuka deres nå</h2>
+    <div class="tallrad" style="grid-template-columns:repeat(2,1fr)">
+      <div><span class="t">2+</span><p>fotballøkter i uka (noen ganger flere)</p></div>
+      <div><span class="t">~1</span><p>kamp i uka</p></div>
+    </div>
+    <div class="fokus">
+      <span class="merke">FOKUSET</span>
+      <span class="t">2</span>
+      <p><b>løpeøkter — som det er plass til</b> — det er dem denne siden handler om.</p>
+    </div>
+    <div class="obs">
+      <p><b>⚠️ Har dere 3 treninger + kamp ei uke?</b> Da er det plass til
+      1 rolig løpeøkt — intervalløkta kan kuttes.</p>
+    </div>
+    <div class="kort">
+      <p><b>🇳🇴 Dette er ikke noe vi har funnet på</b> — alt på denne siden er
+      standard i norske toppmiljøer:</p>
+      <p>• <b>4×4-intervallene</b> er utviklet av forskere ved NTNU i
+      Trondheim og dokumentert på norske elite-ungdomsspillere — metoden
+      norske toppklubber bygde kondisjonstreningen sin på.</p>
+      <p>• <b>Oppvarmingsprogrammet (FIFA 11+)</b> er laget av FIFA sammen
+      med Senter for idrettsskadeforskning i Oslo — norsk forskning som i dag
+      brukes av fotballag over hele verden.</p>
+      <p>• <b>Sonestyringen</b> (rolig skal være rolig, hardt kontrollert) er
+      samme metode som Olympiatoppen bruker på norske landslagsutøvere i alle
+      utholdenhetsidretter.</p>
+    </div>
+  </section>
+
+  <section>
+    <p class="kick">Hvorfor gidde?</p>
+    <h2>Kondis er fotball-superkraften</h2>
+    <div class="kort">
+      <p>Forskere lot et fotballag trene <b>2 løpeøkter i uka i 8 uker</b>
+      (4 × 4 minutter i god fart). Se hva som skjedde i kampene deres:</p>
+    </div>
+    <div class="tallrad">
+      <div><span class="t">+20 %</span><p>lengre løpsdistanse per kamp</p></div>
+      <div><span class="t">2×</span><p>dobbelt så mange sprinter</p></div>
+      <div><span class="t">+24 %</span><p>flere involveringer med ball</p></div>
+    </div>
+    <div class="kort">
+      <p><b>Hvorfor funker det?</b> En kamp er 40–60 sprinter — omtrent én
+      hvert 4.–5. minutt. God kondis gjør at kroppen <b>lader batteriet
+      raskere mellom sprintene</b>. Den som fortsatt har fart i beina de
+      siste ti minuttene, avgjør kamper.</p>
+    </div>
+  </section>
+
+  <section>
+    <p class="kick">Det du kjente på løpeturen</p>
+    <h2>De fire sonene — uten pulsklokke</h2>
+    <div class="soner">
+      <div class="sone s1"><div class="stripe"></div><div class="inn">
+        <div class="navn"><span>🎵 Syngesonen</span><span>VELDIG ROLIG</span></div>
+        <p>Så rolig at du kan synge. Føles nesten for lett — men det er her
+        motoren bygges. Proffene bruker MEST av tida si her.</p>
+      </div></div>
+      <div class="sone s2"><div class="stripe"></div><div class="inn">
+        <div class="navn"><span>💬 Pratefart</span><span>ROLIG</span></div>
+        <p>Hele setninger går fint. Vanlig rolig løpetur. Her skal de fleste
+        løpeturene dine ligge.</p>
+      </div></div>
+      <div class="sone s3"><div class="stripe"></div><div class="inn">
+        <div class="navn"><span>🥵 Terskel</span><span>KONTROLLERT HARDT</span></div>
+        <p>Bare korte setninger. Jevn, tøff fart du kan holde lenge —
+        intervallfarta. Ikke sprint! Siste draget skal kjennes «jeg hadde
+        klart ett til».</p>
+      </div></div>
+      <div class="sone s4"><div class="stripe"></div><div class="inn">
+        <div class="navn"><span>🔥 Sprint</span><span>MAKS</span></div>
+        <p>Umulig å prate. Korte støt — dette er fotballsona di i kamp. Den
+        blir bare bedre hvis de andre sonene er på plass.</p>
+      </div></div>
+    </div>
+    <div class="kort">
+      <p><b>Den vanligste feilen:</b> å løpe alt «passe hardt» — for fort til
+      å bygge motor, for sakte til å bli rask. Velg sone FØR du løper:
+      rolig skal være rolig, hardt skal være hardt.</p>
+    </div>
+  </section>
+
+  <section>
+    <p class="kick">Uka di</p>
+    <h2>Løping ved siden av fotball</h2>
+    <p style="color:var(--muted);font-size:.95rem">Fotballøktene og kampen er
+      hovedtreningen. Med 2 fotballøkter + kamp i uka har du fin plass til to
+      løpeøkter — sånn her:</p>
+    <ul class="uke">
+      <li class="viktig"><span class="em">💬</span><div><b>1 rolig løpetur i uka</b> (30–45 min i
+        pratefart)<p>På en dag uten fotball. Bygger motoren uten å stjele
+        krefter fra trening og kamp.</p></div></li>
+      <li class="viktig"><span class="em">🥵</span><div><b>1 intervalløkt: 4 × 4 min i
+        terskelfart</b> (3 min joggepause mellom)<p>Det var akkurat denne økta
+        som ga +20 % i kamp. Ikke dagen etter kamp. Uker med 3+ fotballøkter:
+        dropp den, behold den rolige turen.</p></div></li>
+      <li><span class="em">🔥</span><div><b>Sprint trener du i fotballøktene</b>
+        <p>Den ligger der allerede — spurter, vendinger, småbanespill.</p></div></li>
+      <li><span class="em">😴</span><div><b>Minst 1–2 helt frie dager i uka</b>
+        <p>Kroppen bygger seg sterkere når du hviler — ikke når du trener.</p></div></li>
+    </ul>
+    <div class="obs">
+      <p><b>⚠️ Øk rolig:</b> aldri mer enn ca. 10 % mer løping fra én uke til
+      den neste. Forskning på unge utøvere: de som øker for fort, skader seg
+      omtrent <b>tre ganger så ofte</b>.</p>
+    </div>
+  </section>
+
+  <section>
+    <p class="kick">Sånn kan uka se ut</p>
+    <h2>Tre eksempeluker</h2>
+    <p style="color:var(--muted);font-size:.95rem">Kampdagen kan variere —
+      flytt brikkene, men behold reglene: aldri intervall dagen etter kamp,
+      styrke i oppvarminga 2×/uke, minst 1–2 helt frie dager.</p>
+    <div class="ukeplaner">
+
+      <div class="ukeplan">
+        <div class="tittel">Uke A — 2 fotballøkter + kamp <span>· den vanlige uka</span></div>
+        <table>
+          <tr><td>Man</td><td class="fri">Fri (dagen etter kamp)</td></tr>
+          <tr><td>Tir</td><td>Fotball <b>+ styrke i oppvarminga</b> (FIFA 11+)</td></tr>
+          <tr><td>Ons</td><td class="lop">🥵 Intervall 4 × 4 min (3 min joggepause)</td></tr>
+          <tr><td>Tor</td><td>Fotball <b>+ styrke i oppvarminga</b></td></tr>
+          <tr><td>Fre</td><td class="fri">Fri</td></tr>
+          <tr><td>Lør</td><td class="lop">💬 Rolig løpetur 30–45 min i pratefart</td></tr>
+          <tr><td>Søn</td><td class="kampen">⚽ KAMP</td></tr>
+        </table>
+      </div>
+
+      <div class="ukeplan">
+        <div class="tittel">Uke B — 3 fotballøkter + kamp <span>· intervalløkta kuttes</span></div>
+        <table>
+          <tr><td>Man</td><td class="fri">Fri (dagen etter kamp)</td></tr>
+          <tr><td>Tir</td><td>Fotball <b>+ styrke i oppvarminga</b> (FIFA 11+)</td></tr>
+          <tr><td>Ons</td><td class="lop">💬 Rolig løpetur 30–45 min i pratefart</td></tr>
+          <tr><td>Tor</td><td>Fotball <b>+ styrke i oppvarminga</b></td></tr>
+          <tr><td>Fre</td><td>Fotball (lett økt)</td></tr>
+          <tr><td>Lør</td><td class="fri">Fri</td></tr>
+          <tr><td>Søn</td><td class="kampen">⚽ KAMP</td></tr>
+        </table>
+      </div>
+
+      <div class="ukeplan">
+        <div class="tittel">Uke C — 2–3 fotballøkter, ingen kamp <span>· plass til alt</span></div>
+        <table>
+          <tr><td>Man</td><td class="fri">Fri</td></tr>
+          <tr><td>Tir</td><td>Fotball <b>+ styrke i oppvarminga</b> (FIFA 11+)</td></tr>
+          <tr><td>Ons</td><td class="lop">💬 Rolig løpetur 45–60 min — litt lengre når det ikke er kamp</td></tr>
+          <tr><td>Tor</td><td>Fotball <b>+ styrke i oppvarminga</b> og evt. kroppsvektsirkel etterpå</td></tr>
+          <tr><td>Fre</td><td class="fri">Fri</td></tr>
+          <tr><td>Lør</td><td class="lop">🥵 Intervall 4 × 4 min (3 min joggepause) — med uthvilte bein etter fridagen</td></tr>
+          <tr><td>Søn</td><td class="fri">Fri (evt. tredje fotballøkt her — ta den lett dagen etter intervall)</td></tr>
+        </table>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <p class="kick">Styrke</p>
+    <h2>Den glemte fotballtreningen</h2>
+    <div class="kort">
+      <p><b>Nei, styrketrening hemmer ikke veksten</b> — det er en myte.
+      Med god teknikk er styrke både trygt og noe av det smarteste en ung
+      fotballspiller kan gjøre: raskere sprint, høyere hopp, tøffere i
+      duellene — og først og fremst <b>langt færre skader</b>.</p>
+    </div>
+    <div class="tallrad">
+      <div><span class="t">−32 %</span><p>skader med 20 min styrke/balanse som oppvarming 2×/uke</p></div>
+      <div><span class="t">−53 %</span><p>belastningsskader — samme program (FIFA 11+)</p></div>
+      <div><span class="t">½</span><p>hamstringstrekk halveres med én øvelse: nordic hamstring</p></div>
+    </div>
+    <div class="kort">
+      <p><b>Slik gjør dere det enkelt:</b></p>
+      <p>1. <b>FIFA 11+ som oppvarming</b> på fotballtreningene (20 min, 2×/uke)
+      — da er styrke, balanse og spenst dekket uten én ekstra økt.</p>
+      <p>2. Eventuelt en kort <b>kroppsvektsirkel</b> etter trening: knebøy,
+      utfall, nordic hamstring, planke — og hopp med <b>kontrollert
+      landing</b>.</p>
+      <p>3. <b>Teknikk før vekt, alltid.</b> Kroppsvekt og lette vekter nå —
+      de tunge løftene kommer gradvis når teknikken sitter. Ingen hast, ingen
+      maksløft-konkurranser i gymmen.</p>
+      <p>4. Vondt i kne eller hæl? Rolig med hopp og spenst en periode —
+      styrke uten smerte er helt fint.</p>
+    </div>
+    <div class="kort">
+      <p><b>Hva er FIFA 11+?</b> Et ferdig oppvarmingsprogram utviklet av
+      FIFA sammen med det norske Senter for idrettsskadeforskning. 15 øvelser
+      i tre deler, tar ca. 20 minutter, trenger bare en ball og litt plass:</p>
+      <div class="videoer">
+        <a class="videokort" href="https://www.youtube.com/watch?v=pK5jcQalrSs" target="_blank" rel="noopener">
+          <span class="play">▶</span>
+          <span class="vtekst"><b>Del 1 — løpeøvelser i rolig tempo</b>
+          <small>6 øvelser · åpnes på YouTube</small></span>
+        </a>
+        <a class="videokort" href="https://www.youtube.com/watch?v=Ov9PHeUdg5Q" target="_blank" rel="noopener">
+          <span class="play">▶</span>
+          <span class="vtekst"><b>Del 2 — styrke, balanse og spenst</b>
+          <small>Planke, nordic hamstring, knebøy, hopp — 6 øvelser i 3 nivåer · åpnes på YouTube</small></span>
+        </a>
+        <a class="videokort" href="https://www.youtube.com/watch?v=dzgvdl9FlCk" target="_blank" rel="noopener">
+          <span class="play">▶</span>
+          <span class="vtekst"><b>Del 3 — løpeøvelser i høyere fart</b>
+          <small>Tempoløp, spensthopp, retningsforandringer · åpnes på YouTube</small></span>
+        </a>
+      </div>
+      <p>Norske øvelsesvideoer finnes også på
+      <a href="https://skadefri.no/idretter/fotball/fotballprepp-del-1/" target="_blank" rel="noopener">skadefri.no</a>
+      (søk «fotballprepp»).</p>
+    </div>
+  </section>
+
+  <section>
+    <p class="kick">Kroppen din vokser</p>
+    <h2>To ting alle på laget bør vite</h2>
+    <div class="kort">
+      <p><b>1. Dere er ikke like langt i vokseløpet — og det er normalt.</b>
+      I et 15-årslag kan kroppene være opptil 3 år fra hverandre i utvikling.
+      Ikke sammenlign fart med de andre — bruk pratetesten på DEG SELV. Flere
+      av verdens beste var små og seine i utviklingen som 15-åringer.</p>
+      <p><b>2. Vondt under kneskåla eller i hælen?</b> Det er vanlig når man
+      vokser (rammer ca. 1 av 5 aktive ungdommer). Det betyr ikke stopp — men
+      det betyr <b>si fra til treneren</b>, så justerer vi mengden. Å bite
+      tenna sammen gjør det bare verre og langvarig.</p>
+    </div>
+    <div class="kort">
+      <p><b>Og den hemmelige treningsøkta: søvn.</b> 8–10 timer per natt.
+      Utøvere på deres alder som sover under 8 timer, skader seg nesten
+      dobbelt så ofte. Gaming til 01 og trening dagen etter er en dårlig
+      kombo — kroppen bygger seg sterkere mens du sover.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="husk">
+      <h2>📌 Huskelista</h2>
+      <ul>
+        <li><b>Kondis vinner kamper</b> — spesielt de siste 10 minuttene</li>
+        <li><b>Rolig skal være rolig</b> — pratetesten bestemmer, ikke stoltheten</li>
+        <li><b>Hardt skal være kontrollert</b> — siste draget best, ikke sistemann i mål</li>
+        <li><b>Maks 10 % mer per uke</b> — kroppen liker trapper, ikke heiser</li>
+        <li><b>Vondt i kne/hæl → si fra</b> — juster, ikke overse</li>
+        <li><b>Styrke 2×/uke i oppvarminga</b> — færre skader, tøffere i duellene</li>
+        <li><b>Sov 8–10 timer</b> — den billigste formen for trening</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    Basert på forskning på fotball og ungdomstrening (bl.a. Helgerud mfl.
+    2001, Soligard mfl. 2008 — FIFA 11+, Milewski mfl. 2014, van der Horst
+    mfl. 2015 — nordic hamstring) · Løpetrening for G15 · 2026
+  </footer>
+</main>
+</body>
+</html>
