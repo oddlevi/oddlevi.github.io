@@ -185,8 +185,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
         if (isset($vl_kode) && $mobil !== "" && defined("TRENI_BOT_TOKEN")) {
             $fornavn3 = explode(" ", $navn)[0];
-            $lenke3 = "https://treni.no/venteliste-start.php?k=" . $vl_kode;
-            $sms = ($sprak === "engelsk")   // (ikke lenger i varselet, 03.09: løperen sendes rett til spørsmålene)
+            $lenke3 = "https://min.treni.no/venteliste.php?t=" . $vl_kode;   // løperens side (sender til spørsmålene til de er besvart)
+            $sms = ($sprak === "engelsk")   // sendes som EGEN Telegram-melding til Odd (lett å kopiere, 03.09)
                 ? "Hi " . $fornavn3 . "! Odd Levi from Treni here - thanks for signing up! "
                   . "While you wait for your Strava spot we made you a personal page: answer "
                   . "a few quick questions and you get heart-rate zones, a training plan and "
@@ -206,9 +206,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     "content" => http_build_query([
                         "chat_id" => defined("TRENI_ODD_CHAT") ? TRENI_ODD_CHAT : TRENI_TRENER_CHAT,
                         "text" => "🆕 Ny påmelding: " . $navn . " (" . $mobil . ")
+📱 SMS-utkast kommer i neste melding, kopier og send til " . $mobil . "
 🚦 Status: venter (sendt rett til spørsmålene, ikke svart ennå)
 ✉️ Kommunisert: velkomst-e-post sendt til " . $epost . (!empty($velkomst_ok) ? " ✓ (Gmail-røret)" : " (usikker leveranse!)") . "
 📝 Om løpingen: " . mb_substr($om !== "" ? $om : "(ikke utfylt)", 0, 300)]),
+                    "timeout" => 8]]));
+            // Melding 2: selve SMS-teksten alene, så den kan kopieres rett fra Telegram
+            @file_get_contents(
+                "https://api.telegram.org/bot" . TRENI_BOT_TOKEN . "/sendMessage",
+                false, stream_context_create(["http" => [
+                    "method" => "POST",
+                    "header" => "Content-Type: application/x-www-form-urlencoded\r\n",
+                    "content" => http_build_query([
+                        "chat_id" => defined("TRENI_ODD_CHAT") ? TRENI_ODD_CHAT : TRENI_TRENER_CHAT,
+                        "text" => $sms]),
                     "timeout" => 8]]));
         }
         $sendt = $epost_ok || $tg_ok;
