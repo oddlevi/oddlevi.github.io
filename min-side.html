@@ -103,8 +103,9 @@
   <p class="kicker reveal"><a href="index.html" style="color:inherit">← treni.no</a> · min side</p>
   <h1 class="reveal">Din egen side.<br>Bare din.</h1>
   <p class="ingress reveal">Hver Treni-løper har sin egen side, delt i faner: status og
-  neste løp, tallene i klartekst, øktene, ukeplanen med veien videre mot løpet ditt, skoene dine med slitasjemåler — og
-  hele rapporten. Oppdatert fra Strava i det øyeblikket du laster opp ei økt.</p>
+  neste løp, tallene i klartekst, øktene, ukeplanen med veien videre mot løpet ditt, kalenderen der du flytter
+  øktene selv, styrke, skoene dine med slitasjemåler, e-boka om fjelløping og hele rapporten.
+  Oppdatert fra Strava i det øyeblikket du laster opp ei økt.</p>
   <div class="knapper reveal">
     <a class="btn btn-primar" href="bli-testloper.php">Bli testløper</a>
     <a class="btn btn-ghost" href="#demo">Se hvordan den ser ut</a>
@@ -128,9 +129,11 @@
         <button data-tema="d-tall" class="aktiv">📊 Belastning ⚠️</button>
         <button data-tema="d-okter">🏃 Øktene</button>
         <button data-tema="d-plan">📋 Løpsplanen</button>
+        <button data-tema="d-kalender">📅 Kalender</button>
         <button data-tema="d-rapport">📖 Rapporten</button>
         <button data-tema="d-skadefritt">🛡️ Skadefritt</button>
         <button data-tema="d-sko">👟 Sko</button>
+        <button data-tema="d-styrke">💪 Styrke</button>
         <button data-tema="d-fjell">⛰️ Fjell</button>
         <button data-tema="d-verv">💌 Verv</button>
       </div>
@@ -239,6 +242,15 @@
               <span class="km2">12 km</span></div></div></div>
           <div class="rad1" style="border-top:2px solid hsl(var(--border)); margin-top:.5rem; padding-top:.5rem">
             <b>Totalt i planen</b><span class="km2" style="font-weight:750">37,5 km</span></div>
+          <p class="undertekst" style="margin:.5rem 0 0">Planen er veiledning. Vi vurderer øktene
+          dine hver dag, og du tar de endelige valgene selv.</p>
+        </div>
+        <div class="kort">
+          <h4>🏁 Løpskalenderen</h4>
+          <p style="margin:.3rem 0; font-size:.9rem">Over 400 løp i Norge samlet på ett sted, fra
+          gateløp til fjelløp. Velg løpet ditt, så bygges planen mot akkurat det. Påmeldingen går
+          via vår side, der du også kan opprette Treni-konto med ett trykk.</p>
+          <p class="undertekst" style="margin:.4rem 0 0"><a href="lop.php">Se løpskalenderen →</a></p>
         </div>
         <div class="kort">
           <h4>📈 Veien mot Oslo Maraton</h4>
@@ -252,6 +264,24 @@
             <tr><td>25.–31. august</td><td>31</td><td>Roligere uke 🌿</td></tr>
             <tr><td>22.–28. september</td><td>23</td><td>Løpsuke — nedtrapping + løpet 🎉</td></tr>
           </table>
+        </div>
+      </div>
+
+      <div class="tema" data-tema="d-kalender">
+        <div class="kort">
+          <h4>📅 Kalenderen din: dra og slipp</h4>
+          <p style="margin:.3rem 0; font-size:.9rem">Alle øktene ligger i en månedskalender.
+          Passer ikke tirsdagen, tar du tak i økta og drar den til en annen dag. Planen din
+          oppdateres med en gang. Skal økta til en annen måned, setter du den i parkering og
+          plasserer den når det passer.</p>
+          <p class="undertekst" style="margin:.4rem 0 0">Gjennomførte økter fylles inn automatisk
+          fra Strava ✓, med kilometer og type. Dagene er veiledende, du bestemmer.</p>
+        </div>
+        <div class="kort">
+          <h4>➕ Egne økter</h4>
+          <p style="margin:.3rem 0; font-size:.9rem">Styrke, terrengtur, intervall, motbakke eller
+          sykkel: legg inn dine egne økter med type, lengde og en kort beskrivelse. De vises i
+          kalenderen og i planen din, og treneren ser dem når øktene vurderes.</p>
         </div>
       </div>
 
@@ -322,17 +352,31 @@
           underlaget, løypeprofilen og værmeldingen. Aldri kjøpepress, bare riktig
           sko på riktig dag.</p>
           <p class="undertekst" style="margin:.4rem 0 0">Trenger du nye? Én knapp
-          melder behovet, og treneren følger opp med forslag som passer deg.
+          melder behovet, og treneren følger opp med forslag som passer deg, bygget på
+          trenerens egen sko-kunnskap: lengde, underlag, såleprofil og vær.
           🛒 Automatisk bestilling med partnerrabatt er på vei.</p>
+        </div>
+      </div>
+
+      <div class="tema" data-tema="d-styrke">
+        <div class="kort">
+          <h4>💪 Styrke for løpere</h4>
+          <p style="margin:.3rem 0; font-size:.9rem">Fire styrkemaler laget av treneren, og en
+          øvelsesbank der hver øvelse har en enkel animasjon som viser hvordan den gjøres.
+          Planen setter opp et par korte økter i uka med enkle basisøvelser, og du stopper
+          før du er helt utkjørt.</p>
+          <p class="undertekst" style="margin:.4rem 0 0">Styrkeøktene ligger i samme plan og
+          samme kalender som løpeøktene.</p>
         </div>
       </div>
 
       <div class="tema" data-tema="d-fjell">
         <div class="kort" style="border-color:hsl(84 80% 34% / .45)">
-          <h4>📚 E-bok på vei: Trening for fjelløping</h4>
+          <h4>📚 E-boka: Trening for fjelløping</h4>
           <p style="margin:.3rem 0; font-size:.9rem">Skrevet med en av landets mest
-          erfarne fjelløpere — fysioterapeut og VM-deltager i skyrunning. Kapitlene
-          publiseres her, og du kan få varsel i Telegram når nye kommer. 🔔</p>
+          erfarne fjelløpere, fysioterapeut og VM-deltager i skyrunning. Kapittel 0 til 11
+          er publisert og ligger på siden din, med en liten quiz etter hvert kapittel.
+          Du kan få varsel i Telegram når nye kapitler kommer. 🔔</p>
         </div>
         <div class="kort">
           <h4>🍫 Ernæring i lange fjelløp</h4>
