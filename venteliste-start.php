@@ -72,7 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && $rad && trim($_POST["nettside"] ?? 
         // Odds presisering 01.09: selve SVARENE skal stå i innslaget —
         // sammendraget bygges FØR fil-sjekken, så også helt nye løpere
         // (bygges-stubben under) får det.
-        $vl_sam = '📝 Onboarding-svarene dine er mottatt — soner og plan bygges/oppdateres fra dem. '
+        $vl_sam = '📝 Svarene dine er mottatt. Soner og plan bygges fra dem. '
                 . 'Du svarte: Mål: ' . $svar['maal']
                 . ' · Alder: ' . $svar['alder']
                 . ' · ' . $svar['km_uke'] . ' km/uke'
@@ -100,6 +100,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && $rad && trim($_POST["nettside"] ?? 
                         "chat_id" => TRENI_TRENER_CHAT,
                         "text" => "📝 Venteliste-onboarding fullført: " . $rad["navn"]
                                 . " (id " . $rad["id"] . ")\n"
+                                . "Side: https://min.treni.no/venteliste.php?t=" . $kode . "\n"
                                 . "Mål: " . $svar["maal"] . "\n"
                                 . "Alder: " . $svar["alder"]
                                 . " · km/uke: " . $svar["km_uke"]

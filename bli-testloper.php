@@ -41,16 +41,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     } elseif ($navn === "" || !filter_var($epost, FILTER_VALIDATE_EMAIL)) {
         $feil = "Fyll inn navn og en gyldig e-postadresse.";
     } else {
+        $vl_kode_ny = bin2hex(random_bytes(16));   // ventelistekoden lages her så trener-e-posten får lenken
         $tekst = "Ny testløper-interesse fra treni.no\n\n"
-               . ($maal_lop ? "🏁 KOM VIA LØPSKALENDEREN — vil trene mot: "
+               . ($maal_lop ? "🏁 KOM VIA LØPSKALENDEREN, vil trene mot: "
                   . $maal_lop["navn"] . ($maal_lop["dato"] ? " (" . $maal_lop["dato"] . ")" : "")
                   . "\nPåmeldingslenke: " . $maal_lop["pamelding"] . "\n\n" : "")
                . "Navn: " . $navn . "\n"
                . "E-post: " . $epost . "\n"
                . ($tg !== "" ? "Telegram: " . $tg . "\n" : "")
                . "Språk: " . $sprak . "\n\n"
-               . "Inviter (send personlig): https://t.me/VeilederenAIBot?start="
-               . ($sprak === "engelsk" ? "verve_odd_en" : "verve_odd") . "\n\n"
+               . "Ventelistesiden (klar når løperen har svart på spørsmålene): "
+               . "https://min.treni.no/venteliste.php?t=" . $vl_kode_ny . "\n\n"
                . ($kilde !== "" ? "Tipset av: " . $kilde . "\n\n" : "")
                . "Om løpingen:\n" . ($om !== "" ? $om : "(ikke utfylt)") . "\n";
         // Gmail-røret (Odds beslutning 20.08): DKIM-signert, innboks + Sendt-arkiv.
@@ -84,7 +85,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     om TEXT,
                     status VARCHAR(20) NOT NULL DEFAULT 'venter'
                 ) CHARACTER SET utf8mb4");
-                $vl_kode = bin2hex(random_bytes(16));
+                $vl_kode = $vl_kode_ny;
                 try { $pdo->exec("ALTER TABLE venteliste ADD COLUMN maal_lop TEXT NULL"); }
                 catch (Throwable $e9) { /* finnes alt */ }
                 $pdo->prepare("INSERT INTO venteliste (navn, epost, telegram, om, sprak, kilde, mobil, kode, maal_lop) VALUES (?,?,?,?,?,?,?,?,?)")
@@ -137,13 +138,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                       . "your training automatically through Strava - that is how the "
                       . "advisor sees your sessions and adjusts your plan every week. "
                       . "Strava caps how many runners a service like ours can connect, "
-                      . "and our first ten spots are taken. We have applied for many "
-                      . "more, and the answer is expected shortly - you are in line.\n\n"
+                      . "and our first ten spots are taken. We have applied for more, "
+                      . "and we will let you know as soon as your spot opens. You are in line.\n\n"
                       . "But we have already made something for you: answer a few quick "
                       . "questions, and the advisor builds your heart-rate zones and a "
                       . "training plan from your numbers. You also get full access to "
                       . "the e-book Training for Mountain Running by our coach Eirik "
-                      . "Haugsnes (physiotherapist and skyrunner):\n\n"
+                      . "Haugsnes (physiotherapist and skyrunner). You were sent straight "
+                      . "to the questions when you signed up. To continue later, use this link:\n\n"
                       . $lenke . "\n\n"
                       . "When your spot opens, you connect Strava in two minutes - and "
                       . "get full weekly guidance with a coach in the loop.\n\n"
@@ -157,13 +159,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                       . "veilederen ser øktene dine og justerer planen hver uke. Strava "
                       . "setter et tak på hvor mange løpere en tjeneste som vår kan "
                       . "koble til, og de ti første plassene våre er fylt. Vi har søkt "
-                      . "Strava om mange flere plasser, og svaret ventes i løpet av "
-                      . "kort tid - du står klar i køen.\n\n"
+                      . "Strava om flere plasser, og vi sier fra så snart plassen din "
+                      . "åpner. Du står i køen.\n\n"
                       . "Men vi har laget noe til deg allerede nå: svar på noen kjappe "
                       . "spørsmål, så bygger veilederen pulssonene dine og en "
                       . "treningsplan ut fra tallene dine. Du får også full tilgang til "
                       . "e-boka «Trening for fjelløping», skrevet av treneren vår Eirik "
-                      . "Haugsnes (fysioterapeut og skyrunner):\n\n"
+                      . "Haugsnes (fysioterapeut og skyrunner). Du ble sendt rett til "
+                      . "spørsmålene da du meldte deg. Vil du fortsette senere, bruker "
+                      . "du denne lenken:\n\n"
                       . $lenke . "\n\n"
                       . "Når plassen din åpner, kobler du Strava på to minutter - og "
                       . "får full ukentlig veiledning med trener i loopen.\n\n"
@@ -182,7 +186,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if (isset($vl_kode) && $mobil !== "" && defined("TRENI_BOT_TOKEN")) {
             $fornavn3 = explode(" ", $navn)[0];
             $lenke3 = "https://treni.no/venteliste-start.php?k=" . $vl_kode;
-            $sms = ($sprak === "engelsk")
+            $sms = ($sprak === "engelsk")   // (ikke lenger i varselet, 03.09: løperen sendes rett til spørsmålene)
                 ? "Hi " . $fornavn3 . "! Odd Levi from Treni here - thanks for signing up! "
                   . "While you wait for your Strava spot we made you a personal page: answer "
                   . "a few quick questions and you get heart-rate zones, a training plan and "
@@ -201,12 +205,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 ",
                     "content" => http_build_query([
                         "chat_id" => defined("TRENI_ODD_CHAT") ? TRENI_ODD_CHAT : TRENI_TRENER_CHAT,
-                        "text" => "📱 SMS klar til å sende til " . $navn . " (" . $mobil
-                                . ") - kopier og send fra mobilen:
-———
-" . $sms . "
-———
-🚦 Status: venter (ny påmelding — sendt rett til spørsmålene, ikke svart ennå)
+                        "text" => "🆕 Ny påmelding: " . $navn . " (" . $mobil . ")
+🚦 Status: venter (sendt rett til spørsmålene, ikke svart ennå)
 ✉️ Kommunisert: velkomst-e-post sendt til " . $epost . (!empty($velkomst_ok) ? " ✓ (Gmail-røret)" : " (usikker leveranse!)") . "
 📝 Om løpingen: " . mb_substr($om !== "" ? $om : "(ikke utfylt)", 0, 300)]),
                     "timeout" => 8]]));
