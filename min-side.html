@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Min side — din egen treningsoversikt | Treni</title>
-<meta name="description" content="Hver Treni-løper har sin egen side, delt i faner: status, tallene, øktene, planen og hele rapporten. Oppdatert fra Strava i det øyeblikket du laster opp.">
+<meta name="description" content="Hver Treni-løper har sin egen side, delt i faner: status, tallene, øktene, planen, skoene dine og hele rapporten. Oppdatert fra Strava i det øyeblikket du laster opp.">
 <meta property="og:title" content="Min side — din egen treningsoversikt | Treni">
 <meta property="og:description" content="Tallene dine i klartekst, oppdatert i sanntid fra Strava. Personlig lenke — ingen passord.">
 <meta property="og:type" content="website">
@@ -103,8 +103,8 @@
   <p class="kicker reveal"><a href="index.html" style="color:inherit">← treni.no</a> · min side</p>
   <h1 class="reveal">Din egen side.<br>Bare din.</h1>
   <p class="ingress reveal">Hver Treni-løper har sin egen side, delt i faner: status og
-  neste løp, tallene i klartekst, øktene, ukeplanen med veien videre mot løpet ditt — og hele
-  rapporten. Oppdatert fra Strava i det øyeblikket du laster opp ei økt.</p>
+  neste løp, tallene i klartekst, øktene, ukeplanen med veien videre mot løpet ditt, skoene dine med slitasjemåler — og
+  hele rapporten. Oppdatert fra Strava i det øyeblikket du laster opp ei økt.</p>
   <div class="knapper reveal">
     <a class="btn btn-primar" href="bli-testloper.php">Bli testløper</a>
     <a class="btn btn-ghost" href="#demo">Se hvordan den ser ut</a>
@@ -130,6 +130,7 @@
         <button data-tema="d-plan">📋 Løpsplanen</button>
         <button data-tema="d-rapport">📖 Rapporten</button>
         <button data-tema="d-skadefritt">🛡️ Skadefritt</button>
+        <button data-tema="d-sko">👟 Sko</button>
         <button data-tema="d-fjell">⛰️ Fjell</button>
         <button data-tema="d-verv">💌 Verv</button>
       </div>
@@ -204,7 +205,15 @@
           <div class="dag"><span class="navn">Ons</span><div>
             <div class="rad1"><span class="badge b-hard">intervall</span><span class="km">7,4 km</span></div>
             <div class="detalj">4×1000 m, P:90s · drag 4:45–4:52</div>
-            <div class="knad">«Hard økt — drag 4:45–4:52 · puls 158–171.»</div></div></div>
+            <div class="knad">«Hard økt — drag 4:45–4:52 · puls 158–171.»</div>
+            <div style="display:flex;gap:2px;height:8px;border-radius:4px;overflow:hidden;margin:.35rem 0 .2rem" title="Tid i sone på økta">
+              <div style="width:38%;background:#b8e0cd"></div>
+              <div style="width:14%;background:#68ca9c"></div>
+              <div style="width:30%;background:#2da96f"></div>
+              <div style="width:13%;background:#1a754a"></div>
+              <div style="width:5%;background:#0b4128"></div>
+            </div>
+            <div class="knad" style="font-style:normal">Tid i sone · 1: 16 min · 2: 6 min · 3: 13 min · 4: 5 min · 5: 2 min</div></div></div>
           <div class="dag"><span class="navn">Søn</span><div>
             <div class="rad1"><span class="badge b-rolig">langtur</span><span class="km">9,8 km</span></div>
             <div class="detalj">Langtur med venninnegjengen · puls 135</div>
@@ -279,6 +288,45 @@
         </div>
       </div>
 
+      <div class="tema" data-tema="d-sko">
+        <div class="kort">
+          <h4>👟 Skoene dine — telles helt av seg selv</h4>
+          <p class="undertekst" style="margin:.2rem 0 .6rem">Velg sko på øktene i
+          Strava, så holder Treni oversikten: kilometer per sko og en slitasjemåler
+          som sier fra når et par nærmer seg utskifting.</p>
+          <div style="display:flex; gap:.7rem; align-items:center; padding:.55rem 0; border-bottom:1px solid hsl(var(--border))">
+            <div style="flex:0 0 40px; width:40px; height:40px; border-radius:11px; background:#00539f; color:#fff; display:grid; place-items:center; font-weight:750; font-size:.72rem">AS</div>
+            <div style="flex:1; min-width:0">
+              <div style="font-weight:650; font-size:.92rem">ASICS Novablast 5</div>
+              <div style="margin:.12rem 0"><span style="display:inline-block; font-size:.7rem; padding:.08rem .5rem; border-radius:999px; background:#00539f1a; color:#00539f; border:1px solid #00539f40">Daglig trener, nøytral allround</span></div>
+              <div class="undertekst" style="font-size:.78rem">512 km totalt · 143 km siste 90 dager</div>
+              <div style="margin-top:.3rem; height:5px; border-radius:999px; background:hsl(var(--border)); overflow:hidden; max-width:240px">
+                <div style="height:100%; width:64%; border-radius:999px; background:hsl(38 85% 50%)"></div></div>
+            </div>
+          </div>
+          <div style="display:flex; gap:.7rem; align-items:center; padding:.55rem 0">
+            <div style="flex:0 0 40px; width:40px; height:40px; border-radius:11px; background:#111; color:#fff; display:grid; place-items:center; font-weight:750; font-size:.72rem">NI</div>
+            <div style="flex:1; min-width:0">
+              <div style="font-weight:650; font-size:.92rem">Nike Vaporfly 3</div>
+              <div style="margin:.12rem 0"><span style="display:inline-block; font-size:.7rem; padding:.08rem .5rem; border-radius:999px; background:#1111111a; color:hsl(var(--fg)); border:1px solid #11111140">Karbonracer — konkurransedagen</span></div>
+              <div class="undertekst" style="font-size:.78rem">118 km totalt · sist brukt i helgas testløp</div>
+              <div style="margin-top:.3rem; height:5px; border-radius:999px; background:hsl(var(--border)); overflow:hidden; max-width:240px">
+                <div style="height:100%; width:15%; border-radius:999px; background:hsl(148 45% 42%)"></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="kort">
+          <h4>🎯 Skotips til løpene dine</h4>
+          <p style="margin:.3rem 0; font-size:.9rem">Foran hvert løp får du råd om
+          hvilken av <b>dine egne</b> sko som passer best — vurdert mot distansen,
+          underlaget, løypeprofilen og værmeldingen. Aldri kjøpepress, bare riktig
+          sko på riktig dag.</p>
+          <p class="undertekst" style="margin:.4rem 0 0">Trenger du nye? Én knapp
+          melder behovet, og treneren følger opp med forslag som passer deg.
+          🛒 Automatisk bestilling med partnerrabatt er på vei.</p>
+        </div>
+      </div>
+
       <div class="tema" data-tema="d-fjell">
         <div class="kort" style="border-color:hsl(84 80% 34% / .45)">
           <h4>📚 E-bok på vei: Trening for fjelløping</h4>
@@ -349,6 +397,7 @@
 <footer>
   <nav aria-label="Bunnmeny">
     <a href="index.html">Forsiden</a>
+    <a href="lop.php">Løpskalender</a>
     <a href="stotte.html">Støtte og kontakt</a>
     <a href="personvern.html">Personvern</a>
   </nav>

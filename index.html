@@ -16,24 +16,107 @@
 <link rel="alternate" hreflang="no" href="https://treni.no/">
 <link rel="alternate" hreflang="en" href="https://treni.no/en/">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏃</text></svg>">
-<link rel="stylesheet" href="stil.css?v=13">
+<link rel="stylesheet" href="stil.css?v=20">
 </head>
 <body>
 <div class="bakteppe" aria-hidden="true"></div>
 <nav class="sprakvalg" aria-label="Språk"><span aria-current="page">NO</span><a href="/en/">EN</a></nav>
+<nav class="toppmeny" aria-label="Meny"><a href="lop.php">🏁 Løpskalender</a></nav>
 <main class="bred">
 
 <header class="hero hero-foto"><div class="indre">
   <p class="kicker reveal">treni.no</p>
   <h1 class="reveal">En ekte trener.<br>En som ser hver økt<br>— og aldri&nbsp;sover.</h1>
-    <p class="ingress reveal">«Dæ e supert å kunne ha et så bra verktøy og din
-  kompetanse t å veiled me, så e trena me i form på rett måte! 😃💪🔥❤️»<br>
+  <p class="ingress reveal" style="margin-bottom:.35rem">Treningen din blir lest og forstått — hver eneste uke.</p>
+    <p class="ingress reveal">«Det er supert å kunne ha et så bra verktøy og din
+  kompetanse til å veilede meg, så jeg trener meg i form på rett måte!»<br>
   <span class="liten" style="opacity:.85">— testløper, august 2026</span></p>
   <div class="knapper reveal">
     <a class="btn btn-primar" href="bli-testloper.php">Bli testløper</a>
+    <a class="btn btn-ghost" href="lop.php">🏁 Løpskalender</a>
     <a class="btn btn-ghost" href="#slik">Slik virker det</a>
+    <a class="btn btn-ghost" href="samarbeid.php">Vi vil samarbeide →</a>
+  </div>
+  <div class="hvem reveal">
+    <span>For løpere</span><span>For løpegrupper</span><span>For arrangører</span>
   </div>
 </div></header>
+
+<section aria-label="Hva Treni er">
+  <p class="ingress" style="max-width:46rem">Treni er en <b>trenerledet treningsveileder</b> for løpere på vei og
+  i fjell. En AI leser hver økt du logger på Strava — soner, drag, høydemeter, følelse — og en
+  trener står bak hvert råd du får. Målet er ett: <b>varig fremgang uten skader</b>.</p>
+</section>
+
+<section aria-labelledby="problem-t">
+  <p class="kicker">Problemet</p>
+  <h2 id="problem-t">De fleste løpere trener i blinde</h2>
+  <ul class="steg" style="list-style:none; padding-left:0">
+    <li><b>Planen kjenner deg ikke</b>
+      <p>Generiske program vet ikke hva kroppen din faktisk har gjort de siste ukene. De ser ikke
+      at forrige uke ble hard, at langturen vokste for fort, eller at «rolig» hos deg har sklidd
+      opp i gråsonen.</p></li>
+    <li><b>Skaden kommer først</b>
+      <p>Den vanligste grunnen til at fremgang stopper er ikke for lite trening — det er
+      <strong>for mye, for fort</strong>. Belastningsskader varsler seg i treningsdataene før de kjennes
+      i beina. Men noen må faktisk lese dataene.</p></li>
+    <li><b>Alene mellom øktene</b>
+      <p>En trener som ser deg hver uke er forbeholdt de få. Resten står alene med klokka,
+      Strava-grafene og magefølelsen — og gjetter seg til om de er på rett vei.</p></li>
+  </ul>
+</section>
+
+<section aria-labelledby="lever-t">
+  <p class="kicker">Forskjellen</p>
+  <h2 id="lever-t">Statiske planer virker — helt til livet skjer</h2>
+  <p>Så ble du forkjølet i uke 2. Jobben tok en uke. Kroppen sa nei en torsdag.</p>
+  <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
+       gap:1rem; margin:1.2rem 0">
+    <div style="border:1.5px solid hsl(var(--border)); border-radius:var(--radius);
+         padding:1.1rem 1.2rem; background:hsl(var(--surface-2) / .6)">
+      <p style="margin:0 0 .6rem; font-weight:750; letter-spacing:.03em;
+         text-transform:uppercase; font-size:.78rem; opacity:.65">📄 Statisk app-plan</p>
+      <div style="display:flex; flex-direction:column; gap:.45rem" aria-hidden="true">
+        <div style="height:.85rem; width:70%; border-radius:99px; background:hsl(var(--fg) / .18)"></div>
+        <div style="height:.85rem; width:85%; border-radius:99px; background:hsl(var(--fg) / .18)"></div>
+        <div style="display:flex; align-items:center; gap:.5rem">
+          <div style="height:.85rem; width:60%; border-radius:99px; background:hsl(var(--fg) / .18);
+               text-decoration:line-through"></div>
+          <span style="font-size:.95rem">🤒</span>
+          <span style="font-size:.75rem; opacity:.6; white-space:nowrap">livet skjedde</span>
+        </div>
+        <div style="height:.85rem; width:75%; border-radius:99px; background:hsl(var(--fg) / .18)"></div>
+        <div style="height:.85rem; width:85%; border-radius:99px; background:hsl(var(--fg) / .18)"></div>
+        <div style="height:.85rem; width:78%; border-radius:99px; background:hsl(var(--fg) / .18)"></div>
+      </div>
+      <p style="margin:.8rem 0 0; font-size:.92rem">Planen kjører videre som om ingenting
+      skjedde — og <b>du</b> får skylda for avviket.</p>
+    </div>
+    <div style="border:2px solid hsl(var(--accent) / .55); border-radius:var(--radius);
+         padding:1.1rem 1.2rem; background:hsl(var(--accent) / .07); box-shadow:var(--shadow-md)">
+      <p style="margin:0 0 .6rem; font-weight:750; letter-spacing:.03em;
+         text-transform:uppercase; font-size:.78rem; color:hsl(var(--primary))">🌱 Treni-planen</p>
+      <div style="display:flex; flex-direction:column; gap:.45rem" aria-hidden="true">
+        <div style="height:.85rem; width:70%; border-radius:99px; background:hsl(var(--accent) / .55)"></div>
+        <div style="height:.85rem; width:85%; border-radius:99px; background:hsl(var(--accent) / .55)"></div>
+        <div style="display:flex; align-items:center; gap:.5rem">
+          <div style="height:.85rem; width:34%; border-radius:99px; background:hsl(var(--accent) / .3)"></div>
+          <span style="font-size:.75rem; color:hsl(var(--primary)); font-weight:650">→ justert ✓</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:.5rem">
+          <div style="height:.85rem; width:60%; border-radius:99px; background:hsl(var(--accent) / .45)"></div>
+          <span style="font-size:.75rem; color:hsl(var(--primary)); font-weight:650">bygger opp</span>
+        </div>
+        <div style="height:.85rem; width:78%; border-radius:99px; background:hsl(var(--accent) / .55)"></div>
+        <div style="height:.85rem; width:85%; border-radius:99px; background:hsl(var(--accent) / .55)"></div>
+      </div>
+      <p style="margin:.8rem 0 0; font-size:.92rem">Hver økt leses fra Strava — planen
+      <b>bygger videre fra virkeligheten</b>, og en ekte trener ser over.</p>
+    </div>
+  </div>
+  <p><b>En plan som lever, for løpere som lever</b> — ikke bare for den godt trente
+  løperen de statiske appene ble laget for.</p>
+</section>
 
 <section aria-labelledby="underlag-t">
   <p class="kicker">Vei eller fjell</p>
@@ -50,9 +133,6 @@
       <p>I terrenget er km-fart meningsløs — her styrer <strong>tid, puls og høydemeter</strong>.
       Motbakke som egen økt, nedoverløping som egen ferdighet, og totalbelastning
       som teller det terrenget faktisk kostet.</p>
-      <p style="margin-top:.6rem">📚 <b>E-bok på vei:</b> «Trening for fjelløping» — skrevet
-      med en av landets mest erfarne fjelløpere (fysioterapeut og VM-deltager i skyrunning).
-      Testløperne får kapitlene først, rett på sin egen side.</p>
     </div>
   </div>
   <p class="liten" style="margin-top:.9rem">Felles for begge: samme sikkerhetsregler,
@@ -79,34 +159,62 @@
   </div>
 </section>
 
-<section aria-label="Nøkkeltall">
-  <blockquote class="sitat sitat-senter" style="margin-bottom:clamp(4.5rem, 10vw, 7.5rem)">«Ja, proft opplegg! 😃»</blockquote>
-  <ul class="tall-rad">
-    <li><span class="tall">80/20</span><p>80 % av tiden rolig, resten hardt — det er sånn form bygges</p></li>
-    <li><span class="tall">+10 %</span><p>maks volumøkning per uke. Alltid.</p></li>
-    <li><span class="tall">Hele dagen</span><p>øktene dine leses og Min side oppdateres — uten at du melder inn noe</p></li>
-    <li><span class="tall">6</span><p>løpere tester nå, fra mosjonist til fjelløper</p></li>
-  </ul>
+<section aria-labelledby="lopkal-t">
+  <p class="kicker">Løpskalenderen</p>
+  <h2 id="lopkal-t">🏁 Alle løp i Norge — på ett sted</h2>
+  <p style="max-width:46rem">Gateløp, terrengløp og fjelløp i hele Norge — med eget Nord-Norge-filter — dato, sted og
+  påmeldingslenke — hentet automatisk fra tidtakersystemet og oppdatert daglig.
+  Finn neste løp, meld deg på, og tren riktig mot det.</p>
+  <div class="knapper">
+    <a class="btn btn-primar" href="lop.php">Se løpskalenderen →</a>
+  </div>
 </section>
-
 
 <section id="slik" aria-labelledby="slik-t">
   <p class="kicker">Slik virker det</p>
-  <h2 id="slik-t">Tre steg — så er blikket på plass</h2>
-  <p>Øktene dine hentes fra Strava i det øyeblikket du laster opp — på asfalt
-  eller i fjellet, <b>skadeforebygging først</b>. Hver uke får du konkrete råd
-  i Telegram, alltid med treneren din i loopen.</p>
-  <ol class="steg">
-    <li><span class="nr">1</span><b>Koble Strava</b>
-      <p>To trykk og et tydelig samtykke. Vi henter øktene dine — distanse, tid, puls,
-      drag — automatisk i det øyeblikket du laster opp.</p></li>
-    <li><span class="nr">2</span><b>Motoren vurderer</b>
-      <p>En regelmotor med skadeforebygging som førsteprioritet: belastning mot det
-      kroppen er vant til, rolig som faktisk er rolig, harde økter innenfor planen.</p></li>
-    <li><span class="nr">3</span><b>Treneren leverer</b>
-      <p>Konkrete ukesråd i Telegram — antall drag, pauser, puls — alltid sett over av
-      en ekte trener. Still spørsmål når som helst.</p></li>
-  </ol>
+  <h2 id="slik-t">Enkelt for begge sider</h2>
+  <div class="to-spalter" style="gap:2.2rem">
+    <div>
+      <p class="flow-tittel">🏃 For løperen</p>
+      <ol class="flowsteg">
+        <li><div><b>Koble Strava, svar på noen få spørsmål</b>
+          <p>Mål, alder og makspuls — mer trenger vi ikke spørre om. Veilederen henter
+          historikken din, setter pulssonene dine etter Olympiatoppens skala og lærer hva
+          som er en vanlig uke — for deg, ikke for en gjennomsnittsløper.</p></div></li>
+        <li><div><b>Få mandagsrapport og ukeplan</b>
+          <p>Hva forrige uke faktisk var — rolig/hardt, soner, belastning — og hva uka som kommer
+          bør inneholde, økt for økt, tilpasset løpene dine.</p></div></li>
+        <li><div><b>Tren — og bli fulgt opp</b>
+          <p>Hver ukesplan godkjenner du med én knapp — eller ber om endring, så justeres den.
+          Veilederen følger med gjennom uka, og du kan spørre om alt, når som helst, i din egen
+          gruppe med treneren på laget.</p></div></li>
+      </ol>
+    </div>
+    <div>
+      <p class="flow-tittel">🤝 For samarbeidspartneren</p>
+      <ol class="flowsteg">
+        <li><div><b>Løpegrupper: flere folk på økt</b>
+          <p>Det er det dere får ut av det — helt konkret. Har klubben intervall tirsdag kl. 17:15,
+          legger veilederen ukas intervalløkt <b>dit</b>, med tid og sted, i medlemmenes egne
+          ukeplaner. Slik gjør vi det med Tromsø Løpeklubb i dag: fellesøktene blir navet,
+          ikke konkurrenten.</p></div></li>
+        <li><div><b>Arrangører: deltagere som trener riktig mot akkurat ditt løp</b>
+          <p>Løpet ditt legges inn som mål med distanse, høydemeter og terreng — og planene bygger
+          mot det i ukevis, med formtopping inn mot startskuddet. Forberedte, skadefrie deltagere
+          leverer bedre løpsopplevelser — og kommer igjen neste år.</p></div></li>
+        <li><div><b>Vi bygger det sammen</b>
+          <p>Piloten kjører nå, og samarbeidsformene er åpne: klubbøkter i planene, tilbud til
+          deltagere i forkant av løp, felles innhold. <a href="samarbeid.php">Ta kontakt</a>, så finner vi formen.</p></div></li>
+      </ol>
+    </div>
+  </div>
+  <div class="midt-cta">
+    <p>Klar til å prøve? Det tar to minutter å melde seg — og samarbeid starter med en kort melding.</p>
+    <div class="knapper" style="justify-content:center">
+      <a class="btn btn-primar" href="bli-testloper.php">Sett meg på ventelista</a>
+      <a class="btn btn-ghost" href="samarbeid.php">Vi vil samarbeide →</a>
+    </div>
+  </div>
 </section>
 
 <section aria-labelledby="prinsipp-t">
@@ -121,6 +229,43 @@
   fra 2025 (<a href="https://pure.au.dk/portal/en/publications/how-much-running-is-too-much-identifying-high-risk-running-sessio/">5&nbsp;205
   løpere</a>) viste at det er der skaderisikoen faktisk sitter. Begge vakter — sammen
   med trenerens blikk.</p>
+</section>
+
+<section aria-label="Nøkkeltall">
+  <ul class="tall-rad">
+    <li><span class="tall">80/20</span><p>80 % av tiden rolig, resten hardt — det er sånn form bygges</p></li>
+    <li><span class="tall">+10 %</span><p>maks volumøkning per uke. Alltid.</p></li>
+    <li><span class="tall">Hele dagen</span><p>øktene dine leses og Min side oppdateres — uten at du melder inn noe</p></li>
+    <li><span class="tall">16</span><p>løpere i Treni nå — 10 i full drift (vei, bane, terreng og ultra) og 6 på vei inn fra ventelista</p></li>
+  </ul>
+</section>
+
+<section aria-labelledby="faglig-t">
+  <p class="kicker">Faglig grunnlag</p>
+  <h2 id="faglig-t">Forskning i bunn — trenererfaring på topp</h2>
+  <p class="liten">Rådene er ikke synsing. Hvert prinsipp i veilederen kan spores til publisert
+  forskning eller dokumentert trenerpraksis — og vi sier alltid hvilken av delene det er.</p>
+  <ul class="steg" style="list-style:none; padding-left:0; grid-template-columns:repeat(auto-fit,minmax(340px,1fr))">
+    <li><b>80/20 — regnet på tid</b>
+      <p>Verdens beste utholdenhetsutøvere legger <strong>80–90 % av utholdenhetstreningen</strong> i
+      rolige soner. Veilederen måler fordelingen din hver uke — på tid, ikke antall økter — og
+      varsler når gråsonen stjeler av det rolige.</p></li>
+    <li><b>Ingen byks — dokumentert</b>
+      <p>En storstudie av 5 205 løpere fant rundt <strong>60 % høyere skaderisiko</strong> når én økt
+      bykser forbi det lengste kroppen har gjort siste 30 dager. Veilederen fanger byksene før de
+      skjer — i planen, ikke i etterkant.</p></li>
+    <li><b>Terreng måles riktig</b>
+      <p>I fjellet lyver kilometerne. Terrengøkter vurderes på <strong>tid og høydemeter</strong> — opp og
+      ned — slik trenere med fjellbakgrunn faktisk gjør det. En «kort» tur med 1 600 høydemeter
+      behandles som den harde økta den er.</p></li>
+    <li><b>Puls + følelse, ikke blind klokketro</b>
+      <p>Veilederen kjenner pulsens blindsoner — treg pulsrespons på slitne dager, drift på
+      lange turer — og lærer deg å <strong>aldri jage puls</strong>. Sonene dine kalibreres mot dine egne
+      data og etterprøves løpende.</p></li>
+  </ul>
+  <p class="liten" style="margin-top:1.2rem">Kilder bl.a.: Sandbakk mfl. 2025 (Sports Medicine – Open)
+  · «How much running is too much?» BJSM 2025 · Seiler &amp; Kjerland 2006 · trenerteamets
+  fagbok om fjelløping</p>
 </section>
 
 <section aria-labelledby="faar-t">
@@ -142,23 +287,55 @@
         som kjenner deg, og helse går alltid til fagpersonell, aldri til en KI.</li>
     <li><span style="font-size:1.45rem; margin-right:.5rem; vertical-align:-.2rem">💬</span><b>På ditt språk</b> — all veiledning på norsk eller engelsk, du velger.</li>
     <li><span style="font-size:1.45rem; margin-right:.5rem; vertical-align:-.2rem">📊</span><b><a href="min-side.html">Min side — din egen treningsoversikt</a></b> —
-        belastningen din i klartekst, søylene bak den og hver økt med veilederens
-        merknad — og neste ukes plan, dag for dag. Personlig lenke, oppdatert
-        gjennom dagen.
+        belastningen din i klartekst, hver økt med veilederens merknad, og neste
+        ukes plan dag for dag. Bla uke for uke bakover — hver uke får sin egen
+        vurdering mot beste praksis, med det som fungerte og det som bør endres.
+        Personlig lenke, oppdatert gjennom dagen.
         <a href="min-side.html">Se hvordan den ser ut →</a></li>
+    <li><span style="font-size:1.45rem; margin-right:.5rem; vertical-align:-.2rem">👟</span><b>Skoene dine, fulgt opp</b> — velg sko på øktene i Strava, så teller
+        Treni kilometerne per par og varsler når et par nærmer seg utskifting.
+        Foran hvert løp får du skotips fra dine egne sko — vurdert mot distanse,
+        underlag, løypeprofil og værmelding. Trenger du nye, melder du behovet
+        med én knapp — og automatisk bestilling med partnerrabatt er på vei.</li>
     <li><span style="font-size:1.45rem; margin-right:.5rem; vertical-align:-.2rem">🔒</span><b>Dataene forblir dine</b> — lagres lokalt hos trenerteamet, selges aldri.
         Koble fra når som helst. <a href="personvern.html">Les personvernerklæringen</a>.</li>
   </ul>
+</section>
+
+<section aria-labelledby="ebok-t">
+  <p class="kicker">E-bok på vei</p>
+  <h2 id="ebok-t">📚 «Trening for fjelløping»</h2>
+  <div class="ebok-grid">
+    <img src="bilder/ebok.jpg" alt="Fjelløper på rygg i solnedgang, fjord og tinder bak" loading="lazy">
+    <div>
+      <p>Skrevet med <b>en av landets mest erfarne fjelløpere</b> — fysioterapeut og
+      VM-deltager i skyrunning. Testløperne får kapitlene først, rett på sin egen side,
+      med en liten quiz etter hvert kapittel før neste låses opp.</p>
+      <ul class="ebok-kap" aria-label="Kapitler">
+        <li>🧭 Treningsfilosofien</li>
+        <li>🫀 Intensitet og soner</li>
+        <li>🧱 Grunnmuren</li>
+        <li>⚡ Intervalltrening</li>
+        <li>🏔 Distansetrening</li>
+        <li>🏁 Etter målstreken</li>
+        <li>🥾 Teknikk</li>
+        <li>💪 Styrke</li>
+        <li>🪜 Trappetrening</li>
+        <li>🦵 Gangsperra</li>
+        <li>🌲 Restitusjon og variert terreng</li>
+      </ul>
+    </div>
+  </div>
+  <div class="midt-cta">
+    <p>Testløperne leser kapitlene først — og alt annet på denne siden er inkludert.</p>
+    <a class="btn btn-primar" href="bli-testloper.php">Bli testløper</a>
+  </div>
 </section>
 
 <section aria-labelledby="sier-t">
   <p class="kicker">Testløperne sier</p>
   <h2 id="sier-t">Ekte ord fra løperne som tester nå</h2>
   <div class="omtaler">
-    <figure class="omtale">
-      <blockquote>«Dæ e supert å kunne ha et så bra verktøy og din kompetanse t å veiled me, så e trena me i form på rett måte! 😃💪🔥❤️»</blockquote>
-      <figcaption>— testløper, august 2026</figcaption>
-    </figure>
     <figure class="omtale">
       <blockquote>«Ja, proft opplegg! 😃»</blockquote>
       <figcaption>— testløper, mosjonist</figcaption>
@@ -175,11 +352,38 @@
   <p class="liten">Sitatene er ordrette, fra testløpernes egne meldinger — navnene holder vi for oss selv.</p>
 </section>
 
+<section aria-label="Miljøet og status">
+  <div class="to-spalter">
+    <div>
+      <p class="kicker">Miljøet</p>
+      <h2 style="font-size:1.35rem">Bygget i og for løpsmiljøet i nord</h2>
+      <p class="liten">Treni utvikles tett på løperne som bruker det — fra mosjonister i
+      oppbygging til løpere som jakter pallplasser på vei og i skyrace. Klubbøkter, lokale løp og
+      terrenget her oppe er ikke tillegg til produktet; det er utgangspunktet. En egen e-bok om
+      trening for fjelløping, skrevet med trenerteamet, publiseres kapittel for kapittel for
+      løperne.</p>
+    </div>
+    <div>
+      <p class="kicker">Status nå</p>
+      <h2 style="font-size:1.35rem">Piloten kjører</h2>
+      <div class="en-blokk">
+        <p><b>9 løpere</b> er i full drift — vei, bane, terreng og ultra; plass 10 er nettopp gitt videre fra ventelista.</p>
+        <p><b>Ventelista</b> er åpen; plassene utvides etter hvert som kapasiteten øker.</p>
+        <p><b>Gratis i piloten</b> — testerne former produktet med oss.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section aria-label="Bli med">
   <div class="avslutt">
-    <h2>Vil du løpe skadefritt — og fortere?</h2>
-    <p>Vi tar inn noen få testløpere om gangen, så treneren faktisk rekker å se deg.</p>
-    <a class="btn" href="bli-testloper.php">Meld interesse — bli testløper</a>
+    <h2>Bli med fra starten.</h2>
+    <p>Løpere setter seg på ventelista — samarbeidspartnere tar kontakt direkte.
+      Begge deler er uforpliktende.</p>
+    <div class="knapper" style="justify-content:center">
+      <a class="btn" href="bli-testloper.php">Jeg er løper — sett meg på lista</a>
+      <a class="btn" href="samarbeid.php">Vi vil samarbeide →</a>
+    </div>
   </div>
 </section>
 
@@ -188,7 +392,8 @@
     <div class="meny-gruppe"><span class="meny-tittel">Sider</span>
       <a href="bli-testloper.php">Bli testløper</a>
       <a href="min-side.html">Min side (demo)</a>
-      <a href="stotte.html">Støtte og kontakt</a>
+      <a href="lop.php">Løpskalender</a>
+    <a href="stotte.html">Støtte og kontakt</a>
       <a href="personvern.html">Personvern</a>
       <a href="/en/">In English</a>
     </div>

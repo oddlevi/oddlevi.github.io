@@ -196,6 +196,9 @@ footer nav a { font-weight: 600; }
 .hero-foto .ingress { color: hsl(40 20% 82%); }
 .hero-foto .ingress b { color: hsl(42 30% 96%); }
 .hero-foto .kicker { color: hsl(84 70% 60%); }
+/* AI-streken (dekorativ aksent-rail) fjernet fra hero-kickeren (Odd 01.09) */
+.hero-foto .kicker::before { display: none; }
+.hero-foto .kicker { gap: 0; }
 .hero-foto .btn-primar { background: linear-gradient(135deg, hsl(84 70% 52%), hsl(74 75% 44%));
                          color: hsl(162 30% 6%); }
 .hero-foto .btn-ghost { color: hsl(42 30% 96%); border-color: hsl(42 30% 96% / .35); }
@@ -258,3 +261,53 @@ footer nav a { font-weight: 600; }
 .bunnmeny a:hover { color: hsl(var(--primary)); opacity: 1; }
 
 
+
+/* Målgruppe-merker i hero (fra presentasjonssiden) */
+.hvem { margin-top: 1.9rem; display: flex; gap: .55rem; flex-wrap: wrap; }
+.hvem span { font-size: .8rem; font-weight: 650; letter-spacing: .07em; text-transform: uppercase;
+  color: hsl(40 20% 85%); border: 1px solid hsl(42 30% 96% / .3); border-radius: 999px;
+  padding: .3rem .75rem; }
+
+/* E-bok-seksjonen på forsiden */
+.ebok-grid { display: grid; gap: 1.6rem; align-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); }
+.ebok-grid img { width: 100%; height: 100%; max-height: 320px; object-fit: cover;
+  border-radius: 14px; display: block; }
+.ebok-kap { list-style: none; padding: 0; margin: .9rem 0 0; display: flex;
+  flex-wrap: wrap; gap: .45rem; }
+.ebok-kap li { font-size: .82rem; font-weight: 600; border: 1px solid hsl(var(--border));
+  border-radius: 999px; padding: .28rem .7rem; background: hsl(var(--card)); }
+.ebok-kap li.kommer { opacity: .55; border-style: dashed; }
+
+/* Slik virker det — to spalter med flow-steg (fra presentasjonssiden) */
+.to-spalter { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); }
+.flow-tittel { font-size: 1.1rem; font-weight: 650; margin: 0 0 1rem; }
+.flowsteg { padding: 0; margin: 0; list-style: none; counter-reset: fs; }
+.flowsteg li { max-width: none; display: grid; grid-template-columns: auto 1fr; gap: .9rem;
+  margin-bottom: 1.05rem; counter-increment: fs; }
+.flowsteg li::before { content: counter(fs); width: 1.9rem; height: 1.9rem; border-radius: 50%;
+  display: grid; place-items: center; font-family: var(--font-serif); font-weight: 600;
+  font-size: .95rem; background: hsl(var(--accent)); color: hsl(var(--accent-fg)); }
+.flowsteg b { display: block; margin-bottom: .15rem; }
+.flowsteg p { margin: 0; font-size: .9375rem; color: hsl(var(--muted-fg)); }
+.flowsteg p b { display: inline; color: hsl(var(--fg)); }
+
+/* Miljø/status-blokka før CTA (fra presentasjonssiden) */
+.en-blokk { border-left: 3px solid hsl(var(--border)); padding-left: 1.25rem; }
+.en-blokk p { color: hsl(var(--muted-fg)); }
+.en-blokk b { color: hsl(var(--fg)); }
+
+/* Små mellom-CTAer for løpere gjennom siden */
+.midt-cta { text-align: center; margin-top: 2.2rem; }
+.midt-cta p { color: hsl(var(--muted-fg)); font-size: .9375rem; margin: 0 0 .8rem; }
+
+/* Toppmeny (venstre pille — synlig inngang til løpskalenderen fra IG-bio) */
+.toppmeny { position: absolute; top: 1.1rem; left: clamp(1rem, 3vw, 2rem); z-index: 5;
+            display: flex; gap: .15rem; align-items: center; font-size: .85rem;
+            font-weight: 650; letter-spacing: .02em;
+            background: hsl(var(--surface) / .85); backdrop-filter: blur(6px);
+            border: 1px solid hsl(var(--border)); border-radius: 999px;
+            padding: .3rem .5rem; }
+.toppmeny a { padding: .15rem .7rem; border-radius: 999px;
+              text-decoration: none; color: hsl(var(--fg)); }
+.toppmeny a:hover { background: hsl(var(--primary)); color: hsl(var(--primary-fg)); }

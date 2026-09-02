@@ -1,4 +1,5 @@
 <?php
+require_once dirname(__DIR__) . "/spamvern.php";
 // Interest form (English) — same backend flow as bli-testloper.php: notifies the
 // coach (email + Telegram) and adds the entry to the waitlist. Honeypot included.
 $sendt = false;
@@ -17,6 +18,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $krukke = trim($_POST["nettside"] ?? "");
     if ($krukke !== "") {
         $sendt = true; // bot — pretend all went well
+    } elseif (($vern = treni_spamvern_ok()) !== "") {
+        $feil = $vern;
     } elseif ($navn === "" || !filter_var($epost, FILTER_VALIDATE_EMAIL)) {
         $feil = "Please fill in your name and a valid email address.";
     } else {
@@ -139,6 +142,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <label class="krukke" aria-hidden="true">Website
       <input type="text" name="nettside" tabindex="-1" autocomplete="off">
     </label>
+    <?php treni_spamvern_felt(); ?>
     <button type="submit" class="btn btn-primar">Register interest</button>
   </form>
   <p class="liten" style="margin-top:1.5rem">Prefer email? Write directly to

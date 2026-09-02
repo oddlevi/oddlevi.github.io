@@ -133,6 +133,31 @@
     location.href = url;
   });
 })();
+
+// Kapasitetsvakt (Odds «husk» 13.08): er Strava-taket nådd (10/10), er
+// «Koble Strava» en blindvei (Strava gir «Error 403: Limit of connected
+// athletes exceeded»). Da tilbys VENTELISTA i stedet — flagget pushes av
+// morgenkjøringen til kapasitet.json. Feiler henting: rør ingenting.
+fetch("/kapasitet.json", {cache: "no-store"})
+  .then(function (r) { return r.json(); })
+  .then(function (k) {
+    if (!k || !k.fullt) return;
+    var knapp = document.getElementById("strava-knapp");
+    var steg = document.getElementById("steg-tekst");
+    if (knapp) {
+      // Verver-kreditt følger med til ventelista (Odd 21.08)
+      knapp.href = "/bli-testloper.php" + (verver && verver !== "odd"
+        ? "?kilde=" + encodeURIComponent("vervet av " + verver) : "");
+      var kt = document.getElementById("knapp-tekst");
+      if (kt) kt.textContent = "Plassene er fulle — sett deg på ventelista";
+    }
+    if (steg) {
+      steg.textContent = "Strava-plassene våre er fulle akkurat nå (flere er på vei). "
+        + "På ventelista får du pulssoner, treningsplan og e-boka vår med en gang — "
+        + "og plassen din står klar når kvoten øker.";
+    }
+  })
+  .catch(function () {});
 </script>
 </body>
 </html>

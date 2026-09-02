@@ -1,0 +1,871 @@
+[
+ {
+  "navn": "Tromsø Løpeklubb",
+  "sted": "Tromsø",
+  "fylke": "Troms",
+  "type": "klubb",
+  "lenke": "https://www.facebook.com/tromsolopeklubb/",
+  "om": "Sosial løpeklubb stiftet i 2007, åpen og gratis for alle nivåer."
+ },
+ {
+  "navn": "BUL Tromsø Friidrett",
+  "sted": "Tromsø",
+  "fylke": "Troms",
+  "type": "klubb",
+  "lenke": "https://bul-tromso.no/bul-tromsø/friidrett",
+  "om": "Friidrettsgruppa i BUL Tromsø tilbyr trening for barn, unge og voksne med både bredde og satsing."
+ },
+ {
+  "navn": "IK Hind",
+  "sted": "Harstad",
+  "fylke": "Troms",
+  "type": "klubb",
+  "lenke": "https://www.hind.no/",
+  "om": "Friidrettsklubb i Harstad som driver Stangnes friidrettsbane og tilbyr trening for ulike aldersgrupper."
+ },
+ {
+  "navn": "IL Pioner Friidrett",
+  "sted": "Finnsnes (Senja)",
+  "fylke": "Troms",
+  "type": "klubb",
+  "lenke": "http://www.pionerfriidrett.no/",
+  "om": "Friidrettslag på Senja med ukentlig trening på Pioner stadion, drevet på frivillig basis."
+ },
+ {
+  "navn": "Bodø Bauta Løpeklubb",
+  "sted": "Bodø",
+  "fylke": "Nordland",
+  "type": "lavterskel",
+  "lenke": "https://www.bodobauta.no/",
+  "om": "Inkluderende løpeklubb der løpeglede og fellesskap står i fokus, for alle fra nybegynner til ultraløper."
+ },
+ {
+  "navn": "Bodø Friidrettsklubb",
+  "sted": "Bodø",
+  "fylke": "Nordland",
+  "type": "klubb",
+  "lenke": "https://www.facebook.com/p/Bod%C3%B8-Friidrettsklubb-100080905503917/",
+  "om": "Friidrettsklubb med base på Mørkvedlia idrettspark, stiftet i 1982."
+ },
+ {
+  "navn": "Rana Friidrettsklubb",
+  "sted": "Mo i Rana",
+  "fylke": "Nordland",
+  "type": "klubb",
+  "lenke": "https://www.facebook.com/p/Rana-Friidrettsklubb-100063628687049/",
+  "om": "Friidrettsklubb i Mo i Rana stiftet i 1982 med rundt 70 utøvere."
+ },
+ {
+  "navn": "Mosjøen IL Friidrett",
+  "sted": "Mosjøen",
+  "fylke": "Nordland",
+  "type": "klubb",
+  "lenke": "https://www.facebook.com/p/Mosj%C3%B8en-IL-Friidrett-100068413124254/",
+  "om": "Friidrettsgruppe med rekruttgruppe, hovedgruppe og egen løpegruppe på rundt 40 aktive."
+ },
+ {
+  "navn": "Sortland Friidrettsklubb",
+  "sted": "Sortland (Vesterålen)",
+  "fylke": "Nordland",
+  "type": "klubb",
+  "lenke": "https://www.sortlandfriidrett.no/",
+  "om": "Friidrettsklubb i Sortland stiftet i 1988, arrangerer blant annet Sortlandsmesterskapet."
+ },
+ {
+  "navn": "Lofoten Løpeklubb",
+  "sted": "Svolvær/Lofoten",
+  "fylke": "Nordland",
+  "type": "klubb",
+  "lenke": "https://lofotenlopeklubb.wordpress.com/",
+  "om": "Løpeklubben for alle i Lofoten, stiftet i 2016, arrangerer blant annet fjelløpet Lofoten High5."
+ },
+ {
+  "navn": "Alta IF Friidrett",
+  "sted": "Alta",
+  "fylke": "Finnmark",
+  "type": "klubb",
+  "lenke": "https://www.altaif.no/friidrett/",
+  "om": "Friidrettsgruppe med egen gratis løpegruppe for alle nivåer og faste bakkeintervaller på Thomasbakken."
+ },
+ {
+  "navn": "Kvalsund Arctic Runners Løpeklubb",
+  "sted": "Hammerfest (Kvalsund)",
+  "fylke": "Finnmark",
+  "type": "lavterskel",
+  "lenke": "https://www.stallomarsjen.no/om-oss/",
+  "om": "Løpeklubb som startet med fem medlemmer i 2021 og nå har over 40, arrangerer blant annet Stallomarsjen."
+ },
+ {
+  "navn": "Hirmasti IL",
+  "sted": "Vadsø",
+  "fylke": "Finnmark",
+  "type": "lavterskel",
+  "lenke": "https://www.facebook.com/hirmasti/",
+  "om": "Uformell løpe- og trimklubb i Vadsø som blant annet arrangerer Qvæntrimmen."
+ },
+ {
+  "navn": "Mikkeller Running Club Oslo",
+  "sted": "Oslo",
+  "fylke": "Oslo",
+  "type": "lavterskel",
+  "lenke": "https://www.running-oslo.com/",
+  "om": "Sosial løpeklubb med treninger mandag, torsdag og søndag, ofte avsluttet med mat og drikke."
+ },
+ {
+  "navn": "Skyggesiden Running Club",
+  "sted": "Oslo",
+  "fylke": "Oslo",
+  "type": "lavterskel",
+  "lenke": "https://srunning.no/",
+  "om": "Lavterskel løpeklubb som løper en fast 5 km-runde fra Tjuvholmen hver onsdag og avslutter sosialt på Skyggesiden Bar.",
+  "strava": "https://www.strava.com/clubs/srunning"
+ },
+ {
+  "navn": "Sidespor løpeklubb",
+  "sted": "Oslo",
+  "fylke": "Oslo",
+  "type": "lavterskel",
+  "lenke": "https://www.sidespor.no/trening/sidespor-lopeklubb",
+  "om": "Egenorganisert løpeklubb for stiløping i Lillomarka og Nordmarka, tilpasset alle nivåer."
+ },
+ {
+  "navn": "Oslo Run Club",
+  "sted": "Oslo",
+  "fylke": "Oslo",
+  "type": "lavterskel",
+  "lenke": "https://www.instagram.com/osloruncluboslo/",
+  "om": "Sosial løpegruppe som møtes hver onsdag klokken 17, åpen for alle nivåer."
+ },
+ {
+  "navn": "ContendHer",
+  "sted": "Oslo",
+  "fylke": "Oslo",
+  "type": "lavterskel",
+  "lenke": "https://www.instagram.com/contenher/",
+  "om": "Løpegruppe for kvinner med minoritetsbakgrunn, søndagsturer på 4 til 5 km ved Sognsvann eller Lambertseter."
+ },
+ {
+  "navn": "Kondistreninga Oslo",
+  "sted": "Oslo",
+  "fylke": "Oslo",
+  "type": "lavterskel",
+  "lenke": "https://www.facebook.com/groups/167818297256635",
+  "om": "Gratis intervall- og bakketrening hver tirsdag ved Olympiatoppens trapp, drives av Kondis."
+ },
+ {
+  "navn": "Idrettsklubben Tjalve",
+  "sted": "Oslo",
+  "fylke": "Oslo",
+  "type": "klubb",
+  "lenke": "https://tjalve.no/",
+  "om": "Norges eldste friidrettsklubb med treningstilbud fra mosjon til eliteløping, holder til på Bislett stadion."
+ },
+ {
+  "navn": "IL i BUL friidrett",
+  "sted": "Oslo",
+  "fylke": "Oslo",
+  "type": "klubb",
+  "lenke": "https://www.bul.no/idrottslaget/friidrett/treningsgrupper/",
+  "om": "Løpegruppe for mosjonister med felles treninger mandag og torsdag på Bislett eller ved Sognsvann."
+ },
+ {
+  "navn": "SK Vidar Lang",
+  "sted": "Oslo",
+  "fylke": "Oslo",
+  "type": "klubb",
+  "lenke": "https://skvidar.spond.club/vidar_lang",
+  "om": "Norges største løpeklubb for unge voksne, med treningsgrupper fra nasjonalt nivå til noen få økter i uken."
+ },
+ {
+  "navn": "Löplabbet Oslo Sentrum fellestrening",
+  "sted": "Oslo",
+  "fylke": "Oslo",
+  "type": "butikk",
+  "lenke": "https://loplabbet.no/fellestrening",
+  "om": "Butikkdrevet fellestrening og løpekurs fra Löplabbets butikk på Pilestredet."
+ },
+ {
+  "navn": "Tøyen parkrun",
+  "sted": "Oslo",
+  "fylke": "Oslo",
+  "type": "lavterskel",
+  "lenke": "https://www.parkrun.no/toyen/",
+  "om": "Gratis, tidtatt 5 km-løp i Tøyenparken hver lørdag klokken 09.30, åpent for alle.",
+  "strava": "https://www.strava.com/clubs/toyen-parkrun"
+ },
+ {
+  "navn": "Romerike Runners Løpeklubb",
+  "sted": "Lillestrøm",
+  "fylke": "Akershus",
+  "type": "klubb",
+  "lenke": "https://romerikerunners.no/",
+  "om": "Løpeklubb for voksne på alle nivåer med fire treningsgrupper mandag og torsdag på Lillestrøm stadion."
+ },
+ {
+  "navn": "Flomvollen parkrun",
+  "sted": "Lillestrøm",
+  "fylke": "Akershus",
+  "type": "lavterskel",
+  "lenke": "https://romerikerunners.no/runnern/flomvollen-parkrun",
+  "om": "Gratis, tidtatt 5 km-løp på Romerike, arrangert i samarbeid med Romerike Runners."
+ },
+ {
+  "navn": "Kondistreninga Jessheim",
+  "sted": "Jessheim",
+  "fylke": "Akershus",
+  "type": "lavterskel",
+  "lenke": "https://www.facebook.com/groups/1745856368904987",
+  "om": "Gratis intervalltrening onsdager ved Jessheim friidrettsstadion og søndager ved Joker Engervei."
+ },
+ {
+  "navn": "Kondistreninga Nes",
+  "sted": "Årnes",
+  "fylke": "Akershus",
+  "type": "lavterskel",
+  "lenke": "https://kondistreninga.no/kondistreninga-nes/",
+  "om": "Gratis, nivåtilpasset løpetrening mandager med oppmøte ved Runnirinken ishall i Årnes."
+ },
+ {
+  "navn": "Kondistreninga Fredrikstad",
+  "sted": "Fredrikstad",
+  "fylke": "Østfold",
+  "type": "lavterskel",
+  "lenke": "https://kondistreninga.no/kondistreninga-fredrikstad/",
+  "om": "Gratis intervalltrening hver tirsdag i Fredrikstadmarka."
+ },
+ {
+  "navn": "Kondistreninga Moss",
+  "sted": "Moss",
+  "fylke": "Østfold",
+  "type": "lavterskel",
+  "lenke": "https://kondistreninga.no/kondistreninga-moss/",
+  "om": "Gratis løpetrening hver torsdag i Moss sentrum, drevet av Veien Tilbake og Kondis."
+ },
+ {
+  "navn": "Löplabbet Fredrikstad",
+  "sted": "Fredrikstad",
+  "fylke": "Østfold",
+  "type": "butikk",
+  "lenke": "https://loplabbet.no/butikker/loplabbet-fredrikstad",
+  "om": "Løpebutikk i Storgata med kompetanse på sko og løpeteknikk, del av Löplabbet-kjeden."
+ },
+ {
+  "navn": "Halden løpeklubb",
+  "sted": "Halden",
+  "fylke": "Østfold",
+  "type": "klubb",
+  "lenke": "https://www.facebook.com/haldenlopeklubb/",
+  "om": "Løpeklubb i Halden med felles treninger tre ganger i uken, åpen for alle."
+ },
+ {
+  "navn": "Torsdagsløpet i Sarpsborg",
+  "sted": "Sarpsborg",
+  "fylke": "Østfold",
+  "type": "lavterskel",
+  "lenke": "https://www.facebook.com/Torsdagslopet/",
+  "om": "Uorganisert fellesløp i Sarpsborg torsdager frem til midt i oktober, deretter lørdager frem til jul."
+ },
+ {
+  "navn": "Sarpsborg IL Friidrett",
+  "sted": "Sarpsborg",
+  "fylke": "Østfold",
+  "type": "klubb",
+  "lenke": "https://www.facebook.com/sarpsborgilfriidrett/",
+  "om": "Friidrettsklubb med egne grupper for mosjonister og supermosjonister, trening tirsdag, torsdag og lørdag."
+ },
+ {
+  "navn": "Kondistreninga Drammen",
+  "sted": "Drammen",
+  "fylke": "Buskerud",
+  "type": "lavterskel",
+  "lenke": "https://kondistreninga.no/kondistreninga-drammen/",
+  "om": "Gratis intervalltrening hver tirsdag på Marienlystbanen ved Drammenshallen."
+ },
+ {
+  "navn": "Löplabbet Drammen fellestrening",
+  "sted": "Drammen",
+  "fylke": "Buskerud",
+  "type": "butikk",
+  "lenke": "https://loplabbet.no/fellestrening",
+  "om": "Butikkdrevet løpetrening tirsdager og torsdager klokken 18, informasjon deles i Facebook-gruppen Løpegruppa Löplabbet Drammen."
+ },
+ {
+  "navn": "Kondistreninga Kongsberg",
+  "sted": "Kongsberg",
+  "fylke": "Buskerud",
+  "type": "lavterskel",
+  "lenke": "https://kondistreninga.no/kondistreninga-kongsberg/",
+  "om": "Gratis, nivåtilpasset løpetrening tirsdager ved Kongsberg svømmehall."
+ },
+ {
+  "navn": "Kondistreninga Hønefoss",
+  "sted": "Hønefoss",
+  "fylke": "Buskerud",
+  "type": "lavterskel",
+  "lenke": "https://kondistreninga.no/kondistreninga-honefoss/",
+  "om": "Gratis løpetrening torsdager med både rolig og hurtig gruppe, oppmøte ved Schjongshallen."
+ },
+ {
+  "navn": "Kondistreninga Hamar",
+  "sted": "Hamar",
+  "fylke": "Innlandet",
+  "type": "lavterskel",
+  "lenke": "https://kondistreninga.no/kondistreninga-hamar/",
+  "om": "Gratis intervalltrening hver torsdag, åpen for alle nivåer."
+ },
+ {
+  "navn": "Kondistreninga Lillehammer",
+  "sted": "Lillehammer",
+  "fylke": "Innlandet",
+  "type": "lavterskel",
+  "lenke": "https://kondistreninga.no/kondistreninga-lillehammer/",
+  "om": "Gratis løpetrening hver tirsdag med oppmøte ved Håkonshall og Kristinshall."
+ },
+ {
+  "navn": "Kondistreninga Gran",
+  "sted": "Gran",
+  "fylke": "Innlandet",
+  "type": "lavterskel",
+  "lenke": "https://kondistreninga.no/kondistreninga-gran/",
+  "om": "Gratis løpe- og gåtrening mandager og torsdager, tilpasset både jogging og gange."
+ },
+ {
+  "navn": "Kondistreninga Elverum",
+  "sted": "Elverum",
+  "fylke": "Innlandet",
+  "type": "lavterskel",
+  "lenke": "https://kondistreninga.no/kondistreninga-elverum/",
+  "om": "Gratis intervall- og terrengtrening torsdager, onsdager og søndager."
+ },
+ {
+  "navn": "Löplabbet Tønsberg",
+  "sted": "Tønsberg",
+  "fylke": "Vestfold",
+  "type": "butikk",
+  "lenke": "https://www.facebook.com/loplabbet.Tonsberg/",
+  "om": "Løpebutikk i Foynsenteret med lokalkjent løperfaglig veiledning."
+ },
+ {
+  "navn": "Kondistreninga Skien",
+  "sted": "Skien",
+  "fylke": "Telemark",
+  "type": "lavterskel",
+  "lenke": "https://kondistreninga.no/kondistreninga-skien/",
+  "om": "Gratis løpetrening onsdager ved skøytebanen på Skien fritidspark, veksler mellom intervall og rolig langtur."
+ },
+ {
+  "navn": "Kondistreninga Risør",
+  "sted": "Risør",
+  "fylke": "Agder",
+  "type": "lavterskel",
+  "lenke": "https://kondistreninga.no/kondistreninga-risor/",
+  "om": "Gratis løpe- og styrketrening mandager og onsdager, dekker Risør, Vegårshei, Gjerstad og Tvedestrand."
+ },
+ {
+  "navn": "Kristiansand Løpeklubb",
+  "sted": "Kristiansand",
+  "fylke": "Agder",
+  "type": "klubb",
+  "lenke": "https://www.facebook.com/kristiansandlopeklubb/",
+  "om": "Løpeklubb som samler engasjerte mosjonister og utholdenhetsløpere på hele Sørlandet.",
+  "strava": "https://www.strava.com/clubs/52074"
+ },
+ {
+  "navn": "Löplabbet Kristiansand fellestrening",
+  "sted": "Kristiansand",
+  "fylke": "Agder",
+  "type": "butikk",
+  "lenke": "https://loplabbet.no/fellestrening",
+  "om": "Butikkdrevet fellestrening onsdager klokken 18.15, passer for nybegynnere og de som har løpt litt."
+ },
+ {
+  "navn": "IL Skjalg mosjonist- og supermosjonistgruppe",
+  "sted": "Stavanger",
+  "fylke": "Rogaland",
+  "type": "lavterskel",
+  "lenke": "https://www.ilskjalg.no/mosjonist-supermosjonist-lopegruppe/",
+  "om": "Åpen løpegruppe for mosjonister med trening torsdager på Stavanger stadion og tirsdager i Sandneshallen om vinteren, uansett tempo."
+ },
+ {
+  "navn": "Sandnes IL løpegruppe for mosjonister",
+  "sted": "Sandnes",
+  "fylke": "Rogaland",
+  "type": "klubb",
+  "lenke": "https://www.sandnes-idrettslag.no/friidrett/trening/",
+  "om": "Lavterskeltilbud for mosjonister med trening tirsdager klokken 19 på Sandnes stadion."
+ },
+ {
+  "navn": "Haugesund IL joggegruppa",
+  "sted": "Haugesund",
+  "fylke": "Rogaland",
+  "type": "klubb",
+  "lenke": "https://haugesundil.no/friidrett/treningsinfo/joggegruppa/",
+  "om": "Nivådelt joggegruppe i Haugesund IL med rolige langturer, åpen for alle uansett klubbtilhørighet."
+ },
+ {
+  "navn": "Fana IL løpegruppe for voksne og mosjonister",
+  "sted": "Bergen",
+  "fylke": "Vestland",
+  "type": "klubb",
+  "lenke": "https://fanail.no/arrangement-og-pameldinger/lopegruppe-for-voksne-og-mosjonister",
+  "om": "Sosial og lavterskel løpetrening for voksne og mosjonister hver torsdag klokken 19 på Fana stadion."
+ },
+ {
+  "navn": "Varegg Friidrett",
+  "sted": "Bergen",
+  "fylke": "Vestland",
+  "type": "klubb",
+  "lenke": "https://varegg.no/idretter/friidrett",
+  "om": "Bredt løpemiljø med egne grupper for bakkeløp, terreng og distanseløping, samling på Skansemyren."
+ },
+ {
+  "navn": "IL Gular Friidrett",
+  "sted": "Bergen",
+  "fylke": "Vestland",
+  "type": "klubb",
+  "lenke": "https://www.gular.no/friidrett",
+  "om": "Friidrettsklubb med mellom- og langdistansegruppe som trener på Skansemyren og i Leikvanghallen."
+ },
+ {
+  "navn": "IL Gneist Friidrett",
+  "sted": "Bergen",
+  "fylke": "Vestland",
+  "type": "klubb",
+  "lenke": "https://gneist.no/friidrett/grupper-og-treningstider",
+  "om": "Friidrettsklubb i Ytrebygda med sprint- og distansegrupper for ulike aldre."
+ },
+ {
+  "navn": "BFG Bergen Løpeklubb",
+  "sted": "Bergen",
+  "fylke": "Vestland",
+  "type": "klubb",
+  "lenke": "https://bergenlopeklubb.com/",
+  "om": "Etablert løpeklubb i Bergen som blant annet arrangerer Bergen City Milen og Ulriken Opp."
+ },
+ {
+  "navn": "No Bad Days Running Club",
+  "sted": "Bergen",
+  "fylke": "Vestland",
+  "type": "lavterskel",
+  "lenke": "https://www.instagram.com/nbdrunningclub/",
+  "om": "Sosial og inkluderende lavterskel løpeklubb med base i Bergen sentrum."
+ },
+ {
+  "navn": "Kondistreninga Bergen",
+  "sted": "Bergen (Nesttun)",
+  "fylke": "Vestland",
+  "type": "lavterskel",
+  "lenke": "https://kondistreninga.no/kondistreninga-bergen/",
+  "om": "Gratis intervalltrening for alle nivåer, oppmøte tirsdager klokken 19 ved Osbanetraseen på Nesttun."
+ },
+ {
+  "navn": "Løvstien parkrun",
+  "sted": "Bergen",
+  "fylke": "Vestland",
+  "type": "lavterskel",
+  "lenke": "https://www.parkrun.no/lovstien/",
+  "om": "Gratis, tidtatt 5 km-løp hver lørdag klokken 09.30 ved foten av Løvstakken."
+ },
+ {
+  "navn": "Löplabbet Bergen fellestrening",
+  "sted": "Bergen",
+  "fylke": "Vestland",
+  "type": "butikk",
+  "lenke": "https://loplabbet.no/fellestrening",
+  "om": "Butikkdrevet løpegruppe fra Löplabbet, oppmøte utenfor butikken mandager klokken 18.05."
+ },
+ {
+  "navn": "Åsane Løpskarusell",
+  "sted": "Bergen (Åsane)",
+  "fylke": "Vestland",
+  "type": "lavterskel",
+  "lenke": "https://aasane-lopskarusell.no/",
+  "om": "Rimelig løpskarusell med 5 og 10 km distanser gjennom året, start og mål ved Ikea i Åsane."
+ },
+ {
+  "navn": "Kondistreninga Husnes",
+  "sted": "Husnes",
+  "fylke": "Vestland",
+  "type": "lavterskel",
+  "lenke": "https://kondistreninga.no/kondistreninga-husnes/",
+  "om": "Gratis, frivillig drevet løpegruppe som møtes mandager klokken 17.45 ved Undarheim skule."
+ },
+ {
+  "navn": "Kondistreninga Masfjorden",
+  "sted": "Masfjorden",
+  "fylke": "Vestland",
+  "type": "lavterskel",
+  "lenke": "https://kondistreninga.no/kondistreninga-masfjorden/",
+  "om": "Gratis intervalltrening for alle nivåer, oppmøte onsdager klokken 20 ved Sandnes skule."
+ },
+ {
+  "navn": "Voss IL løpskarusell",
+  "sted": "Voss",
+  "fylke": "Vestland",
+  "type": "klubb",
+  "lenke": "https://vossil.no/friidrett/lopskarusell",
+  "om": "Løpskarusell med seks løp i året for både mosjonister og konkurranseløpere, start og mål ved idrettsplassen i Voss."
+ },
+ {
+  "navn": "Sognefjorden løpeklubb",
+  "sted": "Sogndal",
+  "fylke": "Vestland",
+  "type": "lavterskel",
+  "lenke": "https://www.facebook.com/p/Sognefjorden-l%C3%B8peklubb-61561432906305/",
+  "om": "Løpeklubb i Sogndal som samler folk som vil oppleve løpeglede sammen."
+ },
+ {
+  "navn": "Kondistreninga Molde",
+  "sted": "Molde",
+  "fylke": "Møre og Romsdal",
+  "type": "lavterskel",
+  "lenke": "https://kondistreninga.no/kondistreninga-molde/",
+  "om": "Gratis og åpen løpegruppe som trener torsdager klokken 17.15 på Molde gamle stadion."
+ },
+ {
+  "navn": "Kondistreninga Ålesund",
+  "sted": "Ålesund (Spjelkavik)",
+  "fylke": "Møre og Romsdal",
+  "type": "lavterskel",
+  "lenke": "https://kondistreninga.no/kondistreninga-alesund/",
+  "om": "Gratis løpegruppe som møtes torsdager klokken 19.25 ved Vasstranda, med intervalltrening rundt Lillevatnet."
+ },
+ {
+  "navn": "IL Norodd Run for Fun",
+  "sted": "Kristiansund",
+  "fylke": "Møre og Romsdal",
+  "type": "lavterskel",
+  "lenke": "https://www.norodd.no/friidrett/treningstider-friidrett/",
+  "om": "Lavterskel løpegruppe med trening tirsdager og torsdager klokken 18 i Folkeparken, oppmøte ved Atlanten stadion."
+ },
+ {
+  "navn": "Kondistreninga Trondheim",
+  "sted": "Trondheim",
+  "fylke": "Trøndelag",
+  "type": "lavterskel",
+  "lenke": "https://kondistreninga.no/kondistreninga-trondheim/",
+  "om": "Gratis løpegruppe for alle nivåer, samling tirsdager klokken 20 på forhåndsannonsert sted."
+ },
+ {
+  "navn": "Löplabbet Trondheim fellestrening",
+  "sted": "Trondheim",
+  "fylke": "Trøndelag",
+  "type": "butikk",
+  "lenke": "https://loplabbet.no/fellestrening",
+  "om": "Butikkdrevet løpegruppe fra Löplabbet i Nordregate, onsdager klokken 19."
+ },
+ {
+  "navn": "Festningen parkrun",
+  "sted": "Trondheim",
+  "fylke": "Trøndelag",
+  "type": "lavterskel",
+  "lenke": "https://www.parkrun.no/festningen/",
+  "om": "Gratis, tidtatt 5 km-løp hver lørdag klokken 09.30 ved Kristiansten festning."
+ },
+ {
+  "navn": "Kondistreninga Stjørdal",
+  "sted": "Stjørdal",
+  "fylke": "Trøndelag",
+  "type": "lavterskel",
+  "lenke": "https://kondistreninga.no/kondistreninga-stjordal/",
+  "om": "Gratis løpegruppe som trener tirsdager og fredager klokken 16.30 i Sandskogan ved Stjørdalshallen."
+ },
+ {
+  "navn": "Løp i Norge",
+  "sted": "Hele Norge",
+  "fylke": "Nasjonalt",
+  "type": "lavterskel",
+  "lenke": "https://www.lopinorge.no",
+  "strava": "https://www.strava.com/clubs/552785",
+  "om": "Norges Friidrettsforbunds offisielle kanal for mosjonsløping, med Strava-klubb med snart 5 000 medlemmer."
+ },
+ {
+  "navn": "Løkka Løpeklubb",
+  "sted": "Oslo (Grünerløkka)",
+  "fylke": "Oslo",
+  "type": "lavterskel",
+  "lenke": "https://www.strava.com/clubs/479243",
+  "om": "Rolige joggeturer for alle nivåer fra Dælenenggata, mandager og onsdager klokken 17."
+ },
+ {
+  "navn": "Adamstuen Løpeklubb",
+  "sted": "Oslo (Adamstuen)",
+  "fylke": "Oslo",
+  "type": "lavterskel",
+  "lenke": "https://www.strava.com/clubs/517684",
+  "om": "Sosial løpeklubb på Adamstuen med mottoet eventyr for livet."
+ },
+ {
+  "navn": "Stavanger parkrun",
+  "sted": "Stavanger",
+  "fylke": "Rogaland",
+  "type": "lavterskel",
+  "lenke": "https://www.parkrun.no/stavanger/",
+  "strava": "https://www.strava.com/clubs/stavanger-parkrun",
+  "om": "Gratis, tidtatt 5 km-løp hver lørdag klokken 09.30, åpent for alle."
+ },
+ {
+  "navn": "Family Ski Running",
+  "sted": "Ski",
+  "fylke": "Akershus",
+  "type": "lavterskel",
+  "lenke": "https://www.strava.com/clubs/familyskirunning",
+  "om": "Lokal løpeklubb i Ski med felles turer for store og små."
+ },
+ {
+  "navn": "Kondistreninga Alta",
+  "sted": "Alta",
+  "fylke": "Finnmark",
+  "type": "lavterskel",
+  "lenke": "https://kondistreninga.no/kondistreninga-alta/",
+  "om": "Gratis intervalltrening hver lørdag klokken 09.30 med oppmøte ved Industrihøyden eller Storgjerdebakken."
+ },
+ {
+  "navn": "Kondistreninga Harestua",
+  "sted": "Harestua",
+  "fylke": "Akershus",
+  "type": "lavterskel",
+  "lenke": "https://kondistreninga.no/kondistreninga-harestua/",
+  "om": "Gratis løpetrening uten medlemskrav hver torsdag klokken 18.30 ved Shell Harestua."
+ },
+ {
+  "navn": "Kondistreninga Moelv",
+  "sted": "Moelv",
+  "fylke": "Innlandet",
+  "type": "lavterskel",
+  "lenke": "https://kondistreninga.no/kondistreninga-moelv/",
+  "om": "Åpen løpegruppe med rolig tur mandager og intervalltrening lørdager i Moskogen-området."
+ },
+ {
+  "navn": "Kondistreninga Mjøndalen",
+  "sted": "Mjøndalen",
+  "fylke": "Buskerud",
+  "type": "lavterskel",
+  "lenke": "https://kondistreninga.no/kondistreninga-mjondalen/",
+  "om": "Frivillig drevet løpegruppe for alle som liker å løpe eller ønsker å begynne."
+ },
+ {
+  "navn": "Kondistreninga Radøy LK",
+  "sted": "Radøy",
+  "fylke": "Vestland",
+  "type": "lavterskel",
+  "lenke": "https://kondistreninga.no/kondistreninga-radoy-lk/",
+  "om": "Intervalltrening med teknikkøvelser hver onsdag klokken 20, tilpasset alle aldre og nivåer."
+ },
+ {
+  "navn": "Kondistreninga Stord",
+  "sted": "Stord",
+  "fylke": "Vestland",
+  "type": "lavterskel",
+  "lenke": "https://kondistreninga.no/kondistreninga-stord/",
+  "om": "Løpetrening hver onsdag klokken 18.30 ved Andedammen/Vikastemmo."
+ },
+ {
+  "navn": "Kondistreninga Online",
+  "sted": "Nettbasert (hele landet)",
+  "fylke": "Nasjonalt",
+  "type": "lavterskel",
+  "lenke": "https://kondistreninga.no/kondistreninga-online/",
+  "om": "Gratis nettbasert løpefellesskap for tredemølleløping via direktesendte økter."
+ },
+ {
+  "navn": "Nansenparken parkrun",
+  "sted": "Fornebu",
+  "fylke": "Akershus",
+  "type": "lavterskel",
+  "lenke": "https://www.parkrun.no/nansenparken/",
+  "om": "Gratis 5 km fellesløp hver lørdag klokken 09.30 i Nansenparken."
+ },
+ {
+  "navn": "Ekebergsletta parkrun",
+  "sted": "Oslo",
+  "fylke": "Oslo",
+  "type": "lavterskel",
+  "lenke": "https://www.parkrun.no/ekebergsletta/",
+  "om": "Gratis 5 km fellesløp hver lørdag klokken 09.30 på Ekebergsletta."
+ },
+ {
+  "navn": "Skien Fritidspark parkrun",
+  "sted": "Skien",
+  "fylke": "Telemark",
+  "type": "lavterskel",
+  "lenke": "https://www.parkrun.no/skienfritidspark/",
+  "om": "Gratis 5 km fellesløp hver lørdag klokken 09.30 ved Skien Fritidspark."
+ },
+ {
+  "navn": "Loftsgardsbrua parkrun",
+  "sted": "Otta",
+  "fylke": "Innlandet",
+  "type": "lavterskel",
+  "lenke": "https://www.parkrun.no/loftsgardsbrua/",
+  "om": "Gratis 5 km fellesløp hver lørdag klokken 09.30 ved Loftsgardsbrua."
+ },
+ {
+  "navn": "Alby Gård parkrun",
+  "sted": "Moss",
+  "fylke": "Østfold",
+  "type": "lavterskel",
+  "lenke": "https://www.parkrun.no/albygard/",
+  "om": "Gratis 5 km fellesløp hver lørdag klokken 09.30 ved Alby Gård."
+ },
+ {
+  "navn": "Ankerskogen parkrun",
+  "sted": "Hamar",
+  "fylke": "Innlandet",
+  "type": "lavterskel",
+  "lenke": "https://www.parkrun.no/ankerskogen/",
+  "om": "Gratis 5 km fellesløp hver lørdag klokken 09.30 i Ankerskogen tur- og parkområde."
+ },
+ {
+  "navn": "Berger Stadion parkrun",
+  "sted": "Nesoddtangen",
+  "fylke": "Akershus",
+  "type": "lavterskel",
+  "lenke": "https://www.parkrun.no/bergerstadion/",
+  "om": "Gratis 5 km fellesløp hver lørdag klokken 09.30 ved Berger Stadion."
+ },
+ {
+  "navn": "Greveskogen parkrun",
+  "sted": "Tønsberg",
+  "fylke": "Vestfold",
+  "type": "lavterskel",
+  "lenke": "https://www.parkrun.no/greveskogen/",
+  "om": "Gratis 5 km fellesløp hver lørdag klokken 09.30 ved Greveskogen idrettspark."
+ },
+ {
+  "navn": "Theisendammen parkrun",
+  "sted": "Trondheim",
+  "fylke": "Trøndelag",
+  "type": "lavterskel",
+  "lenke": "https://www.parkrun.no/theisendammen/",
+  "om": "Gratis 5 km fellesløp hver lørdag klokken 09.30 ved Theisendammen på Sverresborg."
+ },
+ {
+  "navn": "Aktiv Sammen Trondheim",
+  "sted": "Trondheim",
+  "fylke": "Trøndelag",
+  "type": "lavterskel",
+  "lenke": "https://www.instagram.com/aktiv.sammen.trd/",
+  "om": "Sosial run club i Trondheim med arrangementer annonsert i egen Facebook-gruppe."
+ },
+ {
+  "navn": "No Rush Trondheim",
+  "sted": "Trondheim",
+  "fylke": "Trøndelag",
+  "type": "lavterskel",
+  "lenke": "https://www.instagram.com/no.rush.trondheim/",
+  "om": "Sosial løpegruppe i rolig tempo onsdager og søndager, alle er velkomne."
+ },
+ {
+  "navn": "Gjøvik Run Club",
+  "sted": "Gjøvik",
+  "fylke": "Innlandet",
+  "type": "lavterskel",
+  "lenke": "https://www.instagram.com/gjovikrunclub/",
+  "om": "Sosial løpeklubb for alle nivåer med faste treff hver mandag klokken 19.30."
+ },
+ {
+  "navn": "Lento Running Club",
+  "sted": "Stavanger",
+  "fylke": "Rogaland",
+  "type": "lavterskel",
+  "lenke": "https://www.instagram.com/lentorunning/",
+  "om": "Sosial run club i Stavanger med plass til alle tempo under mottoet Slow Is Still Moving."
+ },
+ {
+  "navn": "SVG Run Club",
+  "sted": "Stavanger",
+  "fylke": "Rogaland",
+  "type": "lavterskel",
+  "lenke": "https://www.instagram.com/svgrunclub/",
+  "om": "Løpegruppe med sosiale løpeturer og intervaller uansett form."
+ },
+ {
+  "navn": "Drammen Social Run Club",
+  "sted": "Drammen",
+  "fylke": "Buskerud",
+  "type": "lavterskel",
+  "lenke": "https://www.instagram.com/drmsocialrunclub/",
+  "om": "Sosial løpeklubb med faste økter torsdager og søndager."
+ },
+ {
+  "navn": "Slow&Steady KRS Social Run",
+  "sted": "Kristiansand",
+  "fylke": "Agder",
+  "type": "lavterskel",
+  "lenke": "https://www.instagram.com/slowandsteady.krs/",
+  "om": "Løpegruppe for alle med faste turer søndager klokken 11.15."
+ },
+ {
+  "navn": "GRØD Social Runners Oslo",
+  "sted": "Oslo",
+  "fylke": "Oslo",
+  "type": "lavterskel",
+  "lenke": "https://www.instagram.com/groedsocialrunners/",
+  "om": "Sosial løpegruppe med faste turer første og tredje søndag i måneden klokken 09."
+ },
+ {
+  "navn": "Arctic Blizzard Running Club",
+  "sted": "Tromsø",
+  "fylke": "Troms",
+  "type": "lavterskel",
+  "lenke": "https://www.instagram.com/arcticblizzard.runningclub/",
+  "om": "Gratis løpeklubb for alle nivåer med faste turer onsdager klokken 18 og søndager klokken 10."
+ },
+ {
+  "navn": "Bringebærløperne (Gui SK)",
+  "sted": "Vollen (Asker)",
+  "fylke": "Akershus",
+  "type": "lavterskel",
+  "lenke": "https://guisk.spond.club/om_bringeb%C3%A6rl%C3%B8perne",
+  "om": "Gui Sportsklubbs sosiale løpegruppe med lunsjøkter fra Vollenhallen, for alle som kan løpe på dagtid."
+ },
+ {
+  "navn": "Siljan IL Løpeklubb",
+  "sted": "Siljan",
+  "fylke": "Telemark",
+  "type": "klubb",
+  "lenke": "https://siljanil.spond.club/l%C3%B8peklubb",
+  "om": "Løpeklubb for alle løpere i bygda, med fokus på fellesskap og å heie hverandre frem mot nye mål."
+ },
+ {
+  "navn": "TIL Hovding løpegruppe",
+  "sted": "Bergen",
+  "fylke": "Vestland",
+  "type": "klubb",
+  "lenke": "https://tilhovding.spond.club/treningstider_og_treningsgrupper",
+  "om": "Friidrettslag med egen løpegruppe for voksne, startet i 2024."
+ },
+ {
+  "navn": "Buvik IL løpegruppe",
+  "sted": "Buvik (Skaun)",
+  "fylke": "Trøndelag",
+  "type": "klubb",
+  "lenke": "https://buvikil.spond.club/om_oss",
+  "om": "Løpegruppe etablert i 2021 med fellestreninger tirsdager og torsdager klokken 18."
+ },
+ {
+  "navn": "Skreia IL løpegruppe",
+  "sted": "Skreia (Østre Toten)",
+  "fylke": "Innlandet",
+  "type": "klubb",
+  "lenke": "https://skreiail.spond.club/l%C3%B8pegruppe_skreia_il",
+  "om": "Løpegruppe etablert i 2025 med plass til alle uansett nivå og ambisjoner."
+ },
+ {
+  "navn": "Bud IL trimgruppa",
+  "sted": "Bud (Hustadvika)",
+  "fylke": "Møre og Romsdal",
+  "type": "lavterskel",
+  "lenke": "https://budil.spond.club/trimgruppa",
+  "om": "Trimgruppe med egen løpegruppe og ballspill for voksne."
+ },
+ {
+  "navn": "Torridal IL løpegruppe",
+  "sted": "Kristiansand (Torridal)",
+  "fylke": "Agder",
+  "type": "klubb",
+  "lenke": "https://torridalil.spond.club/",
+  "om": "Lavterskel løpegruppe åpen for alle fra 5. klasse og oppover."
+ }
+]
