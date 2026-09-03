@@ -212,6 +212,62 @@
 
 <main class="wrap">
 
+  <section id="plan">
+    <div class="kick">Ukeplanen</div>
+    <h2>Treningsplanen for laget</h2>
+    <p class="ingress" id="plan-ramme">Fotball og kamper fra Spond, løpeøktene lagt oppå. Fem treningsdager i uka, to fridager.</p>
+    <div id="plan-uker"><p style="color:var(--muted)">Henter planen …</p></div>
+    <p id="plan-stempel" style="font-family:var(--font-mono);font-size:.68rem;color:var(--muted);margin-top:.6rem"></p>
+    <style>
+      .plan-uke{margin:1.2rem 0 1.6rem}
+      .plan-uke h3{font-family:var(--font-display);font-weight:600;font-size:1.15rem;margin:0 0 .15rem}
+      .plan-uke .meta{font-family:var(--font-mono);font-size:.68rem;color:var(--muted);letter-spacing:.04em;margin:0 0 .5rem}
+      .plan-uke table{width:100%;border-collapse:collapse;font-size:.92rem}
+      .plan-uke td{padding:.5rem .4rem;border-top:1px solid color-mix(in srgb,var(--fg) 12%,transparent);vertical-align:top}
+      .plan-uke td.dag{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;width:5.2rem;color:var(--muted)}
+      .plan-uke td.okt b{display:block}
+      .plan-uke td.okt small{display:block;color:var(--muted);line-height:1.35;margin-top:.15rem}
+      .plan-uke tr.gjort{opacity:.55}
+      .plan-uke tr.gjort td.okt b::after{content:" ✓"}
+      .chip{display:inline-block;font-family:var(--font-mono);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;padding:.15rem .45rem;border-radius:999px;margin-bottom:.2rem;border:1px solid transparent}
+      .chip.fotball{background:color-mix(in srgb,#2e7d32 18%,transparent);color:#2e7d32}
+      .chip.kamp{background:color-mix(in srgb,#c62828 16%,transparent);color:#c62828}
+      .chip.rolig{background:color-mix(in srgb,#1565c0 16%,transparent);color:#1565c0}
+      .chip.intervall{background:color-mix(in srgb,#ef6c00 18%,transparent);color:#ef6c00}
+      .chip.hvile{background:color-mix(in srgb,var(--fg) 8%,transparent);color:var(--muted)}
+      .plan-merk{font-size:.85rem;color:var(--muted);margin:.4rem 0 0}
+      @media (max-width:520px){.plan-uke td.dag{width:3.4rem;font-size:.62rem}.plan-uke td{padding:.45rem .25rem}}
+    </style>
+    <script>
+    (function(){
+      var MND=['januar','februar','mars','april','mai','juni','juli','august','september','oktober','november','desember'];
+      function pen(iso){var d=new Date(iso+'T12:00:00');return d.getDate()+'. '+MND[d.getMonth()];}
+      function chip(t){
+        var k={trening:['fotball','Fotball'],kamp:['kamp','Kamp'],rolig:['rolig','Rolig løp'],rolig_valgfri:['rolig','Rolig, valgfri'],
+               intervall:['intervall','Intervall'],intervall_trener:['intervall','Løpetrening'],hvile:['hvile','Fri']}[t]||['hvile',t];
+        return '<span class="chip '+k[0]+'">'+k[1]+'</span>';
+      }
+      fetch('/g15/plan.json?v='+Date.now()).then(function(r){return r.json();}).then(function(p){
+        var ut='';
+        p.uker.forEach(function(u){
+          ut+='<div class="plan-uke"><h3>Uke '+u.uke+' <span style="font-weight:400;color:var(--muted)">'+pen(u.fra)+' til '+pen(u.til)+'</span></h3>';
+          ut+='<p class="meta">'+u.fotballdager+' fotballdag'+(u.fotballdager===1?'':'er')+(u.kamper?' · '+u.kamper+' kamp'+(u.kamper===1?'':'er'):'')+' · '+u.lopeokter+' løpeøkt'+(u.lopeokter===1?'':'er')+' · '+u.regel+'</p>';
+          ut+='<table>';
+          u.dager.forEach(function(d){
+            var tid=[d.tid,d.sted].filter(Boolean).join(' · ');
+            ut+='<tr class="'+(d.gjennomfort?'gjort':'')+'"><td class="dag">'+d.ukedag.slice(0,3)+'<br>'+d.dato.slice(8,10)+'.'+d.dato.slice(5,7)+'</td>'
+              +'<td class="okt">'+chip(d.type)+'<b>'+d.navn+'</b>'+(tid?'<small>'+tid+'</small>':'')+(d.tekst?'<small>'+d.tekst+'</small>':'')+'</td></tr>';
+          });
+          ut+='</table>'+(u.merknad?'<p class="plan-merk">'+u.merknad+'</p>':'')+'</div>';
+        });
+        document.getElementById('plan-uker').innerHTML=ut;
+        document.getElementById('plan-ramme').textContent=p.ramme;
+        document.getElementById('plan-stempel').textContent='Spond hentet '+(p.spond_hentet||'').replace('T',' ').slice(0,16)+' · planen bygget '+p.generert.replace('T',' ').slice(0,16);
+      }).catch(function(){document.getElementById('plan-uker').innerHTML='<p>Planen er ikke tilgjengelig akkurat nå.</p>';});
+    })();
+    </script>
+  </section>
+
   <section id="sporsmal">
     <div class="innspill">
     <p class="kick">✍️ Før økta</p>
