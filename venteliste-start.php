@@ -90,9 +90,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && $rad && !$vs_rate && trim($_POST["n
         "lop_prioritet" => in_array($_POST["lop_prioritet"] ?? "", ["A", "B", "C", "D"], true)
                            ? $_POST["lop_prioritet"] : null,
     ];
+    // Helsesamtykke (personvern 04.09.2026, GDPR art. 9): eget, uttrykkelig
+    // steg. Uten avkrysning lagres ingenting, og svarene bevares i skjemaet.
+    $helse_ok = (($_POST["samtykke_helse"] ?? "") === "ja");
+    if ($helse_ok) {
+        $svar["samtykke_helse"] = ["tidspunkt" => date("c"), "versjon" => "2026-09-04"];
+    }
     if ($svar["maal"] === "" || $svar["alder"] < 10 || $svar["alder"] > 99
         || $svar["km_uke"] <= 0 || $svar["start_km"] <= 0) {
         $feil = "Fyll inn mål, alder, kilometer per uke og ønsket start-kilometer.";
+    } elseif (!$helse_ok) {
+        $feil = "Vi trenger et ja til å behandle helseopplysninger (punkt 5 nederst) før vi kan lage planen din. Svarene dine er tatt vare på i skjemaet.";
     } else {
         $pdo->prepare("UPDATE venteliste SET svar_json = ?, svart_at = NOW() WHERE kode = ?")
             ->execute([json_encode($svar, JSON_UNESCAPED_UNICODE), $kode]);
@@ -349,6 +357,30 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && $rad && !$vs_rate && trim($_POST["n
           <option value="C"<?= $sel('lop_prioritet', 'C', '') ?>>C — vil gjøre det bra, men ikke hovedmålet</option>
           <option value="D"<?= $sel('lop_prioritet', 'D', '') ?>>D — testløp / del av treningen</option>
         </select></label>
+    </fieldset>
+
+    <fieldset class="vl-kort" style="border:1.5px solid hsl(148 15% 84%)" id="helsesamtykke">
+      <legend>5 · Samtykke til helseopplysninger 🔏</legend>
+      <label style="display:grid; grid-template-columns:auto 1fr; gap:.6rem; align-items:start; font-weight:400">
+        <input type="checkbox" name="samtykke_helse" value="ja" required
+               style="width:1.25rem; height:1.25rem; margin-top:.15rem"<?= (($_POST["samtykke_helse"] ?? "") === "ja") ? " checked" : "" ?>>
+        <span><b>Ja, Treni kan behandle helseopplysninger om meg.</b> Det gjelder puls fra
+          Strava og det jeg selv forteller om skader, sykdom og kroppen min. Opplysningene
+          brukes bare til treningsveiledningen min, sees bare av treneren min og
+          driftsansvarlig, og sendes som utdrag til Anthropic for å lage rådtekst. Jeg kan
+          trekke samtykket når som helst ved å skrive til
+          <a href="mailto:hei@treni.no">hei@treni.no</a> eller i gruppa mi.
+          <span class="vl-hint" style="display:block; margin-top:.4rem">Puls, skader og sykdom
+          er helseopplysninger. Loven krever et eget ja fra deg før vi kan bruke dem. Les
+          <a href="personvern.html" target="_blank" rel="noopener">personvernerklæringen</a>.</span>
+          <span class="vl-hint" style="display:block; margin-top:.4rem" lang="en">English: by
+          ticking this box you agree that Treni may process health data about you (heart rate
+          from Strava and what you tell us about injuries, illness and your body), used only for
+          your training guidance, seen only by your coach and the operator, and sent as extracts
+          to Anthropic to phrase the advice. Withdraw any time via hei@treni.no.
+          <a href="en/privacy.html" target="_blank" rel="noopener">Privacy policy</a>.</span>
+        </span>
+      </label>
     </fieldset>
 
     <button class="btn" type="submit" style="justify-self:start">Send inn — og få siden min 🚀</button>
