@@ -79,6 +79,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <title>Become a test runner — Treni</title>
 <meta name="description" content="Register interest to become a Treni test runner — coach-led running guidance built on your own Strava data.">
 <meta name="robots" content="noindex">
+<meta property="og:title" content="Become a Treni test runner">
+<meta property="og:description" content="Coach-led running guidance built on your own Strava data.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://treni.no/en/join.php">
+<meta property="og:image" content="https://treni.no/bilder/og.jpg">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏃</text></svg>">
 <link rel="stylesheet" href="../stil.css?v=12">
 </head>

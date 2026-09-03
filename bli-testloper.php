@@ -246,6 +246,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <title>Bli testløper — Treni</title>
 <meta name="description" content="Meld interesse for å bli testløper hos Treni — trenerledet løpsveiledning bygget på dine egne Strava-data.">
 <meta name="robots" content="noindex">
+<meta property="og:title" content="Bli testløper hos Treni">
+<meta property="og:description" content="Trenerledet løpsveiledning bygget på dine egne Strava-data. Meld interesse, så får du egen side og plan mens du venter.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://treni.no/bli-testloper.php">
+<meta property="og:image" content="https://treni.no/bilder/og.jpg">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏃</text></svg>">
 <link rel="stylesheet" href="stil.css?v=12">
 </head>
