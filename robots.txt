@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /dashbord/
+Disallow: /venteliste-start.php
+Disallow: /en/join.php
+Disallow: /videre.php
+Disallow: /g15/svar.php
+Sitemap: https://treni.no/sitemap.xml

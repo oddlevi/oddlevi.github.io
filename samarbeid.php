@@ -11,12 +11,15 @@ $TYPER = [
     "annet"      => "Annet",
 ];
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $navn = trim($_POST["navn"] ?? "");
-    $org = trim($_POST["organisasjon"] ?? "");
+    // Feltgrenser + rensing (sikkerhetstest 03.09)
+    treni_begrens_post(["melding" => 3000, "navn" => 120, "organisasjon" => 160,
+                        "epost" => 190, "mobil" => 32]);
+    $navn = treni_ren($_POST["navn"] ?? "", 120);
+    $org = treni_ren($_POST["organisasjon"] ?? "", 160);
     $type = array_key_exists($_POST["type"] ?? "", $TYPER) ? $_POST["type"] : "annet";
-    $epost = trim($_POST["epost"] ?? "");
-    $mobil = trim($_POST["mobil"] ?? "");
-    $melding = trim($_POST["melding"] ?? "");
+    $epost = treni_ren($_POST["epost"] ?? "", 190);
+    $mobil = treni_ren($_POST["mobil"] ?? "", 32);
+    $melding = treni_ren($_POST["melding"] ?? "", 3000, true);
     $krukke = trim($_POST["nettside"] ?? "");
     if ($krukke !== "") {
         $sendt = true; // bot — lat som alt gikk bra

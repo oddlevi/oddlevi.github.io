@@ -120,17 +120,30 @@
   }
   document.getElementById("strava-knapp").addEventListener("click", function (ev) {
     ev.preventDefault();
-    var n = nonce();
-    try {
-      localStorage.setItem("treni_onboarding", JSON.stringify({nonce: n, ts: Date.now()}));
-    } catch (e) {}
-    var state = "wv_" + verver + "_" + n + (en ? "_en" : "");
-    var url = "https://www.strava.com/oauth/mobile/authorize" +
-      "?client_id=239111&response_type=code" +
-      "&redirect_uri=" + encodeURIComponent("https://oddlevi.github.io/strava-kobling/") +
-      "&approval_prompt=auto&scope=" + encodeURIComponent("read,activity:read_all") +
-      "&state=" + encodeURIComponent(state);
-    location.href = url;
+    // Signert state fra serveren (sikkerhetstest 03.09): binder Strava-runden
+    // til denne påmeldingen og utløper etter 15 min. Uten den avviser
+    // min.treni.no koden.
+    var knapp = this;
+    knapp.style.opacity = ".6";
+    fetch("/strava_state.php?v=" + encodeURIComponent(verver) + (en ? "&en=1" : ""), {cache: "no-store"})
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        if (!d || !d.state) throw new Error("state mangler");
+        try {
+          localStorage.setItem("treni_onboarding", JSON.stringify({nonce: d.nonce, ts: Date.now()}));
+        } catch (e) {}
+        var url = "https://www.strava.com/oauth/mobile/authorize" +
+          "?client_id=239111&response_type=code" +
+          "&redirect_uri=" + encodeURIComponent("https://oddlevi.github.io/strava-kobling/") +
+          "&approval_prompt=auto&scope=" + encodeURIComponent("read,activity:read_all") +
+          "&state=" + encodeURIComponent(d.state);
+        location.href = url;
+      })
+      .catch(function () {
+        knapp.style.opacity = "";
+        alert(en ? "Could not start the Strava connection right now. Please try again in a moment."
+                 : "Fikk ikke startet Strava-koblingen akkurat nå. Prøv igjen om et lite øyeblikk.");
+      });
   });
 })();
 

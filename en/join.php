@@ -5,15 +5,19 @@ require_once dirname(__DIR__) . "/spamvern.php";
 $sendt = false;
 $feil = "";
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $navn = trim($_POST["navn"] ?? "");
-    $epost = trim($_POST["epost"] ?? "");
-    $om = trim($_POST["om"] ?? "");
-    $kilde = mb_substr(trim($_POST["kilde"] ?? ""), 0, 200);
-    $tg = trim($_POST["telegram"] ?? "");
-    $mobil = trim($_POST["mobil"] ?? "");
+    // Field limits + sanitising (security test 03.09): no HTML/control chars
+    // in email, Telegram or the database.
+    treni_begrens_post(["om" => 2000, "navn" => 120, "epost" => 190, "kilde" => 200,
+                        "telegram" => 120, "mobil" => 32, "sprak_annet" => 40]);
+    $navn = treni_ren($_POST["navn"] ?? "", 120);
+    $epost = treni_ren($_POST["epost"] ?? "", 190);
+    $om = treni_ren($_POST["om"] ?? "", 2000, true);
+    $kilde = treni_ren($_POST["kilde"] ?? "", 200);
+    $tg = treni_ren($_POST["telegram"] ?? "", 120);
+    $mobil = treni_ren($_POST["mobil"] ?? "", 32);
     $sprak_valg = $_POST["sprak"] ?? "engelsk";
     $sprak = $sprak_valg === "annet"
-        ? (trim($_POST["sprak_annet"] ?? "") ?: "annet")
+        ? (treni_ren($_POST["sprak_annet"] ?? "", 40) ?: "annet")
         : (in_array($sprak_valg, ["norsk", "engelsk"], true) ? $sprak_valg : "engelsk");
     $krukke = trim($_POST["nettside"] ?? "");
     if ($krukke !== "") {

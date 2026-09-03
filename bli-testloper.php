@@ -23,15 +23,19 @@ if ($ml_navn !== "" && $ml_til !== "" && preg_match('#^https?://#i', $ml_til)) {
     }
 }
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $navn = trim($_POST["navn"] ?? "");
-    $epost = trim($_POST["epost"] ?? "");
-    $om = trim($_POST["om"] ?? "");
-    $kilde = mb_substr(trim($_POST["kilde"] ?? ""), 0, 200);
-    $tg = trim($_POST["telegram"] ?? "");
-    $mobil = trim($_POST["mobil"] ?? "");
+    // Feltgrenser + rensing (sikkerhetstest 03.09): ingen HTML/kontrolltegn når
+    // innholdet går videre i e-post, Telegram og databasen.
+    treni_begrens_post(["om" => 2000, "navn" => 120, "epost" => 190, "kilde" => 200,
+                        "telegram" => 120, "mobil" => 32, "sprak_annet" => 40]);
+    $navn = treni_ren($_POST["navn"] ?? "", 120);
+    $epost = treni_ren($_POST["epost"] ?? "", 190);
+    $om = treni_ren($_POST["om"] ?? "", 2000, true);
+    $kilde = treni_ren($_POST["kilde"] ?? "", 200);
+    $tg = treni_ren($_POST["telegram"] ?? "", 120);
+    $mobil = treni_ren($_POST["mobil"] ?? "", 32);
     $sprak_valg = $_POST["sprak"] ?? "norsk";
     $sprak = $sprak_valg === "annet"
-        ? (trim($_POST["sprak_annet"] ?? "") ?: "annet")
+        ? (treni_ren($_POST["sprak_annet"] ?? "", 40) ?: "annet")
         : (in_array($sprak_valg, ["norsk", "engelsk"], true) ? $sprak_valg : "norsk");
     $krukke = trim($_POST["nettside"] ?? "");
     if ($krukke !== "") {

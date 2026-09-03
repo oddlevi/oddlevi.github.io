@@ -34,7 +34,23 @@ if (is_array($konfig) && $kode !== "") {
     } catch (Throwable $e) { $rad = null; }
 }
 
-if ($_SERVER["REQUEST_METHOD"] === "POST" && $rad && trim($_POST["nettside"] ?? "") === "") {
+// Rategrense + feltgrenser (sikkerhetstest 03.09): skjemaet er bak en
+// personlig kode, men koden kan lekke — maks 10 innsendinger per IP per time.
+require_once __DIR__ . "/spamvern.php";
+$vs_rate = false;
+if ($_SERVER["REQUEST_METHOD"] === "POST" && $rad) {
+    treni_begrens_post(["maal" => 600, "rekorder" => 600, "alternativ" => 400, "styrke" => 400], 200);
+    foreach ($_POST as $vs_k => $vs_v) {
+        $_POST[$vs_k] = treni_ren($vs_v, 2000, in_array($vs_k, ["maal", "rekorder", "alternativ", "styrke"], true));
+    }
+    if (treni_rategrense("vlstart|" . treni_ip(), 10, 3600)) {
+        treni_sikkerhet_logg("venteliste-start: rategrense (10/t) nådd");
+        http_response_code(429);
+        header("Retry-After: 900");
+        $vs_rate = true;
+    }
+}
+if ($_SERVER["REQUEST_METHOD"] === "POST" && $rad && !$vs_rate && trim($_POST["nettside"] ?? "") === "") {
     $svar = [
         "maal"      => mb_substr(trim($_POST["maal"] ?? ""), 0, 600),
         "alder"     => (int) ($_POST["alder"] ?? 0),
