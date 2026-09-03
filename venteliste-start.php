@@ -52,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && $rad) {
 }
 if ($_SERVER["REQUEST_METHOD"] === "POST" && $rad && !$vs_rate && trim($_POST["nettside"] ?? "") === "") {
     $svar = [
-        "maal"      => mb_substr(trim($_POST["maal"] ?? ""), 0, 600),
+        "maal"      => mb_substr(trim($_POST["maal"] ?? ""), 0, 2500),
         "alder"     => (int) ($_POST["alder"] ?? 0),
         "puls"      => trim($_POST["puls"] ?? "") === "" ? null : (int) $_POST["puls"],
         "beste_tid" => mb_substr(trim($_POST["beste_tid"] ?? ""), 0, 120),
