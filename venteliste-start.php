@@ -2,6 +2,9 @@
 // Venteliste-onboarding (Odds bestilling 19.08): samme spørsmål som
 // Telegram-onboardingen + km/uke. Personlig kode-lenke per venteliste-rad;
 // svarene lagres i venteliste.svar_json og treneren varsles i Telegram.
+// Revisjon 03.09: serveren står i UTC — «Svarene dine er mottatt»-innslaget
+// fikk UTC-klokkeslett (Trond: 07:32 i stedet for 09:32).
+date_default_timezone_set('Europe/Oslo');
 $cfg_sti = dirname(__DIR__) . "/dashbord_config.php";
 $konfig = is_readable($cfg_sti) ? (include $cfg_sti) : null;
 $kode = preg_replace('/[^A-Za-z0-9_-]/', '', $_GET["k"] ?? $_POST["k"] ?? "");
@@ -13,9 +16,21 @@ if (is_array($konfig) && $kode !== "") {
             "mysql:host={$konfig['db_host']};dbname={$konfig['db_name']};charset=utf8mb4",
             $konfig['db_user'], $konfig['db_pass'],
             [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
-        $st = $pdo->prepare("SELECT id, navn, om, svart_at FROM venteliste WHERE kode = ?");
+        $st = $pdo->prepare("SELECT id, navn, om, svart_at, epost, status FROM venteliste WHERE kode = ?");
         $st->execute([$kode]);
         $rad = $st->fetch(PDO::FETCH_ASSOC) ?: null;
+        // Duplikat-rader (24.08-vernet, gjenoppbygd 03.09): en lenke fra en
+        // duplikatrad sendes videre til nyeste ekte rad for samme e-post.
+        if ($rad && ($rad["status"] ?? "") === "duplikat") {
+            $st2 = $pdo->prepare("SELECT kode FROM venteliste WHERE LOWER(epost) = LOWER(?)
+                AND status IN ('venter', 'minside') AND kode IS NOT NULL AND kode <> ''
+                ORDER BY id DESC LIMIT 1");
+            $st2->execute([$rad["epost"]]);
+            if (($kode2 = $st2->fetchColumn()) && $kode2 !== $kode) {
+                header("Location: /venteliste-start.php?k=" . $kode2);
+                exit;
+            }
+        }
     } catch (Throwable $e) { $rad = null; }
 }
 
@@ -201,8 +216,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && $rad && trim($_POST["nettside"] ?? 
   kjappe spørsmål først (samme som testløperne får):</p>
 
   <?php if ($feil): ?><p class="skjema-feil"><?= htmlspecialchars($feil) ?></p><?php endif; ?>
+  <?php // Revisjon 03.09: svarene bevares ved valideringsfeil (før ble alt tømt)
+  $val = fn(string $n): string => htmlspecialchars((string) ($_POST[$n] ?? ""));
+  $sel = fn(string $n, string $v, string $std = ""): string => (($_POST[$n] ?? $std) === $v) ? " selected" : ""; ?>
 
-  <form method="post" style="display:grid; gap:1.1rem; margin-top:1.2rem">
+  <form method="post" style="display:grid; gap:1.1rem; margin-top:1.2rem"
+        onsubmit="var b=this.querySelector('button[type=submit]');if(b.disabled){return false;}b.disabled=true;b.textContent='Sender …';">
     <input type="hidden" name="k" value="<?= htmlspecialchars($kode) ?>">
     <input type="text" name="nettside" value="" style="display:none" tabindex="-1" autocomplete="off">
 
@@ -210,74 +229,74 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && $rad && trim($_POST["nettside"] ?? 
       <legend>1 · Om deg og målet ditt 🎯</legend>
       <label>Hva er målet ditt med løpinga?
         <textarea name="maal" rows="3" required
-          placeholder="F.eks.: gjøre det bra i noen få fjelløp i året …"><?= htmlspecialchars(trim($rad["om"] ?? "")) ?></textarea></label>
+          placeholder="F.eks.: gjøre det bra i noen få fjelløp i året …"><?= htmlspecialchars(trim($_POST["maal"] ?? $rad["om"] ?? "")) ?></textarea></label>
       <label>Alder
-        <input type="number" name="alder" min="10" max="99" required></label>
+        <input type="number" name="alder" min="10" max="99" required value="<?= $val('alder') ?>"></label>
     </fieldset>
 
     <fieldset class="vl-kort" style="border:1.5px solid hsl(148 15% 84%)">
       <legend>2 · Puls og tider 🫀</legend>
       <label>Høyeste puls du har målt i konkurranse eller hard økt siste halvår
-        <input type="number" name="puls" min="120" max="230" placeholder="La stå tomt om du er usikker">
+        <input type="number" name="puls" min="120" max="230" placeholder="La stå tomt om du er usikker" value="<?= $val('puls') ?>">
         <span class="vl-hint">Usikker er helt greit — da beregner vi et startpunkt fra alderen din.</span></label>
       <label>Beste tid siste halvår — med distanse (valgfritt)
-        <input type="text" name="beste_tid" placeholder="F.eks. 10 km på 52:30"></label>
+        <input type="text" name="beste_tid" placeholder="F.eks. 10 km på 52:30" value="<?= $val('beste_tid') ?>"></label>
       <label>Personlige rekorder — flate løp og motbakke/fjelløp (valgfritt)
-        <textarea name="rekorder" rows="2" placeholder="F.eks.: 5 km 21:30 · 10 km 45:10 · Storheia Opp 58:20"></textarea></label>
+        <textarea name="rekorder" rows="2" placeholder="F.eks.: 5 km 21:30 · 10 km 45:10 · Storheia Opp 58:20"><?= $val('rekorder') ?></textarea></label>
     </fieldset>
 
     <fieldset class="vl-kort" style="border:1.5px solid hsl(148 15% 84%)">
       <legend>3 · Treningsuka di 👟</legend>
       <div class="vl-to">
         <label>Kilometer i en vanlig uke
-          <input type="number" name="km_uke" min="1" max="200" step="0.5" required></label>
+          <input type="number" name="km_uke" min="1" max="200" step="0.5" required value="<?= $val('km_uke') ?>"></label>
         <label>Hva er det lengste du har løpt de siste 30 dagene? (km)
           <input type="number" name="lengste_30d" min="0" max="200" step="0.5"
-                 placeholder="f.eks. 12"></label>
+                 placeholder="f.eks. 12" value="<?= $val('lengste_30d') ?>"></label>
         <label>Minst så mange km vil jeg starte med i uke 1
-          <input type="number" name="start_km" min="1" max="200" step="0.5" required></label>
+          <input type="number" name="start_km" min="1" max="200" step="0.5" required value="<?= $val('start_km') ?>"></label>
       </div>
       <label>Hvor løper du mest?
         <select name="underlag">
-          <option value="terreng">Mest terreng og fjell</option>
-          <option value="vei">Mest vei og asfalt</option>
-          <option value="begge" selected>Begge deler</option>
+          <option value="terreng"<?= $sel('underlag', 'terreng', 'begge') ?>>Mest terreng og fjell</option>
+          <option value="vei"<?= $sel('underlag', 'vei', 'begge') ?>>Mest vei og asfalt</option>
+          <option value="begge"<?= $sel('underlag', 'begge', 'begge') ?>>Begge deler</option>
         </select></label>
       <label>Hvordan tenker du om løpemengden fremover?
         <select name="volum_onske">
-          <option value="stabil" selected>Jeg ligger på et volum som passer meg nå</option>
-          <option value="oke">Jeg ønsker å øke løpemengden gradvis</option>
-          <option value="usikker">Usikker — ta det opp med treneren</option>
+          <option value="stabil"<?= $sel('volum_onske', 'stabil', 'stabil') ?>>Jeg ligger på et volum som passer meg nå</option>
+          <option value="oke"<?= $sel('volum_onske', 'oke', 'stabil') ?>>Jeg ønsker å øke løpemengden gradvis</option>
+          <option value="usikker"<?= $sel('volum_onske', 'usikker', 'stabil') ?>>Usikker — ta det opp med treneren</option>
         </select></label>
       <label>Driver du med annen trening? Hva og hvor mye? (valgfritt)
-        <textarea name="alternativ" rows="2" placeholder="F.eks.: sykkel 1×/uke, ski om vinteren, fotball …"></textarea></label>
+        <textarea name="alternativ" rows="2" placeholder="F.eks.: sykkel 1×/uke, ski om vinteren, fotball …"><?= $val('alternativ') ?></textarea></label>
       <label>Trener du styrke? Hva og hvor ofte? (valgfritt)
-        <textarea name="styrke" rows="2" placeholder="F.eks.: 2×/uke — knebøy, utfall, legghev …"></textarea></label>
+        <textarea name="styrke" rows="2" placeholder="F.eks.: 2×/uke — knebøy, utfall, legghev …"><?= $val('styrke') ?></textarea></label>
       <label>Hvordan har treningen din vært de siste 3 månedene?
         <select name="siste_90d">
-          <option value="jevn" selected>Jevn — trent omtrent som nå hele perioden</option>
-          <option value="ujevn">Ujevn — litt av og på</option>
-          <option value="opphold">Opphold — pause eller svært lite trening</option>
-          <option value="mer_for">Jeg trente MER før enn jeg gjør nå</option>
+          <option value="jevn"<?= $sel('siste_90d', 'jevn', 'jevn') ?>>Jevn — trent omtrent som nå hele perioden</option>
+          <option value="ujevn"<?= $sel('siste_90d', 'ujevn', 'jevn') ?>>Ujevn — litt av og på</option>
+          <option value="opphold"<?= $sel('siste_90d', 'opphold', 'jevn') ?>>Opphold — pause eller svært lite trening</option>
+          <option value="mer_for"<?= $sel('siste_90d', 'mer_for', 'jevn') ?>>Jeg trente MER før enn jeg gjør nå</option>
         </select></label>
       <div class="vl-to">
         <label>Typisk ukevolum siste 3 måneder (km, valgfritt)
           <input type="number" name="km_uke_90d" min="0" max="250" step="0.5"
-                 placeholder="Omtrent som nå? La stå tomt"></label>
+                 placeholder="Omtrent som nå? La stå tomt" value="<?= $val('km_uke_90d') ?>"></label>
         <label>Lengste tur siste 3 måneder (km, valgfritt)
           <input type="number" name="lengste_90d" min="0" max="200" step="0.5"
-                 placeholder="f.eks. 18"></label>
+                 placeholder="f.eks. 18" value="<?= $val('lengste_90d') ?>"></label>
       </div>
       <div class="vl-to">
         <label>Mest du har løpt i én uke det siste året (km, valgfritt)
           <input type="number" name="toppuke_aar" min="0" max="300" step="0.5"
-                 placeholder="f.eks. 45"></label>
+                 placeholder="f.eks. 45" value="<?= $val('toppuke_aar') ?>"></label>
         <label>Er du vant til høydemeter og nedoverløping?
           <select name="fjellvane">
             <option value="">Velg …</option>
-            <option value="mye">Ja — fast del av treningen min</option>
-            <option value="litt">Litt — av og til</option>
-            <option value="nei">Nei — mest flatt</option>
+            <option value="mye"<?= $sel('fjellvane', 'mye', '') ?>>Ja — fast del av treningen min</option>
+            <option value="litt"<?= $sel('fjellvane', 'litt', '') ?>>Litt — av og til</option>
+            <option value="nei"<?= $sel('fjellvane', 'nei', '') ?>>Nei — mest flatt</option>
           </select></label>
       </div>
       <span class="vl-hint">Planen starter på volumet kroppen din er vant til — og bygges trygt derfra.
@@ -287,32 +306,32 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && $rad && trim($_POST["nettside"] ?? 
     <fieldset class="vl-kort" style="border:1.5px solid hsl(148 15% 84%)">
       <legend>4 · Løpet du sikter mot 🏁 <span class="vl-hint">(valgfritt — jo mer vi vet, jo bedre)</span></legend>
       <label>Løpets navn og dato
-        <input type="text" name="lop_navn" placeholder="F.eks. Lofoten High 5, juni 2027"></label>
+        <input type="text" name="lop_navn" placeholder="F.eks. Lofoten High 5, juni 2027" value="<?= $val('lop_navn') ?>"></label>
       <div class="vl-to">
         <label>Lengde (km)
-          <input type="number" name="lop_km" min="1" max="300" step="0.1"></label>
+          <input type="number" name="lop_km" min="1" max="300" step="0.1" value="<?= $val('lop_km') ?>"></label>
         <label>Type løp
           <select name="lop_type">
             <option value="">Velg …</option>
-            <option value="flatt">Flatt (vei/bane)</option>
-            <option value="motbakke">Motbakke (bare opp)</option>
-            <option value="opp_og_ned">Opp og ned</option>
-            <option value="fjell">Fjelløp / skyrace / ultra</option>
+            <option value="flatt"<?= $sel('lop_type', 'flatt', '') ?>>Flatt (vei/bane)</option>
+            <option value="motbakke"<?= $sel('lop_type', 'motbakke', '') ?>>Motbakke (bare opp)</option>
+            <option value="opp_og_ned"<?= $sel('lop_type', 'opp_og_ned', '') ?>>Opp og ned</option>
+            <option value="fjell"<?= $sel('lop_type', 'fjell', '') ?>>Fjelløp / skyrace / ultra</option>
           </select></label>
       </div>
       <div class="vl-to">
         <label>Høydemeter opp
-          <input type="number" name="lop_hm_opp" min="0" max="20000"></label>
+          <input type="number" name="lop_hm_opp" min="0" max="20000" value="<?= $val('lop_hm_opp') ?>"></label>
         <label>Høydemeter ned
-          <input type="number" name="lop_hm_ned" min="0" max="20000"></label>
+          <input type="number" name="lop_hm_ned" min="0" max="20000" value="<?= $val('lop_hm_ned') ?>"></label>
       </div>
       <label>Hvor viktig er dette løpet for deg?
         <select name="lop_prioritet">
           <option value="">Velg …</option>
-          <option value="A">A — hovedmålet mitt, her vil jeg prestere maksimalt</option>
-          <option value="B">B — viktig delmål på veien</option>
-          <option value="C">C — vil gjøre det bra, men ikke hovedmålet</option>
-          <option value="D">D — testløp / del av treningen</option>
+          <option value="A"<?= $sel('lop_prioritet', 'A', '') ?>>A — hovedmålet mitt, her vil jeg prestere maksimalt</option>
+          <option value="B"<?= $sel('lop_prioritet', 'B', '') ?>>B — viktig delmål på veien</option>
+          <option value="C"<?= $sel('lop_prioritet', 'C', '') ?>>C — vil gjøre det bra, men ikke hovedmålet</option>
+          <option value="D"<?= $sel('lop_prioritet', 'D', '') ?>>D — testløp / del av treningen</option>
         </select></label>
     </fieldset>
 

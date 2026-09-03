@@ -42,6 +42,51 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $feil = "Fyll inn navn og en gyldig e-postadresse.";
     } else {
         $vl_kode_ny = bin2hex(random_bytes(16));   // ventelistekoden lages her så trener-e-posten får lenken
+        // Serverside-dedup (24.08-vernet, gjenoppbygd 03.09 etter at det var
+        // borte fra fila): samme e-post med aktiv rad siste 30 dager GJENBRUKER
+        // raden og koden — ingen ny rad, ingen nye e-poster/SMS-utkast, bare et
+        // kort 🔁-varsel til treneren (Ørjan-caset: tre rader, tre lenker).
+        $cfg_sti = dirname(__DIR__) . "/dashbord_config.php";
+        $konfig = is_readable($cfg_sti) ? (include $cfg_sti) : null;
+        $pdo = null;
+        $eksisterende = null;
+        if (is_array($konfig)) {
+            try {
+                $pdo = new PDO(
+                    "mysql:host={$konfig['db_host']};dbname={$konfig['db_name']};charset=utf8mb4",
+                    $konfig['db_user'], $konfig['db_pass'],
+                    [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+                $st_d = $pdo->prepare("SELECT id, kode FROM venteliste WHERE LOWER(epost) = LOWER(?)
+                    AND status IN ('venter', 'minside', 'invitert')
+                    AND opprettet > NOW() - INTERVAL 30 DAY ORDER BY id DESC LIMIT 1");
+                $st_d->execute([$epost]);
+                $eksisterende = $st_d->fetch(PDO::FETCH_ASSOC) ?: null;
+                if ($eksisterende && empty($eksisterende["kode"])) {
+                    $pdo->prepare("UPDATE venteliste SET kode = ? WHERE id = ?")
+                        ->execute([$vl_kode_ny, $eksisterende["id"]]);
+                    $eksisterende["kode"] = $vl_kode_ny;
+                }
+            } catch (Throwable $e_d) { $eksisterende = null; }
+        }
+        if ($eksisterende) {
+            $vl_kode = $eksisterende["kode"];
+            if (defined("TRENI_BOT_TOKEN")) {
+                @file_get_contents(
+                    "https://api.telegram.org/bot" . TRENI_BOT_TOKEN . "/sendMessage",
+                    false, stream_context_create(["http" => [
+                        "method" => "POST",
+                        "header" => "Content-Type: application/x-www-form-urlencoded\r\n",
+                        "content" => http_build_query([
+                            "chat_id" => TRENI_TRENER_CHAT,
+                            "text" => "🔁 Gjentatt påmelding fra " . $navn . " (" . $epost . ") — "
+                                    . "bruker eksisterende rad id " . $eksisterende["id"]
+                                    . ", ingen nye e-poster sendt.\n"
+                                    . "Side: https://min.treni.no/venteliste.php?t=" . $vl_kode]),
+                        "timeout" => 8]]));
+            }
+            header("Location: /venteliste-start.php?k=" . $vl_kode . "&ny=1");
+            exit;
+        }
         $tekst = "Ny testløper-interesse fra treni.no\n\n"
                . ($maal_lop ? "🏁 KOM VIA LØPSKALENDEREN, vil trene mot: "
                   . $maal_lop["navn"] . ($maal_lop["dato"] ? " (" . $maal_lop["dato"] . ")" : "")
@@ -66,15 +111,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                              "=?UTF-8?B?" . base64_encode("Testløper-interesse: " . $navn) . "?=",
                              $tekst, $hode, "-fhei@treni.no");
         }
-        $cfg_sti = dirname(__DIR__) . "/dashbord_config.php";
-        $konfig = is_readable($cfg_sti) ? (include $cfg_sti) : null;
         // Ventelista (vises i trenerens dashbord) — beste forsøk, stopper aldri skjemaet
-        if (is_array($konfig)) {
+        if ($pdo !== null) {
             try {
-                $pdo = new PDO(
-                    "mysql:host={$konfig['db_host']};dbname={$konfig['db_name']};charset=utf8mb4",
-                    $konfig['db_user'], $konfig['db_pass'],
-                    [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
                 $pdo->exec("CREATE TABLE IF NOT EXISTS venteliste (
                     id INT AUTO_INCREMENT PRIMARY KEY,
                     opprettet TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -297,7 +336,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     påmeldingslenken til arrangøren får du på din side.</span>
   </div>
   <?php endif; ?>
-  <form method="post" action="bli-testloper.php" class="skjema">
+  <form method="post" action="bli-testloper.php" class="skjema"
+        onsubmit="var b=this.querySelector('button[type=submit]');if(b.disabled){return false;}b.disabled=true;b.textContent='Sender …';">
     <?php if ($maal_lop): ?>
     <input type="hidden" name="lop" value="<?= htmlspecialchars($maal_lop['navn']) ?>">
     <input type="hidden" name="dato" value="<?= htmlspecialchars($maal_lop['dato']) ?>">
@@ -328,8 +368,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <input type="text" name="sprak_annet" oninput="this.closest('fieldset').querySelector('input[value=annet]').checked = this.value.trim() !== ''" placeholder="skriv her" style="width:9rem"></label>
     </fieldset>
     <label>Hvem tipset deg om Treni? <span class="valgfritt">(valgfritt — en person, sosiale medier, klubben …)</span>
-      <input type="text" name="kilde" value="<?= htmlspecialchars(mb_substr(trim($_GET["kilde"] ?? ""), 0, 200)) ?>" placeholder="f.eks. en venn, Facebook, Tromsø Løpeklubb"
-             value="<?php echo htmlspecialchars($_POST["kilde"] ?? ""); ?>">
+      <input type="text" name="kilde" placeholder="f.eks. en venn, Facebook, Tromsø Løpeklubb"
+             value="<?= htmlspecialchars(mb_substr(trim($_POST["kilde"] ?? $_GET["kilde"] ?? ""), 0, 200)) ?>">
     </label>
     <label>Litt om løpingen din <span class="valgfritt">(valgfritt — f.eks. hvor mye du løper, og hva du vil oppnå)</span>
       <textarea name="om" rows="4"><?php echo htmlspecialchars($_POST["om"] ?? ""); ?></textarea>
