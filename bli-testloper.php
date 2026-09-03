@@ -17,7 +17,7 @@ if ($ml_navn !== "" && $ml_til !== "" && preg_match('#^https?://#i', $ml_til)) {
     $ml_cfg = dirname(__DIR__) . "/dashbord_config.php";
     $ml_konfig = is_readable($ml_cfg) ? (include $ml_cfg) : null;
     if (is_array($ml_konfig)
-        && hash_equals(substr(hash_hmac('sha256', $ml_til, (string) $ml_konfig['db_pass']), 0, 16), $ml_sig)) {
+        && hash_equals(substr(hash_hmac('sha256', $ml_til, (string) ($ml_konfig['videre_secret'] ?? $ml_konfig['db_pass'] ?? '')), 0, 16), $ml_sig)) {
         $maal_lop = ["navn" => $ml_navn, "dato" => $ml_dato, "pamelding" => $ml_til,
                      "pameldt" => false, "via" => "lopskalender"];
     }
