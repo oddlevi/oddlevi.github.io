@@ -4,113 +4,188 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Personvernerklæring — Treni</title>
-<meta name="description" content="Personvernerklæring for Treni (PAULSEN UTVIKLING) — hvilke data vi behandler, hvorfor, og dine rettigheter. Inkluderer AI-transparenserklæring.">
+<meta name="description" content="Personvernerklæring for Treni (PAULSEN UTVIKLING): hvilke opplysninger vi behandler, hvor de lagres, hvem som får dem, hvor lenge vi beholder dem og dine rettigheter. Inkluderer åpenhet om KI.">
 <meta property="og:image" content="https://treni.no/bilder/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:url" content="https://treni.no/">
+<meta property="og:url" content="https://treni.no/personvern.html">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏃</text></svg>">
 <link rel="stylesheet" href="stil.css?v=12">
+<style>
+  table.dbh { width: 100%; border-collapse: collapse; margin: .5rem 0 1rem; font-size: .93rem; }
+  table.dbh th, table.dbh td { text-align: left; vertical-align: top; padding: .4rem .5rem;
+                               border-bottom: 1px solid rgba(128,128,128,.3); }
+  .tabell-rull { overflow-x: auto; }
+</style>
 </head>
 <body>
 <div class="bakteppe" aria-hidden="true"></div>
-<nav class="sprakvalg" aria-label="Språk"><span aria-current="page">NO</span><a href="#en-t">EN</a></nav>
+<nav class="sprakvalg" aria-label="Språk"><span aria-current="page">NO</span><a href="en/privacy.html">EN</a></nav>
 <main>
 
 <header class="hero smal">
   <p class="kicker reveal"><a href="index.html" style="color:inherit">treni.no</a> · personvern</p>
   <h1 class="reveal" style="font-size:clamp(2rem,6vw,3rem)">Personvernerklæring</h1>
-  <p class="liten reveal" style="margin-top:1rem">Sist oppdatert 5. august 2026.</p>
+  <p class="liten reveal" style="margin-top:1rem">Sist oppdatert 4. september 2026. Erstatter erklæringen fra 5. august 2026.</p>
 </header>
 
 <section>
+
   <h3>Hvem er ansvarlig</h3>
-  <p>PAULSEN UTVIKLING (enkeltpersonforetak, org.nr 938 158 614, Norge) er
-  behandlingsansvarlig. Kontakt: <a href="mailto:hei@treni.no">hei@treni.no</a>.</p>
+  <p>PAULSEN UTVIKLING (enkeltpersonforetak, org.nr 938 158 614, Norge), ved Odd Levi
+  Paulsen, er behandlingsansvarlig for tjenesten Treni. Kontakt:
+  <a href="mailto:hei@treni.no">hei@treni.no</a>.</p>
 
   <h3>Hvilke opplysninger vi behandler</h3>
   <ul class="liste">
+    <li><b>Interesseskjemaet på nettsiden:</b> navn, e-post, mobilnummer og
+        Telegram-kontakt hvis du oppgir dem, språk, hvor du hørte om oss, og det du
+        skriver om løpingen din. Skjemaet varsler treneren og lagres i ventelista vår
+        hos Hostinger (se «Hvor lagres opplysningene»). Kun trener og driftsansvarlig ser
+        den. Brukes til å kontakte deg om plass. Får du ikke plass, anonymiseres
+        oppføringen etter 12 måneder. Ber du om det, slettes den med en gang.</li>
+    <li><b>Ventelisteskjemaet:</b> mål, alder, makspuls hvis du kjenner den, beste
+        tider, kilometer per uke, underlag, andre idretter, styrketrening og løp du sikter
+        mot. Brukes til å lage ventelistesiden og planforslaget ditt.</li>
+    <li><b>Det du selv oppgir i oppstartsintervjuet</b> i Telegram: mål,
+        planlagte løp, alder, terskelverdier, og eventuelle helseforhold og skader
+        du velger å dele, slik at rådene tar hensyn til dem.</li>
     <li><b>Treningsdata fra Strava</b> (via offisiell API, etter ditt uttrykkelige samtykke i
-        Strava-innloggingen): økter, distanse, tid, puls, runder/drag og øktbeskrivelser.</li>
-    <li><b>Det du selv oppgir i oppstartsintervjuet:</b> mål, planlagte løp, alder,
-        terskelverdier — og eventuelle helseforhold du velger å dele, slik at rådene tar
-        hensyn til dem.</li>
-    <li><b>Meldinger i Telegram-gruppa di</b> som gjelder treningen (f.eks. «ferie neste uke»,
-        «kjente foten») — de brukes til å gi deg riktigere råd.</li>
-    <li><b>Interesseskjemaet på nettsiden</b> (navn, e-post, eventuelt Telegram-kontakt og det
-        du skriver om løpingen din): varsler treneren og legges i en passordbeskyttet
-        venteliste som kun treneren ser. Brukes utelukkende til å kontakte deg om
-        testplass — slettes på forespørsel, én e-post er nok.</li>
+        Strava-innloggingen): økter, distanse, tid, puls, runder/drag, høydemeter,
+        utstyr (sko) og øktbeskrivelser.</li>
+    <li><b>Meldinger i Telegram-gruppa di</b> som gjelder treningen (for eksempel «ferie
+        neste uke», «kjente foten»). Hele samtalen i gruppa lagres, fordi treneren og
+        motoren bruker den til å forstå uka di.</li>
+    <li><b>Det du gjør på min side</b> (min.treni.no): hendelser du melder (skade,
+        sykdom, ferie), svar på planen, tilbakemeldinger og bilder du selv laster opp, for
+        eksempel av sko.</li>
+    <li><b>Tekniske opplysninger</b> når du bruker nettsidene: IP-adresse, nettleser
+        og tidspunkt, i vanlige serverlogger hos Hostinger og i Cloudflare sitt
+        nettverk foran sidene. Brukes bare til drift og sikkerhet, ikke til sporing eller
+        markedsføring. Vi bruker ikke analyseverktøy fra tredjeparter.</li>
   </ul>
+
+  <div class="kort" style="margin-top:1.5rem">
+    <h3 style="margin-top:0">Helseopplysninger</h3>
+    <p style="margin-bottom:0">Puls, skader, sykdom og annet du forteller om kroppen din
+    er helseopplysninger etter personvernforordningen artikkel 9. Vi behandler dem bare fordi du
+    gir et eget, uttrykkelig samtykke til det, ved oppstart eller på min side når vi ber om
+    det. Du velger selv hva du deler. Rådene
+    våre er treningsveiledning, ikke helsehjelp. Ved skade eller sykdom henviser vi alltid til
+    fagpersonell.</p>
+  </div>
 
   <h3>Hva opplysningene brukes til</h3>
   <p>Ett formål: å gi deg personlig treningsveiledning fra din navngitte trener, med
   skadeforebygging først. Analysen (belastning, volumutvikling, intensitetsfordeling) gjøres
   av en deterministisk regelmotor. Ingen data selges, deles med tredjeparter for markedsføring,
-  eller brukes til noe annet enn veiledningen din. Ingen andre løpere ser dine data.</p>
+  eller brukes til noe annet enn veiledningen din. Ingen andre løpere ser dine data.
+  Opplysningene brukes også til å svare deg når du skriver til oss, og til å drive og
+  sikre tjenesten.</p>
 
   <div class="kort" style="margin-top:1.5rem">
     <h3 style="margin-top:0">Åpenhet om KI (AI-transparenserklæring)</h3>
-    <p style="margin-bottom:0">Selve analysen er regelstyrt — ikke KI. Vi bruker en språkmodell
-    (Anthropic sitt API) kun til å <b>formulere</b> regelmotorens funn som lesbar tekst. Dataene
+    <p style="margin-bottom:0">Selve analysen er regelstyrt, ikke KI. Vi bruker en språkmodell
+    (Anthropic sitt API) til å <b>formulere</b> regelmotorens funn som lesbar tekst,
+    til å lage utkast til treningsplaner som treneren godkjenner, og til å tolke
+    treningsmeldinger du sender i chatten eller på min side. Det som sendes til
+    Anthropic er treningstallene dine, målene dine, helsenotatet ditt (det du selv har delt om
+    skader og helse), planen din og treningsrelaterte meldinger. Fornavnet ditt kan følge med i
+    teksten. Vi sender ikke e-post, telefonnummer eller Strava-tilgangen din. Dataene
     behandles flyktig under genereringen, lagres ikke hos leverandøren og brukes ikke til å trene
     KI-modeller (avtalefestet i leverandørens kommersielle vilkår). Du samtykker til dette før
-    oppstart, og samtykket kan når som helst trekkes tilbake — da stopper all behandling.</p>
+    oppstart, og samtykket kan når som helst trekkes tilbake. Da stopper all behandling.</p>
   </div>
 
-  <h3>Behandlingsgrunnlag, lagring og dine rettigheter</h3>
+  <h3>Hvor lagres opplysningene</h3>
+    <ul class="liste">
+    <li><b>Hostinger (EU):</b> nettsidene, ventelista, min side, chatloggen,
+        treningsplanene, trenerdashbordet og en kopi av treningsdataene dine ligger i en
+        database hos Hostinger. Trenerdashbordet er passordbeskyttet.</li>
+    <li><b>Driftsansvarliges maskin i Norge:</b> hoveddatabasen med all treningshistorikk,
+        analyser og meldinger. Boten og motoren kjører herfra.</li>
+    <li><b>Apple iCloud:</b> daglig sikkerhetskopi av hoveddatabasen, samtykkedokumenter
+        og løperdokumenter. Kopiene ligger i Apples sky under Apples avtalevilkår.</li>
+    <li><b>GitHub:</b> kun programkode i private kodelagre. Persondata skal ikke ligge
+        der. Vi kontrollerer dette automatisk.</li>
+  </ul>
+
+  <h3>Databehandlere og andre mottakere</h3>
+  <p>Disse selskapene behandler opplysninger på vegne av oss (databehandlere) eller er
+  selvstendig ansvarlige for sin egen tjeneste. Vi inngår databehandleravtale der loven krever
+  det.</p>
+  <div class="tabell-rull">
+  <table class="dbh">
+    <tr><th>Hvem</th><th>Hva</th><th>Hvor</th></tr>
+    <tr><td>Hostinger</td><td>Nettsider, database, e-postserver, trenerdashbord</td><td>EU/EØS</td></tr>
+    <tr><td>Apple (iCloud)</td><td>Sikkerhetskopi av databasen og dokumenter</td><td>EU og USA. Apple bruker standardkontrakter (SCC) for overføring.</td></tr>
+    <tr><td>Cloudflare</td><td>Nettverk og beskyttelse foran nettsidene. Ser trafikken, inkludert IP-adressen din.</td><td>Verdensomspennende nettverk, EU-U.S. Data Privacy Framework.</td></tr>
+    <tr><td>Telegram</td><td>Meldingsplattformen for gruppa di og boten. Telegram er selv ansvarlig for sin tjeneste og sine vilkår. Alt du skriver der ligger også hos Telegram.</td><td>Servere utenfor EU (Dubai m.fl.).</td></tr>
+    <tr><td>Anthropic</td><td>KI-formulering av rådtekst og planutkast. Flyktig behandling, ingen lagring, ingen modelltrening.</td><td>USA. EU-U.S. Data Privacy Framework / standardkontrakter.</td></tr>
+    <tr><td>Google (Gmail)</td><td>Sender e-post fra hei@treni.no. Svarer du på e-post, ligger den hos Google.</td><td>EU/USA, Data Privacy Framework.</td></tr>
+    <tr><td>Strava</td><td>Kilden til treningsdataene. Strava er selv ansvarlig for sin tjeneste. Vi følger Stravas API-vilkår.</td><td>USA</td></tr>
+    <tr><td>Meta (Instagram, Facebook)</td><td>Vi publiserer egne innlegg om Treni. Løperdata sendes aldri til Meta, og vi bruker ikke Meta-piksler på sidene.</td><td>Ikke relevant for dine opplysninger.</td></tr>
+  </table>
+  </div>
+
+  <h3>Strava og frakobling</h3>
+  <p>Du kan når som helst koble Treni fra Strava på
+  <a href="https://www.strava.com/settings/apps">strava.com/settings/apps</a>. Da stopper
+  hentingen med en gang, tilgangsnøkkelen slettes, og treningsdata vi har hentet fra Strava
+  slettes innen 48 timer, slik Stravas vilkår krever. Det du selv har skrevet til oss, og
+  planene dine, beholdes etter reglene under, med mindre du ber om sletting.</p>
+
+  <h3>Hvor lenge vi beholder opplysningene</h3>
+  <ul class="liste">
+    <li><b>Aktiv løper:</b> så lenge du bruker tjenesten.</li>
+    <li><b>Etter at du slutter:</b> vi beholder opplysningene i 24 måneder, slik at du kan
+        komme tilbake og fortsette der du slapp. Deretter anonymiseres de: navn, e-post,
+        telefonnummer, Telegram-ID og fritekst fjernes. Anonyme treningstall kan beholdes for
+        å forbedre metodikken.</li>
+    <li><b>Venteliste uten plass:</b> anonymiseres etter 12 måneder. Navn, e-post,
+        telefonnummer, Telegram-kontakt og fritekst fjernes.</li>
+    <li><b>Samtykkedokumentasjon:</b> beholdes så lenge vi må kunne vise at samtykke ble
+        gitt.</li>
+    <li><b>Ber du om sletting</b>, går det foran alle fristene over.</li>
+  </ul>
+
+  <h3>Behandlingsgrunnlag og dine rettigheter</h3>
   <ul class="liste">
     <li><b>Grunnlag:</b> ditt samtykke (GDPR art. 6(1)(a); for helseopplysninger du selv
-        deler: art. 9(2)(a)). Samtykket kan trekkes når som helst.</li>
-    <li><b>Lagring:</b> dataene lagres lokalt hos trenerteamet i Norge, med daglig
-        sikkerhetskopiering. De beholdes så lenge du bruker tjenesten.</li>
-    <li><b>Trenerdashbord:</b> et avledet driftssammendrag (ukesvolum, belastningsstatus
-        og varseltekster) vises i et passordbeskyttet trenerdashbord hos vår
-        driftsleverandør (Hostinger, databehandler med databehandleravtale og servere
-        i EU/EØS). Fullstendige treningsdata og øktdetaljer forlater aldri
-        trenerteamets egen maskin.</li>
-    <li><b>Underdatabehandlere og hvor behandlingen skjer:</b> Anthropic (USA —
-        KI-formulering av rådtekst; flyktig behandling, ingen lagring, ingen
-        modelltrening; overføringsgrunnlag: EU-U.S. Data Privacy Framework /
-        standardkontrakter), Hostinger (EU/EØS — nettside og trenerdashbord,
-        databehandleravtale) og Google Workspace (e-post til hei@treni.no).
-        Selve treningsdataene lagres lokalt hos trenerteamet i Norge.</li>
+        deler: uttrykkelig samtykke etter art. 9(2)(a)). Samtykket kan trekkes når
+        som helst. Drift og sikring av nettsidene bygger på vår berettigede interesse
+        (art. 6(1)(f)).</li>
+    <li><b>Lagring og databehandlere:</b> se tabellen over.</li>
+    <li><b>Hvem ser dataene dine:</b> din navngitte trener og driftsansvarlig Odd Levi
+        Paulsen. Får du ny trener, får du beskjed. Alle trenere har taushetsplikt.</li>
     <li><b>Rettigheter:</b> du kan kreve innsyn, retting, sletting, begrensning og
-        dataportabilitet — én e-post er nok. Du kan også klage til Datatilsynet
+        dataportabilitet, og du kan trekke samtykket ditt. Én e-post til
+        <a href="mailto:hei@treni.no">hei@treni.no</a> er nok. Vi svarer innen 30
+        dager. Du kan også klage til Datatilsynet
         (<a href="https://www.datatilsynet.no">datatilsynet.no</a>).</li>
+    <li><b>Sikkerhet:</b> tilgang til dataene er beskyttet med passord og personlige
+        lenker, nøkler oppbevares kryptert, og vi kontrollerer daglig at ingen persondata havner
+        i kodelagrene. Skjer det likevel et brudd som kan ramme deg, varsler vi deg og
+        Datatilsynet innen 72 timer.</li>
+    <li><b>Endringer:</b> endrer vi denne erklæringen på en måte som betyr noe for deg,
+        for eksempel en ny databehandler, får du beskjed i Telegram-gruppa di før endringen
+        gjelder.</li>
   </ul>
 </section>
 
 <section class="en-blokk" aria-labelledby="en-t">
-  <h2 id="en-t" style="font-size:1.35rem">English summary</h2>
-  <p><b>What this is:</b> Treni (treni.no) is a coach-led running-guidance
-  service run by PAULSEN UTVIKLING (Norwegian sole proprietorship, org. no. 938 158 614).
-  Your Strava activities are fetched with your explicit OAuth consent, analysed by a
-  deterministic rule engine focused on injury prevention, and your named coach delivers
-  weekly guidance via Telegram.</p>
-  <p><b>Sub-processors &amp; transfers:</b> Anthropic (USA — transient AI phrasing
-  of the advice text, no storage, no model training; transfer basis: EU-U.S. Data
-  Privacy Framework / SCCs), Hostinger (EU — website and coach dashboard, DPA) and
-  Google Workspace (email). Training data itself is stored locally with the coach
-  team in Norway.</p>
-  <p><b>Privacy &amp; AI transparency:</b> we process your training data, your interview
-  answers and training-related chat messages solely to provide your coaching. Analysis is
-  rule-based; a large-language-model API (Anthropic) is used only to phrase the engine's
-  findings as readable text — processed transiently, never stored by the provider, never
-  used for model training. Legal basis is your consent, withdrawable at any time. Data is
-  stored locally with the coach team in Norway, never sold or shared; a derived weekly
-  summary (volume, load status, alert texts) is shown in a password-protected coach
-  dashboard hosted by our EU-based hosting provider under a data-processing agreement.
-  You may request
-  access, rectification, deletion or portability by email — or disconnect at
-  <a href="https://www.strava.com/settings/apps">strava.com/settings/apps</a>.</p>
+  <h2 id="en-t" style="font-size:1.35rem">English</h2>
+  <p>This policy is also available in English:
+  <a href="en/privacy.html">treni.no/en/privacy.html</a>. In case of doubt, the Norwegian
+  version applies.</p>
 </section>
 
 <footer>
   <nav aria-label="Bunnmeny">
     <a href="index.html">Hjem</a>
     <a href="stotte.html">Støtte og kontakt</a>
+    <a href="en/privacy.html">English</a>
   </nav>
   <p>PAULSEN UTVIKLING · org.nr 938 158 614 · Norge ·
      <a href="mailto:hei@treni.no">hei@treni.no</a></p>
