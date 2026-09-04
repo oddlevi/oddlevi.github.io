@@ -367,7 +367,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && $rad && !$vs_rate && trim($_POST["n
         <span><b>Ja, Treni kan behandle helseopplysninger om meg.</b> Det gjelder puls fra
           Strava og det jeg selv forteller om skader, sykdom og kroppen min. Opplysningene
           brukes bare til treningsveiledningen min, sees bare av treneren min og
-          driftsansvarlig, og sendes som utdrag til Anthropic for å lage rådtekst. Jeg kan
+          Eirik Haugsnes og Odd Levi Paulsen, og sendes som utdrag til Anthropic for å lage rådtekst. Jeg kan
           trekke samtykket når som helst ved å skrive til
           <a href="mailto:hei@treni.no">hei@treni.no</a> eller i gruppa mi.
           <span class="vl-hint" style="display:block; margin-top:.4rem">Puls, skader og sykdom
