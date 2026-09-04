@@ -39,7 +39,8 @@ if (is_array($konfig) && $kode !== "") {
 require_once __DIR__ . "/spamvern.php";
 $vs_rate = false;
 if ($_SERVER["REQUEST_METHOD"] === "POST" && $rad) {
-    treni_begrens_post(["maal" => 600, "rekorder" => 600, "alternativ" => 400, "styrke" => 400], 200);
+    treni_begrens_post(["maal" => 600, "rekorder" => 600, "alternativ" => 400,
+                        "styrke" => 400, "alternativ_hva" => 200], 200);
     foreach ($_POST as $vs_k => $vs_v) {
         $_POST[$vs_k] = treni_ren($vs_v, 2000, in_array($vs_k, ["maal", "rekorder", "alternativ", "styrke"], true));
     }
@@ -75,6 +76,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && $rad && !$vs_rate && trim($_POST["n
                          ? $_POST["volum_onske"] : "stabil",
         "alternativ" => mb_substr(trim($_POST["alternativ"] ?? ""), 0, 400),
         "styrke"     => mb_substr(trim($_POST["styrke"] ?? ""), 0, 400),
+        // «Økter per uke» var tvetydig (Odd 04.09, Trond-caset): han svarte 2
+        // og mente to LØPEøkter — styrke og fotball kom i tillegg, men planen
+        // leste 2 som alt han gjør. Fra nå telles de tre hver for seg, og
+        // annen trening må si HVA det er: fotball belaster helt annerledes
+        // enn svømming. Fritekstfeltene over beholdes, de gir mer enn tallet.
+        "n_okter" => trim($_POST["n_okter"] ?? "") === "" ? null
+            : max(1, min(14, (int) $_POST["n_okter"])),
+        "n_styrke" => trim($_POST["n_styrke"] ?? "") === "" ? null
+            : max(0, min(7, (int) $_POST["n_styrke"])),
+        "n_alternativ" => trim($_POST["n_alternativ"] ?? "") === "" ? null
+            : max(0, min(14, (int) $_POST["n_alternativ"])),
+        "alternativ_hva" => mb_substr(trim($_POST["alternativ_hva"] ?? ""), 0, 120),
         // 90-dagersbildet (Eiriks regelverk §2–5, Odds go 23.08): historikk og
         // kontekst — grunnlaget for nivåklassifisering og korridor i planene.
         "siste_90d" => in_array($_POST["siste_90d"] ?? "", ["jevn", "ujevn", "opphold", "mer_for"], true)
@@ -115,6 +128,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && $rad && !$vs_rate && trim($_POST["n
                 . 'Du svarte: Mål: ' . $svar['maal']
                 . ' · Alder: ' . $svar['alder']
                 . ' · ' . $svar['km_uke'] . ' km/uke'
+                . ($svar['n_okter'] !== null ? ' · ' . $svar['n_okter'] . ' løpeøkter/uke' : '')
+                . ($svar['n_styrke'] !== null ? ' · ' . $svar['n_styrke'] . ' styrkeøkter/uke' : '')
+                . ($svar['n_alternativ'] !== null ? ' · ' . $svar['n_alternativ'] . ' økter annen trening/uke'
+                    . ($svar['alternativ_hva'] !== '' ? ' (' . $svar['alternativ_hva'] . ')' : '') : '')
                 . ' · underlag: ' . $svar['underlag']
                 . ' · puls: ' . ($svar['puls'] ?? 'ukjent')
                 . ($svar['beste_tid'] !== '' ? ' · beste tid: ' . $svar['beste_tid'] : '')
@@ -144,6 +161,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && $rad && !$vs_rate && trim($_POST["n
                                 . "Alder: " . $svar["alder"]
                                 . " · km/uke: " . $svar["km_uke"]
                                 . " · underlag: " . $svar["underlag"] . "\n"
+                                . "Økter: " . ($svar["n_okter"] !== null ? $svar["n_okter"] . " løp" : "løp ikke oppgitt")
+                                . " · " . ($svar["n_styrke"] !== null ? $svar["n_styrke"] . " styrke" : "styrke ikke oppgitt")
+                                . " · " . ($svar["n_alternativ"] !== null ? $svar["n_alternativ"] . " annen trening" : "annen trening ikke oppgitt")
+                                . ($svar["alternativ_hva"] !== "" ? " (" . $svar["alternativ_hva"] . ")" : "") . "\n"
                                 . "Puls: " . ($svar["puls"] ?? "ukjent")
                                 . " · beste tid: " . ($svar["beste_tid"] ?: "ingen") . "\n"
                                 . ($svar["lop_navn"] !== "" ? "Målløp: " . $svar["lop_navn"]
@@ -204,6 +225,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && $rad && !$vs_rate && trim($_POST["n
     outline:2px solid hsl(152 62% 30%);outline-offset:1px}
   .vl-hint{font-weight:400;font-size:.8rem;color:hsl(158 10% 40%)}
   .vl-to{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+  /* Uten denne strekkes radene i en to-kolonners boks slik at feltet i den
+     kolonnen som mangler hjelpetekst havner lavere enn nabofeltet (04.09). */
+  .vl-to > label{align-content:start}
   @media (max-width:480px){.vl-to{grid-template-columns:1fr}}
 </style>
 </head>
@@ -292,10 +316,32 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && $rad && !$vs_rate && trim($_POST["n
           <option value="oke"<?= $sel('volum_onske', 'oke', 'stabil') ?>>Jeg ønsker å øke løpemengden gradvis</option>
           <option value="usikker"<?= $sel('volum_onske', 'usikker', 'stabil') ?>>Usikker — ta det opp med treneren</option>
         </select></label>
-      <label>Driver du med annen trening? Hva og hvor mye? (valgfritt)
-        <textarea name="alternativ" rows="2" placeholder="F.eks.: sykkel 1×/uke, ski om vinteren, fotball …"><?= $val('alternativ') ?></textarea></label>
-      <label>Trener du styrke? Hva og hvor ofte? (valgfritt)
-        <textarea name="styrke" rows="2" placeholder="F.eks.: 2×/uke — knebøy, utfall, legghev …"><?= $val('styrke') ?></textarea></label>
+      <div class="vl-to">
+        <label>Løpeøkter per uke
+          <input type="number" name="n_okter" min="1" max="14" step="1"
+                 placeholder="f.eks. 3" value="<?= $val('n_okter') ?>">
+          <span class="vl-hint">Bare løpingen. Styrke og annen trening føres i
+          feltene ved siden av, så de kommer i tillegg og ikke i stedet for.</span></label>
+        <label>Styrkeøkter per uke
+          <input type="number" name="n_styrke" min="0" max="7" step="1"
+                 placeholder="0 om du ikke trener styrke" value="<?= $val('n_styrke') ?>">
+          <span class="vl-hint">Kommer i tillegg til løpeøktene, ikke i stedet for.</span></label>
+      </div>
+      <div class="vl-to">
+        <label>Annen trening, antall økter per uke
+          <input type="number" name="n_alternativ" min="0" max="14" step="1"
+                 placeholder="0 om du ikke har noe" value="<?= $val('n_alternativ') ?>">
+          <span class="vl-hint">Alt annet enn løping og styrke.</span></label>
+        <label>Hva er den andre treningen?
+          <input type="text" name="alternativ_hva" maxlength="120"
+                 placeholder="F.eks. fotballtrening, sykkel, svømming" value="<?= $val('alternativ_hva') ?>">
+          <span class="vl-hint">Vi trenger å vite hva det er: fotball belaster
+          kroppen helt annerledes enn svømming.</span></label>
+      </div>
+      <label>Vil du utdype den andre treningen? (valgfritt)
+        <textarea name="alternativ" rows="2" placeholder="F.eks.: sykkel 1×/uke, ski om vinteren, fotball på mandager …"><?= $val('alternativ') ?></textarea></label>
+      <label>Vil du utdype styrketreningen? Hva gjør du? (valgfritt)
+        <textarea name="styrke" rows="2" placeholder="F.eks.: knebøy, utfall, legghev — mest overkropp …"><?= $val('styrke') ?></textarea></label>
       <label>Hvordan har treningen din vært de siste 3 månedene?
         <select name="siste_90d">
           <option value="jevn"<?= $sel('siste_90d', 'jevn', 'jevn') ?>>Jevn — trent omtrent som nå hele perioden</option>
