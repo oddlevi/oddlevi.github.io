@@ -64,7 +64,9 @@ $via9 = function (string $url, array $l) use ($konfig): string {
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://treni.no/lop.php">
 <link rel="canonical" href="https://treni.no/lop.php">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏁</text></svg>">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" type="image/png" href="/icon-192.png" sizes="192x192">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="stylesheet" href="stil.css?v=19">
 <script type="application/ld+json">
 <?= json_encode(['@context' => 'https://schema.org', '@graph' => array_map(fn($l) => [

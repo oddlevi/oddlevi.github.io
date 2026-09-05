@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1640 624" width="1640" height="624">
+  <defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#135335"/><stop offset="1" stop-color="#0C3220"/></linearGradient></defs>
+  <rect width="1640" height="624" fill="url(#g)"/>
+  <text x="820" y="300" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="200" font-weight="800"
+        letter-spacing="-9" fill="#fff" text-anchor="middle">Trenı</text>
+  <circle cx="1012" cy="162" r="25" fill="#96D25A"/>
+  <path d="M 620 400 C 700 400 736 374 800 374 C 872 374 908 348 1020 348"
+        fill="none" stroke="#96D25A" stroke-width="18" stroke-linecap="round"/>
+  <text x="820" y="470" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="46" font-weight="500"
+        letter-spacing="8" fill="#96D25A" text-anchor="middle">TRENERLEDET LØPING</text>
+</svg>

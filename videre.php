@@ -30,6 +30,9 @@ $dato_pen = $dato ? ((int) substr($dato, 8, 2)) . '. ' . $MND9[(int) substr($dat
 <html lang="no">
 <head>
 <meta charset="utf-8">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" type="image/png" href="/icon-192.png" sizes="192x192">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <title><?= $lop ? e9($lop) . ' — ' : '' ?>tren riktig mot løpet | Treni</title>

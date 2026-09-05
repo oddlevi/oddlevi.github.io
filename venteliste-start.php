@@ -98,6 +98,29 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && $rad && !$vs_rate && trim($_POST["n
             : (float) str_replace(",", ".", $_POST["lengste_90d"]),
         "toppuke_aar" => trim($_POST["toppuke_aar"] ?? "") === "" ? null
             : (float) str_replace(",", ".", $_POST["toppuke_aar"]),
+        // TIMER per uke (Eirik 04.09 20:25): «Det må også ved onboarding
+        // spørres om timer trening per uke når det kommer til de som skal
+        // følge fjellmetodikk. Andre ligger f.eks. mellom 12-18 timer per
+        // uke.» Fjellmodellens volumklasse V1–V4 og fjellnivå 1–5 leser TIMER,
+        // ikke km — og uten klokke leses hele gruppa som V0, «bygg timer før
+        // noe annet», uansett hvor mye de trener. To felt fordi de svarer på
+        // hver sin regel: totaltimer setter volumklassen (§11, all
+        // utholdenhet), løpte timer setter nivået (S-29, kun løping).
+        // Timer spørres nå i TRE deler (Eirik 04.09 23:31: «Styrke som eget
+        // felt. Løping + alternativ (aerob trening) + styrke»). Styrken skilles
+        // ut fordi utholdenhetstotalen — den som setter volumklassen — måler
+        // aerob trening, og den loggede siden av det tallet har aldri talt
+        // styrkeøkter med. Sto styrken i totalen for dem som oppgir tallene
+        // selv, ble løpere med og uten klokke målt med hver sin målestokk.
+        // timer_uke beholdes for dem som svarte før endringen.
+        "timer_uke" => trim($_POST["timer_uke"] ?? "") === "" ? null
+            : (float) str_replace(",", ".", $_POST["timer_uke"]),
+        "timer_alt_uke" => trim($_POST["timer_alt_uke"] ?? "") === "" ? null
+            : (float) str_replace(",", ".", $_POST["timer_alt_uke"]),
+        "timer_lop_uke" => trim($_POST["timer_lop_uke"] ?? "") === "" ? null
+            : (float) str_replace(",", ".", $_POST["timer_lop_uke"]),
+        "timer_styrke_uke" => trim($_POST["timer_styrke_uke"] ?? "") === "" ? null
+            : (float) str_replace(",", ".", $_POST["timer_styrke_uke"]),
         "fjellvane" => in_array($_POST["fjellvane"] ?? "", ["mye", "litt", "nei"], true)
                        ? $_POST["fjellvane"] : null,
         "lop_prioritet" => in_array($_POST["lop_prioritet"] ?? "", ["A", "B", "C", "D"], true)
@@ -174,6 +197,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && $rad && !$vs_rate && trim($_POST["n
                                 . "Siste 90 d: " . $svar["siste_90d"]
                                 . ($svar["km_uke_90d"] !== null ? " · " . $svar["km_uke_90d"] . " km/u" : "")
                                 . ($svar["lengste_90d"] !== null ? " · lengste " . $svar["lengste_90d"] . " km" : "")
+                                . ($svar["timer_lop_uke"] !== null ? " · " . $svar["timer_lop_uke"] . " t løping/uke" : "")
+                                . ($svar["timer_alt_uke"] !== null ? " + " . $svar["timer_alt_uke"] . " t alternativ (aerob)" : "")
+                                . ($svar["timer_styrke_uke"] !== null ? " + " . $svar["timer_styrke_uke"] . " t styrke" : "")
+                                . ($svar["timer_uke"] !== null ? " (oppgitt totalt: " . $svar["timer_uke"] . " t)" : "")
                                 . ($svar["toppuke_aar"] !== null ? " · toppuke " . $svar["toppuke_aar"] . " km" : "")
                                 . ($svar["fjellvane"] !== null ? " · fjellvane: " . $svar["fjellvane"] : "")
                                 . ($svar["lop_prioritet"] !== null ? " · løp-prioritet: " . $svar["lop_prioritet"] : "") . "\n\n"
@@ -211,7 +238,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && $rad && !$vs_rate && trim($_POST["n
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://treni.no/venteliste-start.php">
 <meta property="og:image" content="https://treni.no/bilder/og.jpg">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏃</text></svg>">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" type="image/png" href="/icon-192.png" sizes="192x192">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="stylesheet" href="stil.css?v=18">
 <style>
   .vl-kort{background:#fff;border:1.5px solid hsl(148 15% 84%);border-radius:14px;
@@ -356,6 +385,30 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && $rad && !$vs_rate && trim($_POST["n
         <label>Lengste tur siste 3 måneder (km, valgfritt)
           <input type="number" name="lengste_90d" min="0" max="200" step="0.5"
                  placeholder="f.eks. 18" value="<?= $val('lengste_90d') ?>"></label>
+      </div>
+      <div class="vl-to">
+        <label>Timer LØPING per uke i en vanlig uke (valgfritt)
+          <input type="number" name="timer_lop_uke" min="0" max="30" step="0.5"
+                 placeholder="f.eks. 5" value="<?= $val('timer_lop_uke') ?>">
+          <span class="vl-hint">Bare løpingen. Det er løpetimene som avgjør hvor
+          mye kroppen tåler av harde økter. Løper du i fjellet, sier timene mer
+          om belastningen enn kilometerne gjør: en bratt time er ikke det samme
+          som en flat time.</span></label>
+        <label>Timer alternativ trening per uke (valgfritt)
+          <input type="number" name="timer_alt_uke" min="0" max="30" step="0.5"
+                 placeholder="f.eks. 4" value="<?= $val('timer_alt_uke') ?>">
+          <span class="vl-hint">Annen kondisjonstrening — ski, sykkel, svømming,
+          gåturer i fjellet, roing. Alt som gir pust og puls uten å være løping.
+          Styrke skal IKKE med her, den har sitt eget felt under.</span></label>
+      </div>
+      <div class="vl-to">
+        <label>Timer styrke per uke (valgfritt)
+          <input type="number" name="timer_styrke_uke" min="0" max="20" step="0.5"
+                 placeholder="f.eks. 2" value="<?= $val('timer_styrke_uke') ?>">
+          <span class="vl-hint">Styrkeøktene dine, målt i timer. De telles for
+          seg — styrke bygger kroppen din, men belaster den på en annen måte enn
+          løping og kondisjon, og skal derfor ikke blandes inn i
+          utholdenhetstimene.</span></label>
       </div>
       <div class="vl-to">
         <label>Mest du har løpt i én uke det siste året (km, valgfritt)

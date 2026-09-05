@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#135335"/><stop offset="1" stop-color="#0B2D1D"/>
+    </linearGradient>
+    <clipPath id="c"><rect width="1024" height="1024" rx="224" ry="224"/></clipPath>
+
+  </defs>
+  <g clip-path="url(#c)"><rect width="1024" height="1024" fill="url(#g)"/>
+    <path d="M 212 780 C 312 560, 712 560, 812 780" fill="none" stroke="#96D25A" stroke-width="26" opacity="0.95" stroke-linecap="round"/>
+    <path d="M 258 780 C 342 508, 682 508, 766 780" fill="none" stroke="#96D25A" stroke-width="24" opacity="0.82" stroke-linecap="round"/>
+    <path d="M 304 780 C 372 456, 652 456, 720 780" fill="none" stroke="#96D25A" stroke-width="22" opacity="0.69" stroke-linecap="round"/>
+    <path d="M 350 780 C 402 404, 622 404, 674 780" fill="none" stroke="#96D25A" stroke-width="20" opacity="0.5599999999999999" stroke-linecap="round"/>
+    <path d="M 396 780 C 432 352, 592 352, 628 780" fill="none" stroke="#96D25A" stroke-width="18" opacity="0.42999999999999994" stroke-linecap="round"/>
+    <rect x="332" y="210" width="360" height="88" fill="#fff"/>
+    <rect x="468" y="210" width="88" height="380" fill="#fff"/>
+  </g></svg>
