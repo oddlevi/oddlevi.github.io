@@ -243,16 +243,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && $rad && !$vs_rate && trim($_POST["n
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="stylesheet" href="stil.css?v=18">
 <style>
-  .vl-kort{background:#fff;border:1.5px solid hsl(148 15% 84%);border-radius:14px;
+  /* Kortene følger temaet (Odd 06.09: i mørk modus sto hvite kort med
+     lys tekst — overskrifter og ledetekster var usynlige). */
+  .vl-kort{background:hsl(var(--surface));color:hsl(var(--fg));
+    border:1.5px solid hsl(var(--border));border-radius:14px;
     padding:1.1rem 1.3rem;display:grid;gap:.9rem}
-  .vl-kort legend, .vl-tittel{font-weight:700;font-size:1rem;padding:0 .3rem}
-  .vl-kort label{display:grid;gap:.3rem;font-weight:600;font-size:.93rem;margin:0}
-  .vl-kort input,.vl-kort textarea,.vl-kort select{width:100%;font:inherit;
-    border:1.5px solid hsl(148 15% 80%);border-radius:10px;padding:.55rem .75rem;
-    background:hsl(44 45% 99%)}
+  .vl-kort legend, .vl-tittel{font-weight:700;font-size:1rem;padding:0 .3rem;color:hsl(var(--fg))}
+  .vl-kort label{display:grid;gap:.3rem;font-weight:600;font-size:.93rem;margin:0;color:hsl(var(--fg))}
+  .vl-kort input,.vl-kort textarea,.vl-kort select{width:100%;font:inherit;color:hsl(var(--fg));
+    border:1.5px solid hsl(var(--border));border-radius:10px;padding:.55rem .75rem;
+    background:hsl(var(--surface-2))}
+  .vl-kort input::placeholder,.vl-kort textarea::placeholder{color:hsl(var(--muted-fg))}
   .vl-kort input:focus,.vl-kort textarea:focus,.vl-kort select:focus{
-    outline:2px solid hsl(152 62% 30%);outline-offset:1px}
-  .vl-hint{font-weight:400;font-size:.8rem;color:hsl(158 10% 40%)}
+    outline:2px solid hsl(var(--primary));outline-offset:1px}
+  .vl-hint{font-weight:400;font-size:.8rem;color:hsl(var(--muted-fg))}
   .vl-to{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
   /* Uten denne strekkes radene i en to-kolonners boks slik at feltet i den
      kolonnen som mangler hjelpetekst havner lavere enn nabofeltet (04.09). */
@@ -302,7 +306,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && $rad && !$vs_rate && trim($_POST["n
     <input type="hidden" name="k" value="<?= htmlspecialchars($kode) ?>">
     <input type="text" name="nettside" value="" style="display:none" tabindex="-1" autocomplete="off">
 
-    <fieldset class="vl-kort" style="border:1.5px solid hsl(148 15% 84%)">
+    <fieldset class="vl-kort">
       <legend>1 · Om deg og målet ditt 🎯</legend>
       <label>Hva er målet ditt med løpinga?
         <textarea name="maal" rows="3" required
@@ -311,7 +315,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && $rad && !$vs_rate && trim($_POST["n
         <input type="number" name="alder" min="10" max="99" required value="<?= $val('alder') ?>"></label>
     </fieldset>
 
-    <fieldset class="vl-kort" style="border:1.5px solid hsl(148 15% 84%)">
+    <fieldset class="vl-kort">
       <legend>2 · Puls og tider 🫀</legend>
       <label>Høyeste puls du har målt i konkurranse eller hard økt siste halvår
         <input type="number" name="puls" min="120" max="230" placeholder="La stå tomt om du er usikker" value="<?= $val('puls') ?>">
@@ -322,7 +326,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && $rad && !$vs_rate && trim($_POST["n
         <textarea name="rekorder" rows="2" placeholder="F.eks.: 5 km 21:30 · 10 km 45:10 · Storheia Opp 58:20"><?= $val('rekorder') ?></textarea></label>
     </fieldset>
 
-    <fieldset class="vl-kort" style="border:1.5px solid hsl(148 15% 84%)">
+    <fieldset class="vl-kort">
       <legend>3 · Treningsuka di 👟</legend>
       <div class="vl-to">
         <label>Kilometer i en vanlig uke
@@ -426,7 +430,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && $rad && !$vs_rate && trim($_POST["n
       De siste 3 månedene forteller oss hva kroppen din faktisk tåler nå — derfor spør vi.</span>
     </fieldset>
 
-    <fieldset class="vl-kort" style="border:1.5px solid hsl(148 15% 84%)">
+    <fieldset class="vl-kort">
       <legend>4 · Løpet du sikter mot 🏁 <span class="vl-hint">(valgfritt — jo mer vi vet, jo bedre)</span></legend>
       <label>Løpets navn og dato
         <input type="text" name="lop_navn" placeholder="F.eks. Lofoten High 5, juni 2027" value="<?= $val('lop_navn') ?>"></label>
