@@ -38,6 +38,21 @@ table.res td.klubb { color: hsl(var(--muted)); font-size: .9rem; }
 .tom { color: hsl(var(--muted)); }
 .venter { background: hsl(var(--surface)); border: 1px solid hsl(var(--border)); border-radius: var(--r2); padding: var(--s5); margin-top: var(--s5); }
 details.hele { margin-top: var(--s3); }
+.forslag { display: grid; gap: 4px; margin-top: var(--s2); }
+.forslag button { text-align: left; font: inherit; padding: .55rem .9rem; border-radius: var(--r); border: 1px solid hsl(var(--border)); background: hsl(var(--bg)); color: hsl(var(--fg)); cursor: pointer; display: flex; justify-content: space-between; gap: var(--s3); }
+.forslag button:hover { border-color: hsl(var(--accent)); }
+.forslag button span { color: hsl(var(--muted)); font-size: .9rem; }
+.forslag button b { color: hsl(var(--accent)); font-weight: 600; }
+.minliste { margin-top: var(--s4); display: grid; gap: var(--s3); }
+.minliste .folg { margin-top: 0; display: grid; grid-template-columns: 1fr auto; gap: var(--s3); align-items: start; }
+.minliste .status-l { font-size: .9rem; margin-top: var(--s2); }
+.minliste .status-l.mal { color: hsl(var(--fg)); font-weight: 600; }
+.minliste .status-l.vei { color: hsl(var(--muted)); }
+.minliste .fjern { border: 0; background: none; color: hsl(var(--muted)); cursor: pointer; font-size: .85rem; padding: .2rem; }
+.minliste .fjern:hover { color: hsl(var(--accent)); }
+.minliste .tom { margin: 0; }
+.minliste .ny { background: transparent; }
+.minliste .folg.ny { border-color: hsl(var(--accent)); box-shadow: 0 0 0 3px hsl(var(--accent) / .18); }
 @media (max-width: 640px) { .tabell table.res { min-width: 0; } table.res td.klubb, table.res th:nth-child(3) { display: none; } }
 </style>
 </head>
@@ -70,9 +85,10 @@ details.hele { margin-top: var(--s3); }
       <li><b id="n-siste">–</b><span>siste oppdatering</span></li>
     </ul>
     <div class="sok" id="sokboks">
-      <label for="sok-inn">Følg en løper</label>
-      <input id="sok-inn" type="search" placeholder="Skriv navn eller klubb" autocomplete="off" spellcheck="false">
-      <div id="folg"></div>
+      <label for="sok-inn">Min liste: finn løperne dine i deltakerlista</label>
+      <input id="sok-inn" type="search" placeholder="Skriv navn eller klubb, trykk for å legge til" autocomplete="off" spellcheck="false">
+      <div id="forslag" class="forslag"></div>
+      <div id="minliste" class="minliste"></div>
     </div>
   </div>
 </header>
@@ -83,6 +99,12 @@ details.hele { margin-top: var(--s3); }
       <h3>Før start</h3>
       <p>Tidtakeren publiserer lista når løpet er i gang. Til da: <a href="../#tour-de-ornes">løypa og tipsene for hver del</a>, og <a href="../resultater/">hall of fame fra Kua Ultra</a>.</p>
       <p class="liten">Resultatene ligger også hos <a href="https://racetracker.no/events/2026/tour-de-ornes/" rel="noopener">RaceTracker</a>.</p>
+    </div>
+    <div id="eksempel" hidden>
+      <p class="kicker" style="margin-top:32px">Eksempel</p>
+      <h3>Slik ser det ut når løperne kommer i mål</h3>
+      <p class="liten">Tallene under er fra Kua Ultra 2025, samme tidtaker. På lørdag byttes de ut med Tour de Ørnes etter hvert som løperne passerer mål.</p>
+      <div id="eksempel-lister"></div>
     </div>
     <div id="lister"></div>
   </div>
@@ -128,6 +150,7 @@ details.hele { margin-top: var(--s3); }
     var f = alle.slice().sort(function (a, b) { return (a.plass || 999) - (b.plass || 999); })[0];
     document.getElementById('n-forste').textContent = f && D.konkurranser && Object.keys(D.konkurranser).length ? (D.konkurranser[Object.keys(D.konkurranser)[0]][0] || {}).tid || '–' : '–';
     document.getElementById('venter').hidden = (D.antall || 0) > 0;
+    eksempel((D.antall || 0) === 0);
     var ut = '';
     Object.keys(D.konkurranser || {}).forEach(function (k) {
       var rows = D.konkurranser[k];
@@ -143,23 +166,66 @@ details.hele { margin-top: var(--s3); }
     forste = false;
     folg();
   }
-  function folg() {
-    var boks = document.getElementById('folg'); q = nk(document.getElementById('sok-inn').value);
-    if (!D || q.length < 2) { boks.innerHTML = ''; return; }
-    var treff = [];
-    Object.keys(D.konkurranser || {}).forEach(function (k) { D.konkurranser[k].forEach(function (r) { if (nk(r.navn).indexOf(q) !== -1 || nk(r.klubb).indexOf(q) !== -1) treff.push({k: k, r: r}); }); });
-    if (!treff.length) { boks.innerHTML = '<p class="tom" style="margin-top:8px">Ingen i mål med det navnet ennå. Siden oppdaterer seg selv, så la den stå.</p>'; return; }
-    boks.innerHTML = treff.slice(0, 5).map(function (t) {
-      return '<div class="folg"><div class="navn">' + esc(t.r.navn) + '</div><div class="meta">' + esc(t.k) + (t.r.klubb ? ' · ' + esc(t.r.klubb) : '') + ' · ' + t.r.plass + '. plass' + (t.r.klasse ? ' · ' + esc(t.r.klasse) : '') + '</div><div class="tid">' + esc(t.r.tid) + '</div></div>';
+  // Min liste (Odd 18.09): søk i deltakerlista, legg til, følg til de er i mål. Lagres i nettleseren.
+  var DELT = [], MIN = [], settMal = {};
+  try { MIN = JSON.parse(localStorage.getItem('rn_minliste_' + LOP) || '[]'); } catch (e) { MIN = []; }
+  function lagre() { try { localStorage.setItem('rn_minliste_' + LOP, JSON.stringify(MIN)); } catch (e) {} }
+  function hentDeltakere() {
+    fetch('data.php?lop=' + encodeURIComponent(LOP) + '&visning=deltakere').then(function (r) { return r.json(); }).then(function (d) { DELT = d.deltakere || []; forslag(); minliste(); }).catch(function () {});
+  }
+  function finnRes(navn) {
+    var k = nk(navn), best = null;
+    Object.keys((D && D.konkurranser) || {}).forEach(function (kk) { (D.konkurranser[kk] || []).forEach(function (r) { if (nk(r.navn) === k) best = {k: kk, r: r}; }); });
+    return best;
+  }
+  function forslag() {
+    var boks = document.getElementById('forslag'); q = nk(document.getElementById('sok-inn').value);
+    if (q.length < 2) { boks.innerHTML = ''; return; }
+    var valgt = {}; MIN.forEach(function (m) { valgt[nk(m.navn)] = 1; });
+    var treff = DELT.filter(function (p) { return !valgt[nk(p.navn)] && (nk(p.navn).indexOf(q) !== -1 || nk(p.klubb).indexOf(q) !== -1); });
+    // også fra resultatlista, om noen mangler i deltakerlista
+    Object.keys((D && D.konkurranser) || {}).forEach(function (kk) { (D.konkurranser[kk] || []).forEach(function (r) { if (!valgt[nk(r.navn)] && !treff.some(function (p) { return nk(p.navn) === nk(r.navn); }) && (nk(r.navn).indexOf(q) !== -1 || nk(r.klubb).indexOf(q) !== -1)) treff.push({navn: r.navn, klubb: r.klubb, fodt: r.fodt || ''}); }); });
+    if (!treff.length) { boks.innerHTML = '<p class="tom" style="margin:8px 0 0">Ingen i deltakerlista med det navnet. Lista hentes fra tidtakeren og kan mangle etteranmeldte.</p>'; return; }
+    boks.innerHTML = treff.slice(0, 8).map(function (p, i) {
+      return '<button type="button" data-i="' + i + '">' + esc(p.navn) + (p.klubb ? ' <span>' + esc(p.klubb) + '</span>' : '') + '<b>+ Legg til</b></button>';
     }).join('');
+    [].forEach.call(boks.querySelectorAll('button'), function (b) {
+      b.onclick = function () { var p = treff[+b.getAttribute('data-i')]; MIN.push({navn: p.navn, klubb: p.klubb || ''}); lagre(); document.getElementById('sok-inn').value = ''; forslag(); minliste(); };
+    });
+  }
+  function minliste() {
+    var boks = document.getElementById('minliste');
+    if (!MIN.length) { boks.innerHTML = '<p class="tom liten">Ingen på lista ennå. Søk opp navnet og trykk «Legg til», så ligger tida her når løperen er i mål.</p>'; return; }
+    boks.innerHTML = MIN.map(function (m, i) {
+      var f = finnRes(m.navn), ny = f && !settMal[nk(m.navn)] && !forste;
+      var st = f ? '<div class="status-l mal">I mål: ' + esc(f.r.tid) + ' · ' + f.r.plass + '. plass' + (f.k ? ' · ' + esc(f.k) : '') + '</div>'
+                 : '<div class="status-l vei">' + (D && D.status === 'pågår' ? 'Underveis, ikke i mål ennå' : (D && D.status === 'ferdig' ? 'Ikke i resultatlista' : 'Venter på start')) + '</div>';
+      if (f) settMal[nk(m.navn)] = 1;
+      return '<div class="folg' + (ny ? ' ny' : '') + '"><div><div class="navn">' + esc(m.navn) + '</div>' + (m.klubb ? '<div class="meta">' + esc(m.klubb) + '</div>' : '') + st + '</div><button class="fjern" type="button" data-i="' + i + '" aria-label="Fjern fra lista">Fjern</button></div>';
+    }).join('');
+    [].forEach.call(boks.querySelectorAll('.fjern'), function (b) { b.onclick = function () { MIN.splice(+b.getAttribute('data-i'), 1); lagre(); minliste(); }; });
+  }
+  function folg() { forslag(); minliste(); }
+  var eksHentet = false;
+  function eksempel(vis) {
+    var e = document.getElementById('eksempel'); e.hidden = !vis;
+    if (!vis || eksHentet) return; eksHentet = true;
+    fetch('data.php?lop=kua-ultra-2025').then(function (r) { return r.json(); }).then(function (d) {
+      var ut = '';
+      Object.keys(d.konkurranser || {}).slice(0, 2).forEach(function (k) {
+        var rows = d.konkurranser[k].slice(0, 5);
+        ut += '<div class="kont"><h2>' + esc(k) + ' <small>' + d.konkurranser[k].length + ' i mål</small></h2><div class="tabell"><table class="res"><thead><tr><th>Plass</th><th>Navn</th><th>Klubb</th><th class="tid">Tid</th></tr></thead><tbody>' + rows.map(function (r) { return rad(r, false); }).join('') + '</tbody></table></div></div>';
+      });
+      document.getElementById('eksempel-lister').innerHTML = ut;
+    }).catch(function () {});
   }
   function hent() {
     fetch(URL + '&t=' + Math.floor(Date.now() / 40000)).then(function (r) { return r.json(); }).then(function (d) { D = d; tegn(); }).catch(function () {
       var st = document.getElementById('status'); st.querySelector('span').textContent = 'Får ikke kontakt, prøver igjen';
     });
   }
-  document.getElementById('sok-inn').addEventListener('input', folg);
-  hent(); setInterval(hent, 40000);
+  document.getElementById('sok-inn').addEventListener('input', forslag);
+  hentDeltakere(); hent(); setInterval(hent, 40000);
   document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'visible') hent(); });
 })();
 </script>

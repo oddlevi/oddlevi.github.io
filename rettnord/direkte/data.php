@@ -25,6 +25,52 @@ $EVENT = $L['event'];
 $CACHE = sys_get_temp_dir() . '/treni_rn_direkte_' . $EVENT . '.json';
 $TTL = 40;
 
+// ?visning=deltakere: påmeldte fra tidtakerens deltakerliste (til «Min liste» på direktesiden, Odd 18.09)
+if (($_GET['visning'] ?? '') === 'deltakere') {
+    $DC = sys_get_temp_dir() . '/treni_rn_deltakere_' . $EVENT . '.json';
+    if (is_readable($DC) && time() - filemtime($DC) < 600) { readfile($DC); exit; }
+    $ref = 'https://my.raceresult.com/' . $EVENT . '/participants?lang=nb';
+    $ut = ['lop' => $L['navn'], 'hentet' => date('c'), 'deltakere' => []];
+    foreach (['participants/config?lang=nb&sanitize=true', 'RRPublish/data/config?page=participants&noVisitor=1'] as $cu) {
+        $cfg = json_decode((string) hent('https://my.raceresult.com/' . $EVENT . '/' . $cu, $ref), true);
+        if (!is_array($cfg) || empty($cfg['key'])) { continue; }
+        $srv = $cfg['server'] ?? 'my.raceresult.com';
+        $api = str_starts_with($cu, 'RRPublish') ? 'RRPublish/data' : 'participants';
+        $lister = is_array($cfg['lists'] ?? null) ? $cfg['lists'] : ($cfg['Tab']['Config']['Lists'] ?? []);
+        foreach ($lister as $l) {
+            $navn = is_array($l) ? ($l['Name'] ?? '') : (string) $l;
+            if ($navn === '') { continue; }
+            $u = 'https://' . $srv . '/' . $EVENT . '/' . $api . '/list?' . http_build_query(['key' => $cfg['key'], 'listname' => $navn, 'page' => 'participants', 'contest' => '0', 'r' => 'all', 'l' => '0']);
+            $d = json_decode((string) hent($u, $ref), true);
+            if (!is_array($d) || empty($d['data']) || empty($d['list']['Fields'])) { continue; }
+            $df = $d['DataFields'] ?? null;
+            $labels = array_map(fn($f) => (string) ($f['Label'] ?: $f['Expression']), $d['list']['Fields']);
+            $go = function ($x, $sti) use (&$go, &$ut, $df, $labels) {
+                if (isset($x[0]) && is_array($x[0]) && !is_array($x[0][0] ?? null)) {
+                    foreach ($x as $r) {
+                        $rec = $df && count($df) === count($r) ? array_combine($df, $r) : array_combine($labels, array_slice($r, -count($labels)));
+                        $n = felt($rec, ['FLNAME', 'DisplayNameBib', 'Navn', 'Navb', 'Name']);
+                        if ($n === '') { $n = trim(felt($rec, ['FIRSTNAME']) . ' ' . felt($rec, ['LASTNAME'])); }
+                        if ($n === '') { continue; }
+                        $ut['deltakere'][] = ['navn' => preg_replace('/\s*\[\d+\]\s*$/', '', $n), 'klubb' => felt($rec, ['CLUB', 'Klubb', 'Klubb/Lag']),
+                                              'fodt' => felt($rec, ['YEAR', 'F.år', 'Fødselsår']), 'kjonn' => felt($rec, ['GenderMF', 'Kjønn']),
+                                              'gruppe' => preg_replace('/^#\d+_/', '', (string) ($sti[0] ?? ''))];
+                    }
+                    return;
+                }
+                foreach ($x as $k => $v) { if (is_array($v)) { $go($v, array_merge($sti, [(string) $k])); } }
+            };
+            $go($d['data'], []);
+        }
+        if ($ut['deltakere']) { break; }
+    }
+    usort($ut['deltakere'], fn($a, $b) => strcasecmp($a['navn'], $b['navn']));
+    $ut['antall'] = count($ut['deltakere']);
+    $json = json_encode($ut, JSON_UNESCAPED_UNICODE);
+    if ($ut['antall'] > 0) { @file_put_contents($DC, $json, LOCK_EX); }
+    echo $json; exit;
+}
+
 if (is_readable($CACHE) && time() - filemtime($CACHE) < $TTL) {
     readfile($CACHE); exit;
 }
@@ -68,6 +114,7 @@ foreach ($KILDER as [$API, $cfgurl]) {
     $ut['over'] = $ut['over'] || !empty($cfg['EventOver']);
     $kontester = $cfg['contests'] ?? [];
     $lister = is_array($cfg['lists'] ?? null) ? $cfg['lists'] : [];
+    if (!$lister && is_array($cfg['Tab']['Config']['Lists'] ?? null)) { $lister = $cfg['Tab']['Config']['Lists']; }   // nytt grensesnitt (TDØ)
     if (!$lister) { continue; }
     $ut['api'] = $API;
     $ut['lister'] = array_values(array_map(fn($l) => is_array($l) ? ($l['Name'] ?? '') : (string) $l, $lister));

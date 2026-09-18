@@ -84,6 +84,18 @@ $til   = 'https://treni.no/bli-testloper.php?kilde=' . rawurlencode($kilde);
     <span>Alle 748 løperne med mellomtider post for post.</span>
   </a>
   <?php endif; ?>
+  <?php // 18.09 (Odd): direktesiden for Tour de Ørnes øverst til og med løpsdagen 19.09, så resultatene. ?>
+  <?php if (date('Y-m-d') <= '2026-09-20'): ?>
+  <a class="ig-kort" href="/rettnord/direkte/?fra=ig">
+    <b>Tour de Ørnes direkte →</b>
+    <span>Lørdag fra kl. 11: målgangene kommer inn mens det skjer. Legg løperne dine i lista di, så ligger tidene der.</span>
+  </a>
+  <?php else: ?>
+  <a class="ig-kort" href="/rettnord/resultater/?fra=ig">
+    <b>Rett Nord, alle resultater →</b>
+    <span>Tour de Ørnes og Kua Ultra 2022 til 2026: søk på eget navn, hall of fame, beste tider.</span>
+  </a>
+  <?php endif; ?>
   <a class="ig-kort primar" href="<?= htmlspecialchars($til) ?>">
     <b>Bli testløper →</b>
     <span>Ingen venteliste: du får egen side fra dag én, og planen så snart klokka er koblet og historikken er inne, bygget av en trener
