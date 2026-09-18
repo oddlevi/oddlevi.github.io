@@ -3,16 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Bli med — test Treni</title>
-<meta name="description" content="Du er invitert til å teste Treni — en treningsveileder der en ekte trener og en smart motor følger løpingen din.">
+<title>Bli med · test Treni</title>
+<meta name="description" content="Du er invitert til å teste Treni, en treningsveileder der en ekte trener og en smart motor følger løpingen din.">
 <meta name="robots" content="noindex">
-<meta property="og:title" content="Bli med — test Treni">
-<meta property="og:description" content="En ekte trener. En som ser hver økt — og aldri sover. Koble Strava, så er du i gang på to minutter.">
+<meta property="og:title" content="Bli med · test Treni">
+<meta property="og:description" content="En ekte trener. En som ser hver økt, og aldri sover. Koble Strava, så er du i gang på to minutter.">
 <meta property="og:image" content="https://treni.no/bilder/og.jpg">
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="icon" type="image/png" href="/icon-192.png" sizes="192x192">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="stylesheet" href="stil.css?v=12">
+<link rel="stylesheet" href="stil.css?v=30">
 <style>
   .startknapp { display: block; width: 100%; max-width: 26rem; margin: 1.4rem auto .6rem;
     padding: 1.05rem 1.4rem; font: 700 1.15rem/1.3 inherit; text-align: center;
@@ -36,20 +36,20 @@
 </header>
 
 <section style="text-align:center">
-  <p class="liten steg" id="inaktiv-tekst">Lite eller ingenting på Strava? Helt i orden —
+  <p class="liten steg" id="inaktiv-tekst">Lite eller ingenting på Strava? Helt i orden.
   da spør vi deg heller kort om løpingen din, og veiledningen starter der du faktisk er.</p>
-  <a class="startknapp" id="strava-knapp" href="#">🔗 <span id="knapp-tekst">Koble Strava — så er du i gang</span></a>
-  <p class="liten steg" id="steg-tekst">Trykk Autoriser i Strava, så åpner du Telegram — det er alt.</p>
+  <a class="startknapp" id="strava-knapp" href="#">🔗 <span id="knapp-tekst">Koble Strava, så er du i gang</span></a>
+  <p class="liten steg" id="steg-tekst">Trykk Autoriser i Strava, så åpner du Telegram, det er alt.</p>
 
   <div class="vilkaar" id="vilkaar">
     <p><b id="v-tittel">Ved å koble godtar du kortvilkårene:</b></p>
     <p>🏃 <span>Vi henter løpeøktene dine fra Strava, og bruker dem + det du skriver i
     chatten til å gi deg ukentlige treningsråd. KI (Anthropic Claude) hjelper med
-    formuleringene — dataene lagres aldri der.</span></p>
+    formuleringene, dataene lagres aldri der.</span></p>
     <p>👀 <span>Bare trenerne Eirik Haugsnes og Odd Levi Paulsen ser dataene dine.
     Alt lagres lokalt, ingenting deles eller selges.</span></p>
     <p>🗑 <span>Si fra når som helst, så slettes alt innen 30 dager.</span></p>
-    <p>🩺 <span>Dette er en pilot, ikke helsehjelp — ved skader og helseplager gjelder
+    <p>🩺 <span>Dette er en pilot, ikke helsehjelp, ved skader og helseplager gjelder
     fagpersonell, ikke veilederen.</span></p>
     <p class="liten"><a href="samtykke.html" id="fulltekst">Fullstendig tekst →</a></p>
   </div>
@@ -164,12 +164,13 @@ fetch("/kapasitet.json", {cache: "no-store"})
       knapp.href = "/bli-testloper.php" + (verver && verver !== "odd"
         ? "?kilde=" + encodeURIComponent("vervet av " + verver) : "");
       var kt = document.getElementById("knapp-tekst");
-      if (kt) kt.textContent = "Plassene er fulle — sett deg på ventelista";
+      if (kt) kt.textContent = "Bli med som testløper";
     }
     if (steg) {
-      steg.textContent = "Strava-plassene våre er fulle akkurat nå (flere er på vei). "
-        + "På ventelista får du pulssoner, treningsplan og e-boka vår med en gang — "
-        + "og plassen din står klar når kvoten øker.";
+      steg.textContent = "Strava-plassene våre er fulle akkurat nå (flere er på vei), "
+        + "men det stopper ingenting. Har du Garmin, Polar, Suunto, Coros eller Wahoo, "
+        + "kobler du klokka via Intervals.icu på et halvt minutt. Du får pulssoner, "
+        + "treningsplan og e-boka vår med en gang uansett.";
     }
   })
   .catch(function () {});

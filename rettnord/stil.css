@@ -1,0 +1,267 @@
+/* Rett Nord, forslag fra Treni 18.09.2026. Tokens i HSL etter design-instruksen, lys og mørk.
+   Aksenten er merkebåndet: oransje nedbrytbare bånd i løypa. Nøytralene har fjordens kjølige drag. */
+:root {
+  --bg: 40 30% 97%;
+  --fg: 208 28% 10%;
+  --muted: 206 10% 38%;
+  --surface: 200 24% 94%;
+  --surface-2: 200 20% 90%;
+  --border: 202 14% 84%;
+  --primary: 204 48% 20%;
+  --primary-fg: 40 30% 97%;
+  --accent: 22 92% 50%;
+  --accent-fg: 0 0% 100%;
+  --accent-soft: 24 90% 93%;
+  --shadow-sm: 0 1px 2px hsl(var(--fg) / .06);
+  --shadow-md: 0 14px 36px -14px hsl(var(--primary) / .28);
+  --serif: "Fraunces", "Iowan Old Style", Georgia, serif;
+  --sans: "Inter Tight", "Inter", system-ui, sans-serif;
+  --wordmark: "Sora", system-ui, sans-serif;
+  --r: 12px; --r2: 20px;
+  --ease: cubic-bezier(.22, 1, .36, 1);
+  --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px; --s5: 24px; --s6: 32px; --s7: 48px; --s8: 64px; --s9: 96px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: 208 24% 6%; --fg: 40 26% 93%; --muted: 200 10% 64%;
+    --surface: 206 18% 10%; --surface-2: 205 16% 13%; --border: 204 12% 18%;
+    --primary: 200 60% 68%; --primary-fg: 208 30% 7%;
+    --accent: 24 95% 60%; --accent-fg: 208 30% 7%; --accent-soft: 24 50% 16%;
+    --shadow-sm: 0 1px 2px hsl(0 0% 0% / .4); --shadow-md: 0 14px 36px -14px hsl(0 0% 0% / .6);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: 208 24% 6%; --fg: 40 26% 93%; --muted: 200 10% 64%;
+  --surface: 206 18% 10%; --surface-2: 205 16% 13%; --border: 204 12% 18%;
+  --primary: 200 60% 68%; --primary-fg: 208 30% 7%;
+  --accent: 24 95% 60%; --accent-fg: 208 30% 7%; --accent-soft: 24 50% 16%;
+  --shadow-sm: 0 1px 2px hsl(0 0% 0% / .4); --shadow-md: 0 14px 36px -14px hsl(0 0% 0% / .6);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 4.5rem; }
+body { margin: 0; background: hsl(var(--bg)); color: hsl(var(--fg)); font-family: var(--sans);
+       font-size: 1.0625rem; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+img { max-width: 100%; height: auto; display: block; }
+a { color: hsl(var(--primary)); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:hover { color: hsl(var(--accent)); }
+:focus-visible { outline: 2px solid hsl(var(--accent)); outline-offset: 3px; border-radius: 4px; }
+h1, h2, h3, .disp { font-family: var(--serif); font-weight: 600; letter-spacing: -.01em; text-wrap: balance; }
+h2 { font-size: clamp(1.75rem, 4vw, 2.5rem); line-height: 1.1; margin: 0 0 var(--s4); }
+h3 { font-size: clamp(1.25rem, 2.6vw, 1.55rem); line-height: 1.2; margin: 0 0 var(--s3); }
+p { margin: 0 0 var(--s4); max-width: 65ch; }
+.wrap { max-width: 72rem; margin-inline: auto; padding-inline: clamp(1.1rem, 4vw, 2.5rem); }
+.smal { max-width: 46rem; }
+section { padding-block: clamp(3.5rem, 8vw, 6rem); }
+section + section { border-top: 1px solid hsl(var(--border)); }
+.kicker { display: inline-flex; align-items: center; gap: var(--s3); font-size: .8125rem; font-weight: 600;
+          letter-spacing: .1em; text-transform: uppercase; color: hsl(var(--accent)); margin: 0 0 var(--s4); }
+/* merkebåndet: den ene aksenten, brukt som et lite bånd foran hver kicker */
+.kicker::before { content: ""; width: 2rem; height: 6px; border-radius: 2px;
+                  background: hsl(var(--accent)); transform: skewX(-18deg); }
+.muted { color: hsl(var(--muted)); }
+.liten { font-size: .9rem; color: hsl(var(--muted)); }
+.ingress { font-size: clamp(1.15rem, 2.2vw, 1.3rem); line-height: 1.5; color: hsl(var(--muted)); max-width: 38rem; }
+
+/* knapper */
+.btn { display: inline-flex; align-items: center; gap: var(--s2); padding: .85rem 1.4rem; border-radius: 999px;
+       font-weight: 600; font-size: 1rem; text-decoration: none; line-height: 1.2; border: 1.5px solid transparent;
+       transition: transform 200ms var(--ease), box-shadow 200ms var(--ease), background-color 200ms var(--ease); }
+.btn-primar { background: hsl(var(--accent)); color: hsl(var(--accent-fg)); box-shadow: 0 10px 28px -12px hsl(var(--accent) / .7); }
+.btn-primar:hover { transform: translateY(-2px); color: hsl(var(--accent-fg)); box-shadow: 0 16px 36px -12px hsl(var(--accent) / .8); }
+.btn-ghost { color: hsl(var(--fg)); border-color: hsl(var(--border)); }
+.btn-ghost:hover { background: hsl(var(--surface)); color: hsl(var(--fg)); }
+.btn-lys { color: #fff; border-color: hsl(0 0% 100% / .45); }
+.btn-lys:hover { background: hsl(0 0% 100% / .12); color: #fff; }
+
+/* topplinje */
+.topp { position: sticky; top: 0; z-index: 20; background: hsl(var(--bg) / .86); backdrop-filter: blur(12px);
+        border-bottom: 1px solid hsl(var(--border)); }
+.topp .wrap { display: flex; align-items: center; justify-content: space-between; gap: var(--s4); min-height: 3.75rem; }
+.logo { font-family: var(--serif); font-weight: 600; font-size: 1.35rem; text-decoration: none; color: hsl(var(--fg));
+        display: inline-flex; align-items: center; gap: var(--s2); }
+.logo i { width: 1.1rem; height: .45rem; background: hsl(var(--accent)); border-radius: 2px; transform: skewX(-18deg); }
+.meny { display: flex; gap: clamp(.6rem, 2vw, 1.4rem); list-style: none; margin: 0; padding: 0; overflow-x: auto; }
+.meny a { text-decoration: none; color: hsl(var(--fg)); font-weight: 600; font-size: .95rem; white-space: nowrap; }
+.meny a:hover { color: hsl(var(--accent)); }
+@media (max-width: 640px) { .meny { display: none; } }
+
+/* hero: tekst på fast grunn, bildet i ramme i naturlig størrelse (originalene er 720 px) */
+.hero { position: relative; background: hsl(var(--surface)); border-bottom: 1px solid hsl(var(--border)); }
+.hero-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: clamp(2rem, 5vw, 4rem); align-items: center;
+             padding-block: clamp(3rem, 7vw, 5.5rem) clamp(6rem, 10vw, 8rem); }
+.hero h1 { font-size: clamp(2.5rem, 6.5vw, 4.6rem); line-height: 1.02; margin: 0; max-width: 14ch; font-weight: 500; }
+.hero .ingress { margin-top: var(--s5); }
+.hero .knapper { display: flex; flex-wrap: wrap; gap: var(--s3); margin-top: var(--s6); }
+.hero-bilde { margin: 0; position: relative; justify-self: end; width: min(100%, 30rem); }
+.hero-bilde img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--r2); box-shadow: var(--shadow-md); }
+.hero-bilde::before { content: ""; position: absolute; inset: 1.25rem -1.25rem -1.25rem 1.25rem; border-radius: var(--r2);
+                      background: hsl(var(--accent) / .16); z-index: 0; }
+.hero-bilde img { position: relative; z-index: 1; }
+.hero-bilde figcaption { margin-top: var(--s3); font-size: .85rem; color: hsl(var(--muted)); }
+@media (max-width: 820px) { .hero-grid { grid-template-columns: minmax(0, 1fr); padding-bottom: 6rem; } .hero-bilde { justify-self: start; width: 100%; } .hero-bilde img { aspect-ratio: 4 / 3; } }
+
+/* neste løp-kortet ligger over kanten av heroen */
+.neste { position: relative; z-index: 2; margin-top: -4rem; }
+.neste .kort { display: grid; grid-template-columns: auto 1fr auto; gap: var(--s5); align-items: center;
+               background: hsl(var(--surface)); border: 1px solid hsl(var(--border)); border-radius: var(--r2);
+               padding: var(--s5) var(--s6); box-shadow: var(--shadow-md); }
+.neste .dato { text-align: center; padding-right: var(--s5); border-right: 1px solid hsl(var(--border)); min-width: 5.5rem; }
+.neste .dato b { display: block; font-family: var(--serif); font-size: 2.8rem; line-height: 1; font-weight: 500; color: hsl(var(--accent)); }
+.neste .dato span { font-size: .8rem; text-transform: uppercase; letter-spacing: .08em; color: hsl(var(--muted)); font-weight: 600; }
+.neste h2 { font-size: 1.5rem; margin: 0 0 var(--s1); }
+.neste p { margin: 0; color: hsl(var(--muted)); }
+.neste .fakta { display: flex; flex-wrap: wrap; gap: var(--s2) var(--s4); margin-top: var(--s2); font-size: .95rem; }
+.neste .fakta b { font-weight: 600; color: hsl(var(--fg)); }
+@media (max-width: 760px) { .neste .kort { grid-template-columns: auto 1fr; } .neste .btn { grid-column: 1 / -1; justify-content: center; } }
+
+/* løpskort */
+.rutenett { display: grid; gap: var(--s5); grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.lop { position: relative; display: flex; flex-direction: column; background: hsl(var(--surface)); border: 1px solid hsl(var(--border));
+       border-radius: var(--r2); overflow: hidden; text-decoration: none; color: inherit;
+       transition: transform 240ms var(--ease), box-shadow 240ms var(--ease); }
+.lop:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); color: inherit; }
+.lop img { aspect-ratio: 4 / 3; object-fit: cover; width: 100%; }
+.lop .tekst { padding: var(--s4) var(--s5) var(--s5); }
+.lop .naar { font-size: .8125rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: hsl(var(--accent)); }
+.lop h3 { margin: var(--s1) 0 var(--s2); }
+.lop p { margin: 0; color: hsl(var(--muted)); font-size: .95rem; }
+.chips { display: flex; flex-wrap: wrap; gap: var(--s2); margin-top: var(--s3); }
+.chip { font-size: .8rem; font-weight: 600; padding: .2rem .6rem; border-radius: 999px; background: hsl(var(--surface-2)); color: hsl(var(--fg)); }
+.chip.gratis { background: hsl(var(--accent-soft)); color: hsl(var(--fg)); }
+
+/* kart */
+.kartgrid { display: grid; gap: var(--s6); grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); align-items: start; }
+.kartgrid img { border-radius: var(--r2); border: 1px solid hsl(var(--border)); }
+.merker { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s2); }
+.merker li { display: grid; grid-template-columns: 2rem 1fr; gap: var(--s3); align-items: baseline; padding: var(--s2) 0; border-top: 1px solid hsl(var(--border)); }
+.merker li:first-child { border-top: 0; }
+.merker .nr { width: 1.7rem; height: 1.7rem; border-radius: 50%; background: hsl(var(--accent)); color: hsl(var(--accent-fg));
+              display: inline-grid; place-items: center; font-weight: 600; font-size: .85rem; }
+.merker b { display: block; font-weight: 600; }
+.merker span { font-size: .9rem; color: hsl(var(--muted)); }
+@media (max-width: 820px) { .kartgrid { grid-template-columns: minmax(0, 1fr); } }
+
+/* tabeller */
+.tabell { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+@media (max-width: 640px) { .tabell table { min-width: 560px; } }
+@media (max-width: 480px) { .nokkel { grid-template-columns: repeat(2, 1fr); } }
+table { width: 100%; border-collapse: collapse; font-size: .95rem; font-variant-numeric: tabular-nums; }
+th { text-align: left; font-size: .75rem; text-transform: uppercase; letter-spacing: .07em; color: hsl(var(--muted));
+     padding: var(--s2) var(--s3); border-bottom: 2px solid hsl(var(--border)); font-weight: 600; }
+td { padding: var(--s3); border-bottom: 1px solid hsl(var(--border)); vertical-align: top; }
+td.dato { white-space: nowrap; font-family: var(--serif); font-size: 1.05rem; font-weight: 500; }
+td.dato small { display: block; font-family: var(--sans); font-size: .75rem; text-transform: uppercase; letter-spacing: .06em; color: hsl(var(--muted)); font-weight: 600; }
+td b { font-weight: 600; }
+.merke-kua { color: hsl(var(--primary)); } .merke-cup { color: hsl(var(--accent)); }
+
+/* løp-seksjonene */
+.lopsside { display: grid; gap: var(--s6); grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; }
+.lopsside .bilde { position: sticky; top: 4.5rem; border-radius: var(--r2); overflow: hidden; border: 1px solid hsl(var(--border)); }
+.lopsside .bilde img { aspect-ratio: 4 / 5; object-fit: cover; width: 100%; }
+.lopsside .bilde figcaption { padding: var(--s3) var(--s4); font-size: .85rem; color: hsl(var(--muted)); background: hsl(var(--surface)); }
+@media (max-width: 820px) { .lopsside { grid-template-columns: minmax(0, 1fr); } .lopsside .bilde { position: static; } .lopsside .bilde img { aspect-ratio: 16 / 10; } }
+.nokkel { display: grid; grid-template-columns: repeat(auto-fit, minmax(88px, 1fr)); gap: var(--s4); margin: var(--s5) 0; padding: 0; list-style: none; }
+.nokkel li { border-top: 2px solid hsl(var(--accent)); padding-top: var(--s2); }
+.nokkel b { display: block; font-family: var(--serif); font-size: 1.75rem; line-height: 1.1; font-weight: 500; }
+.nokkel span { font-size: .85rem; color: hsl(var(--muted)); }
+details { border: 1px solid hsl(var(--border)); border-radius: var(--r); background: hsl(var(--surface)); margin-bottom: var(--s3); }
+summary { cursor: pointer; padding: var(--s3) var(--s4); font-weight: 600; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: "+"; font-family: var(--serif); font-size: 1.4rem; color: hsl(var(--accent)); line-height: 1; }
+details[open] summary::after { content: "\2212"; }
+details .inn { padding: 0 var(--s4) var(--s4); }
+details .inn p:last-child, details .inn ul:last-child { margin-bottom: 0; }
+ul.liste { padding-left: 1.2rem; margin: 0 0 var(--s4); }
+ul.liste li { margin-bottom: var(--s2); max-width: 65ch; }
+ul.liste li::marker { color: hsl(var(--accent)); }
+.sitat { font-family: var(--serif); font-size: clamp(1.25rem, 2.6vw, 1.6rem); line-height: 1.35; font-weight: 500; margin: 0 0 var(--s4); max-width: 30ch; }
+.sitat::before { content: ""; display: block; width: 2rem; height: 6px; border-radius: 2px; background: hsl(var(--accent)); transform: skewX(-18deg); margin-bottom: var(--s4); }
+
+/* profil */
+.profil { background: hsl(var(--surface)); border: 1px solid hsl(var(--border)); border-radius: var(--r2); padding: var(--s4) var(--s4) var(--s2); margin: var(--s5) 0; }
+.profil svg { width: 100%; height: auto; display: block; }
+.profil .tekst { fill: hsl(var(--muted)); font-family: var(--sans); font-size: 20px; }
+.profil .merk { fill: hsl(var(--fg)); font-family: var(--sans); font-size: 21px; font-weight: 600; }
+.profil .flate { fill: hsl(var(--primary) / .22); }
+.profil .linje { fill: none; stroke: hsl(var(--primary)); stroke-width: 2; }
+.profil .grid { stroke: hsl(var(--border)); stroke-dasharray: 3 5; }
+.profil .pkt { fill: hsl(var(--accent)); }
+.tips { display: grid; gap: var(--s3); grid-template-columns: repeat(2, 1fr); margin: var(--s4) 0; padding: 0; list-style: none; }
+.tips li { background: hsl(var(--surface)); border: 1px solid hsl(var(--border)); border-radius: var(--r); padding: var(--s4); font-size: .95rem; }
+.tips b { display: block; font-family: var(--serif); font-size: 1.15rem; margin-bottom: var(--s1); font-weight: 500; }
+
+/* resultater */
+.aar { display: flex; flex-wrap: wrap; gap: var(--s2); list-style: none; margin: var(--s4) 0; padding: 0; }
+.aar a { display: inline-block; padding: .55rem 1rem; border-radius: 999px; border: 1.5px solid hsl(var(--border)); text-decoration: none; font-weight: 600; color: hsl(var(--fg)); }
+.aar a:hover { border-color: hsl(var(--accent)); color: hsl(var(--accent)); }
+.kommer { background: hsl(var(--primary)); color: hsl(var(--primary-fg)); border-radius: var(--r2); padding: var(--s6); margin-top: var(--s6); }
+.kommer h3 { color: inherit; }
+.kommer p, .kommer li { color: hsl(var(--primary-fg) / .85); }
+.kommer .kicker { color: hsl(var(--primary-fg) / .85); }
+.kommer .kicker::before { background: hsl(var(--primary-fg) / .85); }
+.kommer ul.liste li::marker { color: hsl(24 95% 66%); }
+.kommer a { color: inherit; }
+
+/* praktisk */
+.reise { display: grid; gap: var(--s4); grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); margin: var(--s4) 0 var(--s6); padding: 0; list-style: none; }
+.reise li { background: hsl(var(--surface)); border: 1px solid hsl(var(--border)); border-radius: var(--r2); padding: var(--s5); }
+.reise h3 { font-size: 1.3rem; }
+.reise p { font-size: .95rem; margin-bottom: var(--s3); }
+.reise .tid { font-family: var(--serif); font-size: 1.05rem; font-weight: 500; }
+.reise .tid small { font-family: var(--sans); color: hsl(var(--muted)); font-size: .8rem; }
+.to-kol { display: grid; gap: var(--s6); grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+
+/* om oss */
+.om { display: grid; gap: var(--s7); grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); align-items: start; }
+@media (max-width: 820px) { .om { grid-template-columns: minmax(0, 1fr); } }
+.roller { display: flex; flex-wrap: wrap; gap: var(--s2); margin: var(--s3) 0 var(--s4); }
+.kontakt { background: hsl(var(--surface)); border: 1px solid hsl(var(--border)); border-radius: var(--r2); padding: var(--s5); }
+.kontakt p { margin-bottom: var(--s2); }
+
+/* bilder */
+.galleri { display: grid; gap: var(--s3); grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.galleri img { aspect-ratio: 3 / 2; object-fit: cover; border-radius: var(--r); width: 100%; }
+
+/* Treni-båndet */
+.treni { background: hsl(160 28% 9%); color: hsl(44 30% 94%); padding: var(--s7) 0; }
+.treni .wrap { display: grid; gap: var(--s5); grid-template-columns: auto 1fr auto; align-items: center; }
+.treni .ordmerke { font-family: var(--wordmark); font-weight: 800; font-size: 1.9rem; letter-spacing: -.02em; }
+.treni .ordmerke b { color: hsl(84 80% 60%); }
+.treni p { margin: 0; color: hsl(44 30% 94% / .8); }
+.treni a.btn { background: hsl(84 80% 60%); color: hsl(160 28% 9%); }
+.treni a.btn:hover { color: hsl(160 28% 9%); }
+@media (max-width: 720px) { .treni .wrap { grid-template-columns: 1fr; } }
+footer { padding: var(--s6) 0 var(--s7); font-size: .875rem; color: hsl(var(--muted)); }
+footer nav { display: flex; flex-wrap: wrap; gap: var(--s4); margin-bottom: var(--s3); }
+footer nav a { font-weight: 600; }
+
+/* bevegelse med mening: innholdet glir opp ved lasting, fra en synlig hviletilstand */
+@keyframes glid { from { opacity: .001; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+.hero-tekst > * { animation: glid 560ms var(--ease) both; }
+.hero-tekst > *:nth-child(2) { animation-delay: 80ms; } .hero-tekst > *:nth-child(3) { animation-delay: 160ms; } .hero-tekst > *:nth-child(4) { animation-delay: 240ms; }
+.hero-bilde { animation: glid 700ms var(--ease) 200ms both; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } html { scroll-behavior: auto; } }
+
+/* søk etter deltaker (hovedsiden sender til resultater/#sok=) */
+.sok { margin-top: var(--s6); max-width: 34rem; }
+.sok label { display: block; font-size: .8125rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: hsl(var(--muted)); margin-bottom: var(--s2); }
+.sok input { width: 100%; font: inherit; font-size: 1.1rem; padding: .85rem 1.1rem; border-radius: 999px; border: 1.5px solid hsl(var(--border)); background: hsl(var(--bg)); color: hsl(var(--fg)); -webkit-appearance: none; }
+.sok input:focus { outline: 2px solid hsl(var(--accent)); outline-offset: 2px; }
+.sok input::placeholder { color: hsl(var(--muted)); opacity: 1; }
+.treff { margin-top: var(--s4); display: grid; gap: var(--s3); }
+.treff .person { background: hsl(var(--bg)); border: 1px solid hsl(var(--border)); border-radius: var(--r); padding: var(--s3) var(--s4); }
+.treff .person b { font-family: var(--serif); font-size: 1.15rem; font-weight: 500; }
+.treff .person .muted { font-size: .9rem; }
+.treff table { margin-top: var(--s2); font-size: .9rem; }
+.treff td { padding: .3rem .4rem; }
+.treff td:first-child { font-weight: 600; white-space: nowrap; }
+.treff .status { font-size: .9rem; color: hsl(var(--muted)); }
+
+.sok-topp { margin-top: var(--s3); max-width: none; display: flex; flex-wrap: wrap; gap: var(--s3) var(--s4); align-items: center; padding: var(--s3) var(--s5); background: hsl(var(--surface)); border: 1px solid hsl(var(--border)); border-radius: var(--r2); }
+.sok-topp input { flex: 1 1 16rem; max-width: 26rem; }
+.sok-topp label { margin: 0; text-transform: none; letter-spacing: 0; font-size: 1rem; font-weight: 600; color: hsl(var(--fg)); }
+@media (max-width: 720px) { .sok-topp input { max-width: none; } }

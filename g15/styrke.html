@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Styrkeøktene · G15 | Treni</title>
+<meta name="description" content="Styrkeøkta for G15: ti øvelser, de merket 11+ er dekket av FIFA 11+. Kroppsvekt, 10 til 20 minutter.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💪</text></svg>">
+<style>
+  :root{
+    --font-display:"Iowan Old Style","Palatino Linotype",Georgia,serif;
+    --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,sans-serif;
+    --font-mono:"SF Mono",ui-monospace,Menlo,monospace;
+    --bg:hsl(100 30% 97%);
+    --panel:#FFFFFF;
+    --line:hsl(110 20% 85%);
+    --fg:hsl(140 40% 10%);
+    --fg2:hsl(140 20% 28%);
+    --muted:hsl(140 12% 38%);
+    --gress:hsl(135 55% 28%);        /* banegrønn */
+    --lime:hsl(80 75% 42%);
+    --gul:hsl(45 95% 50%);
+    --rod:hsl(5 75% 50%);
+    --bla:hsl(210 70% 45%);
+    --shadow:0 2px 12px -4px hsl(140 40% 10% / .12);
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --bg:hsl(150 20% 6%);--panel:hsl(148 16% 10%);--line:hsl(145 12% 18%);
+      --fg:hsl(90 25% 92%);--fg2:hsl(95 15% 78%);--muted:hsl(110 8% 60%);
+      --gress:hsl(130 50% 45%);--lime:hsl(80 70% 55%);
+      --gul:hsl(45 90% 55%);--rod:hsl(5 80% 60%);--bla:hsl(210 75% 60%);
+      --shadow:0 2px 14px -4px hsl(0 0% 0% / .5);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:hsl(150 20% 6%);--panel:hsl(148 16% 10%);--line:hsl(145 12% 18%);
+    --fg:hsl(90 25% 92%);--fg2:hsl(95 15% 78%);--muted:hsl(110 8% 60%);
+    --gress:hsl(130 50% 45%);--lime:hsl(80 70% 55%);
+    --gul:hsl(45 90% 55%);--rod:hsl(5 80% 60%);--bla:hsl(210 75% 60%);
+    --shadow:0 2px 14px -4px hsl(0 0% 0% / .5);
+  }
+  :root[data-theme="light"]{
+    --bg:hsl(100 30% 97%);--panel:#FFFFFF;--line:hsl(110 20% 85%);
+    --fg:hsl(140 40% 10%);--fg2:hsl(140 20% 28%);--muted:hsl(140 12% 38%);
+    --gress:hsl(135 55% 28%);--lime:hsl(80 75% 42%);
+    --gul:hsl(45 95% 50%);--rod:hsl(5 75% 50%);--bla:hsl(210 70% 45%);
+    --shadow:0 2px 12px -4px hsl(140 40% 10% / .12);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{background:var(--bg);color:var(--fg);font-family:var(--font-sans);
+    font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:640px;margin-inline:auto;padding:0 1.1rem 3rem}
+  h1,h2{font-family:var(--font-display);font-weight:600;line-height:1.1;text-wrap:balance;margin:0}
+  p{margin:.6rem 0}
+
+  /* Hero — grønn banestripe */
+  .hero{background:linear-gradient(160deg,hsl(140 50% 14%),hsl(135 55% 22%) 60%,hsl(130 50% 28%));
+    color:hsl(90 40% 95%);padding:2.6rem 0 2.2rem;position:relative;overflow:hidden}
+  .hero::before{content:"";position:absolute;inset:0;
+    background:repeating-linear-gradient(90deg,transparent 0 60px,hsl(0 0% 100%/.03) 60px 120px)}
+  .hero .wrap{position:relative;padding-bottom:0}
+  .hero .topp{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.2em;
+    text-transform:uppercase;color:hsl(80 70% 70%);margin-bottom:.9rem}
+  .hero h1{font-size:clamp(1.9rem,7.5vw,2.7rem)}
+  .hero p{color:hsl(100 25% 82%);max-width:42ch;font-size:1.02rem}
+  .hero .ball{position:absolute;right:-8px;top:12px;font-size:5.5rem;opacity:.14;transform:rotate(12deg)}
+
+  section{margin-top:2.4rem}
+  .kick{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--gress);display:flex;align-items:center;gap:.6rem;margin-bottom:.6rem}
+  .kick::before{content:"";width:22px;height:2px;background:var(--gress);border-radius:2px}
+  h2{font-size:1.45rem;margin-bottom:.4rem}
+  .kort{background:var(--panel);border:1px solid var(--line);border-radius:14px;
+    padding:1.1rem 1.2rem;box-shadow:var(--shadow);margin-top:.9rem}
+  .kort p{margin:.35rem 0;font-size:.96rem;color:var(--fg2)}
+  .kort b{color:var(--fg)}
+
+  .tallrad{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;margin-top:1rem}
+  .tallrad div{background:var(--panel);border:1px solid var(--line);border-radius:12px;
+    padding:.8rem .6rem;text-align:center;box-shadow:var(--shadow)}
+  .tallrad .t{font-family:var(--font-display);font-size:1.5rem;font-weight:600;
+    color:var(--gress);display:block;line-height:1.1}
+  .tallrad p{font-size:.75rem;color:var(--muted);margin:.3rem 0 0;line-height:1.35}
+
+  /* Sonetabell */
+  .soner{display:flex;flex-direction:column;gap:.55rem;margin-top:1rem}
+  .sone{display:grid;grid-template-columns:8px 1fr;border:1px solid var(--line);
+    border-radius:12px;overflow:hidden;background:var(--panel);box-shadow:var(--shadow)}
+  .sone .stripe{height:100%}
+  .sone .inn{padding:.75rem .95rem}
+  .sone .navn{font-weight:700;font-size:.95rem;display:flex;justify-content:space-between;gap:.5rem;flex-wrap:wrap}
+  .sone .navn span:last-child{font-family:var(--font-mono);font-size:.68rem;color:var(--muted);
+    letter-spacing:.05em;align-self:center}
+  .sone p{margin:.2rem 0 0;font-size:.88rem;color:var(--fg2)}
+  .s1 .stripe{background:var(--bla)} .s2 .stripe{background:var(--gress)}
+  .s3 .stripe{background:var(--gul)} .s4 .stripe{background:var(--rod)}
+
+  ul{padding-left:1.15rem;margin:.6rem 0}
+  li{margin:.45rem 0;font-size:.96rem;color:var(--fg2)}
+  li b{color:var(--fg)}
+  li::marker{color:var(--gress)}
+
+  .uke{list-style:none;padding:0}
+  .uke li{display:grid;grid-template-columns:auto 1fr;gap:.7rem;align-items:start;
+    background:var(--panel);border:1px solid var(--line);border-radius:12px;
+    padding:.75rem .9rem;box-shadow:var(--shadow)}
+  .uke .em{font-size:1.25rem;line-height:1.3}
+  .uke p{margin:.15rem 0 0;font-size:.86rem;color:var(--muted)}
+  .uke li.viktig{background:color-mix(in srgb,var(--gress) 13%,var(--panel));
+    border-color:color-mix(in srgb,var(--gress) 45%,var(--line))}
+  .uke li.viktig p{color:var(--fg2)}
+
+  .ukeplaner{display:grid;gap:1rem;margin-top:1rem}
+  .ukeplan{background:var(--panel);border:1px solid var(--line);border-radius:14px;
+    overflow:hidden;box-shadow:var(--shadow)}
+  .ukeplan .tittel{background:color-mix(in srgb,var(--gress) 10%,var(--panel));
+    padding:.65rem 1rem;font-weight:700;font-size:.95rem;
+    border-bottom:1px solid var(--line)}
+  .ukeplan .tittel span{font-weight:400;color:var(--muted);font-size:.82rem}
+  .ukeplan table{width:100%;border-collapse:collapse;font-size:.88rem}
+  .ukeplan td{padding:.42rem 1rem;border-top:1px solid var(--line);color:var(--fg2)}
+  .ukeplan tr:first-child td{border-top:0}
+  .ukeplan td:first-child{font-family:var(--font-mono);font-size:.7rem;
+    text-transform:uppercase;letter-spacing:.08em;color:var(--muted);
+    width:3.4rem;white-space:nowrap}
+  .ukeplan .lop{color:var(--gress);font-weight:650;
+    background:color-mix(in srgb,var(--gress) 13%,var(--panel))}
+  .ukeplan tr:has(.lop) td{background:color-mix(in srgb,var(--gress) 13%,var(--panel))}
+  .ukeplan .kampen{font-weight:650;color:var(--fg)}
+  .ukeplan .fri{color:var(--muted)}
+  .fokus{display:grid;grid-template-columns:auto 1fr;gap:.35rem .9rem;align-items:center;
+    margin-top:.7rem;padding:.95rem 1.15rem;border-radius:14px;
+    background:linear-gradient(140deg,hsl(140 50% 18%),hsl(133 52% 27%));
+    color:hsl(90 40% 95%);box-shadow:0 4px 18px -6px hsl(135 55% 20% / .5)}
+  .fokus .merke{grid-column:1 / -1;font-family:var(--font-mono);font-size:.64rem;
+    letter-spacing:.2em;color:var(--lime)}
+  .fokus .t{font-family:var(--font-display);font-size:2.3rem;font-weight:600;
+    line-height:1;color:var(--lime)}
+  .fokus p{margin:0;font-size:.95rem;color:hsl(100 25% 88%)}
+  .fokus p b{color:#fff}
+  .videoer{display:flex;flex-direction:column;gap:.55rem;margin:.7rem 0 .3rem}
+  .videokort{display:grid;grid-template-columns:auto 1fr;gap:.9rem;align-items:center;
+    text-decoration:none;background:hsl(140 45% 12%);border-radius:12px;
+    padding:.7rem .9rem;transition:transform .16s ease, box-shadow .16s ease}
+  .videokort:hover{transform:translateY(-2px);box-shadow:0 8px 22px -8px hsl(140 45% 10% / .55);opacity:1}
+  .videokort .play{width:44px;height:32px;border-radius:8px;background:#FF0033;
+    display:grid;place-items:center;color:#fff;font-size:.85rem;flex:0 0 auto}
+  .videokort .vtekst{display:flex;flex-direction:column;gap:.1rem}
+  .videokort .vtekst b{color:hsl(90 40% 95%);font-size:.92rem;line-height:1.3}
+  .videokort .vtekst small{color:hsl(110 15% 68%);font-size:.76rem;line-height:1.35}
+  .innspill{background:color-mix(in srgb,var(--gress) 10%,var(--panel));
+    border:2px solid color-mix(in srgb,var(--gress) 55%,var(--line));
+    border-radius:16px;padding:1.3rem 1.3rem 1.4rem;
+    box-shadow:0 6px 24px -10px hsl(135 55% 20% / .35)}
+  .innspill h2{margin-top:.1rem}
+  .innspill .kick{margin-bottom:.4rem}
+  html{scroll-behavior:smooth}
+  .til-skjema{text-align:center;margin-top:2.2rem}
+  .til-skjema a{display:inline-block;background:var(--gress);color:#fff;
+    text-decoration:none;font-weight:700;font-size:1.05rem;border-radius:999px;
+    padding:.95rem 2rem;box-shadow:0 8px 24px -8px hsl(135 55% 22% / .55);
+    transition:transform .16s ease}
+  .til-skjema a:hover{transform:translateY(-2px)}
+  .til-skjema p{margin:.6rem 0 0;font-size:.85rem;color:var(--muted)}
+  .sporsmal{display:flex;flex-direction:column;gap:.6rem;margin-top:.9rem}
+  .sporsmal input[type=text],.sporsmal textarea{font:inherit;color:var(--fg);
+    background:var(--panel);border:1px solid var(--line);border-radius:10px;
+    padding:.7rem .9rem;width:100%}
+  .sporsmal textarea{min-height:7.5rem;resize:vertical}
+  .sporsmal input:focus-visible,.sporsmal textarea:focus-visible{
+    outline:2px solid var(--gress);outline-offset:1px}
+  .sporsmal button{align-self:flex-start;font:inherit;font-weight:700;
+    background:var(--gress);color:#fff;border:0;border-radius:999px;
+    padding:.75rem 1.6rem;cursor:pointer;transition:transform .16s ease}
+  .sporsmal button:hover{transform:translateY(-2px)}
+  .sporsmal .krukke{position:absolute;left:-9999px}
+  .takk{background:color-mix(in srgb,var(--gress) 13%,var(--panel));
+    border:1px solid color-mix(in srgb,var(--gress) 45%,var(--line));
+    border-radius:12px;padding:1rem 1.2rem;margin-top:.9rem;display:none}
+  .takk b{color:var(--gress)}
+  .obs{border-left:4px solid var(--gul);
+    background:color-mix(in srgb,var(--gul) 14%,var(--panel));
+    border-radius:0 12px 12px 0;
+    padding:.9rem 1.1rem;margin-top:1rem;box-shadow:var(--shadow)}
+  .obs p{margin:.3rem 0;font-size:.94rem;color:var(--fg2)}
+
+  .husk{background:linear-gradient(150deg,hsl(140 50% 16%),hsl(133 52% 24%));
+    color:hsl(90 40% 95%);border-radius:16px;padding:1.3rem 1.4rem;margin-top:1rem}
+  .husk h2{color:inherit;font-size:1.25rem}
+  .husk li{color:hsl(100 25% 85%)}
+  .husk li b{color:#fff}
+  .husk li::marker{color:var(--lime)}
+
+  footer{margin-top:2.6rem;padding-top:1.2rem;border-top:1px solid var(--line);
+    font-size:.8rem;color:var(--muted)}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+<style>
+  .tilbake{display:inline-flex;align-items:center;gap:.4rem;font-family:var(--font-mono);font-size:.72rem;
+    letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-decoration:none;margin-bottom:1rem}
+  .tilbake:hover{color:var(--gress)}
+  .sidetopp{padding:2.2rem 0 .6rem}
+  .sidetopp h1{font-family:var(--font-display);font-size:clamp(1.9rem,6vw,2.6rem);line-height:1.1;margin:.2rem 0 .5rem}
+  .sidetopp p{color:var(--fg2);margin:0;max-width:34rem}
+  @media print{.tilbake{display:none}}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <div class="sidetopp">
+    <a class="tilbake" href="/g15/">← Løping for fotball · G15</a>
+    <p class="kick">Styrke</p>
+    <h1>Styrkeøktene deres</h1>
+    <p>Ti øvelser, kroppsvekt, alltid etter fotball eller etter den rolige
+    løpeturen. Ta gjerne fram denne sida på mobilen mens dere holder på.</p>
+  </div>
+  <section id="styrkeokter">
+    <style>
+      .m11{display:inline-block;font-family:var(--font-mono);font-size:.6rem;letter-spacing:.06em;
+        padding:.1rem .4rem;border-radius:999px;margin-right:.35rem;vertical-align:.08rem;
+        background:color-mix(in srgb,var(--gress) 16%,transparent);color:var(--gress);
+        border:1px solid color-mix(in srgb,var(--gress) 35%,transparent)}
+      .yt{display:inline-block;font-family:var(--font-mono);font-size:.6rem;letter-spacing:.05em;
+        padding:.08rem .4rem;border-radius:999px;text-decoration:none;white-space:nowrap;
+        background:color-mix(in srgb,var(--rod) 12%,transparent);color:var(--rod);
+        border:1px solid color-mix(in srgb,var(--rod) 30%,transparent)}
+      .yt:hover{background:color-mix(in srgb,var(--rod) 20%,transparent)}
+      .mny{display:inline-block;font-family:var(--font-mono);font-size:.6rem;letter-spacing:.06em;
+        padding:.1rem .4rem;border-radius:999px;margin-right:.35rem;vertical-align:.08rem;
+        background:color-mix(in srgb,var(--lime) 25%,transparent);color:var(--fg);
+        border:1px solid color-mix(in srgb,var(--lime) 45%,transparent)}
+    </style>
+    <div class="kort">
+      <p><b>Ti øvelser, 15 til 20 minutter.</b> Alt er kroppsvekt, med en
+      makker eller en benk som eneste utstyr. Økta tas <b>etter</b> fotball
+      eller etter den rolige løpeturen, aldri før.</p>
+      <p>Merket <span class="m11">11+</span> betyr at øvelsen også er med i
+      FIFA 11+, oppvarmingsprogrammet vi anbefaler på fotballtreningene.
+      Begynner dere med 11+ som oppvarming en dag, kan de merkede hoppes over
+      etterpå, og da tar økta ti minutter.</p>
+      <p><b>To økter, A og B.</b> Ta A den ene dagen og B den andre.
+      A jobber mest rett fram, B mest sideveis, sammen dekker de retningene
+      fotball og løping faktisk krever. Vil dere holde det enkelt, kjører dere
+      A begge dagene.</p>
+      <p class="liten" style="opacity:.8">Øvelsene er hentet fra Treni sin
+      øvelsesbank, satt opp av fysioterapeut og fjelløper Eirik Haugsnes.
+      <span class="m11">11+</span> = finnes også i FIFA 11+ ·
+      <span class="mny">NY</span> = det 11+ ikke har.</p>
+    </div>
+
+    <div class="ukeplan" style="margin-top:1rem">
+      <div class="tittel">Styrkeøkt A · rett fram <span>15 til 20 min · 10 min hvis dere har kjørt 11+</span></div>
+      <table>
+        <tr><td>1</td><td><span class="m11">11+</span><b class="lop">Nordic hamstring</b>3 × 3 til 5.
+          Kneståing, makker holder anklene. Senk deg sakte framover på 3 sekunder, ta imot med hendene.
+          Minst 48 timer mellom hver gang. <i>(11+ øvelse 9)</i> <a class="yt" href="https://www.youtube.com/results?search_query=nordic+hamstring+exercise+technique" target="_blank" rel="noopener" title="Se øvelsen på YouTube">▶ video</a></td></tr>
+        <tr><td>2</td><td><span class="m11">11+</span><b>Utfall fremover</b>3 × 8 per bein,
+          eller <b>ettbeins knebøy til benk</b> 3 × 6 per bein. Kneet stopper over foten, ikke innover.
+          <i>(11+ øvelse 11)</i> <a class="yt" href="https://www.youtube.com/results?search_query=forward+lunge+exercise+technique" target="_blank" rel="noopener" title="Se øvelsen på YouTube">▶ video</a></td></tr>
+        <tr><td>3</td><td><span class="mny">NY</span><b class="lop">Copenhagen adduction, kort arm</b>3 × 8 per side.
+          Sideplanke med det øverste beinet på en benk, bøyd kne. Uten benk:
+          <b>klem en ball mellom knærne</b>, 5 × 10 sekunder.
+          Lyske er ikke med i 11+, og lyskestrekk er en av de vanligste fotballskadene. <a class="yt" href="https://www.youtube.com/results?search_query=copenhagen+adduction+short+lever+exercise" target="_blank" rel="noopener" title="Se øvelsen på YouTube">▶ video</a></td></tr>
+        <tr><td>4</td><td><span class="mny">NY</span><b>Ettbeins stående tåhev</b>3 × 12 per bein.
+          Helt opp, helt ned. Øvelsen mot vonde hæler og legger. <a class="yt" href="https://www.youtube.com/results?search_query=single+leg+calf+raise+technique" target="_blank" rel="noopener" title="Se øvelsen på YouTube">▶ video</a></td></tr>
+        <tr><td>5</td><td><span class="mny">NY</span><b>Ettbeins soleushev med bøyd kne</b>2 × 12 per bein.
+          Treffer den dype leggmuskelen som tar støtet når du løper. <a class="yt" href="https://www.youtube.com/results?search_query=bent+knee+calf+raise+soleus" target="_blank" rel="noopener" title="Se øvelsen på YouTube">▶ video</a></td></tr>
+        <tr><td>6</td><td><span class="mny">NY</span><b>Glute bridge</b>3 × 12.
+          Løft hofta til kroppen er rett, hold ett sekund på toppen. Ett bein om det er lett. <a class="yt" href="https://www.youtube.com/results?search_query=glute+bridge+exercise+technique" target="_blank" rel="noopener" title="Se øvelsen på YouTube">▶ video</a></td></tr>
+        <tr><td>7</td><td><span class="mny">NY</span><b>Short-foot</b>3 × 10 per fot.
+          Trekk fotbua opp uten å krølle tærne. Rolig og lite, men det er dette som holder ankelen stabil. <a class="yt" href="https://www.youtube.com/results?search_query=short+foot+exercise+arch" target="_blank" rel="noopener" title="Se øvelsen på YouTube">▶ video</a></td></tr>
+        <tr><td>8</td><td><span class="m11">11+</span><b>Planke</b> 3 × 30 sek og
+          <b>sideplanke</b> 3 × 20 sek per side. Hofta står helt stille.
+          <i>(11+ øvelse 7 og 8)</i> <a class="yt" href="https://www.youtube.com/results?search_query=plank+and+side+plank+technique" target="_blank" rel="noopener" title="Se øvelsen på YouTube">▶ video</a></td></tr>
+        <tr><td>9</td><td><span class="m11">11+</span><b>Ettbeins balanse-reach</b>3 × 6 per bein.
+          Stå på ett bein, strekk det andre rolig framover, til siden og bakover.
+          <i>(11+ øvelse 10)</i> <a class="yt" href="https://www.youtube.com/results?search_query=single+leg+balance+reach+exercise" target="_blank" rel="noopener" title="Se øvelsen på YouTube">▶ video</a></td></tr>
+        <tr><td>10</td><td><span class="m11">11+</span><b>Flerretningshopp med kontrollert landing</b>3 × 5.
+          Land mykt med bøyde knær og <b>stå stille i 2 sekunder</b>. Landingen er hele poenget.
+          <i>(11+ øvelse 12)</i> <a class="yt" href="https://www.youtube.com/results?search_query=multidirectional+jump+landing+technique" target="_blank" rel="noopener" title="Se øvelsen på YouTube">▶ video</a></td></tr>
+      </table>
+    </div>
+
+    <div class="ukeplan" style="margin-top:1rem">
+      <div class="tittel">Styrkeøkt B · sideveis <span>15 min · andre økt i uka</span></div>
+      <table>
+        <tr><td>1</td><td><span class="mny">NY</span><b class="lop">Ettbeins hamstring curl på ball</b>3 × 6 per bein.
+          Ligg på ryggen med hælen på en fotball, løft hofta og rull ballen inn mot deg med ett bein.
+          Bakside lår i en annen vinkel enn nordic hamstring. <a class="yt" href="https://www.youtube.com/results?search_query=single+leg+hamstring+curl+ball" target="_blank" rel="noopener" title="Se øvelsen på YouTube">▶ video</a></td></tr>
+        <tr><td>2</td><td><span class="mny">NY</span><b>Step-down</b>3 × 8 per bein.
+          Stå på en kasse eller et trappetrinn, senk deg sakte ned på ett bein til hælen så vidt tar
+          bakken, opp igjen. Kneet skal ikke falle innover. Den beste øvelsen mot vondt under kneskåla. <a class="yt" href="https://www.youtube.com/results?search_query=step+down+exercise+knee+control" target="_blank" rel="noopener" title="Se øvelsen på YouTube">▶ video</a></td></tr>
+        <tr><td>3</td><td><span class="mny">NY</span><b>Sideutfall</b>3 × 8 per side.
+          Langt steg rett til siden, sett deg ned på det beinet, det andre strakt. Retningen fotball
+          faktisk skjer i, og den Økt A ikke har. <a class="yt" href="https://www.youtube.com/results?search_query=lateral+lunge+technique" target="_blank" rel="noopener" title="Se øvelsen på YouTube">▶ video</a></td></tr>
+        <tr><td>4</td><td><span class="mny">NY</span><b>Sideleie hofteabduksjon</b>3 × 12 per side.
+          Ligg på sida, løft det øverste beinet rolig opp og ned. Holder bekkenet stabilt når du løper. <a class="yt" href="https://www.youtube.com/results?search_query=side+lying+hip+abduction+exercise" target="_blank" rel="noopener" title="Se øvelsen på YouTube">▶ video</a></td></tr>
+        <tr><td>5</td><td><span class="mny">NY</span><b>Isometrisk adduksjon med ball</b>5 × 10 sek.
+          Klem en fotball mellom knærne, hold, slipp. Lyske igjen, men lettere enn Copenhagen. <a class="yt" href="https://www.youtube.com/results?search_query=isometric+adductor+squeeze+ball" target="_blank" rel="noopener" title="Se øvelsen på YouTube">▶ video</a></td></tr>
+        <tr><td>6</td><td><span class="mny">NY</span><b>Tåhev på step</b> 3 × 12 med stort bevegelsesutslag,
+          og <b>tibialis anterior-hev</b> 3 × 15. Den siste er forsida av leggen, mot beinhinnebetennelse. <a class="yt" href="https://www.youtube.com/results?search_query=calf+raise+on+step+full+range+of+motion" target="_blank" rel="noopener" title="Se øvelsen på YouTube">▶ video</a></td></tr>
+        <tr><td>7</td><td><span class="mny">NY</span><b>Dead bug</b>3 × 8 per side.
+          Ligg på ryggen, strekk motsatt arm og bein rolig ut uten at korsryggen slipper gulvet. <a class="yt" href="https://www.youtube.com/results?search_query=dead+bug+exercise+technique" target="_blank" rel="noopener" title="Se øvelsen på YouTube">▶ video</a></td></tr>
+        <tr><td>8</td><td><span class="m11">11+</span><b>Skater jumps</b>3 × 6 per side.
+          Hopp sideveis fra bein til bein, land mykt og hold balansen ett sekund.
+          <i>(11+ øvelse 12, sideveis variant)</i> <a class="yt" href="https://www.youtube.com/results?search_query=skater+jumps+exercise" target="_blank" rel="noopener" title="Se øvelsen på YouTube">▶ video</a></td></tr>
+      </table>
+    </div>
+
+    <div class="kort">
+      <p><b>Slik blir dere sterkere uke for uke:</b> samme øvelser, litt mer
+      hver gang. Uke 1 til 2: lær teknikken, færrest repetisjoner. Uke 3 til 4:
+      opp til øvre antall. Uke 5 og utover: saktere ned i nordic hamstring,
+      dypere ettbeins knebøy, lengre arm i Copenhagen. <b>Teknikk før antall</b>
+      blir teknikken dårlig, stopper du settet. <b>Ingen vekter</b> før dette sitter.</p>
+    </div>
+    <div class="obs">
+      <p><b>⚠️ Når du skal ta det roligere:</b> vondt under kneskåla eller i
+      hælen? Dropp hoppene, behold resten, styrke uten smerte er helt fint.
+      Er du støl i baksida av låret, venter du med nordic hamstring til
+      stølheten er borte. Og si fra til treneren, så justerer vi.</p>
+    </div>
+  </section>
+
+  <section id="hamstring">
+    <div class="kort">
+      <h2>Vondt bak på låret etter kamp?</h2>
+      <p>Det er baksida av låret, hamstringen. Etter en kamp med mange spurter
+      er den ofte stiv og øm i to til tre dager. Det er vanlig, og det går over
+      av seg selv. Men den skal ikke få vondt av mer spurting mens den er sår.
+      Så her er hva du gjør de dagene.</p>
+
+      <p><b>Først, den viktigste regelen:</b> gjør du noe som gjør vondt, stopp.
+      Stivhet som blir bedre når du varmer opp er greit. Smerte som kommer
+      brått, som stikker, eller som gjør at du halter, er noe annet. Da hopper
+      du over kampen og sier fra til treneren samme dag.</p>
+
+      <h3>Alternativ trening, så du holder deg i gang</h3>
+      <p>Alt dette trener kondisjon uten å strekke eller belaste hamstringen
+      hardt. Velg én om dagen, 30 til 45 minutter.</p>
+      <table>
+        <tr><td>1</td><td><b>Sykkel</b>, sittende, lett motstand og høy tråkkfrekvens. Ikke stå i pedalene.
+          Det beste alternativet, for du får pulsen opp uten å strekke baksida.</td></tr>
+        <tr><td>2</td><td><b>Svømming</b>, crawl eller rygg. Ikke bryst: beinsparket der belaster
+          baksida og innsida av låret.</td></tr>
+        <tr><td>3</td><td><b>Rask gange i motbakke</b>, 30 til 40 minutter. Finn en bakke
+          du bruker 3 til 5 minutter opp, gå raskt opp og rolig ned, 4 til 6 ganger.
+          Bakken skal være så bratt at du puster tungt uten å måtte ta lange skritt.
+          Korte, raske skritt, ikke lange. Lange skritt er det som strekker baksida.
+          Du skal kjenne det i lårene foran og i pusten, ikke bak på låret.</td></tr>
+        <tr><td>4</td><td><b>Overkropp og kjerne</b> fra Økt B: dead bug, planke, sideplanke,
+          push-ups. Alt som ikke strekker baksida av låret.</td></tr>
+      </table>
+      <p><b>Ikke:</b> spurter, hopp, sparkøvelser med strake bein, og ikke
+      tøy hamstringen hardt. En sår muskel blir ikke bedre av å dras i.</p>
+
+      <h3>Styrke, når det ikke gjør vondt lenger</h3>
+      <p>Vent til du kan gå raskt og jogge lett uten å kjenne det. Da begynner
+      du her, i denne rekkefølgen, og går ett steg videre bare når det forrige
+      steget er helt smertefritt. Det tar som regel en uke eller to.</p>
+      <table>
+        <tr><td>1</td><td><b>Hoftehev liggende (glute bridge)</b>, 3 × 12. Ligg på ryggen, føttene i gulvet,
+          løft hofta til kroppen er rett fra kne til skulder. Baksida jobber uten å
+          strekkes. Første øvelse, alltid. <a class="yt" href="https://www.youtube.com/results?search_query=glute+bridge+technique" target="_blank" rel="noopener">▶</a></td></tr>
+        <tr><td>2</td><td><b>Hoftehev på ett bein</b>, 3 × 8 per side. Samme, men det andre beinet i lufta.
+          Kjenner du forskjell på sidene, er det den svake du skal trene mest.</td></tr>
+        <tr><td>3</td><td><b>Rumensk markløft uten vekt</b>, 3 × 10. Hofta bak, rett rygg, hendene glir
+          nedover lårene til du kjenner et lett drag bak. Ikke lenger ned enn det. Dette er
+          Trenis øvelse for baksida, samme som løperne bruker. <a class="yt" href="https://www.youtube.com/results?search_query=romanian+deadlift+bodyweight+technique" target="_blank" rel="noopener">▶</a></td></tr>
+        <tr><td>4</td><td><b>Nordic hamstring</b>, 2 × 4, SISTE steget. Den som alt står i Økt A. Sakte ned,
+          ta imot med hendene. Denne er hard for baksida, så den kommer først når alt
+          annet er smertefritt. Blir det vondt underveis, tilbake til steg 3.</td></tr>
+      </table>
+      <p>Når du er tilbake på nordic uten å kjenne noe, er du klar for full trening
+      igjen. Da fortsetter du med Økt A og B som før.</p>
+    </div>
+    <div class="obs">
+      <p><b>⚠️ Når du skal til fysio, ikke bare vente:</b> vondt i mer enn en uke
+      selv om du har tatt det rolig, smerte som kom brått under en spurt, eller
+      et sted som er ømt å trykke på og gjør at du halter. Da er det ikke stivhet,
+      og da skal noen se på det. Si fra til treneren, så ordner vi time.
+      Øvelsesbanken er satt opp av en fysioterapeut som vet nøyaktig hva han skal se etter.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="kort">
+      <p><b>Spørsmål om øvelsene?</b> Skriv i Spond, eller ta det med treneren
+      på neste økt. Kjennes noe feil ut, stopper du og sier fra.</p>
+      <p><a href="/g15/#styrkeokter">Tilbake til lagsida →</a></p>
+    </div>
+  </section>
+</main>
+<script src="/banner.js?v=1" defer></script>
+</body>
+</html>

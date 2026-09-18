@@ -19,10 +19,22 @@ if (is_readable($cfg_sti)) {
             if ($rad) {
                 $radar = json_decode($rad['verdi'], true) ?: [];
                 $sist = substr((string) ($radar['sist'] ?? ''), 0, 10);
+                $sett9 = [];
                 foreach (($radar['lop_alle'] ?? $radar['lop_nn'] ?? []) as $l) {
-                    if (substr($l['dato'], 0, 10) >= date('Y-m-d')) {
-                        $lop[] = $l;
+                    if (substr($l['dato'], 0, 10) < date('Y-m-d')) { continue; }
+                    // Revisjon 10.09: radaren leverer råe navn. Trim doble
+                    // mellomrom, hopp over testarrangementer, merk AVLYST og
+                    // ta bort dubletter (samme navn og dato).
+                    $l['navn'] = trim(preg_replace('/\s+/u', ' ', (string) ($l['navn'] ?? '')));
+                    if ($l['navn'] === '' || preg_match('/^TEST\b|\bTEST\s*[-:]/u', $l['navn'])) { continue; }
+                    if (preg_match('/\bAVLYST\b/iu', $l['navn'])) {
+                        $l['navn'] = trim(preg_replace('/\s*[-:·]?\s*AVLYST\s*$/iu', '', $l['navn'])) . ' (avlyst)';
+                        $l['pamelding'] = '';
                     }
+                    $n9 = mb_strtolower($l['navn']) . '|' . substr($l['dato'], 0, 10);
+                    if (isset($sett9[$n9])) { continue; }
+                    $sett9[$n9] = true;
+                    $lop[] = $l;
                 }
             }
         } catch (Throwable $e) { /* siden vises med tom-melding */ }
@@ -57,35 +69,35 @@ $via9 = function (string $url, array $l) use ($konfig): string {
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Løpskalender Norge <?= date('Y') ?> — alle løp med påmelding | Treni</title>
+<title>Løpskalender Norge <?= date('Y') ?>: alle løp med påmelding | Treni</title>
 <meta name="description" content="Komplett oversikt over kommende løp i hele Norge: gateløp, terrengløp og fjelløp med dato, sted og påmeldingslenke. Oppdateres daglig.">
-<meta property="og:title" content="Løpskalender Norge — alle løp med påmelding">
-<meta property="og:description" content="Gateløp, terrengløp og fjelløp i hele landet — dato, sted og påmelding, samlet på ett sted. Oppdateres daglig.">
+<meta property="og:title" content="Løpskalender Norge · alle løp med påmelding">
+<meta property="og:description" content="Gateløp, terrengløp og fjelløp i hele landet, dato, sted og påmelding, samlet på ett sted. Oppdateres daglig.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://treni.no/lop.php">
 <link rel="canonical" href="https://treni.no/lop.php">
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="icon" type="image/png" href="/icon-192.png" sizes="192x192">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="stylesheet" href="stil.css?v=19">
+<link rel="stylesheet" href="stil.css?v=30">
 <script type="application/ld+json">
-<?= json_encode(['@context' => 'https://schema.org', '@graph' => array_map(fn($l) => [
-    '@type' => 'SportsEvent',
-    'name' => $l['navn'],
-    'description' => $l['navn'] . ' — løp' . ($l['by'] ? ' i ' . $l['by'] : ' i Nord-Norge')
-                     . ' ' . substr($l['dato'], 0, 10) . '. Dato, sted og påmelding i Trenis løpskalender.',
-    'startDate' => $l['dato'],
-    'endDate' => $l['dato'],
-    'eventStatus' => 'https://schema.org/EventScheduled',
-    'eventAttendanceMode' => 'https://schema.org/OfflineEventAttendanceMode',
-    'image' => 'https://treni.no/bilder/og.jpg',
-    'sport' => 'Løping',
-    'location' => ['@type' => 'Place', 'name' => $l['by'] ?: 'Norge',
-                   'address' => ['@type' => 'PostalAddress', 'addressCountry' => 'NO']],
-    'organizer' => ['@type' => 'Organization',
-                    'name' => $l['arrangor'] ?? ('Arrangøren av ' . $l['navn']),
-                    'url' => $l['pamelding'] ?: ($l['live'] ?: 'https://treni.no/lop.php')],
-    'url' => $l['pamelding'] ?: $l['live'],
+<?= json_encode(["@context" => "https://schema.org", "@graph" => array_map(fn($l) => [
+    "@type" => "SportsEvent",
+    "name" => $l["navn"],
+    "description" => $l["navn"] . "løp" . ($l["by"] ? " i " . $l["by"] : " i Nord-Norge")
+                     . " " . substr($l["dato"], 0, 10) . ". Dato, sted og påmelding i Trenis løpskalender.",
+    "startDate" => $l["dato"],
+    "endDate" => $l["dato"],
+    "eventStatus" => "https://schema.org/EventScheduled",
+    "eventAttendanceMode" => "https://schema.org/OfflineEventAttendanceMode",
+    "image" => "https://treni.no/bilder/og.jpg",
+    "sport" => "Løping",
+    "location" => ["@type" => "Place", "name" => $l["by"] ?: "Norge",
+                   "address" => ["@type" => "PostalAddress", "addressCountry" => "NO"]],
+    "organizer" => ["@type" => "Organization",
+                    "name" => $l["arrangor"] ?? ("Arrangøren av " . $l["navn"]),
+                    "url" => $l["pamelding"] ?: ($l["live"] ?: "https://treni.no/lop.php")],
+    "url" => $l["pamelding"] ?: $l["live"],
 ], array_slice($lop, 0, 50))], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?>
 </script>
 <style>
@@ -109,15 +121,15 @@ $via9 = function (string $url, array $l) use ($konfig): string {
 
 <header class="hero smal">
   <p class="kicker reveal"><a href="index.html" style="color:inherit">treni.no</a> · løpskalender</p>
-  <h1 class="reveal" style="font-size:clamp(1.8rem,5vw,2.7rem)">Løp i Norge —<br>alle på ett sted</h1>
+  <h1 class="reveal" style="font-size:clamp(1.8rem,5vw,2.7rem)">Løp i Norge,<br>alle på ett sted</h1>
   <p class="ingress reveal">Gateløp, terrengløp og fjelløp i hele Norge med dato, sted og
-  påmeldingslenke — hentet automatisk fra tidtakersystemet EQ Timing<?= $sist ? ', oppdatert ' . e9(substr($sist, 8, 2)) . '.' . e9(substr($sist, 5, 2)) : '' ?>.
+  påmeldingslenke, hentet automatisk fra tidtakersystemet EQ Timing<?= $sist ? ', oppdatert ' . e9(substr($sist, 8, 2)) . '.' . e9(substr($sist, 5, 2)) : '' ?>.
   Fant du løpet ditt? Da vet du hva du skal trene mot. 🏔️</p>
 </header>
 
 <section>
 <?php if (!$lop): ?>
-  <div class="kort"><p style="margin:0">Kalenderen fylles i løpet av dagen — kom tilbake litt senere,
+  <div class="kort"><p style="margin:0">Kalenderen fylles i løpet av dagen, kom tilbake litt senere,
   eller <a href="mailto:hei@treni.no">send oss en e-post</a>.</p></div>
 <?php else: ?>
   <div style="display:flex; gap:.6rem; margin:.2rem 0 1rem">
@@ -132,7 +144,7 @@ $via9 = function (string $url, array $l) use ($konfig): string {
     </select>
   </div>
   <div class="cta-strip">
-    <b>🎯 Meldt deg på et løp?</b> Treni bygger treningsplanen din mot akkurat det løpet —
+    <b>🎯 Meldt deg på et løp?</b> Treni bygger treningsplanen din mot akkurat det løpet,
     uke for uke, med en ekte trener på laget og skadefri fremgang som mål.
     <a href="bli-testloper.php"><b>Bli testløper →</b></a>
   </div>
@@ -155,14 +167,14 @@ $via9 = function (string $url, array $l) use ($konfig): string {
   <?php endforeach; ?>
   <?php endforeach; ?>
   <div class="cta-strip" style="margin-top:2rem">
-    <b>🏃 Vil du komme forberedt til start?</b> Treni leser treningen din fra Strava og
-    gir deg ukeplan og oppfølging mot løpet ditt — trenerledet, skadefritt først.
-    <a href="bli-testloper.php"><b>Sett meg på ventelista →</b></a>
+    <b>🏃 Vil du komme forberedt til start?</b> Treni leser treningen din fra klokka di (Strava eller Intervals.icu) og
+    gir deg ukeplan og oppfølging mot løpet ditt, trenerledet, skadefritt først.
+    <a href="bli-testloper.php"><b>Bli med som testløper →</b></a>
   </div>
   <p class="liten" style="margin-top:1.4rem">Kalenderen dekker arrangementer med påmelding/tidtaking
-  hos EQ Timing de neste 18 månedene — også neste års arrangementer, og oppdateres daglig. Mangler et løp?
+  hos EQ Timing de neste 18 månedene, også neste års arrangementer, og oppdateres daglig. Mangler et løp?
   <a href="mailto:hei@treni.no?subject=L%C3%B8p%20som%20mangler%20i%20kalenderen">Tips oss</a>,
-  så legger vi det inn. Treni er ikke tilknyttet EQ Timing — påmelding skjer hos arrangøren.</p>
+  så legger vi det inn. Treni er ikke tilknyttet EQ Timing, påmelding skjer hos arrangøren.</p>
 <?php endif; ?>
 <script>
 document.querySelectorAll('.lop-filter').forEach(function (kn) {
@@ -211,17 +223,17 @@ function settFilter(region, fylke) {
 <section aria-labelledby="om-kal-t" style="max-width:46rem">
   <h2 id="om-kal-t" style="font-size:1.3rem">Om løpskalenderen</h2>
   <p class="liten">Kalenderen samler kommende <b>gateløp, terrengløp, motbakkeløp og
-  fjelløp i hele Norge</b> — med eget filter for Nord-Norge, fra Helgeland via Lofoten,
+  fjelløp i hele Norge</b>: med eget filter for Nord-Norge, fra Helgeland via Lofoten,
   Harstad, Narvik og Tromsø til Alta, Hammerfest og Finnmark. Løpene hentes automatisk fra
   EQ Timing, som håndterer påmelding og tidtaking for de fleste norske mosjonsløp, og
   lista oppdateres hver morgen.</p>
   <h3 style="font-size:1.05rem; margin:1.1rem 0 .3rem">Hvordan melder jeg meg på et løp?</h3>
-  <p class="liten">Trykk «Påmelding» ved løpet — du sendes rett til arrangørens
+  <p class="liten">Trykk «Påmelding» ved løpet, du sendes rett til arrangørens
   påmeldingsside. Påmeldingen og betalingen skjer hos arrangøren, ikke hos Treni.</p>
   <h3 style="font-size:1.05rem; margin:1.1rem 0 .3rem">Hvordan trener jeg riktig mot et løp?</h3>
   <p class="liten">Gradvis oppbygging, riktig fordeling mellom rolig og hard trening, og
-  en plan som topper formen til løpsdagen — det er akkurat det <a href="index.html">Treni</a>
-  gjør: en trenerledet treningsveileder som leser treningen din fra Strava og bygger
+  en plan som topper formen til løpsdagen, det er akkurat det <a href="index.html">Treni</a>
+  gjør: en trenerledet treningsveileder som leser treningen din fra klokka di (Strava eller Intervals.icu) og bygger
   ukeplanen mot løpet ditt. <a href="bli-testloper.php">Bli testløper →</a></p>
   <h3 style="font-size:1.05rem; margin:1.1rem 0 .3rem">Mangler et løp i kalenderen?</h3>
   <p class="liten">Kalenderen dekker løp med påmelding hos EQ Timing. Arrangerer du et
@@ -232,11 +244,11 @@ function settFilter(region, fylke) {
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
  {"@type":"Question","name":"Hvordan melder jeg meg på et løp?",
-  "acceptedAnswer":{"@type":"Answer","text":"Bruk påmeldingslenken ved løpet i kalenderen — den går rett til arrangørens påmeldingsside hos EQ Timing. Påmelding og betaling skjer hos arrangøren."}},
+  "acceptedAnswer":{"@type":"Answer","text":"Bruk påmeldingslenken ved løpet i kalenderen, den går rett til arrangørens påmeldingsside hos EQ Timing. Påmelding og betaling skjer hos arrangøren."}},
  {"@type":"Question","name":"Hvilke løp dekker kalenderen?",
-  "acceptedAnswer":{"@type":"Answer","text":"Gateløp, terrengløp, motbakkeløp og fjelløp i hele Norge de neste 18 månedene — med fylkesfilter og eget Nord-Norge-filter — hentet automatisk fra EQ Timing og oppdatert daglig."}},
+  "acceptedAnswer":{"@type":"Answer","text":"Gateløp, terrengløp, motbakkeløp og fjelløp i hele Norge de neste 18 månedene, med fylkesfilter og eget Nord-Norge-filter, hentet automatisk fra EQ Timing og oppdatert daglig."}},
  {"@type":"Question","name":"Hvordan trener jeg riktig mot et løp?",
-  "acceptedAnswer":{"@type":"Answer","text":"Gradvis oppbygging, mest rolig trening og en plan som topper formen til løpsdagen. Treni er en trenerledet treningsveileder som leser treningen din fra Strava og bygger ukeplanen mot løpet ditt."}}]}
+  "acceptedAnswer":{"@type":"Answer","text":"Gradvis oppbygging, mest rolig trening og en plan som topper formen til løpsdagen. Treni er en trenerledet treningsveileder som leser treningen din fra klokka di (Strava eller Intervals.icu) og bygger ukeplanen mot løpet ditt."}}]}
 </script>
 
 <footer>
@@ -249,9 +261,10 @@ function settFilter(region, fylke) {
   </nav>
   <p>PAULSEN UTVIKLING · org.nr 938 158 614 · Norge ·
      <a href="mailto:hei@treni.no">hei@treni.no</a></p>
-  <p>Powered by Strava — this service is not affiliated with or endorsed by Strava.</p>
+  <p>Powered by Strava. This service is not affiliated with or endorsed by Strava.</p>
 </footer>
 
 </main>
+<script src="/banner.js?v=1" defer></script>
 </body>
 </html>

@@ -109,7 +109,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="icon" type="image/png" href="/icon-192.png" sizes="192x192">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="stylesheet" href="stil.css?v=18">
+<link rel="stylesheet" href="stil.css?v=30">
 </head>
 <body>
 <div class="bakteppe" aria-hidden="true"></div>
@@ -117,14 +117,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 <header class="hero smal">
   <p class="kicker reveal"><a href="index.html" style="color:inherit">treni.no</a> · samarbeid</p>
-  <h1 class="reveal" style="font-size:clamp(1.8rem,5vw,2.7rem)">Vi bygger det sammen —<br>og hjelper dine løpere</h1>
+  <h1 class="reveal" style="font-size:clamp(1.8rem,5vw,2.7rem)">Vi bygger det sammen,<br>og hjelper dine løpere</h1>
 </header>
 
 <?php if ($sendt): ?>
 <section>
   <div class="kort">
     <h3 style="margin-top:0">Takk<?php if (!empty($navn)) echo ", " . htmlspecialchars(explode(" ", $navn)[0]); ?>! 🤝</h3>
-    <p>Henvendelsen er mottatt — vi i Treni tar kontakt på e-post
+    <p>Henvendelsen er mottatt, vi i Treni tar kontakt på e-post
     <?php if (!empty($mobil)) echo "eller mobil "; ?>innen kort tid, så finner vi
     formen sammen.</p>
     <p style="margin-bottom:0"><a href="index.html">← Tilbake til forsiden</a></p>
@@ -137,16 +137,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
       <p style="font-size:1.55rem; margin:0" aria-hidden="true">👟</p>
       <h2 style="font-size:1.08rem; margin:.35rem 0 .4rem">Løpegrupper:<br>flere folk på økt</h2>
       <p style="margin:0; font-size:.95rem">Fellesøktene deres legges rett inn i medlemmenes
-      ukeplaner — med tid og sted. Slik gjør vi det med Tromsø Løpeklubb i dag.</p>
+      ukeplaner, med tid og sted. Slik gjør vi det med Tromsø Løpeklubb i dag.</p>
     </div>
     <div class="kort">
       <p style="font-size:1.55rem; margin:0" aria-hidden="true">🏁</p>
       <h2 style="font-size:1.08rem; margin:.35rem 0 .4rem">Arrangører: deltagere som<br>trener riktig mot ditt løp</h2>
       <p style="margin:0; font-size:.95rem">Løpet legges inn som mål med distanse, høydemeter
-      og terreng — og planene topper formen inn mot start.</p>
+      og terreng, og planene topper formen inn mot start.</p>
     </div>
   </div>
-  <p>Vi er i pilotfasen, og døra er åpen — fra en enkel avtale om fellesøkter
+  <p>Vi er i pilotfasen, og døra er åpen, fra en enkel avtale om fellesøkter
   til noe større. Skriv et par setninger om hvem dere er og hva dere ønsker,
   så tar vi i Treni kontakt.</p>
   <?php if ($feil): ?><p class="skjema-feil"><?php echo htmlspecialchars($feil); ?></p><?php endif; ?>
@@ -176,7 +176,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
       <input type="tel" name="mobil" autocomplete="tel" placeholder="f.eks. 900 00 000"
              value="<?php echo htmlspecialchars($_POST["mobil"] ?? ""); ?>">
     </label>
-    <label>Hva ser dere for dere? <span class="valgfritt">(valgfritt — faste fellesøkter,
+    <label>Hva ser dere for dere? <span class="valgfritt">(valgfritt, faste fellesøkter,
       et løp dere arrangerer, antall medlemmer …)</span>
       <textarea name="melding" rows="4"><?php echo htmlspecialchars($_POST["melding"] ?? ""); ?></textarea>
     </label>
@@ -188,7 +188,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   </form>
   <p class="liten" style="margin-top:1.5rem">Foretrekker du e-post? Skriv direkte til
   <a href="mailto:hei@treni.no?subject=Samarbeid%20med%20Treni">hei@treni.no</a>.
-  Opplysningene brukes kun til å svare dere —
+  Opplysningene brukes kun til å svare dere.
   <a href="personvern.html">les personvernerklæringen</a>.</p>
 </section>
 <?php endif; ?>
@@ -201,9 +201,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   </nav>
   <p>PAULSEN UTVIKLING · org.nr 938 158 614 · Norge ·
      <a href="mailto:hei@treni.no">hei@treni.no</a></p>
-  <p>Powered by Strava — this service is not affiliated with or endorsed by Strava.</p>
+  <p>Powered by Strava. This service is not affiliated with or endorsed by Strava.</p>
 </footer>
 
 </main>
+<script src="/banner.js?v=1" defer></script>
 </body>
 </html>

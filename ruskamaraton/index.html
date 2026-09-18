@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Northern Runners i Levi</title>
+<meta name="description" content="Northern Runners stilte med 33 løpere på Ruskamaraton Lapland i Levi 12. september 2026. Alle tidene, plassering i klassen og hvor de lå i feltet.">
+<meta property="og:title" content="Northern Runners i Levi">
+<meta property="og:description" content="33 løpere fra Tromsø i Levi. Alle tidene, plassering i klassen og hvor de lå i feltet.">
+<meta property="og:image" content="https://treni.no/og.jpg">
+<meta property="og:url" content="https://treni.no/ruskamaraton/">
+<meta name="theme-color" content="#123d2a">
+<link rel="icon" href="/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700;800&family=Inter+Tight:wght@400;500;600&display=swap">
+<style>
+:root{--bg:hsl(44 45% 97%);--fg:hsl(160 28% 9%);--muted:hsl(158 10% 36%);--surface:#fff;--border:hsl(148 15% 84%);--primary:hsl(152 62% 20%);--accent:hsl(84 80% 34%);--accent2:hsl(84 85% 88%);--radius:14px;--disp:"Sora",system-ui,sans-serif;--sans:"Inter Tight",system-ui,sans-serif}
+*{box-sizing:border-box}html,body{margin:0}body{background:var(--bg);color:var(--fg);font:16px/1.45 var(--sans)}
+header{background:linear-gradient(120deg,hsl(160 28% 9%) 20%,var(--primary) 70%,hsl(84 60% 25%) 115%);color:#fff;padding:1.1rem 1rem 1rem}
+.wrap{max-width:760px;margin:0 auto}
+.merke{font:800 .8rem var(--disp);letter-spacing:.08em;text-transform:uppercase;opacity:.85}.merke b{color:hsl(84 80% 60%)}
+h1{font:800 clamp(1.5rem,5.5vw,2.1rem)/1.1 var(--disp);margin:.3rem 0 .2rem;text-wrap:balance}
+.status{font-size:.9rem;opacity:.9;display:flex;flex-wrap:wrap;gap:.3rem 1rem}
+.meny{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.9rem;background:rgba(255,255,255,.1);border-radius:99px;padding:.25rem}.meny a{flex:1 1 30%;text-align:center;border-radius:99px;padding:.5rem .4rem;font:700 .9rem var(--disp);color:#fff;text-decoration:none}
+.meny a[aria-current=page]{background:#fff;color:var(--primary)}.meny2{margin-top:.5rem}
+.faner{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.7rem}.faner button{flex:1 1 40%;border:1.5px solid rgba(255,255,255,.35);background:rgba(255,255,255,.08);color:#fff;border-radius:99px;padding:.5rem .8rem;font:700 .95rem var(--disp);cursor:pointer}
+.faner button[aria-selected=true]{background:#fff;color:var(--primary);border-color:#fff}
+main{padding:1rem}section{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:.9rem 1rem;margin:0 0 .9rem}
+h2{font:700 1rem var(--disp);margin:0 0 .6rem}
+.filtre{display:grid;grid-template-columns:1fr;gap:.6rem}
+@media (min-width:640px){.filtre{grid-template-columns:1fr 1fr}}
+.sok input,.sok select{width:100%;border:1.5px solid var(--border);border-radius:99px;padding:.55rem .95rem;font:inherit;background:var(--bg);color:var(--fg);-webkit-appearance:none}
+.sok input:focus,.sok select:focus{outline:2px solid var(--accent);outline-offset:1px}
+.chips{display:flex;flex-wrap:wrap;gap:.35rem}.chips button{border:1.5px solid var(--border);background:var(--surface);color:var(--fg);border-radius:99px;padding:.28rem .7rem;font:600 .8rem var(--sans);cursor:pointer}
+.chips button[aria-pressed=true]{background:var(--primary);color:#fff;border-color:var(--primary)}.chips button small{opacity:.7;font-weight:500}
+.tabell{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:.88rem;font-variant-numeric:tabular-nums}
+th{text-align:left;font:600 .7rem var(--sans);text-transform:uppercase;letter-spacing:.05em;color:var(--muted);padding:.3rem .35rem;border-bottom:1.5px solid var(--border);white-space:nowrap;cursor:pointer;user-select:none}
+th[aria-sort=ascending]::after{content:" ↑"}th[aria-sort=descending]::after{content:" ↓"}
+td{padding:.35rem .35rem;border-top:1px solid var(--border);vertical-align:top}
+td.t,th.t{text-align:right;white-space:nowrap}
+tr.rad{cursor:pointer}tr.rad:hover td{background:var(--accent2)}
+.pl{display:inline-block;min-width:1.7rem;text-align:center;border-radius:6px;background:var(--accent2);color:var(--fg);font-weight:700;font-size:.82rem;padding:.05rem .3rem}
+.pl.g{background:hsl(45 95% 55%)}.pl.s{background:hsl(0 0% 85%)}.pl.b{background:hsl(28 60% 70%)}
+.navn{font-weight:700}.sub{display:block;font-size:.76rem;color:var(--muted)}
+.st{font:600 .72rem var(--sans);border-radius:6px;padding:.05rem .4rem;background:var(--border)}.st.dnf{background:hsl(8 70% 88%)}.st.dns{background:var(--border)}.st.under{background:hsl(45 95% 80%)}
+tr.mellom td{background:var(--bg);padding:.5rem .6rem}
+.split{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:.4rem}.split div{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:.4rem .5rem}
+.split b{display:block;font:800 1rem var(--disp);font-variant-numeric:tabular-nums}.split span{font-size:.72rem;color:var(--muted)}
+.tom{color:var(--muted);font-size:.9rem;margin:.2rem 0}
+.del{display:inline-block;margin-top:.5rem;border:1.5px solid var(--border);background:var(--surface);border-radius:99px;padding:.4rem .9rem;font:600 .85rem var(--sans);color:var(--fg);text-decoration:none;cursor:pointer}
+.tellere{display:flex;flex-wrap:wrap;gap:.3rem 1rem;font-size:.85rem;color:var(--muted);margin:0 0 .6rem}.tellere b{color:var(--fg)}
+footer{color:var(--muted);font-size:.8rem;text-align:center;padding:.5rem 1rem 2rem}footer a{color:var(--primary)}
+.mer{display:block;width:100%;margin-top:.6rem;border:1.5px solid var(--border);background:var(--surface);border-radius:99px;padding:.55rem;font:700 .9rem var(--disp);color:var(--primary);cursor:pointer}
+@media (max-width:640px){.skjul-m{display:none}}
+@media (prefers-color-scheme:dark){:root{color-scheme:dark;--bg:hsl(160 20% 8%);--fg:hsl(44 30% 94%);--muted:hsl(150 10% 65%);--surface:hsl(158 18% 12%);--border:hsl(155 12% 22%);--accent2:hsl(84 40% 22%)}.pl.s{background:hsl(0 0% 40%)}.st.dnf{background:hsl(8 40% 30%)}.st.under{background:hsl(45 50% 30%)}}
+.banner{position:sticky;bottom:0;z-index:50;display:flex;align-items:center;gap:.8rem;margin:.5rem auto 0;max-width:760px;background:linear-gradient(120deg,hsl(160 28% 9%),var(--primary));color:#fff;text-decoration:none;padding:.65rem 1rem;border-radius:14px 14px 0 0;box-shadow:0 -6px 24px rgba(0,0,0,.25)}
+.banner .b-venstre{display:flex;flex-direction:column;gap:.1rem;min-width:0;flex:1}
+.banner .b-laget{font-size:.74rem;opacity:.8;line-height:1.3}.banner .b-laget b{color:hsl(84 80% 60%)}
+@media (max-width:420px){.banner .b-tekst{display:none}}.banner .b-merke{font:800 1.2rem var(--disp)}.banner .b-merke b{color:hsl(84 80% 60%)}.banner .b-tekst{font-size:.8rem;line-height:1.25;opacity:.92}
+.banner .b-cta{flex:0 0 auto;background:hsl(84 80% 60%);color:hsl(160 28% 9%);font:800 1rem var(--disp);padding:.75rem 1.1rem;border-radius:99px;white-space:nowrap;box-shadow:0 4px 14px rgba(0,0,0,.25)}
+@media (max-width:420px){.banner .b-tekst{font-size:.74rem}.banner .b-cta{font-size:.92rem;padding:.7rem .9rem}}
+body{padding-bottom:.5rem}
+.nr-topp{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:.5rem;margin-top:.9rem}
+.nr-topp div{background:rgba(255,255,255,.12);border-radius:12px;padding:.55rem .7rem}
+.nr-topp b{display:block;font:800 1.5rem/1 var(--disp);font-variant-numeric:tabular-nums}
+.nr-topp span{font-size:.72rem;opacity:.85;line-height:1.3;display:block;margin-top:.2rem}
+.ovtit{display:flex;align-items:baseline;justify-content:space-between;gap:.6rem;margin:1.2rem 0 .3rem}
+.ovtit h2{margin:0}.ovtit span{font-size:.8rem;color:var(--muted)}
+.ref{background:var(--accent2);border-radius:10px;padding:.45rem .7rem;font-size:.82rem;margin:0 0 .5rem;color:var(--fg)}
+.ref b{font-variant-numeric:tabular-nums}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <div class="merke">Treni<b>.</b> Løpsdag</div>
+  <h1>Northern Runners i Levi</h1>
+  <div class="status"><span>Ruskamaraton Lapland</span><span>12. september 2026</span><span>Levi, Finland</span></div>
+  <div class="nr-topp" id="topp"></div>
+</div></header>
+
+<main class="wrap">
+<section>
+  <h2>Slik gikk det</h2>
+  <p class="tom" id="ingress">Henter resultatene …</p>
+  <div class="sok"><input id="sok" type="search" placeholder="Søk på navn eller startnummer" autocomplete="off"></div>
+</section>
+
+<div id="ovelser"></div>
+
+<section>
+  <h2>Om tallene</h2>
+  <p class="tom">Tidene er nettotid fra arrangørens tidtaking (Race Result). Plasseringen er i klassen.
+  «Raskest i feltet» er beste tid blant alle i samme øvelse og kjønn, og står der bare som målestokk.
+  Fullstendige resultater for alle 1 897 deltakerne ligger hos
+  <a href="https://www.ruskamaraton.com/tulokset/" target="_blank" rel="noopener">ruskamaraton.com</a>.</p>
+  <a class="del" id="csv" download="northern_runners_levi_2026.csv">Last ned klubbens resultater som CSV</a>
+</section>
+
+<footer><p>Siden er laget av <a href="https://treni.no/">Treni</a>, trenerledet løpsveiledning.</p></footer>
+</main>
+
+<a class="banner" href="https://treni.no/bli-testloper.php?fra=nr-levi" target="_blank" rel="noopener">
+  <span class="b-venstre"><span class="b-merke">Treni<b>.</b></span>
+    <span class="b-tekst"><b>Prøv Treni.</b> Vi leser hver økt du løper og sier om uka var rolig nok. En ekte trener ser over rådene.</span>
+    <span class="b-laget">Denne siden er laget av Treni<b>.</b> løpeveileder</span></span>
+  <span class="b-cta">Prøv gratis</span>
+</a>
+
+<script>
+let DATA = null, sok = '';
+const REKKE = ['Maraton', 'Halvmaraton', '10 km', 'Trailrun 16 km', 'Trailrun 16km', 'Ungdomsløp'];
+function medalje(p) { return p === 1 ? ' g' : p === 2 ? ' s' : p === 3 ? ' b' : ''; }
+function tegn() {
+  const hold = document.getElementById('ovelser');
+  hold.innerHTML = '';
+  const s = sok.toLowerCase();
+  const ovelser = REKKE.filter(o => DATA.per_ovelse[o]);
+  for (const ov of ovelser) {
+    const mine = DATA.rader.filter(r => r.ovelse === ov && (!s || r.navn.toLowerCase().includes(s) || r.nr === s));
+    if (!mine.length) { continue; }
+    const sec = document.createElement('section');
+    const tit = document.createElement('div');
+    tit.className = 'ovtit';
+    const h = document.createElement('h2'); h.textContent = ov;
+    const sp = document.createElement('span'); sp.textContent = mine.length + (mine.length === 1 ? ' løper' : ' løpere');
+    tit.append(h, sp); sec.appendChild(tit);
+    for (const kj of ['Kvinner', 'Menn']) {
+      const c = (DATA.kontekst[ov] || {})[kj];
+      if (!c || !mine.some(r => r.kjonn === kj)) { continue; }
+      const p = document.createElement('p');
+      p.className = 'ref';
+      p.innerHTML = '';
+      p.appendChild(document.createTextNode('Raskest blant ' + kj.toLowerCase() + ' i feltet: '));
+      const b = document.createElement('b'); b.textContent = c.best_tid;
+      p.appendChild(b);
+      p.appendChild(document.createTextNode(' (' + c.best_navn + '), av ' + c.felt + ' startende.'));
+      sec.appendChild(p);
+    }
+    const tab = document.createElement('div');
+    tab.className = 'tabell';
+    const t = document.createElement('table');
+    t.innerHTML = '<thead><tr><th>Klasse</th><th>Navn</th><th class="skjul-m">Startnr</th><th class="t">Tid</th></tr></thead>';
+    const tb = document.createElement('tbody');
+    for (const r of mine) {
+      const tr = document.createElement('tr');
+      tr.innerHTML = '<td><span class="pl' + medalje(r.plass) + '">' + r.plass_tekst + '</span> ' + r.klasse +
+        '</td><td><span class="navn"></span><span class="sub"></span></td>' +
+        '<td class="skjul-m">' + r.nr + '</td><td class="t">' + r.tid + '</td>';
+      tr.querySelector('.navn').textContent = r.navn;
+      tr.querySelector('.sub').textContent = r.kjonn + ' · plass ' + r.plass + ' i klassen';
+      tb.appendChild(tr);
+    }
+    t.appendChild(tb); tab.appendChild(t); sec.appendChild(tab);
+    hold.appendChild(sec);
+  }
+  if (!hold.children.length) {
+    const p = document.createElement('p');
+    p.className = 'tom'; p.textContent = 'Ingen løper passer søket.';
+    hold.appendChild(p);
+  }
+}
+function csv() {
+  const linjer = [['Øvelse', 'Klasse', 'Plass i klassen', 'Navn', 'Startnr', 'Tid'].join(';')];
+  for (const r of DATA.rader) {
+    linjer.push([r.ovelse, r.klasse, r.plass, r.navn, r.nr, r.tid]
+      .map(v => '"' + String(v == null ? '' : v).replace(/"/g, '""') + '"').join(';'));
+  }
+  const blob = new Blob(['﻿' + linjer.join('\n')], {type: 'text/csv;charset=utf-8'});
+  document.getElementById('csv').href = URL.createObjectURL(blob);
+}
+document.getElementById('sok').oninput = e => { sok = e.target.value.trim(); tegn(); };
+fetch('data.php?visning=klubb&klubb=Northern%20Runners&t=' + Math.floor(Date.now() / 60000)).then(r => r.json()).then(d => {
+  DATA = d;
+  const beste = d.rader.reduce((a, r) => (a && a.plass <= r.plass ? a : r), null);
+  const antOv = Object.keys(d.per_ovelse).length;
+  document.getElementById('topp').innerHTML =
+    '<div><b>' + d.antall + '</b><span>løpere fra klubben</span></div>' +
+    '<div><b>' + antOv + '</b><span>øvelser</span></div>' +
+    '<div><b>' + d.felt_totalt + '</b><span>i feltet totalt</span></div>' +
+    '<div><b>' + (beste ? beste.plass + '.' : '') + '</b><span>beste plassering i klassen</span></div>';
+  const topp = d.topp_klubber || [];
+  const storst = (topp.length > 1 && topp[0] && topp[0].antall === d.antall)
+    ? ' Ingen klubb i løpet hadde flere med: ' + topp[1].navn + ' var nest størst med ' + topp[1].antall + '.'
+    : '';
+  document.getElementById('ingress').textContent =
+    'Northern Runners stilte med ' + d.antall + ' løpere i Levi, fordelt på ' + antOv +
+    ' øvelser.' + storst + ' Her er alle tidene, sortert etter tid innenfor hver øvelse.';
+  tegn(); csv();
+}).catch(() => {
+  document.getElementById('ingress').textContent = 'Klarte ikke å hente resultatene akkurat nå. Prøv å laste siden på nytt.';
+});
+</script>
+</body>
+</html>

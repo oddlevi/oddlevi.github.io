@@ -35,8 +35,8 @@ $dato_pen = $dato ? ((int) substr($dato, 8, 2)) . '. ' . $MND9[(int) substr($dat
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
-<title><?= $lop ? e9($lop) . ' — ' : '' ?>tren riktig mot løpet | Treni</title>
-<link rel="stylesheet" href="stil.css?v=19">
+<title><?= $lop ? e9($lop) . '' : '' ?>tren riktig mot løpet | Treni</title>
+<link rel="stylesheet" href="stil.css?v=30">
 </head>
 <body>
 <div class="bakteppe" aria-hidden="true"></div>
@@ -51,21 +51,21 @@ $dato_pen = $dato ? ((int) substr($dato, 8, 2)) . '. ' . $MND9[(int) substr($dat
   <div style="border:2px solid hsl(var(--primary) / .45); border-radius:var(--radius);
        padding:1.6rem 1.5rem; background:hsl(var(--primary) / .06)">
     <p style="font-size:1.15rem; font-weight:650; margin:0 0 .5rem">
-      Skal vi hjelpe deg å trene riktig — og mest mulig optimalt — mot løpet? 🏃</p>
+      Skal vi hjelpe deg å trene riktig, og mest mulig optimalt, mot løpet? 🏃</p>
     <p style="margin:0 0 1.1rem">Treni lager treningsplanen <b>sammen med deg</b>:
       uke for uke frem mot <?= $lop ? e9($lop) : 'løpsdagen' ?>, tilpasset nivået ditt,
-      lest rett fra Strava — med en ekte trener på laget og skadefri fremgang som mål.
+      lest rett fra klokka di, med en ekte trener på laget og skadefri fremgang som mål.
       Gratis i testperioden.</p>
     <a href="bli-testloper.php?lop=<?= urlencode($lop) ?><?= $dato ? '&dato=' . e9($dato) : '' ?>&til=<?= urlencode($til) ?>&s=<?= e9($sig) ?>"
        style="display:inline-block; padding:.8rem 1.6rem; border-radius:999px;
        background:hsl(var(--primary)); color:hsl(var(--primary-fg)); font-weight:700;
-       font-size:1.05rem; text-decoration:none">✅ Ja takk — opprett Treni-treningsplan</a>
+       font-size:1.05rem; text-decoration:none">✅ Ja takk, opprett Treni-treningsplan</a>
     <p class="liten" style="margin:.8rem 0 0; color:hsl(var(--muted-fg, var(--fg)))">
       2 minutter å komme i gang · ingen betaling · du kan melde deg på løpet etterpå.</p>
   </div>
   <p class="liten" style="margin:1.6rem 0 0; text-align:center">
     <a href="<?= e9($til) ?>" target="_blank" rel="noopener nofollow"
-       style="color:inherit; opacity:.75">Nei takk — gå videre til påmeldingen hos arrangøren →</a></p>
+       style="color:inherit; opacity:.75">Nei takk, gå videre til påmeldingen hos arrangøren →</a></p>
 </section>
 </main>
 </body>

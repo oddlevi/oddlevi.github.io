@@ -1,5 +1,4 @@
 User-agent: *
-Disallow: /dashbord/
 Disallow: /venteliste-start.php
 Disallow: /en/join.php
 Disallow: /videre.php

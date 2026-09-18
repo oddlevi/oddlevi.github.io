@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Treni direkte</title>
+<meta name="description" content="Følg løpet direkte: mellomtider, ledere, målgang og din egen løper.">
+<meta property="og:title" content="Treni direkte">
+<meta property="og:description" content="Mellomtider, ledere og målgang. Søk opp løperen din og følg hele veien.">
+<meta property="og:image" content="og.jpg">
+<meta name="theme-color" content="#123d2a">
+<link rel="icon" href="/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700;800&family=Inter+Tight:wght@400;500;600&display=swap">
+<style>
+:root{--bg:hsl(44 45% 97%);--fg:hsl(160 28% 9%);--muted:hsl(158 10% 36%);--surface:#fff;--border:hsl(148 15% 84%);--primary:hsl(152 62% 20%);--accent:hsl(84 80% 34%);--accent2:hsl(84 85% 88%);--gul:hsl(38 85% 46%);--radius:14px;--sans:"Inter Tight",system-ui,sans-serif;--disp:"Sora",system-ui,sans-serif}
+*{box-sizing:border-box}html,body{margin:0}body{background:var(--bg);color:var(--fg);font:16px/1.45 var(--sans)}
+header{background:linear-gradient(120deg,hsl(160 28% 9%) 20%,var(--primary) 70%,hsl(84 60% 25%) 115%);color:#fff;padding:1.1rem 1rem 1rem}
+.wrap{max-width:760px;margin:0 auto}
+.merke{font:800 .8rem var(--disp);letter-spacing:.08em;text-transform:uppercase;opacity:.85}.merke b{color:hsl(84 80% 60%)}
+h1{font:800 clamp(1.5rem,5.5vw,2.1rem)/1.1 var(--disp);margin:.3rem 0 .2rem;text-wrap:balance}
+.status{font-size:.9rem;opacity:.9;display:flex;flex-wrap:wrap;gap:.3rem 1rem}
+.puls{display:inline-block;width:.55rem;height:.55rem;border-radius:50%;background:hsl(84 80% 60%);margin-right:.35rem;animation:p 1.6s infinite}@keyframes p{50%{opacity:.25}}
+.faner{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.7rem}.faner button{flex:1 1 40%;border:1.5px solid rgba(255,255,255,.35);background:rgba(255,255,255,.08);color:#fff;border-radius:99px;padding:.5rem .8rem;font:700 .95rem var(--disp);cursor:pointer}
+.faner button[aria-selected=true]{background:#fff;color:var(--primary);border-color:#fff}
+main{padding:1rem}section{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:.9rem 1rem;margin:0 0 .9rem}
+h2{font:700 1rem var(--disp);margin:0 0 .6rem;display:flex;align-items:baseline;gap:.5rem}h2 small{font:500 .8rem var(--sans);color:var(--muted)}
+.sok{display:flex;gap:.5rem}.sok input{flex:1;border:1.5px solid var(--border);border-radius:99px;padding:.6rem .95rem;font:inherit;background:var(--bg);color:var(--fg);-webkit-appearance:none}.sok input::placeholder{color:var(--muted);opacity:1}
+.sok input:focus{outline:2px solid var(--accent);outline-offset:1px}
+.treff{list-style:none;margin:.5rem 0 0;padding:0}.treff li{display:flex;justify-content:space-between;align-items:center;padding:.45rem .2rem;border-top:1px solid var(--border);cursor:pointer}.treff li:hover{background:var(--bg)}
+.treff .nr{font:600 .8rem var(--sans);color:var(--muted)}
+.folg{border-top:2px solid var(--accent2);margin-top:.6rem;padding-top:.6rem}
+.kort{border:1.5px solid var(--border);border-radius:12px;padding:.7rem .85rem;margin-top:.6rem;background:var(--bg)}
+.kort .topp{display:flex;justify-content:space-between;gap:.5rem;align-items:flex-start}.kort .navn{font:800 1.2rem var(--disp)}.kort .meta{font-size:.82rem;color:var(--muted)}
+.kort .fjern{border:none;background:none;color:var(--muted);cursor:pointer;font-size:.8rem;padding:.2rem}
+.linje{position:relative;margin:.75rem 0 .3rem;height:8px;border-radius:99px;background:var(--border);overflow:hidden}.linje i{position:absolute;inset:0 auto 0 0;background:linear-gradient(90deg,var(--primary),var(--accent));border-radius:99px}
+.stasj{display:flex;justify-content:space-between;font-size:.7rem;color:var(--muted);margin-bottom:.4rem}
+table{width:100%;border-collapse:collapse;font-size:.9rem;font-variant-numeric:tabular-nums}th{text-align:left;font:600 .72rem var(--sans);text-transform:uppercase;letter-spacing:.05em;color:var(--muted);padding:.25rem .3rem;border-bottom:1px solid var(--border)}td{padding:.4rem .3rem;border-bottom:1px solid var(--border);vertical-align:top}tr:last-child td{border-bottom:none}
+td.t,th.t{text-align:right;white-space:nowrap}.pl{display:inline-block;min-width:1.7rem;text-align:center;border-radius:6px;background:var(--accent2);color:var(--fg);font-weight:700;font-size:.82rem;padding:.05rem .3rem}
+.pl.g{background:hsl(45 95% 55%)}.pl.s{background:hsl(0 0% 85%)}.pl.b{background:hsl(28 60% 70%)}
+.anslag{font-size:.85rem;color:var(--muted);margin:.3rem 0 0}.anslag b{color:var(--fg)}
+.strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(88px,1fr));gap:.4rem}.strip div{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:.45rem .5rem;text-align:center}.strip b{display:block;font:700 1.15rem var(--disp)}.strip span{font-size:.72rem;color:var(--muted)}
+.strip.runder{grid-template-columns:repeat(auto-fit,minmax(64px,1fr))}
+.tom{color:var(--muted);font-size:.9rem;margin:.2rem 0}
+.feed li{display:grid;grid-template-columns:auto 1fr auto;gap:.6rem;padding:.4rem 0;border-top:1px solid var(--border);font-size:.9rem}.feed{list-style:none;margin:0;padding:0}.feed .kl{font-variant-numeric:tabular-nums;color:var(--muted)}
+footer{color:var(--muted);font-size:.8rem;text-align:center;padding:.5rem 1rem 2rem}footer a{color:var(--primary)}
+.del{display:inline-block;margin-top:.5rem;border:1.5px solid var(--border);background:var(--surface);border-radius:99px;padding:.4rem .9rem;font:600 .85rem var(--sans);color:var(--fg);text-decoration:none;cursor:pointer}
+.banner{position:sticky;bottom:0;z-index:50;display:flex;align-items:center;gap:.8rem;margin:.5rem auto 0;max-width:760px;background:linear-gradient(120deg,hsl(160 28% 9%),var(--primary));color:#fff;text-decoration:none;padding:.65rem 1rem;border-radius:14px 14px 0 0;box-shadow:0 -6px 24px rgba(0,0,0,.25)}
+.banner .b-venstre{display:flex;flex-direction:column;gap:.1rem;min-width:0;flex:1}.banner .b-merke{font:800 1.2rem var(--disp)}.banner .b-merke b{color:hsl(84 80% 60%)}.banner .b-tekst{font-size:.8rem;line-height:1.25;opacity:.92}
+.banner .b-cta{flex:0 0 auto;background:hsl(84 80% 60%);color:hsl(160 28% 9%);font:800 1rem var(--disp);padding:.75rem 1.1rem;border-radius:99px;white-space:nowrap;box-shadow:0 4px 14px rgba(0,0,0,.25)}
+@media (max-width:420px){.banner .b-tekst{font-size:.74rem}.banner .b-cta{font-size:.92rem;padding:.7rem .9rem}}
+.klubb-knapp{display:inline-block;margin-top:.3rem;border:1.5px solid var(--border);border-radius:99px;padding:.15rem .6rem;font:600 .75rem var(--sans);color:var(--primary);background:var(--surface)}
+.chips{display:flex;flex-wrap:wrap;gap:.35rem;margin:0 0 .8rem}.chips button{border:1.5px solid var(--border);background:var(--surface);color:var(--fg);border-radius:99px;padding:.28rem .7rem;font:600 .8rem var(--sans);cursor:pointer}
+.chips button[aria-pressed=true]{background:var(--primary);color:#fff;border-color:var(--primary)}.chips button small{opacity:.7;font-weight:500}
+.meny{display:flex;gap:.4rem;margin-top:.9rem;background:rgba(255,255,255,.1);border-radius:99px;padding:.25rem;flex-wrap:wrap}.meny a{flex:1 1 30%;text-align:center;border-radius:99px;padding:.5rem .4rem;font:700 .82rem var(--disp);color:#fff;text-decoration:none;white-space:nowrap}
+.meny a[aria-current=page]{background:#fff;color:var(--primary)}.meny2{margin-top:.5rem}
+.stat{text-align:right;white-space:nowrap}.stat b{display:block;font:800 1.3rem var(--disp);font-variant-numeric:tabular-nums}.stat span{font-size:.75rem;color:var(--muted)}
+.d{font-weight:700}.d.foran{color:hsl(140 55% 32%)}.d.bak{color:hsl(8 70% 45%)}
+@media (prefers-color-scheme:dark){:root{color-scheme:dark;--bg:hsl(160 20% 8%);--fg:hsl(44 30% 94%);--muted:hsl(150 10% 65%);--surface:hsl(158 18% 12%);--border:hsl(155 12% 22%);--accent2:hsl(84 40% 22%)}.pl.s{background:hsl(0 0% 35%)}.pl.g{color:#111}.d.foran{color:hsl(140 55% 55%)}.d.bak{color:hsl(8 80% 65%)}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <div class="merke">Treni<b>.</b> direkte</div>
+  <h1 id="tittel">Henter løpet …</h1>
+  <div class="status"><span><span class="puls"></span><span id="oppdatert">henter …</span></span><span id="start"></span><span id="paameldt"></span></div>
+  <nav class="meny" aria-label="Sider">
+    <a href="#alle" id="meny-alle" aria-current="page" onclick="window.velgAlleEtapper&&window.velgAlleEtapper()">Alle løperne</a>
+    <a href="#deltakere" id="meny-deltakere">Se deltakere</a>
+    <a href="#klubb" id="meny-klubb" hidden>Klubben</a>
+    <a href="#" id="meny-eq" target="_blank" rel="noopener" onclick="window.logg&&window.logg('ut',{'mål':'eqtiming'})">EQ Timing</a>
+  </nav>
+  <div class="faner" role="tablist" id="faner"></div>
+</div></header>
+<main class="wrap" id="vis-alle">
+  <div class="chips" id="klasser" aria-label="Klasse"></div>
+  <section id="folg">
+    <h2>🔎 Følg en løper <small>navn, startnummer eller klubb</small></h2>
+    <div class="sok"><input id="q" type="search" placeholder="navn, startnummer eller klubb" autocomplete="off" inputmode="search"></div>
+    <ul class="treff" id="treff"></ul>
+    <div id="mine"></div>
+  </section>
+  <section>
+    <h2 id="loype-h"><span id="loype-tittel">⛰️ Løypa</span> <small id="loype-info"></small></h2>
+    <div class="strip" id="strip"></div>
+  </section>
+  <section>
+    <h2 id="leder-h">🏁 Ledere</h2>
+    <table id="leder"><thead><tr><th>#</th><th>Løper</th><th>Klasse</th><th class="t" id="leder-tid-h">Tid</th></tr></thead><tbody></tbody></table>
+    <p class="tom" id="leder-tom">Ingen passeringer ennå.</p>
+    <button type="button" id="leder-mer" hidden style="display:block;width:100%;margin-top:.6rem;border:1.5px solid var(--border);background:var(--surface);border-radius:99px;padding:.55rem;font:700 .9rem var(--disp);color:var(--primary);cursor:pointer">Vis flere</button>
+  </section>
+  <section>
+    <h2>⏱️ Siste passeringer</h2>
+    <ul class="feed" id="siste"></ul>
+    <p class="tom" id="siste-tom">Kommer når løpet er i gang.</p>
+  </section>
+  <p style="text-align:center"><a class="del" id="delknapp">📣 Del denne siden</a></p>
+</main>
+<main class="wrap" id="vis-deltakere" hidden>
+  <h2 style="font:800 1.25rem var(--disp);margin:.2rem 0 .4rem" id="delt-h">Deltakerne</h2>
+  <p class="tom" style="margin:0 0 .8rem" id="delt-intro">Henter startlista …</p>
+  <div class="chips" id="delt-klasser" aria-label="Klasse"></div>
+  <section>
+    <div class="sok"><input id="delt-q" type="search" placeholder="søk i startlista: navn, klubb eller startnummer" autocomplete="off" inputmode="search"></div>
+    <p class="tom" id="delt-antall" style="margin:.5rem 0 0"></p>
+    <table id="delt-tabell" style="margin-top:.4rem"><thead><tr><th>Løper</th><th>Klasse</th><th>Klubb</th></tr></thead><tbody></tbody></table>
+    <button type="button" id="delt-mer" hidden style="display:block;width:100%;margin-top:.6rem;border:1.5px solid var(--border);background:var(--surface);border-radius:99px;padding:.55rem;font:700 .9rem var(--disp);color:var(--primary);cursor:pointer">Vis flere</button>
+  </section>
+  <section>
+    <h2>🏃 Klubbene <small>flest påmeldte først</small></h2>
+    <div class="chips" id="delt-klubber"></div>
+  </section>
+  <p style="text-align:center"><a class="del" id="delknapp5">📣 Del startlista</a></p>
+</main>
+<main class="wrap" id="vis-klubb" hidden>
+  <h2 style="font:800 1.25rem var(--disp);margin:.2rem 0 .4rem" id="klubb-h">Klubben</h2>
+  <p class="tom" style="margin:0 0 .8rem" id="klubb-intro">Henter …</p>
+  <section>
+    <table id="klubb-tabell"><thead><tr><th>Løper</th><th>Sist sett</th><th class="t">Tid</th><th class="t">Plass</th></tr></thead><tbody></tbody></table>
+    <p class="tom" id="klubb-tom">Henter …</p>
+  </section>
+  <p style="text-align:center"><a class="del" id="delknapp3">📣 Del</a></p>
+</main>
+<a class="banner" id="banner" href="https://treni.no/bli-testloper.php" target="_blank" rel="noopener" onclick="window.logg&&window.logg('ut',{'mål':'banner'})">
+  <span class="b-venstre"><span class="b-merke">Treni<b>.</b></span><span class="b-tekst">Treneren som ser hver økt. Løpeplan hver uke, ekte trener bak.</span></span>
+  <span class="b-cta">Prøv Treni gratis →</span>
+</a>
+<footer>Tider fra EQ Timing, oppdateres hvert 45. sekund. Laget av <a href="https://treni.no">Treni.no</a>, treneren som ser hver økt.</footer>
+<script>
+(function(){
+  var ARR=(location.search.match(/[?&]arr=(\d+)/)||[])[1], API='data.php'+(ARR?'?arr='+ARR+'&':'?'), etappe=null, mine=[], LOP={}, BY=false, KEY='live_';
+  window.logg=function(h,data){ if(ARR) return; try{ fetch('data.php?logg='+encodeURIComponent(h),{method:'POST',keepalive:true,headers:{'Content-Type':'application/json'},body:JSON.stringify(data||{})}); }catch(e){} };
+  function $(id){return document.getElementById(id);}
+  function km(x){return (Math.round(x*10)/10).toString().replace('.',',');}
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function fmt(s){s=Math.round(Math.abs(s));var h=Math.floor(s/3600),m=Math.floor(s%3600/60),x=s%60;return h?h+':'+String(m).padStart(2,'0')+':'+String(x).padStart(2,'0'):m+':'+String(x).padStart(2,'0');}
+  function plass(p){if(!p)return'';return'<span class="pl'+(p===1?' g':p===2?' s':p===3?' b':'')+'">'+p+'</span>';}
+  function kort(n){return n.split(' ').length>2?n.split(' ')[0]+' '+n.split(' ').slice(-1)[0]:n;}
+  function etNavn(uid){var e=(LOP.etapper||[]).filter(function(x){return String(x.uid)===String(uid);})[0];return e?(e.kort||e.navn):'';}
+  var valgtKl={}, STASJ={};
+  function klParam(){ if(etappe==='alle'){return '';} var v=valgtKl[etappe]||[]; return v.length?'&klasser='+encodeURIComponent(v.join(',')):''; }
+  function lagre(k,v){try{localStorage.setItem(KEY+k,JSON.stringify(v));}catch(e){}}
+  function tegnKlasser(d){
+    var v=valgtKl[etappe]||[], boks=$('klasser');
+    if(!d.klasser||!d.klasser.length){boks.innerHTML='';return;}
+    var menn=d.klasser.filter(function(k){return /menn|gutter/i.test(k.navn);}).map(function(k){return k.navn;});
+    var kvinner=d.klasser.filter(function(k){return /kvinner|jenter/i.test(k.navn);}).map(function(k){return k.navn;});
+    function lik(a,b){return a.length===b.length&&a.slice().sort().join('|')===b.slice().sort().join('|');}
+    var sum=function(l){return d.klasser.filter(function(k){return l.indexOf(k.navn)>=0;}).reduce(function(s,k){return s+k.antall;},0);};
+    boks.innerHTML='<button type="button" data-kl="" aria-pressed="'+(!v.length)+'">Alle klasser</button>'
+      +(menn.length>1?'<button type="button" data-gruppe="menn" aria-pressed="'+lik(v,menn)+'">Menn <small>'+sum(menn)+'</small></button>':'')
+      +(kvinner.length>1?'<button type="button" data-gruppe="kvinner" aria-pressed="'+lik(v,kvinner)+'">Kvinner <small>'+sum(kvinner)+'</small></button>':'')
+      +d.klasser.map(function(k){return'<button type="button" data-kl="'+esc(k.navn)+'" aria-pressed="'+(v.indexOf(k.navn)>=0)+'">'+esc(k.navn)+' <small>'+k.antall+'</small></button>';}).join('');
+    boks.querySelectorAll('button').forEach(function(b){b.addEventListener('click',function(){
+      var k=b.dataset.kl, g=b.dataset.gruppe, v=valgtKl[etappe]||[];
+      if(g){v=lik(v,g==='menn'?menn:kvinner)?[]:(g==='menn'?menn.slice():kvinner.slice());}
+      else if(!k){v=[];}else if(v.indexOf(k)>=0){v=v.filter(function(x){return x!==k;});}else{v.push(k);}
+      valgtKl[etappe]=v; lagre('klasser',valgtKl); window.logg('klasse',{etappe:etappe,klasser:v.join(',')}); last();
+    });});
+  }
+  function tegnOversikt(d){
+      var e=d.etappe; tegnKlasser(d); var kf=(valgtKl[etappe]||[]).length>0;
+      $('tittel').textContent=etappe==='alle'?LOP.navn+', alle løperne':LOP.navn+((LOP.etapper||[]).length>1?' · '+(etNavn(e.uid)||e.navn):'');
+      $('oppdatert').textContent='oppdatert '+new Date(d.hentet).toLocaleTimeString('no-NO',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+      $('start').textContent=e.start?'start kl. '+e.start:'';
+      $('paameldt').textContent=e.paameldt?e.paameldt+(kf?' i valgte klasser':' påmeldt'):'';
+      if(etappe!=='alle'){STASJ[etappe]=d.stasjoner.map(function(s){return (BY?s.navn.replace('Runde ','R'):s.navn.split(' ')[0])+(s.km&&!BY?' '+km(s.km):'');});}
+      if(BY&&d.backyard){
+        var by=d.backyard, ig=by.igjen.filter(function(r){return r.igjen>0;});
+        $('loype-tittel').textContent='🔁 Runde for runde'; $('loype-info').textContent=by.runde_km?km(by.runde_km)+' km per runde, ny start hver hele time':'';
+        $('strip').className='strip runder';
+        $('strip').innerHTML=(ig.length?ig:by.igjen.slice(0,1)).map(function(r){return'<div><b>'+r.igjen+'</b><span>'+esc(r.navn.replace('Runde ','runde '))+'</span></div>';}).join('')||'<div><b>'+e.paameldt+'</b><span>på startstreken</span></div>';
+      }else{
+        $('loype-tittel').textContent=etappe==='alle'?'🏁 I mål per etappe':'⛰️ Løypa';
+        $('loype-info').textContent=etappe==='alle'?'i mål av påmeldte':km(e.km)+' km · '+Math.max(0,d.stasjoner.length-1)+' mellomtider';
+        $('strip').className='strip';
+        $('strip').innerHTML=d.stasjoner.map(function(s){return'<div><b>'+s.antall+'</b><span>'+esc(s.navn)+(s.km?' · '+km(s.km)+' km':'')+'</span></div>';}).join('');
+      }
+      window._sisteOversikt=d; var visAntall=window._visAntall||50;
+      var lbAlle=d.maal.antall?d.maal.liste:d.leder.liste, lb=lbAlle.slice(0,visAntall);
+      var hv=d.maal.antall?'🏁 Målgang <small>'+d.maal.antall+' i mål'+(etappe==='alle'?' i alle klasser, etappe for etappe':'')+'</small>'
+             :(BY?'🏁 Lengst i løpet <small>'+(d.leder.stasjon?'har fullført '+esc(d.leder.stasjon.toLowerCase())+', '+km(d.leder.km)+' km':'venter på start')+'</small>'
+                 :'🏁 Ledere ved '+esc(d.leder.stasjon||'start')+(d.leder.km?' <small>'+km(d.leder.km)+' km</small>':''));
+      $('leder-h').innerHTML=hv; $('leder-tid-h').textContent=BY&&!d.maal.antall?'Samlet tid':'Tid';
+      $('leder').querySelector('tbody').innerHTML=lb.map(function(r){return'<tr data-ed="'+esc(String(r.ed||''))+'" style="cursor:pointer" title="Trykk for passeringene"><td>'+plass(kf&&(valgtKl[etappe]||[]).length===1?r.plass_kl:r.plass)+'</td><td><b>'+esc(kort(r.navn))+'</b>'+(r.klubb?'<br><small style="color:var(--muted)">'+esc(r.klubb)+'</small>':'')+'</td><td><small>'+esc(r.klasse)+'</small></td><td class="t"><b>'+r.tid+'</b>'+(r.plass_kl?'<br><small style="color:var(--muted)">'+r.plass_kl+'. i kl.</small>':'')+'</td></tr>';}).join('');
+      $('leder-tom').hidden=lb.length>0; $('leder').hidden=!lb.length;
+      var mer=$('leder-mer'); mer.hidden=lbAlle.length<=visAntall; mer.textContent='Vis flere ('+Math.max(0,lbAlle.length-visAntall)+' til)';
+      $('leder').querySelectorAll('tbody tr[data-ed]').forEach(function(tr){tr.addEventListener('click',function(){var ed=tr.dataset.ed; if(!ed){return;} if(mine.indexOf(ed)<0){mine.push(ed);lagre('mine',mine);} window.logg('folg',{fra:'leder'}); lastMine(); setTimeout(function(){var m=$('mine'); if(m){m.scrollIntoView({behavior:'smooth',block:'start'});}},300);});});
+      $('siste').innerHTML=d.siste.map(function(r){return'<li><span class="kl">'+r.klokke.slice(0,5)+'</span><span><b>'+esc(kort(r.navn))+'</b> '+(BY?'fullførte '+esc(r.stasjon.toLowerCase()):'passerte '+esc(r.stasjon))+' ('+km(r.km)+' km)</span><span class="kl">'+r.tid+(r.plass?' · '+r.plass+'.':'')+'</span></li>';}).join('');
+      $('siste-tom').hidden=d.siste.length>0;
+  }
+  function lastAlleEtapper(){
+    var kortnavn=function(n){return String(n||'').replace(' konkurranse','');};
+    Promise.all([
+      fetch(API+'visning=resultater&etappe=alle&_='+Date.now()).then(function(r){return r.json();}),
+      Promise.all((LOP.etapper||[]).map(function(e){return fetch(API+'visning=oversikt&etappe='+e.uid+'&_='+Date.now()).then(function(r){return r.json();}).then(function(d){d._kort=e.kort||e.navn;return d;});}))
+    ]).then(function(res){
+      var alle=res[0], ds=res[1], siste=[], stasjoner=[], rekke={};
+      (LOP.etapper||[]).forEach(function(e,i){rekke[e.kort||e.navn]=i;});
+      stasjoner.push({antall:alle.etappe.fullfort+' av '+alle.etappe.paameldt,navn:'alle etapper',km:0});
+      (alle.etapper||[]).forEach(function(e){stasjoner.push({antall:(e.fullfort||0)+' av '+(e.paameldt||0),navn:kortnavn(e.navn),km:e.km});});
+      var maal=(alle.rader||[]).filter(function(r){return r.status==='TIME';}).map(function(r){var k=etNavn(r.etappe)||kortnavn(r.etappe_navn);return {ed:r.ed,navn:r.navn,klubb:r.klubb,klasse:(r.klasse||'')+' · '+k,plass:r.plass,plass_kl:r.plass_kl,tid:r.tid,sek:r.sek,_r:(rekke[k]||0)*10000+(r.plass||0)};});
+      maal.sort(function(a,b){return a._r-b._r;});
+      ds.forEach(function(d){(d.siste||[]).forEach(function(r){var x=Object.assign({},r);x.stasjon=r.stasjon+' ('+d._kort+')';siste.push(x);});});
+      siste.sort(function(a,b){return b.klokke<a.klokke?-1:1;});
+      tegnOversikt({hentet:alle.hentet,etappe:{navn:'alle',km:0,paameldt:alle.etappe.paameldt,start:''},klasser:[],stasjoner:stasjoner,
+        maal:{antall:alle.etappe.fullfort,liste:maal},leder:{stasjon:'',km:0,liste:[]},siste:siste.slice(0,25)});
+    }).catch(function(){ $('oppdatert').textContent='fikk ikke kontakt, prøver igjen'; });
+    lastMine();
+  }
+  function last(){
+    if(etappe==='alle'){ return lastAlleEtapper(); }
+    fetch(API+'visning=oversikt&etappe='+etappe+klParam()+'&_='+Date.now()).then(function(r){return r.json();}).then(tegnOversikt)
+    .catch(function(){ $('oppdatert').textContent='fikk ikke kontakt, prøver igjen'; });
+    lastMine();
+  }
+  function lastMine(){
+    if(!mine.length){ $('mine').innerHTML=''; return; }
+    fetch(API+'ed='+mine.join(',')+'&_='+Date.now()).then(function(r){return r.json();}).then(function(d){
+      $('mine').innerHTML='<div class="folg">'+d.lopere.map(kortHtml).join('')+'</div>';
+      $('mine').querySelectorAll('.fjern').forEach(function(b){b.addEventListener('click',function(){mine=mine.filter(function(x){return x!==b.dataset.ed;});lagre('mine',mine);lastMine();});});
+    });
+  }
+  function kortHtml(l){
+    var tot=l.etappe_km, sist=l.maal?{km:tot,sek:l.maal.sek,stasjon:'Mål'}:(l.passeringer.length?l.passeringer[l.passeringer.length-1]:null);
+    var pros=sist?Math.min(100,sist.km/tot*100):0;
+    var forrige={km:0,sek:0};
+    function strekk(p){var dk=p.km-forrige.km, ds=p.sek-forrige.sek; var ut='<b>'+fmt(ds)+'</b>'+(BY?'':(dk>0?'<br><small style="color:var(--muted)">'+fmt(Math.round(ds/dk))+' /km</small>':'')); forrige={km:p.km,sek:p.sek}; return ut;}
+    function margin(p){var ds=p.sek-forrige.sek; var m=3600-ds; return m>=0?'<span class="d foran">'+fmt(m)+' igjen</span>':'<span class="d bak">'+fmt(-m)+' over</span>';}
+    function pl2(p){return (p.plass?'<span class="pl">'+p.plass+'</span>':'')+(p.plass_kl?' <small style="color:var(--muted)">'+p.plass_kl+'. i kl.</small>':'');}
+    var rad=l.passeringer.map(function(p){var mg=BY?margin(p):''; return'<tr><td>'+esc(p.stasjon)+' <small style="color:var(--muted)">'+km(p.km)+' km</small></td><td class="t"><b>'+p.tid+'</b>'+(p.klokke?'<br><small style="color:var(--muted)">kl. '+p.klokke.slice(0,5)+'</small>':'')+'</td><td class="t">'+strekk(p)+(BY?'<br><small>'+mg+'</small>':'')+'</td><td class="t">'+pl2(p)+'</td></tr>';}).join('');
+    if(l.maal){var m=l.maal; rad+='<tr><td><b>🏁 Mål</b> <small style="color:var(--muted)">'+km(tot)+' km</small></td><td class="t"><b>'+m.tid+'</b>'+(m.klokke?'<br><small style="color:var(--muted)">kl. '+m.klokke.slice(0,5)+'</small>':'')+'</td><td class="t">'+strekk({km:tot,sek:m.sek})+'</td><td class="t">'+pl2(m)+'</td></tr>';}
+    var ans='';
+    if(!BY&&!l.maal&&sist){ans='<p class="anslag">Grovt anslag sluttid <b>'+fmt(sist.sek/(sist.km/tot))+'</b> om farten holder.</p>';}
+    var st=l.status?'<span class="pl">'+l.status+'</span>':(l.maal?'i mål':(sist?(BY?l.runder+' runde'+(l.runder===1?'':'r')+' fullført':'underveis'):'venter på start'+(l.start?' kl. '+l.start.slice(0,5):'')));
+    return'<div class="kort"><div class="topp"><div><div class="navn">'+esc(l.navn)+'</div><div class="meta">'+(l.startnr?'#'+l.startnr+' · ':'')+esc(l.klasse)+(l.klubb?' · '+esc(l.klubb):'')+((LOP.etapper||[]).length>1?' · '+esc(l.etappe_navn):'')+' · '+st+'</div></div><button class="fjern" data-ed="'+l.ed+'" title="Slutt å følge">✕</button></div>'+
+      '<div class="linje"><i style="width:'+pros+'%"></i></div>'+(rad?'<table><thead><tr><th>'+(BY?'Runde':'Post')+'</th><th class="t">Tid</th><th class="t">'+(BY?'Rundetid':'Strekk')+'</th><th class="t">Plass</th></tr></thead><tbody>'+rad+'</tbody></table>':'<p class="tom">Ingen passeringer ennå.</p>')+ans+'</div>';
+  }
+  var sokTimer=null;
+  $('q').addEventListener('input',function(){
+    clearTimeout(sokTimer); var q=this.value.trim();
+    if(q.length<2){$('treff').innerHTML='';return;}
+    sokTimer=setTimeout(function(){
+      fetch(API+'q='+encodeURIComponent(q)).then(function(r){return r.json();}).then(function(d){
+        window.logg('sok',{q:q,antall:d.treff.length});
+        $('treff').innerHTML=(d.treff.length>1?'<li data-alle="1"><span><b>Følg alle '+d.treff.length+'</b></span><span class="nr">＋</span></li>':'')+(d.treff.length?d.treff.map(function(t){return'<li data-ed="'+t.ed+'"><span><b>'+esc(t.navn)+'</b> <small style="color:var(--muted)">'+esc(t.klasse)+(t.klubb?' · '+esc(t.klubb):'')+'</small></span><span class="nr">'+(t.startnr?'#'+t.startnr:'')+((LOP.etapper||[]).length>1?' · '+esc(etNavn(t.etappe)):'')+'</span></li>';}).join(''):'<li><span class="tom">Ingen treff.</span></li>');
+        $('treff').querySelectorAll('li[data-ed]').forEach(function(li){li.addEventListener('click',function(){var ed=String(li.dataset.ed);var t=d.treff.filter(function(x){return String(x.ed)===ed;})[0]||{};window.logg('folg',{ed:ed,navn:t.navn,klubb:t.klubb,klasse:t.klasse,q:q});if(mine.indexOf(ed)<0){mine.push(ed);lagre('mine',mine);}$('q').value='';$('treff').innerHTML='';lastMine();});});
+        var alleLi=$('treff').querySelector('li[data-alle]'); if(alleLi){alleLi.addEventListener('click',function(){window.logg('folg_alle',{q:q,antall:d.treff.length,klubb:(d.treff[0]||{}).klubb});d.treff.forEach(function(t){var ed=String(t.ed);if(mine.indexOf(ed)<0){mine.push(ed);}});mine=mine.slice(-12);lagre('mine',mine);$('q').value='';$('treff').innerHTML='';lastMine();});}
+      });
+    },250);
+  });
+  $('delknapp').addEventListener('click',function(){window.logg('del',{visning:'alle'});var u=location.href.split('#')[0];if(navigator.share){navigator.share({title:LOP.navn+' direkte',url:u});}else{navigator.clipboard&&navigator.clipboard.writeText(u);this.textContent='Lenke kopiert ✓';}});
+  $('leder-mer').addEventListener('click',function(){ window._visAntall=(window._visAntall||50)+50; if(window._sisteOversikt){tegnOversikt(window._sisteOversikt);} });
+  window.velgAlleEtapper=function(){ if((LOP.etapper||[]).length<2||etappe==='alle'){return;} etappe='alle'; document.querySelectorAll('.faner button').forEach(function(x){x.setAttribute('aria-selected',x.dataset.etappe==='alle'?'true':'false');}); last(); };
+  window.lastAlle=last;
+  window.stasjFor=function(uid){return STASJ[uid]||[];};
+  // Oppsettet: lop.json først, så resten
+  fetch('lop.json?_='+Date.now()).then(function(r){return r.json();}).then(function(c){
+    LOP=c; window.LOP=c; BY=c.type==='backyard'; KEY='live_'+c.slug+'_';
+    try{ mine=JSON.parse(localStorage.getItem(KEY+'mine')||'[]'); valgtKl=JSON.parse(localStorage.getItem(KEY+'klasser')||'{}')||{}; }catch(e){}
+    var et=(ARR&&c.referanse&&c.referanse.etapper)?Object.keys(c.referanse.etapper).map(function(k){return{uid:+k,navn:c.referanse.etapper[k],kort:c.referanse.etapper[k]};}):(c.etapper||[]);
+    LOP.etapper=et;
+    document.title=c.navn+' direkte'; document.querySelector('meta[property="og:title"]').content=c.navn+' direkte';
+    $('tittel').textContent=c.navn;
+    $('meny-eq').href='https://live.eqtiming.com/'+(ARR||c.event);
+    $('banner').href='https://treni.no/bli-testloper.php?kilde='+encodeURIComponent(c.slug);
+    if(c.klubb){ $('meny-klubb').hidden=false; $('meny-klubb').textContent=c.klubb; }
+    var f=$('faner'); f.innerHTML=et.length>1?et.map(function(e,i){return'<button role="tab" aria-selected="'+(i===0)+'" data-etappe="'+e.uid+'">'+esc(e.kort||e.navn)+'</button>';}).join('')+'<button role="tab" aria-selected="false" data-etappe="alle" style="flex-basis:100%">Alle løperne, alle klasser</button>':'';
+    f.style.display=et.length>1?'':'none';
+    etappe=et.length?et[0].uid:null;
+    f.querySelectorAll('button').forEach(function(b){b.addEventListener('click',function(){f.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-selected','false');});b.setAttribute('aria-selected','true');etappe=(b.dataset.etappe==='alle'?'alle':+b.dataset.etappe);window._visAntall=50;window.logg('etappe',{etappe:etappe});last();});});
+    window.logg('besok',{visning:location.hash==='#klubb'?'klubb':'alle',ref:(document.referrer||'').slice(0,80)});
+    window.dispatchEvent(new Event('lop-klar'));
+  }).catch(function(){ $('tittel').textContent='Fant ikke løpsoppsettet'; });
+})();
+</script>
+<script>
+(function(){   // Se deltakere (Odd 14.09): hele startlista med søk, klasse- og klubbfilter; trykk på en løper for å følge
+  var ARR=(location.search.match(/[?&]arr=(\d+)/)||[])[1], API='data.php'+(ARR?'?arr='+ARR+'&':'?');
+  function $(id){return document.getElementById(id);}
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  var data=null, kl='', klubb='', vis=80;
+  function tegn(){
+    if(!data){return;}
+    var q=$('delt-q').value.trim().toLowerCase();
+    var rader=data.rader.filter(function(r){
+      if(kl&&r.klasse!==kl){return false;}
+      if(klubb&&r.klubb!==klubb){return false;}
+      if(q&&!(r.navn.toLowerCase().indexOf(q)>=0||(r.klubb||'').toLowerCase().indexOf(q)>=0||String(r.startnr)===q)){return false;}
+      return true;
+    });
+    var flere=(window.LOP&&window.LOP.etapper||[]).length>1;
+    $('delt-antall').textContent=rader.length===data.antall?data.antall+' påmeldte':rader.length+' av '+data.antall+' påmeldte';
+    $('delt-tabell').querySelector('tbody').innerHTML=rader.slice(0,vis).map(function(r){return'<tr data-ed="'+esc(r.ed)+'" style="cursor:pointer" title="Trykk for å følge"><td><b>'+esc(r.navn)+'</b>'+(r.startnr?' <small style="color:var(--muted)">#'+r.startnr+'</small>':'')+(flere?'<br><small style="color:var(--muted)">'+esc(r.etappe_navn)+'</small>':'')+(r.status?' <span class="pl">'+esc(r.status)+'</span>':'')+'</td><td><small>'+esc(r.klasse)+'</small></td><td><small>'+esc(r.klubb||'')+'</small></td></tr>';}).join('');
+    var mer=$('delt-mer'); mer.hidden=rader.length<=vis; mer.textContent='Vis flere ('+Math.max(0,rader.length-vis)+' til)';
+    $('delt-tabell').querySelectorAll('tr[data-ed]').forEach(function(tr){tr.addEventListener('click',function(){
+      var ed=tr.dataset.ed, key='live_'+((window.LOP||{}).slug||'')+'_mine', mine=[];
+      try{mine=JSON.parse(localStorage.getItem(key)||'[]');}catch(e){}
+      if(mine.indexOf(ed)<0){mine.push(ed);mine=mine.slice(-12);} try{localStorage.setItem(key,JSON.stringify(mine));}catch(e){}
+      window.logg&&window.logg('folg',{fra:'deltakere',ed:ed}); location.hash='#alle'; setTimeout(function(){var m=$('mine'); if(m){m.scrollIntoView({behavior:'smooth',block:'start'});}},400);
+    });});
+    $('delt-klasser').innerHTML='<button type="button" data-kl="" aria-pressed="'+(!kl)+'">Alle klasser <small>'+data.antall+'</small></button>'+data.klasser.map(function(k){return'<button type="button" data-kl="'+esc(k.navn)+'" aria-pressed="'+(kl===k.navn)+'">'+esc(k.navn)+' <small>'+k.antall+'</small></button>';}).join('');
+    $('delt-klasser').querySelectorAll('button').forEach(function(b){b.addEventListener('click',function(){kl=b.dataset.kl; vis=80; window.logg&&window.logg('delt_klasse',{klasse:kl}); tegn();});});
+    $('delt-klubber').innerHTML=(klubb?'<button type="button" data-klubb="" aria-pressed="false">Alle klubber</button>':'')+data.klubber.slice(0,30).map(function(k){return'<button type="button" data-klubb="'+esc(k.navn)+'" aria-pressed="'+(klubb===k.navn)+'">'+esc(k.navn)+' <small>'+k.antall+'</small></button>';}).join('');
+    $('delt-klubber').querySelectorAll('button').forEach(function(b){b.addEventListener('click',function(){klubb=b.dataset.klubb; vis=80; window.logg&&window.logg('delt_klubb',{klubb:klubb}); tegn(); window.scrollTo(0,0);});});
+  }
+  function last(){
+    var LOP=window.LOP||{};
+    fetch(API+'visning=deltakere&_='+Date.now()).then(function(r){return r.json();}).then(function(d){
+      data=d; $('oppdatert').textContent='startlista hentet '+new Date(d.hentet).toLocaleTimeString('no-NO',{hour:'2-digit',minute:'2-digit'});
+      $('delt-h').textContent='Deltakerne i '+LOP.navn; $('delt-intro').textContent=d.antall+' påmeldte'+(d.klubber.length?' fra '+d.klubber.length+' klubber':'')+'. Trykk på en løper for å følge hen direkte.';
+      tegn();
+    }).catch(function(){$('delt-intro').textContent='Fikk ikke hentet startlista, prøver igjen.';});
+  }
+  $('delt-q').addEventListener('input',function(){vis=80; tegn();});
+  $('delt-mer').addEventListener('click',function(){vis+=80; tegn();});
+  $('delknapp5').addEventListener('click',function(){window.logg&&window.logg('del',{visning:'deltakere'});var u=location.href.split('#')[0]+'#deltakere';if(navigator.share){navigator.share({title:'Startlista, '+(window.LOP||{}).navn,url:u});}else{navigator.clipboard&&navigator.clipboard.writeText(u);this.textContent='Lenke kopiert ✓';}});
+  window.lastDeltakere=last;
+})();
+</script>
+<script>
+(function(){   // Klubbvisning (Odd 12.09): klubben fra lop.json, sortert etter hvor langt de har kommet
+  var ARR=(location.search.match(/[?&]arr=(\d+)/)||[])[1], API='data.php'+(ARR?'?arr='+ARR+'&':'?');
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function fmtS(x){x=Math.round(Math.abs(x));var h=Math.floor(x/3600),m=Math.floor(x%3600/60),q=x%60;return h?h+':'+String(m).padStart(2,'0')+':'+String(q).padStart(2,'0'):m+':'+String(q).padStart(2,'0');}
+  function last(){
+    var LOP=window.LOP||{}; if(!LOP.klubb){return;} var BY=LOP.type==='backyard';
+    fetch(API+'klubb='+encodeURIComponent(LOP.klubb)+'&_='+Date.now()).then(function(r){return r.json();}).then(function(d){
+      document.getElementById('oppdatert').textContent='oppdatert '+new Date(d.hentet).toLocaleTimeString('no-NO',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+      var tb=document.querySelector('#klubb-tabell tbody'), sistEt=null, html='';
+      d.lopere.forEach(function(l){
+        if((LOP.etapper||[]).length>1&&l.etappe!==sistEt){sistEt=l.etappe;html+='<tr><td colspan="4" style="background:var(--bg);font:700 .8rem var(--disp)">'+esc(l.etappe_navn)+'</td></tr>';}
+        var sist=l.maal?null:(l.passeringer.length?l.passeringer[l.passeringer.length-1]:null);
+        var status=l.maal?'🏁 Mål':(sist?(BY?l.runder+' runder':esc(sist.stasjon))+' <small style="color:var(--muted)">'+String(sist.km).replace('.',',')+' km</small>':(l.status||'<span style="color:var(--muted)">ikke startet</span>'));
+        var tid=l.maal?l.maal.tid:(sist?sist.tid:''), pl=l.maal?l.maal.plass:(sist?sist.plass:0), plk=l.maal?l.maal.plass_kl:(sist?sist.plass_kl:0);
+        var fp={km:0,sek:0}; function strekkT(p){var dk=p.km-fp.km, ds=p.sek-fp.sek; fp={km:p.km,sek:p.sek}; return '<b>'+fmtS(ds)+'</b>'+(BY?'<br><small style="color:var(--muted)">'+(3600-ds>=0?fmtS(3600-ds)+' igjen':fmtS(ds-3600)+' over')+'</small>':(dk>0?'<br><small style="color:var(--muted)">'+fmtS(Math.round(ds/dk))+' /km</small>':''));}
+        function plT(p){return (p.plass?'<span class="pl">'+p.plass+'</span>':'')+(p.plass_kl?'<br><small style="color:var(--muted)">'+p.plass_kl+'. i kl.</small>':'');}
+        var det=l.passeringer.map(function(p){return'<tr><td style="padding-left:1rem">'+esc(p.stasjon)+' <small style="color:var(--muted)">'+String(p.km).replace('.',',')+' km</small></td><td class="t"><b>'+p.tid+'</b><br><small style="color:var(--muted)">'+(p.klokke?'kl. '+p.klokke.slice(0,5)+' · ':'')+(p.plass===1?'leder':(p.bak?fmtS(p.bak)+' bak leder':''))+'</small></td><td class="t">'+strekkT(p)+'</td><td class="t">'+plT(p)+'</td></tr>';}).join('');
+        if(l.maal){var mm=l.maal; det+='<tr><td style="padding-left:1rem"><b>🏁 Mål</b></td><td class="t"><b>'+mm.tid+'</b><br><small style="color:var(--muted)">'+(mm.klokke?'kl. '+mm.klokke.slice(0,5)+' · ':'')+(mm.plass===1?'vinner':(mm.bak?fmtS(mm.bak)+' bak vinner':''))+'</small></td><td class="t">'+strekkT({km:l.etappe_km,sek:mm.sek})+'</td><td class="t">'+plT(mm)+'</td></tr>';}
+        var totKm=l.etappe_km, sistP=l.maal?totKm:(l.passeringer.length?l.passeringer[l.passeringer.length-1].km:0);
+        var stripHtml='<div class="linje" style="margin:.5rem 1rem .3rem"><i style="width:'+Math.min(100,sistP/totKm*100)+'%"></i></div>';
+        var kan=det.length>0;
+        html+='<tr'+(kan?' class="klubb-rad" data-ed="'+l.ed+'" style="cursor:pointer"':'')+'><td><b>'+esc(l.navn)+'</b><br><small style="color:var(--muted)">'+(l.startnr?'#'+l.startnr+' · ':'')+esc(l.klasse)+'</small>'+(kan?'<br><span class="klubb-knapp">'+(window._klubbOpen&&window._klubbOpen[l.ed]?'Vis mindre ‹':'Se passeringer ›')+'</span>':'')+'</td><td>'+status+'</td><td class="t"><b>'+tid+'</b></td><td class="t">'+(pl?'<span class="pl">'+pl+'</span>'+(plk?'<br><small style="color:var(--muted)">'+plk+'. i kl.</small>':''):'')+'</td></tr>';
+        if(kan){html+='<tr class="klubb-det" data-for="'+l.ed+'"'+(window._klubbOpen&&window._klubbOpen[l.ed]?'':' hidden')+'><td colspan="4" style="padding:0 0 .4rem;background:var(--bg)">'+stripHtml+'<table style="margin:0;font-size:.85rem"><thead><tr><th style="padding-left:1rem">'+(BY?'Runde':'Post')+'</th><th class="t">Tid</th><th class="t">'+(BY?'Rundetid':'Strekk')+'</th><th class="t">Plass</th></tr></thead><tbody>'+det+'</tbody></table></td></tr>';}
+      });
+      tb.innerHTML=html; document.getElementById('klubb-tom').hidden=d.lopere.length>0; document.getElementById('klubb-tom').textContent='Ingen fra klubben i startlista.';
+      window._klubbOpen=window._klubbOpen||{};
+      tb.querySelectorAll('tr.klubb-rad').forEach(function(r){r.addEventListener('click',function(){var ed=r.dataset.ed, d2=tb.querySelector('tr.klubb-det[data-for="'+ed+'"]'); if(!d2) return; d2.hidden=!d2.hidden; window._klubbOpen[ed]=!d2.hidden; var kn=r.querySelector('.klubb-knapp'); if(kn){kn.textContent=d2.hidden?'Se passeringer ›':'Vis mindre ‹';} if(!d2.hidden&&window.logg){window.logg('klubb_passeringer',{ed:ed});}});});
+      document.getElementById('klubb-h').textContent=LOP.klubb+' i '+LOP.navn;
+      document.getElementById('klubb-intro').textContent=d.lopere.length+' løpere fra '+LOP.klubb+', sortert etter hvor langt de har kommet.';
+    }).catch(function(){document.getElementById('oppdatert').textContent='fikk ikke kontakt, prøver igjen';});
+  }
+  window.lastKlubb=last;
+  document.getElementById('delknapp3').addEventListener('click',function(){window.logg&&window.logg('del',{visning:'klubb'});var u=location.href.split('#')[0]+'#klubb';if(navigator.share){navigator.share({title:(window.LOP||{}).klubb+' i '+(window.LOP||{}).navn,url:u});}else{navigator.clipboard&&navigator.clipboard.writeText(u);this.textContent='Lenke kopiert ✓';}});
+})();
+</script>
+<script>
+(function(){
+  function vis(){
+    var LOP=window.LOP||{}; var v=location.hash==='#klubb'&&LOP.klubb?'klubb':(location.hash==='#deltakere'?'deltakere':'alle');
+    if(location.hash==='#alle'&&window.velgAlleEtapper){window.velgAlleEtapper();}
+    ['alle','deltakere','klubb'].forEach(function(k){var vk=document.getElementById('vis-'+k), mk=document.getElementById('meny-'+k); if(vk){vk.hidden=v!==k;} if(mk){mk.setAttribute('aria-current',v===k?'page':'false');}});
+    var f=document.getElementById('faner'); if(f){f.style.display=(v==='alle'&&(LOP.etapper||[]).length>1)?'':'none';}
+    if(v==='klubb'){document.getElementById('tittel').textContent=LOP.klubb+' i '+LOP.navn;}
+    if(v==='deltakere'){document.getElementById('tittel').textContent=LOP.navn+', startlista';}
+    if(window.logg&&window._visLogget){window.logg('visning',{visning:v});} window._visLogget=true;
+    oppdater();
+  }
+  function oppdater(){ if(!window.LOP){return;} if(location.hash==='#klubb'&&window.LOP.klubb){window.lastKlubb();}else if(location.hash==='#deltakere'){window.lastDeltakere();}else{window.lastAlle();} }
+  window.addEventListener('hashchange',vis);
+  window.addEventListener('lop-klar',vis);
+  setInterval(oppdater,45000);
+  document.addEventListener('visibilitychange',function(){if(!document.hidden){oppdater();}});
+})();
+</script>
+</body>
+</html>

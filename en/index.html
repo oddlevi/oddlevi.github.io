@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Treni: a real coach, one that sees every run and never sleeps</title>
-<meta name="description" content="Coach-led running guidance for road and mountain running, built on your own Strava data. Concrete weekly advice in Telegram, injury prevention first.">
-<meta property="og:title" content="Treni: a real coach, one that sees every run and never sleeps">
-<meta property="og:description" content="Coach-led running guidance for road and mountain running, built on your own training data.">
+<title>Treni · training plans for runners, with a real coach</title>
+<meta name="description" content="Most runners go too hard on their easy days. Treni reads every run you do, shows whether the week was easy enough, and recommends what to change next week. A real coach reviews the advice you get. Every week.">
+<meta property="og:title" content="Run easy, the secret every fast runner knows.">
+<meta property="og:description" content="A coach-led plan built on the sessions from your watch. A real coach, every week.">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://treni.no/bilder/og.jpg">
+<meta property="og:image" content="https://treni.no/bilder/og.jpg?v=20260911c">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:url" content="https://treni.no/en/">
@@ -18,50 +18,65 @@
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="icon" type="image/png" href="/icon-192.png" sizes="192x192">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="stylesheet" href="../stil.css?v=20">
+<link rel="stylesheet" href="../stil.css?v=30">
 </head>
 <body>
 <div class="bakteppe" aria-hidden="true"></div>
 <nav class="sprakvalg" aria-label="Language"><a href="/">NO</a><span aria-current="page">EN</span></nav>
-<nav class="toppmeny" aria-label="Menu"><a href="../lop.php">🏁 Race calendar</a></nav>
 <main class="bred">
 
 <header class="hero hero-foto"><div class="indre">
-  <p class="kicker reveal">treni.no</p>
+  <p class="kicker slagord reveal">Run easy, the secret every fast runner knows.</p>
   <h1 class="reveal">Do you know if you are<br>training right,<br>right&nbsp;now?</h1>
-  <p class="ingress reveal" style="margin-bottom:.35rem">Treni reads every run you log on Strava, and a real coach reviews the advice you get. Every week.</p>
-  <p class="ingress reveal">Your runs are fetched from Strava the moment you upload, on road or mountain trails. <b>Injury prevention comes first</b>. Every week you get concrete advice in Telegram, and your coach is always in the loop.</p>
+  <p class="ingress reveal" style="margin-bottom:.35rem">Most runners go too hard on their easy days. Treni reads every run you do, shows whether the week was easy enough, and recommends what to change next week. A real coach reviews the advice you get. Every week.</p>
   <div class="knapper reveal">
-    <a class="btn btn-primar" href="join.php">Become a test runner</a>
-    <a class="btn btn-ghost" href="../lop.php">🏁 Race calendar</a>
-    <a class="btn btn-ghost" href="#how">How it works</a>
-    <a class="btn btn-ghost" href="../samarbeid.php">We want to partner →</a>
+    <a class="btn btn-primar" href="join.php">For runners</a>
+    <a class="btn btn-primar" href="join.php?rolle=coach">For running coaches</a>
   </div>
   <div class="hvem reveal">
-    <span>For runners</span><span>For running groups</span><span>For race organizers</span>
+    <span>Also for running groups</span><span>Also for race organizers</span>
   </div>
 </div></header>
 
 <section aria-label="What Treni is">
   <p class="ingress" style="max-width:46rem">Treni is a <b>coach-led training guide</b> for runners on road and
-  mountain trails. The system reads every run you log on Strava: heart rate, intervals, elevation and how it felt. A coach stands behind every piece of advice you get. One goal: <b>lasting progress without injury</b>.</p>
+  mountain trails. The system reads every run from Strava, Garmin or your watch: heart rate, intervals, elevation and how it felt. You need a heart-rate watch that connects to Intervals.icu: Garmin, Polar, Suunto, Coros or Wahoo. A coach stands behind every piece of advice you get. One goal: <b>lasting progress without injury or losing the joy of it</b>. It starts with the easy runs actually being easy.</p>
+  <figure class="hero-sitat reveal">
+    <blockquote>It is great to have such a good tool and the coach's expertise guiding me, so I get in shape the right way!</blockquote>
+    <figcaption>Test runner, August 2026</figcaption>
+  </figure>
+</section>
+
+<section aria-label="More about Treni">
+  <div class="knapper" style="margin-top:0">
+    <a class="btn btn-primar" href="join.php">For runners</a>
+    <a class="btn btn-primar" href="join.php?rolle=coach">For running coaches</a>
+  </div>
+  <div class="knapper" style="margin-top:.6rem">
+    <a class="btn btn-ghost" href="#how">How it works</a>
+    <a class="btn btn-ghost" href="../samarbeid.php">We want to partner →</a>
+  </div>
 </section>
 
 <section aria-labelledby="problem-t">
-  <p class="kicker">The problem</p>
-  <h2 id="problem-t">Most runners train blind</h2>
+  <p class="kicker">Sound familiar?</p>
+  <h2 id="problem-t">Most runners train harder than they think</h2>
   <ul class="steg" style="list-style:none; padding-left:0">
-    <li><b>The plan doesn't know you</b>
-      <p>Generic programs don't know what your body has actually done in recent weeks. They don't
-      see that last week turned hard, that the long run grew too fast, or that your "easy" has
-      drifted into the grey zone.</p></li>
+    <li><b>"Easy" is rarely easy</b>
+      <p>The secret is simple, but hard to follow. Generic programs don't know what your body has
+      actually done in recent weeks. They don't
+      see that your "easy" is actually fairly fast, that last week turned hard, or that the
+      long run grew too fast.</p>
+      <p class="treni-svar">Treni helps you see whether you hit the mark on each run.</p></li>
     <li><b>The injury comes first</b>
       <p>The most common reason progress stops is not too little training. It is
       <strong>too much, too soon</strong>. Overuse injuries announce themselves in the training data before
-      you feel them in your legs. But someone actually has to read the data.</p></li>
+      you feel them in your legs. But someone has to read it, and tell you what to change next week.</p>
+      <p class="treni-svar">Treni helps you catch the signs early, and speaks up before they become an injury.</p></li>
     <li><b>Alone between runs</b>
       <p>A coach who sees you every week is reserved for the few. The rest are left with the watch,
-      the Strava graphs and gut feeling, guessing whether they are on the right track.</p></li>
+      the Strava graphs and gut feeling, guessing whether they are running easy enough.</p>
+      <p class="treni-svar">Treni helps you keep a coach in the loop every week, without having to afford one of your own.</p></li>
   </ul>
 </section>
 
@@ -108,11 +123,22 @@
         <div style="height:.85rem; width:78%; border-radius:99px; background:hsl(var(--accent) / .55)"></div>
         <div style="height:.85rem; width:85%; border-radius:99px; background:hsl(var(--accent) / .55)"></div>
       </div>
-      <p style="margin:.8rem 0 0; font-size:.92rem">Every run is read from Strava. The plan
+      <p style="margin:.8rem 0 0; font-size:.92rem">Every run is read from Strava or Intervals.icu. The plan
       <b>builds on from reality</b>, and a real coach reviews it.</p>
     </div>
   </div>
   <p><b>A plan that lives, for runners who live</b> , not just the well-trained runner static apps were built for.</p>
+</section>
+
+<section aria-labelledby="racecal-t">
+  <p class="kicker">The race calendar</p>
+  <h2 id="racecal-t">🏁 Do you know which race is next?</h2>
+  <p style="max-width:46rem">Road, trail and mountain races across Norway, with a filter for Northern Norway. Date, place and
+  registration link, fetched automatically from the timing system and updated every day. The calendar itself is in Norwegian.
+  Find your next race, sign up, and train right towards it.</p>
+  <div class="knapper">
+    <a class="btn btn-primar" href="../lop.php">See the race calendar →</a>
+  </div>
 </section>
 
 <section aria-labelledby="surface-t">
@@ -161,7 +187,7 @@
     <div>
       <p class="flow-tittel">🏃 For the runner</p>
       <ol class="flowsteg">
-        <li><div><b>Connect Strava, answer a few questions</b>
+        <li><div><b>Connect Strava or your watch, answer a few questions</b>
           <p>Goal, age and max heart rate. That is all we need to ask. The guide fetches your
           history, sets your heart-rate zones on the Norwegian Olympic Federation scale, and
           learns what a normal week is for you, not for an average runner.</p></div></li>
@@ -169,7 +195,7 @@
           <p>What last week actually was: easy and hard, zones, load. And what the coming week
           should hold, session by session, shaped around your races.</p></div></li>
         <li><div><b>Train, and be followed up</b>
-          <p>You approve each weekly plan with one tap, or request a change and it is adjusted.
+          <p>The plan comes to you. If something does not fit, you say so and it is adjusted.
           The guide watches through the week, and you can ask about anything, any time, in your
           own group with the coach on the team.</p></div></li>
       </ol>
@@ -194,7 +220,7 @@
   <div class="midt-cta">
     <p>Ready to try? Signing up takes two minutes. A partnership starts with a short message.</p>
     <div class="knapper" style="justify-content:center">
-      <a class="btn btn-primar" href="join.php">Put me on the waitlist</a>
+      <a class="btn btn-primar" href="join.php">Join as a test runner</a>
       <a class="btn btn-ghost" href="../samarbeid.php">We want to partner →</a>
     </div>
   </div>
@@ -204,7 +230,7 @@
   <blockquote class="sitat" id="principle-t">It is not how much you run that injures you. It is how much more than your body is used to.</blockquote>
   <p>The principle behind every single review. Feeling fit is not injury protection.</p>
   <p class="liten">Concretely, on two levels: <b>your week</b> is measured against the
-  average of the last four and kept inside the safe band (80–130&nbsp;%), a precautionary frame for steady progression
+  average of the last four and kept inside the safe band (80 til 130&nbsp;%), a precautionary frame for steady progression
   (<a href="https://doi.org/10.1136/bjsports-2015-095788">Gabbett 2016</a>;
   <a href="https://doi.org/10.1136/bjsports-2015-094817">Hulin 2016</a>). And <b>every
   single run</b> is measured against your longest run in the past 30 days, because a 2025 study (<a href="https://pure.au.dk/portal/en/publications/how-much-running-is-too-much-identifying-high-risk-running-sessio/">5,205
@@ -213,10 +239,10 @@
 
 <section aria-label="Key numbers">
   <ul class="tall-rad">
-    <li><span class="tall">76–85%</span><p>of your training time easy, the rest hard. That is how fitness is built</p></li>
-    <li><span class="tall">0–15%</span><p>maximum volume increase per week. The corridor follows your level, not one rule for everyone</p></li>
+    <li><span class="tall">76 til 85%</span><p>of your training time easy, the rest hard. That is how fitness is built</p></li>
+    <li><span class="tall">0 til 15%</span><p>maximum volume increase per week. The corridor follows your level, not one rule for everyone</p></li>
     <li><span class="tall">All day</span><p>your runs are read and My page updates, without you logging anything</p></li>
-    <li><span class="tall">18</span><p>runners in Treni now: 10 in full operation (road, track, trail and ultra) and 8 on their way in from the waitlist, each with their own page and plan from day one</p></li>
+    <li><span class="tall" data-lopertall>36</span><p>runners in Treni now, on road, track, trail and ultra. Everyone has their own page, and a plan built on their own runs</p></li>
   </ul>
 </section>
 
@@ -227,8 +253,8 @@
   published research or documented coaching practice, and we always say which one it is.</p>
   <ul class="steg" style="list-style:none; padding-left:0; grid-template-columns:repeat(auto-fit,minmax(340px,1fr))">
     <li><b>The model corridor, counted in time</b>
-      <p>The world's best endurance athletes place <strong>80–90% of their endurance training</strong> in
-      easy zones. The guide measures your distribution every week, in time, not session count, and speaks up when the grey zone steals from the easy. Your room is <strong>76–85% easy</strong>, 15–24% quality.</p></li>
+      <p>The world's best endurance athletes place <strong>80 til 90% of their endurance training</strong> in
+      easy zones. The guide measures your distribution every week, in time, not session count, and speaks up when the grey zone steals from the easy. Your room is <strong>76 til 85% easy</strong>, 15 til 24% quality.</p></li>
     <li><b>No leaps, documented</b>
       <p>A large study of 5,205 runners found roughly <strong>60% higher injury risk</strong> when a single
       run leaps past the longest your body has done in the last 30 days. The guide catches the
@@ -240,7 +266,7 @@
       <p>The guide knows the blind spots of heart rate: slow response on tired days, drift on long runs. It teaches you to <strong>never chase heart rate</strong>. Your zones are calibrated
       against your own data and continuously re-checked.</p></li>
   </ul>
-  <p class="liten" style="margin-top:1.2rem">Sources incl.: Sandbakk et al. 2025 (Sports Medicine – Open)
+  <p class="liten" style="margin-top:1.2rem">Sources incl.: Sandbakk et al. 2025 (Sports Medicine. Open)
   · "How much running is too much?" BJSM 2025 · Seiler &amp; Kjerland 2006 · the coaching team's
   book on mountain running</p>
 </section>
@@ -252,22 +278,22 @@
   <ul class="liste" style="list-style:none; padding-left:0">
     <li><span style="font-size:1.45rem; margin-right:.5rem; vertical-align:-.2rem">📅</span><b>Your weekly plan, ready before the week starts</b> Concrete sessions with pace, heart rate, intervals and rests, built on the week you actually ran.
         Finish your week by Sunday evening and next week's plan lands the same evening, otherwise Monday morning.</li>
-    <li><span style="font-size:1.45rem; margin-right:.5rem; vertical-align:-.2rem">🔕</span><b>Follow-up without the noise</b> The system reads your runs every day, but you hear from us when it matters: your weekly plan on Sunday evening or Monday morning, and a status on Thursday, with praise when you nail it and a friendly nudge when the
+    <li><span style="font-size:1.45rem; margin-right:.5rem; vertical-align:-.2rem">🔕</span><b>Follow-up without the noise</b> The system reads your runs every day, but you hear from us when it matters: your weekly plan on Sunday evening or Monday morning, the day's session at 07:00 on training days (turn it off or move it yourself), and a status on Thursday, with praise when you nail it and a friendly nudge when the
         run got harder than planned. The rest of the week: quiet (and My page
         whenever you want a look).</li>
     <li><span style="font-size:1.45rem; margin-right:.5rem; vertical-align:-.2rem">🤝</span><b>A named coach</b> Not an app alone. The advice is reviewed by a human who knows you, and health questions always go to professionals, never to a machine.</li>
     <li><span style="font-size:1.45rem; margin-right:.5rem; vertical-align:-.2rem">💬</span><b>In your language</b> All guidance in English or Norwegian, your choice.</li>
-    <li><span style="font-size:1.45rem; margin-right:.5rem; vertical-align:-.2rem">📊</span><b>My page, your own training overview</b> Your load in plain words, the bars behind it, and every run with the advisor's note. Plus next week's plan, day by day.
-        Personal link, updated through the day.</li>
+    <li><span style="font-size:1.45rem; margin-right:.5rem; vertical-align:-.2rem">📊</span><b><a href="my-page.html">My page, your own training overview</a></b> Your load in plain words, the bars behind it, and every run with the advisor's note. Plus next week's plan, day by day.
+        Personal link, updated through the day. Add it to your home screen and it opens as an app, with notifications on your phone when a new plan, a message from your coach or a new run is in. <a href="my-page.html">See what it looks like →</a></li>
     <li><span style="font-size:1.45rem; margin-right:.5rem; vertical-align:-.2rem">📅</span><b>Calendar, your own sessions and strength</b> Move sessions yourself with drag and drop, add strength, trail runs or cycling as your own sessions, and see it all
         in one plan. Strength comes with the coach's templates and an exercise bank with animations.
         Plus the race calendar: 400+ races in Norway, and your plan is built towards the one you pick.</li>
     <li><span style="font-size:1.45rem; margin-right:.5rem; vertical-align:-.2rem">👟</span><b>Your shoes, tracked</b> Tag your shoes on Strava activities and
         Treni counts the kilometres per pair, warning you when one nears
         retirement. Before every race you get shoe advice from your own rotation, matched to distance, surface, course profile and the
-        weather forecast. Need a new pair? One tap registers it, and automatic ordering with partner discounts is on the way.</li>
+        weather forecast. Need a new pair? One tap registers it.</li>
     <li><span style="font-size:1.45rem; margin-right:.5rem; vertical-align:-.2rem">🔒</span><b>Your data stays yours</b> Stored locally with the coach team, never sold.
-        Disconnect any time. <a href="../personvern.html#en-t">Read the privacy policy</a>.</li>
+        Disconnect any time. <a href="privacy.html">Read the privacy policy</a>.</li>
   </ul>
 </section>
 
@@ -294,6 +320,7 @@
         <li>🧩 Training planning</li>
         <li>🍂 A new mountain season</li>
         <li>🏆 Race season and peaking</li>
+        <li>🥤 Race-day nutrition</li>
       </ul>
     </div>
   </div>
@@ -336,8 +363,8 @@
       <p class="kicker">Status now</p>
       <h2 style="font-size:1.35rem">The pilot is running</h2>
       <div class="en-blokk">
-        <p><b>10 runners</b> in full operation: road, track, trail and ultra.</p>
-        <p><b>The waitlist</b> is open, and 8 runners are lined up. Everyone on the waitlist gets their own page with a plan built on their answers, adjustable while they wait.</p>
+        <p><b><span data-antall="lopere">19</span> runners</b> are up and running: road, track, trail and ultra.</p>
+        <p><b>No waitlist.</b> Sign up and you get your own page right away, and your plan as soon as your training history from your watch is in.</p>
         <p><b>Free during the pilot</b> The testers shape the product with us.</p>
       </div>
     </div>
@@ -347,10 +374,10 @@
 <section aria-label="Join">
   <div class="avslutt">
     <h2>Join from the start.</h2>
-    <p>Runners join the waitlist. Partners get in touch directly.
+    <p>Runners sign up directly. Partners get in touch.
       Both are non-binding.</p>
     <div class="knapper" style="justify-content:center">
-      <a class="btn" href="join.php">I'm a runner, put me on the list</a>
+      <a class="btn" href="join.php">I'm a runner, sign me up</a>
       <a class="btn" href="../samarbeid.php">We want to partner →</a>
     </div>
   </div>
@@ -361,10 +388,11 @@
     <div class="meny-gruppe"><span class="meny-tittel">Pages</span>
       <a href="join.php">Become a test runner</a>
       <a href="../stotte.html#en-t">Support &amp; contact</a>
-      <a href="../personvern.html#en-t">Privacy</a>
+      <a href="privacy.html">Privacy</a>
       <a href="/">På norsk</a>
     </div>
     <div class="meny-gruppe"><span class="meny-tittel">For test runners and coach</span>
+      <a href="my-page.html">My page, what it looks like</a>
       <a href="https://min.treni.no/">My page, sign in (personal link)</a>
       <a href="https://dashbord.treni.no/">Coach dashboard (password)</a>
     </div>
@@ -375,5 +403,13 @@
 </footer>
 
 </main>
+<script>
+// A-7 (11.09.2026): løpertallet hentes live fra antall.json (skrives av morgenkjøringen),
+// teksten i HTML er bare reserve hvis fila ikke svarer.
+fetch('/antall.json?t=' + Math.floor(Date.now() / 3600000)).then(r => r.ok ? r.json() : null).then(d => {
+  if (d && d.lopere) document.querySelectorAll('[data-antall="lopere"]').forEach(e => { e.textContent = d.lopere; });
+}).catch(() => {});
+</script>
+<script src="/banner.js?v=1" defer></script>
 </body>
 </html>

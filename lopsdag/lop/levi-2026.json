@@ -1,0 +1,28 @@
+{
+ "kilde": "raceresult",
+ "event": "374352",
+ "navn": "Ruskamaraton Lapland",
+ "dato": "2026-09-12",
+ "sted": "Levi, Finland",
+ "navnefiks": {
+  "6": "Olga Serezhnikova"
+ },
+ "ekstra": {
+  "Northern Runners": [
+   "6",
+   "1305"
+  ]
+ },
+ "manuelle": {
+  "Northern Runners": [
+   {
+    "navn": "John Roar Paulsen",
+    "ovelse": "Ruskareisen, 6,5 km powerwalk"
+   },
+   {
+    "navn": "Nils Harald",
+    "ovelse": "Ruskareisen, 6,5 km powerwalk"
+   }
+  ]
+ }
+}

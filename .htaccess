@@ -6,3 +6,5 @@ RewriteRule ^(.*)$ https://treni.no/$1 [R=301,L]
 # www -> apex
 RewriteCond %{HTTP_HOST} ^www\.treni\.no$ [NC]
 RewriteRule ^(.*)$ https://treni.no/$1 [R=301,L]
+# bli-med.html (gammel onboarding) -> ny påmelding, vervelenker beholdes (A-6, 11.09.2026)
+RewriteRule ^bli-med\.html$ /bli-med.php [L]

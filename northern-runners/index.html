@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Northern Runners i Levi</title>
+<meta name="description" content="31 løpere fra Northern Runners tok turen til Ruskamaraton i Levi 12. september 2026. Her er hele klubben, fra 1:31 til 3:29 på samme fjell.">
+<meta property="og:title" content="Northern Runners i Levi">
+<meta property="og:description" content="31 løpere, ett fjell, 1 897 i feltet. Hele klubben i Ruskamaraton 2026.">
+<meta property="og:url" content="https://treni.no/northern-runners/">
+<meta name="theme-color" content="#07110e">
+<link rel="icon" href="/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@800&family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter+Tight:wght@400;600&display=swap">
+<style>
+:root{
+  --natt:#07110e; --natt2:#0d1b17; --kort:#111f1a; --kant:#1d332b;
+  --krem:#f4f1e8; --dempet:#9fb3aa; --aurora:#7bf1a8; --aurora2:#38d98a; --varm:#ffd479;
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:24px; --s6:32px; --s7:48px; --s8:64px; --s9:96px;
+  --r:12px; --r2:20px;
+  --disp:"Fraunces",Georgia,serif; --sans:"Inter Tight",system-ui,-apple-system,sans-serif;
+  --inn:cubic-bezier(.22,1,.36,1);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--natt);color:var(--krem);font:400 17px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+.wrap{width:min(1160px,100% - 2.5rem);margin-inline:auto}
+.smal{width:min(64ch,100%)}
+a{color:var(--aurora)}
+h1,h2,h3{font-family:var(--disp);font-weight:600;line-height:1.05;text-wrap:balance;margin:0}
+.kicker{font:600 .78rem/1.4 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--aurora)}
+
+/* Hero */
+.hero{position:relative;padding:var(--s9) 0 var(--s8);overflow:hidden}
+.hero::before{content:"";position:absolute;inset:-30% -10% auto;height:70vh;
+  background:radial-gradient(60% 55% at 30% 40%,rgba(123,241,168,.22),transparent 70%),
+             radial-gradient(45% 45% at 75% 20%,rgba(56,217,138,.16),transparent 70%);
+  filter:blur(12px);pointer-events:none}
+.hero h1{font-size:clamp(2.3rem,6.4vw,4.4rem);letter-spacing:-.02em;margin:var(--s4) 0 var(--s5)}
+.hero h1 em{font-style:normal;color:var(--aurora)}
+.hero p{color:var(--dempet);font-size:clamp(1.05rem,2.2vw,1.3rem);max-width:54ch;margin:0}
+.meta{display:flex;flex-wrap:wrap;gap:var(--s2) var(--s5);margin-top:var(--s6);color:var(--dempet);font-size:.92rem}
+.meta b{color:var(--krem);font-weight:600}
+
+/* Tallbånd */
+.tall{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:var(--s3);margin-top:var(--s8)}
+.tall div{border:1px solid var(--kant);border-radius:var(--r2);padding:var(--s5) var(--s4);background:linear-gradient(160deg,var(--kort),transparent)}
+.tall b{display:block;font:600 clamp(2.2rem,5vw,3.2rem)/1 var(--disp);font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.tall span{display:block;margin-top:var(--s2);color:var(--dempet);font-size:.86rem;line-height:1.35}
+
+/* Seksjoner */
+section{padding:var(--s9) 0}
+section.linje{border-top:1px solid var(--kant)}
+h2{font-size:clamp(1.8rem,4.5vw,2.8rem);letter-spacing:-.01em;margin-bottom:var(--s5)}
+.brod{color:var(--dempet);font-size:1.05rem}
+.brod strong{color:var(--krem);font-weight:600}
+.brod p{margin:0 0 var(--s4)}
+
+/* Høydepunkt */
+.hoyde{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:var(--s4);margin-top:var(--s6)}
+.h-kort{border:1px solid var(--kant);border-radius:var(--r2);padding:var(--s5);background:var(--kort);position:relative}
+.h-kort .plass{font:600 .8rem var(--sans);color:var(--natt);background:var(--aurora);border-radius:999px;padding:.15rem .6rem;display:inline-block}
+.h-kort .plass.sol{background:var(--varm)}
+.h-kort h3{font-size:1.35rem;margin:var(--s3) 0 var(--s2)}
+.h-kort .tid{font:600 1.9rem/1 var(--disp);font-variant-numeric:tabular-nums;color:var(--aurora)}
+.h-kort p{color:var(--dempet);font-size:.92rem;margin:var(--s3) 0 0}
+
+/* Laget */
+.filter{display:flex;flex-wrap:wrap;gap:var(--s2);margin:var(--s5) 0 var(--s6)}
+.filter button{border:1px solid var(--kant);background:transparent;color:var(--dempet);border-radius:999px;
+  padding:.45rem 1rem;font:600 .88rem var(--sans);cursor:pointer;transition:all 160ms var(--inn)}
+.filter button:hover{border-color:var(--aurora2);color:var(--krem)}
+.filter button[aria-pressed=true]{background:var(--aurora);border-color:var(--aurora);color:var(--natt)}
+.laget{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:var(--s3)}
+.l-kort{border:1px solid var(--kant);border-radius:var(--r);padding:var(--s4);background:var(--natt2);
+  display:flex;flex-direction:column;gap:var(--s1);transition:border-color 160ms var(--inn),transform 160ms var(--inn)}
+.l-kort:hover{border-color:var(--aurora2);transform:translateY(-2px)}
+.l-kort .n{font-weight:600;font-size:1rem;line-height:1.3}
+.l-kort .t{font:600 1.45rem/1 var(--disp);font-variant-numeric:tabular-nums;margin-top:var(--s2)}
+.l-kort .d{color:var(--dempet);font-size:.82rem}
+.l-kort.medalje{border-color:var(--aurora)}
+.l-kort.medalje .t{color:var(--aurora)}
+
+/* Avslutning */
+.slutt{border:1px solid var(--kant);border-radius:var(--r2);padding:var(--s7) var(--s5);text-align:center;
+  background:radial-gradient(80% 120% at 50% 0%,rgba(123,241,168,.12),transparent 70%),var(--kort)}
+.slutt h2{margin-bottom:var(--s4)}
+.slutt p{color:var(--dempet);margin:0 auto var(--s5);max-width:52ch}
+.knapp{display:inline-block;background:var(--aurora);color:var(--natt);font:600 1rem var(--sans);
+  padding:.85rem 1.6rem;border-radius:999px;text-decoration:none;transition:transform 160ms var(--inn)}
+.knapp:hover{transform:translateY(-2px)}
+.knapp.tom{background:transparent;color:var(--krem);border:1px solid var(--kant);margin-left:var(--s2)}
+footer{border-top:1px solid var(--kant);padding:var(--s6) 0;color:var(--dempet);font-size:.85rem}
+footer a{color:var(--aurora)}
+
+/* Innholdet er ALLTID synlig som utgangspunkt. JS legger på .skjult like før
+   den observerer, og tar den av igjen. Svikter JS, står siden fullt lesbar. */
+.inn{transition:opacity 420ms var(--inn),transform 420ms var(--inn)}
+.inn.skjult{opacity:0;transform:translateY(14px)}
+@media (prefers-reduced-motion:reduce){.inn.skjult{opacity:1;transform:none}.inn{transition:none}.l-kort:hover,.knapp:hover{transform:none}}
+
+/* Samme merke som på de andre Treni-sidene: ordmerket «Treni» med lime prikk,
+   Sora 800, versaler og luft mellom bokstavene (logo-fasit 04.09). */
+.merkenavn{font:800 .84rem "Sora",system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--krem);margin:0 0 var(--s6);opacity:.9}
+.merkenavn b{color:var(--aurora)}
+/* Løpslinja under merket: dempet og i vanlig setningsform, så merket står alene
+   som avsender og ikke konkurrerer med to versallinjer over hverandre. */
+.lopslinje{font:400 .95rem var(--sans);color:var(--dempet);margin:0 0 var(--s3)}
+
+/* Bunnbanner: «Prøv Treni» (Odd 13.09) */
+.pt{position:sticky;bottom:0;z-index:60;margin-top:var(--s7);border-top:1px solid var(--kant);
+  background:linear-gradient(180deg,rgba(7,17,14,.86),var(--natt));backdrop-filter:blur(10px)}
+.pt-inn{display:flex;align-items:center;gap:var(--s4);padding:var(--s4) 0}
+.pt-tekst{flex:1;min-width:0}
+.pt-tekst b{display:block;font:600 1.05rem var(--disp);letter-spacing:-.01em}
+.pt-tekst b span{display:inline;color:var(--aurora)}
+.pt-tekst > span{display:block;color:var(--dempet);font-size:.88rem;line-height:1.35;margin-top:2px}
+.pt-tekst .pt-laget{display:block;color:var(--dempet);font-size:.8rem;margin-top:2px}
+.pt-tekst .pt-laget b{display:inline;font:inherit;font-weight:600;color:var(--krem)}
+.pt-tekst .pt-laget i{font-style:normal;color:var(--aurora)}
+.pt a.pt-cta{flex:0 0 auto;background:var(--aurora);color:var(--natt);font:600 .98rem var(--sans);
+  padding:.7rem 1.35rem;border-radius:999px;text-decoration:none;white-space:nowrap;transition:transform 160ms var(--inn)}
+.pt a.pt-cta:hover{transform:translateY(-2px)}
+@media (max-width:520px){.pt-tekst > span:not(.pt-laget){display:none}.pt-inn{padding:var(--s3) 0}}
+
+/* Største klubb i løpet (Odd 13.09: «det er gøy!») */
+.hero p.storst,.storst{display:inline-flex;align-items:center;gap:var(--s3);margin:var(--s7) 0 0;
+  border:1px solid var(--aurora2);border-radius:999px;padding:.5rem 1.1rem .5rem .6rem;
+  background:rgba(123,241,168,.08);font-size:.95rem;color:var(--krem)}
+.storst .merket{background:var(--aurora);color:var(--natt);font:600 .78rem var(--sans);
+  letter-spacing:.04em;text-transform:uppercase;border-radius:999px;padding:.25rem .7rem}
+.storst b{font-weight:600}
+@media (max-width:520px){.storst{font-size:.88rem;align-items:flex-start;border-radius:var(--r)}}
+
+/* Signatur på hver skillelinje mellom bolkene (Odd 13.09). Dekorativ, derfor
+   pseudo-element: skjermlesere får den ikke som innhold to ganger. */
+section.linje{position:relative}
+section.linje::before{content:"Laget av Treni. løpeveileder";position:absolute;top:0;left:50%;
+  transform:translate(-50%,-50%);background:var(--natt);padding:0 var(--s4);white-space:nowrap;
+  font:800 .68rem "Sora",system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--dempet);opacity:.75}
+@media (max-width:520px){section.linje::before{font-size:.6rem;letter-spacing:.08em;padding:0 var(--s3)}}
+
+/* Oversikt over klubbens løp (Odd 13.09: en klubb kan ha flere sider) */
+.lopliste{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:var(--s3);margin-top:var(--s5)}
+.lop-kort{display:flex;flex-direction:column;gap:var(--s1);border:1px solid var(--kant);border-radius:var(--r2);
+  padding:var(--s5);background:var(--natt2);text-decoration:none;color:var(--krem);
+  transition:border-color 160ms var(--inn),transform 160ms var(--inn)}
+.lop-kort:hover{border-color:var(--aurora);transform:translateY(-2px)}
+.lop-kort b{font:600 1.3rem var(--disp);letter-spacing:-.01em}
+.lop-dato{font:600 .75rem var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--aurora)}
+.lop-sted{color:var(--dempet);font-size:.9rem}
+.lop-gaa{margin-top:var(--s3);font-weight:600;color:var(--aurora);font-size:.92rem}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="merkenavn">Treni<b>.</b> Løpsdag</p>
+    <p class="lopslinje">Ruskamaraton Lapland · 12. september 2026</p>
+    <h1>Northern Runners<br><em>Klubbens egne sider</em></h1>
+    <p>Her samler vi løpene klubben har vært med på. Hver side har alle løperne, alle tidene og alle plasseringene, klare til å deles.</p>
+    <div class="meta"><span><b>Levi</b>, Finland</span><span>Trailrun 16 km · halvmaraton · 10 km</span><span id="oppdatert"></span></div>
+    <p class="storst" id="storst" hidden></p>
+    <div class="tall" id="tall"></div>
+  </div>
+</header>
+
+<section class="linje">
+  <div class="wrap">
+    <p class="kicker">Dagen</p>
+    <h2>Klubben som tok fjellet</h2>
+    <div class="smal brod" id="fortelling">
+      <p id="f1">Av dem som stilte, valgte de fleste den bratteste veien: Trailrun 16 km opp og rundt Levifjellet.</p>
+      <p>Det er en klubbprofil som forteller noe. Northern Runners er ikke et lag som jakter flate bestetider. De drar dit terrenget er.</p>
+    </div>
+    <div class="hoyde" id="hoyde"></div>
+  </div>
+</section>
+
+
+<section class="linje">
+  <div class="wrap">
+    <p class="kicker">Løpene våre</p>
+    <h2>Sidene til klubben</h2>
+    <p class="smal brod">Hvert løp Treni dekker får sin egen side med alle løperne fra klubben, tidene og plasseringene.</p>
+    <div class="lopliste">
+      <a class="lop-kort" href="/northern-runners/levi-2026/">
+        <span class="lop-dato">12. september 2026</span>
+        <b>Ruskamaraton Lapland</b>
+        <span class="lop-sted">Levi, Finland · 33 løpere fra klubben</span>
+        <span class="lop-gaa">Se sida →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="linje">
+  <div class="wrap">
+    <p class="kicker">Hele laget</p>
+    <h2>Alle <span id="h-alle">33</span></h2>
+    <div class="filter" id="filter"></div>
+    <div class="laget" id="laget"></div>
+  </div>
+</section>
+
+<section class="linje">
+  <div class="wrap">
+    <div class="slutt">
+      <p class="kicker">Neste løp</p>
+      <h2>Vil klubben din ha en slik side?</h2>
+      <p>Treni dekker løp i nord og lager egen visning for klubben, med alle løperne, tidene og plasseringene samlet på ett sted. Det koster ingenting for klubben.</p>
+      <a class="knapp" href="https://treni.no/arrangor/">Slik gjør vi det</a>
+      <a class="knapp tom" href="https://treni.no/">Om Treni</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>Tallene er hentet fra arrangørens tidtaking. Fullstendige resultater ligger hos
+      <a href="https://www.ruskamaraton.com/tulokset/" target="_blank" rel="noopener">ruskamaraton.com</a>.
+      Klubbens egne resultater med klasseplasseringer: <a href="https://treni.no/ruskamaraton/">treni.no/ruskamaraton</a>.</p>
+    <p>Siden er laget av <a href="https://treni.no/">Treni</a>, trenerledet løpsveiledning fra Tromsø.</p>
+  </div>
+</footer>
+
+<div class="pt">
+  <div class="wrap pt-inn">
+    <div class="pt-tekst"><b>Prøv Treni<span style="color:var(--aurora)">.</span></b>
+      <span>Vi leser hver økt du løper og sier om uka var rolig nok. En ekte trener ser over rådene.</span>
+      <span class="pt-laget">Denne siden er laget av <b>Treni<i>.</i></b> løpeveileder</span></div>
+    <a class="pt-cta" href="https://treni.no/bli-testloper.php?fra=lopsdag" target="_blank" rel="noopener">Prøv gratis</a>
+  </div>
+</div>
+
+
+<script>
+let DATA = null, valgtOv = '';
+function sek(t) {
+  const d = (t || '').split(':').map(Number);
+  if (!d.length || d.some(isNaN)) { return 0; }
+  return d.length === 3 ? d[0] * 3600 + d[1] * 60 + d[2] : d[0] * 60 + d[1];
+}
+function klokke(s) {
+  const t = Math.round(s), h = Math.floor(t / 3600), m = Math.floor(t % 3600 / 60);
+  return h ? h + ' t ' + m + ' min' : m + ' min';
+}
+function tegnLaget() {
+  const hold = document.getElementById('laget');
+  hold.innerHTML = '';
+  const rader = DATA.rader.filter(r => !valgtOv || r.ovelse === valgtOv);
+  for (const r of rader) {
+    const d = document.createElement('article');
+    d.className = 'l-kort' + (r.plass <= 3 ? ' medalje' : '');
+    const n = document.createElement('p'); n.className = 'n'; n.textContent = r.navn;
+    const t = document.createElement('p'); t.className = 't'; t.textContent = r.tid;
+    const s = document.createElement('p'); s.className = 'd';
+    s.textContent = r.ovelse + ' · ' + r.klasse + ' · ' + r.plass + '. plass i klassen';
+    d.append(n, t, s);
+    hold.appendChild(d);
+  }
+}
+function tegnFilter() {
+  const f = document.getElementById('filter');
+  f.innerHTML = '';
+  const lag = (v, tekst) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.setAttribute('aria-pressed', valgtOv === v ? 'true' : 'false');
+    b.textContent = tekst;
+    b.onclick = () => { valgtOv = v; tegnFilter(); tegnLaget(); };
+    return b;
+  };
+  f.appendChild(lag('', 'Alle (' + DATA.antall + ')'));
+  for (const [o, n] of Object.entries(DATA.per_ovelse)) { f.appendChild(lag(o, o + ' (' + n + ')')); }
+}
+function tegnHoyde() {
+  const h = document.getElementById('hoyde');
+  h.innerHTML = '';
+  const beste = DATA.rader.slice().sort((a, b) => a.plass - b.plass).slice(0, 3);
+  for (const r of beste) {
+    const k = DATA.kontekst[r.ovelse] && DATA.kontekst[r.ovelse][r.kjonn];
+    const a = document.createElement('article');
+    a.className = 'h-kort';
+    const p = document.createElement('span');
+    p.className = 'plass' + (r.plass === 1 ? ' sol' : '');
+    p.textContent = r.plass + '. plass i klasse ' + r.klasse;
+    const n = document.createElement('h3'); n.textContent = r.navn;
+    const t = document.createElement('p'); t.className = 'tid'; t.textContent = r.tid;
+    const b = document.createElement('p');
+    b.textContent = r.ovelse + '. Raskeste ' + r.kjonn.toLowerCase() + ' i feltet brukte ' +
+      (k ? k.best_tid : '') + ', av ' + (k ? k.felt : '') + ' startende.';
+    a.append(p, n, t, b);
+    h.appendChild(a);
+  }
+}
+function reveal() {
+  const el = Array.from(document.querySelectorAll('section .wrap > *'));
+  if (!('IntersectionObserver' in window) ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches) { return; }
+  const io = new IntersectionObserver(e => {
+    for (const x of e) { if (x.isIntersecting) { x.target.classList.remove('skjult'); io.unobserve(x.target); } }
+  }, {rootMargin: '0px 0px -40px 0px'});
+  for (const e of el) { e.classList.add('inn', 'skjult'); io.observe(e); }
+  // Sikkerhetsnett: ingenting får bli stående usynlig om observeren svikter.
+  setTimeout(() => { for (const e of el) { e.classList.remove('skjult'); } }, 1500);
+}
+fetch('../ruskamaraton/data.php?visning=klubb&klubb=Northern%20Runners&t=' + Math.floor(Date.now() / 60000)).then(r => r.json()).then(d => {
+  if (d && d.skjult) {
+    // B-127 (Odd 18.09.2026): klubbens tall er skjult. Sida viser et EKSEMPEL med fiktive
+    // navn og tider, så klubben ser hvordan den ser ut med egne tall.
+    const K = {felt: 150, best_tid: '2:42:44'}, K2 = {felt: 49, best_tid: '3:12:58'};
+    DATA = {antall: 6, per_ovelse: {'Trailrun 16 km': 2, 'Halvmaraton': 2, '10 km': 2}, topp_klubber: [], hentet: new Date().toISOString(),
+      kontekst: {'Trailrun 16 km': {Menn: {felt: 210, best_tid: '1:14:02'}, Kvinner: {felt: 120, best_tid: '1:25:40'}},
+                 'Halvmaraton': {Menn: {felt: 260, best_tid: '1:12:31'}, Kvinner: {felt: 190, best_tid: '1:24:05'}},
+                 '10 km': {Menn: {felt: 320, best_tid: '33:10'}, Kvinner: {felt: 300, best_tid: '37:48'}}},
+      rader: [
+        {nr: '1001', navn: 'Ola Nordmann', klasse: 'M40', kjonn: 'Menn', ovelse: 'Trailrun 16 km', tid: '1:31:12', plass: 4},
+        {nr: '1002', navn: 'Kari Nordmann', klasse: 'K35', kjonn: 'Kvinner', ovelse: 'Trailrun 16 km', tid: '1:38:55', plass: 2},
+        {nr: '1003', navn: 'Per Hansen', klasse: 'M50', kjonn: 'Menn', ovelse: 'Halvmaraton', tid: '1:35:40', plass: 9},
+        {nr: '1004', navn: 'Anne Olsen', klasse: 'K45', kjonn: 'Kvinner', ovelse: 'Halvmaraton', tid: '1:49:03', plass: 6},
+        {nr: '1005', navn: 'Lars Berg', klasse: 'M30', kjonn: 'Menn', ovelse: '10 km', tid: '41:27', plass: 15},
+        {nr: '1006', navn: 'Ingrid Dahl', klasse: 'K25', kjonn: 'Kvinner', ovelse: '10 km', tid: '46:10', plass: 11}]};
+    for (const id of ['csv', 'sok', 'storst']) { const e = document.getElementById(id); if (e) e.hidden = true; }
+    for (const id of ['h-ant', 'h-alle']) { const e = document.getElementById(id); if (e) e.textContent = 'Eksempel'; }
+    { const e = document.getElementById('f1'); if (e) e.textContent = 'Klubben stilte med et stort lag i Levi. Tallene fra løpet er skjult etter ønske fra klubben; det du ser under er et eksempel med fiktive navn.'; }
+    { const e = document.getElementById('f3'); if (e) e.textContent = ''; }
+    { const e = document.getElementById('tall'); if (e) e.innerHTML = '<div><b>6</b><span>løpere (eksempel)</span></div><div><b>2</b><span>på Trailrun 16 km (eksempel)</span></div><div><b>3</b><span>kvinner i laget (eksempel)</span></div><div><b>2.</b><span>beste plassering i klassen (eksempel)</span></div>'; }
+    for (const id of ['resultater', 'laget']) {
+      const e = document.getElementById(id);
+      if (e && e.parentNode) {
+        const p = document.createElement('p'); p.className = 'smal brod'; p.id = 'eks-note';
+        p.style.cssText = 'padding:1rem 1.2rem;border:1.5px solid currentColor;border-radius:12px;opacity:.95;margin:0 0 1.2rem';
+        p.textContent = 'Eksempel med fiktive navn og tider, slik siden ser ut med klubbens egne tall. ' + (d.melding || 'Klubbens løpsdata er skjult etter ønske fra klubben. Ta kontakt med hei@treni.no for å åpne dem.');
+        e.parentNode.insertBefore(p, e);
+      }
+    }
+    const o = document.getElementById('oppdatert'); if (o) o.textContent = 'Eksempeldata, ikke klubbens tall.';
+    for (const fn of ['tegnHoyde', 'tegnResultater', 'tegnFilter', 'tegnLaget', 'tegn', 'filter', 'reveal']) { try { if (typeof window[fn] === 'function') window[fn](); } catch (e) {} }
+    return;
+  }
+  DATA = d;
+  const trail = d.rader.filter(r => r.ovelse.indexOf('Trail') === 0);
+  const kvinner = d.rader.filter(r => r.kjonn === 'Kvinner').length;
+  document.getElementById('tall').innerHTML =
+    '<div><b>' + d.antall + '</b><span>løpere fra klubben</span></div>' +
+    '<div><b>' + trail.length + '</b><span>av dem på Trailrun 16 km</span></div>' +
+    '<div><b>' + kvinner + '</b><span>kvinner i laget</span></div>' +
+    '<div><b>' + d.felt_totalt + '</b><span>i feltet totalt</span></div>';
+  const topp = d.topp_klubber || [];
+  if (topp.length > 1 && topp[0] && topp[0].antall === d.antall) {
+    const b = document.getElementById('storst');
+    b.hidden = false;
+    const m = document.createElement('span');
+    m.className = 'merket'; m.textContent = 'Størst i løpet';
+    const t = document.createElement('span');
+    t.appendChild(document.createTextNode('Ingen klubb hadde flere med enn Northern Runners. '));
+    const nr2 = document.createElement('b');
+    nr2.textContent = topp[1].navn + ' var nest størst med ' + topp[1].antall + '.';
+    t.appendChild(nr2);
+    b.append(m, t);
+  }
+  document.getElementById('h-alle').textContent = d.antall;
+  const halv = d.per_ovelse['Halvmaraton'] || 0, ti = d.per_ovelse['10 km'] || 0;
+  document.getElementById('f1').textContent =
+    'Av de ' + d.antall + ' som stilte, valgte ' + trail.length + ' den bratteste veien: Trailrun 16 km opp og rundt Levifjellet. ' +
+    halv + ' løp halvmaraton, ' + (ti === 1 ? 'én løp ti kilometer' : ti + ' løp ti kilometer') + '.';
+  document.getElementById('oppdatert').textContent = 'Oppdatert ' +
+    new Date(d.hentet).toLocaleString('no-NO', {day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit'});
+  tegnHoyde(); tegnFilter(); tegnLaget(); reveal();
+}).catch(() => {
+  document.getElementById('fortelling').textContent = 'Klarte ikke å hente resultatene akkurat nå. Prøv å laste siden på nytt.';
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>My page · your own training overview | Treni</title>
+<meta name="description" content="Your page answers what you are really wondering: am I running easy enough, can my body take more, how far am I from my race? In plain words, updated the moment your watch uploads a run.">
+<meta property="og:title" content="My page · your own training overview | Treni">
+<meta property="og:url" content="https://treni.no/en/my-page.html">
+<meta property="og:image" content="https://treni.no/bilder/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:description" content="Your numbers in plain words, updated from your watch (Strava or Intervals.icu). Personal link, no password.">
+<meta property="og:type" content="website">
+<link rel="alternate" hreflang="no" href="https://treni.no/min-side.html">
+<link rel="alternate" hreflang="en" href="https://treni.no/en/my-page.html">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" type="image/png" href="/icon-192.png" sizes="192x192">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="../stil.css?v=30">
+<style>
+.slik-faar { max-width: 46rem; margin-inline: auto; }
+/* F-39 (Odd 10.09): ekte skjermbilder av funksjonene, sveipestripe på mobil */
+#funksjoner { max-width: 72rem; margin: 2.5rem auto 0; padding-inline: 1rem; }
+.funk-hode { max-width: 46rem; margin: 0 auto 1rem; }
+.funk-hode h2 { margin: .2rem 0 .3rem; text-wrap: balance; }
+.funk-strip { display: flex; gap: 1rem; overflow-x: auto; scroll-snap-type: x mandatory; padding: .25rem .25rem 1rem;
+  -webkit-overflow-scrolling: touch; scrollbar-width: thin; }
+.funk-strip figure { flex: 0 0 min(78vw, 19rem); margin: 0; scroll-snap-align: start; }
+.funk-strip img { display: block; width: 100%; height: auto; max-height: 30rem; object-fit: cover; object-position: top;
+  border-radius: 1rem; border: 1px solid hsl(var(--border, 0 0% 85%)); box-shadow: 0 8px 24px hsl(0 0% 0% / .08); background: #fff; }
+.funk-strip figcaption { font-size: .9rem; line-height: 1.4; margin-top: .55rem; color: hsl(var(--muted-fg)); }
+.funk-strip figcaption b { color: inherit; font-weight: 650; }
+@media (min-width: 900px) { .funk-strip { display: grid; grid-template-columns: repeat(4, 1fr); overflow: visible; }
+  .funk-strip figure { flex: none; } .funk-strip img { max-height: 34rem; } }
+</style>
+</head>
+<body>
+<div class="bakteppe" aria-hidden="true"></div>
+<main class="bred">
+<nav class="sprakvalg" aria-label="Language"><a href="/min-side.html">NO</a><span aria-current="page">EN</span></nav>
+
+<header class="hero"><div class="indre">
+  <p class="kicker reveal"><a href="index.html" style="color:inherit">← treni.no</a> · my page</p>
+  <h1 class="reveal">Your own page.<br>Yours alone.</h1>
+  <p class="ingress reveal">Your page answers what you are really wondering: am I running easy enough, can my body take more this week,
+  and how far am I from my race? You get the answer in plain words, not in numbers you have to interpret yourself, and your coach sees the same as you.
+  The plan, the calendar, strength, health and your shoes sit below, and everything updates the moment your watch uploads a run.
+  Add the page to your home screen, and it tells you when the plan is adjusted, the coach has written to you or a new run is in.
+  You stop wondering whether you are doing it right.</p>
+  <div class="knapper reveal">
+    <a class="btn btn-primar" href="join.php">Become a test runner</a>
+    <a class="btn btn-ghost" href="#funksjoner">See what it looks like</a>
+  </div>
+</div></header>
+
+<section id="funksjoner" aria-label="What the page looks like on your phone">
+  <div class="funk-hode">
+    <p class="kicker">Real screenshots</p>
+    <h2>What it looks like on your phone</h2>
+    <p class="undertekst">From two test runners' pages, taken 10 September 2026, in Norwegian. Your page is in English. Swipe sideways.</p>
+  </div>
+  <div class="funk-strip">
+    <figure><img src="../bilder/minside/ukas-bilde.jpg?v=1" alt="This week in one picture: eight weekly volumes as bars with the ceiling drawn in, this week's quota and run cap" loading="lazy" width="804" height="1500"><figcaption><b>This week in one picture.</b> Eight weeks as bars, your ceiling drawn in, and how many km you have left this week.</figcaption></figure>
+    <figure><img src="../bilder/minside/okt.jpg?v=1" alt="A run read by Treni: easy road run, heart rate, how it landed and what you did right" loading="lazy" width="804" height="1400"><figcaption><b>The run.</b> Every run is read the moment it arrives: too easy, right, or too hard, with heart rate and zone explained.</figcaption></figure>
+    <figure><img src="../bilder/minside/ukeplan.jpg?v=1" alt="The week plan day by day with completed runs ticked and an explanation of why the week looks as it does" loading="lazy" width="804" height="1800"><figcaption><b>The week plan.</b> Day by day, with why the week looks the way it does, and ticks as you run.</figcaption></figure>
+    <figure><img src="../bilder/minside/tre-nokler.jpg?v=1" alt="This week so far: intensity discipline, load and plan followed, with what you did right" loading="lazy" width="804" height="1500"><figcaption><b>Three keys.</b> Easy enough, loaded right, plan followed. And what you did right.</figcaption></figure>
+    <figure><img src="../bilder/minside/kalender.jpg?v=1" alt="The calendar with completed runs ticked and planned runs you can drag to another day" loading="lazy" width="804" height="2226"><figcaption><b>The calendar.</b> Completed runs tick themselves off. Planned ones you drag to the day that suits you.</figcaption></figure>
+    <figure><img src="../bilder/minside/styrke.jpg?v=1" alt="The strength programme with this week's sessions, exercises and animation" loading="lazy" width="804" height="1400"><figcaption><b>Strength.</b> This week's strength sessions with exercises, sets and animation, matched to the running week.</figcaption></figure>
+    <figure><img src="../bilder/minside/lop.jpg?v=1" alt="Upcoming races in Northern Norway fetched automatically, with registration link" loading="lazy" width="804" height="1258"><figcaption><b>Races.</b> Upcoming races in the north are fetched automatically. Say which one you are aiming for, and the plan builds towards it.</figcaption></figure>
+    <figure><img src="../bilder/minside/helse.jpg?v=1" alt="Health: the big principle that the increase stays inside the corridor for your level" loading="lazy" width="804" height="1300"><figcaption><b>Health.</b> It is not how much you run that injures you, but how much more than your body is used to.</figcaption></figure>
+  </div>
+</section>
+
+<section aria-labelledby="access-t" class="slik-faar">
+  <p class="kicker">How you get in</p>
+  <h2 id="access-t">No app. No password. Just your link.</h2>
+  <ul class="liste">
+    <li><b>Personal link</b>: as a Treni runner you get your own link sent straight to you by email or in your Telegram group.
+        One tap and you are in, and you stay signed in on your phone.</li>
+    <li><b>Only your page</b>: the link shows you, and only you. No other runner can see your numbers, and you cannot see theirs.</li>
+    <li><b>Always fresh</b>. Strava or Intervals.icu tells us the moment you upload, and the run is on your page seconds later.</li>
+  </ul>
+  <p class="liten">Already a test runner? Your link is in your welcome email. Reply to it if you cannot find it, and you get a new one.</p>
+</section>
+<section aria-label="Join">
+  <div class="avslutt">
+    <h2>Want your own page?</h2>
+    <p>No waitlist. You get your own page right away, and your plan as soon as your watch is connected and your history is in.</p>
+    <a class="btn" href="join.php">Register interest, become a test runner</a>
+  </div>
+</section>
+<footer>
+  <nav aria-label="Footer">
+    <a href="index.html">Front page</a>
+    <a href="../lop.php">Race calendar (in Norwegian)</a>
+    <a href="../stotte.html#en-t">Support and contact</a>
+    <a href="privacy.html">Privacy</a>
+  </nav>
+  <p>PAULSEN UTVIKLING · org.nr 938 158 614 · Norway ·
+     <a href="mailto:hei@treni.no">hei@treni.no</a></p>
+  <p>Powered by Strava. This service is not affiliated with or endorsed by Strava.</p>
+</footer>
+</main>
+<script src="/banner.js?v=1" defer></script>
+</body>
+</html>

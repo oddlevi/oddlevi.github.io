@@ -1,0 +1,790 @@
+<!doctype html>
+<html lang="no"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tromsøkarusellen 2026</title>
+<meta name="description" content="13 løp, 1 313 løpere, 39 347 kilometer. Hele sesongen samlet for første gang.">
+<meta property="og:title" content="Tromsøkarusellen 2026">
+<meta property="og:description" content="Søk opp navnet ditt og se hvert løp du var med på, med tid, plassering og fart. Last ned bildet av sesongen din.">
+<meta property="og:url" content="https://treni.no/tromsokarusellen/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="nb_NO">
+<meta property="og:image" content="https://treni.no/tromsokarusellen/og.jpg?v=202609171530">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Løper på veien langs fjorden utenfor Tromsø i høstlys">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#07110e">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@800&family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter+Tight:wght@400;600&display=swap">
+<style>
+:root{--natt:#120c09;--natt2:#1b120e;--kort:#211610;--kant:#3a271e;
+--krem:#f4f1e8;--dempet:#b3aaa2;--aurora:#f2734a;--aurora2:#e25c33;--lime:#7bf1a8;
+--s1:4px;--s2:8px;--s3:12px;--s4:16px;--s5:24px;--s6:32px;--s7:48px;--s8:64px;--s9:96px;
+--r:12px;--r2:20px;--disp:"Fraunces",Georgia,serif;--sans:"Inter Tight",system-ui,sans-serif;
+--inn:cubic-bezier(.22,1,.36,1)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--natt);color:var(--krem);font:400 17px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+.wrap{width:min(1000px,100% - 2.5rem);margin-inline:auto}
+a{color:var(--aurora)}
+h1,h2,h3{font-family:var(--disp);font-weight:600;line-height:1.05;text-wrap:balance;margin:0}
+.kicker{font:600 .78rem/1.4 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--aurora)}
+.merkenavn{color:var(--lime);font:800 .84rem "Sora",system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;
+margin:0 0 var(--s7);opacity:.95}
+.merkenavn b{color:var(--lime)}
+.heroflate{position:relative;overflow:hidden}
+.heroflate::before{content:"";position:absolute;inset:0;background:
+linear-gradient(180deg,rgba(18,12,9,.42) 0%,rgba(18,12,9,.80) 58%,var(--natt) 100%),
+url('hero.jpg') center 32%/cover no-repeat;pointer-events:none}
+.hero{position:relative;padding:var(--s9) 0 var(--s8)}
+.hero h1{font-size:clamp(2.3rem,6.4vw,4.2rem);letter-spacing:-.02em;margin:var(--s4) 0 var(--s5);position:relative}
+.hero h1 em{font-style:normal;color:var(--aurora)}
+.hero p{color:var(--dempet);font-size:clamp(1.05rem,2.2vw,1.25rem);max-width:56ch;margin:0;position:relative}
+.tall{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:var(--s3);margin-top:var(--s7)}
+.tall div{border:1px solid var(--kant);border-radius:var(--r2);padding:var(--s5) var(--s4);
+background:linear-gradient(160deg,var(--kort),transparent)}
+.tall b{display:block;font:600 clamp(2rem,4.6vw,3rem)/1 var(--disp);font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.tall span{display:block;margin-top:var(--s2);color:var(--dempet);font-size:.86rem;line-height:1.35}
+section{padding:var(--s7) 0 var(--s6)}
+section.linje{border-top:0}
+h2{font-size:clamp(1.7rem,4.2vw,2.5rem);letter-spacing:-.01em;margin-bottom:var(--s4)}
+.brod{color:var(--dempet);font-size:1.05rem;max-width:66ch}
+.brod strong{color:var(--krem);font-weight:600}
+.hoyde{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:var(--s4);margin:var(--s6) 0}
+.h-kort{border:1px solid var(--kant);border-radius:var(--r2);padding:var(--s5);background:var(--kort)}
+.h-kort .plass{font:600 .78rem var(--sans);color:var(--natt);background:var(--aurora);border-radius:999px;
+padding:.15rem .7rem;display:inline-block;letter-spacing:.02em}
+.h-kort h3{font-size:1.2rem;margin:var(--s3) 0 var(--s2)}
+.h-kort p{color:var(--dempet);font-size:.9rem;margin:0}
+table{width:100%;border-collapse:collapse;font-size:.97rem;margin-top:var(--s5)}
+td,th{padding:10px 8px;border-bottom:1px solid var(--kant);text-align:left}
+th{color:var(--dempet);font:600 .8rem var(--sans);letter-spacing:.06em;text-transform:uppercase}
+.t{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.sokboks{border:1px solid var(--aurora2);border-radius:var(--r2);padding:var(--s6) var(--s5);
+background:radial-gradient(90% 140% at 20% 0%,rgba(242,115,74,.16),transparent 65%),var(--kort);
+box-shadow:0 18px 50px rgba(0,0,0,.35);margin-top:calc(var(--s7) * -1);position:relative;z-index:5}
+.sokboks h2{margin-bottom:var(--s2)}
+.sokboks .brod{margin:0 0 var(--s5)}
+.sokrad{display:flex;gap:var(--s3);flex-wrap:wrap;align-items:center}
+.sokrad .hint{color:var(--dempet);font-size:.85rem}
+input{width:100%;max-width:560px;padding:16px 18px;font:400 1.05rem var(--sans);border-radius:var(--r);
+border:2px solid var(--kant);background:var(--natt);color:var(--krem)}
+input:focus{outline:none;border-color:var(--aurora2)}
+#svar:empty{display:none}
+.sesong{border:1px solid var(--kant);border-radius:var(--r2);padding:var(--s5);margin-top:var(--s5);
+background:linear-gradient(160deg,var(--kort),#160e0a)}
+.sesong h3{font-size:1.6rem;margin:0 0 var(--s1);color:var(--krem)}
+.sesong .stort{font:600 1.05rem var(--sans);color:var(--aurora);margin:0 0 var(--s4)}
+.lopgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
+gap:8px;margin:var(--s2) 0 0}
+.lopkort{border:1px solid var(--kant);border-left:3px solid #4a3227;border-radius:10px;
+padding:10px 12px;background:#170f0b}
+.lopkort.rask{border-left-color:var(--lime)}
+.lopkort .d{color:var(--dempet);font:600 .7rem var(--sans);letter-spacing:.08em;text-transform:uppercase}
+.lopkort .sted{color:var(--krem);font:600 .95rem var(--sans);margin:3px 0 5px;line-height:1.2}
+.lopkort .m{color:var(--krem);font-size:.88rem;font-variant-numeric:tabular-nums}
+.lopkort .p{color:var(--dempet);font-size:.78rem;margin-top:3px;font-variant-numeric:tabular-nums}
+.lopkort.rask .p b{color:var(--lime)}
+.gridtittel{color:var(--dempet);font:600 .72rem var(--sans);letter-spacing:.14em;
+text-transform:uppercase;margin:var(--s5) 0 0}
+.sokdel{display:grid;grid-template-columns:1fr 268px;gap:var(--s6);align-items:start}
+.demo{display:none;margin:0}
+.demo.pa{display:block}
+.demo img{width:100%;display:block;border-radius:14px;border:1px solid var(--kant);
+box-shadow:0 18px 44px rgba(0,0,0,.5)}
+.demo figcaption{color:var(--dempet);font-size:.76rem;line-height:1.4;margin-top:8px;text-align:center}
+@media (max-width:820px){
+  .sokdel{grid-template-columns:1fr}
+  .demo.pa{max-width:230px;margin:var(--s5) auto 0}
+}
+.lagsok{margin:var(--s6) 0 0;box-shadow:none}
+.lagsok h2{font-size:clamp(1.6rem,3.2vw,2.2rem)}
+.soyle-tekst{display:flex;justify-content:space-between;color:var(--dempet);font-size:.75rem}
+.setning{color:var(--krem);font-size:1.02rem;line-height:1.5;margin:var(--s4) 0 0}
+.lagre{display:inline-block;margin:var(--s1) 0 var(--s4);background:var(--lime);color:#0b1410;
+border:0;font:600 .95rem var(--sans);padding:.7rem 1.2rem;border-radius:999px;cursor:pointer}
+.sesong .setning{margin-top:0}
+.detalj{margin-top:var(--s5)}
+.detalj summary{cursor:pointer;color:var(--dempet);font-size:.9rem}
+#svar h3{font-size:1.5rem;margin:var(--s6) 0 var(--s1);color:var(--aurora)}
+.slutt{border:1px solid rgba(123,241,168,.35);border-radius:var(--r2);padding:var(--s7) var(--s5);
+text-align:center;background:radial-gradient(80% 120% at 50% 0%,rgba(123,241,168,.14),transparent 70%),
+#0f1a14}
+.slutt .kicker{color:var(--lime)}
+.slutt h2{color:var(--krem)}
+.slutt p{color:var(--dempet);margin:var(--s4) auto var(--s5);max-width:56ch}
+.knapp{display:inline-block;background:var(--lime);color:#0b1410;font:600 1rem var(--sans);
+padding:.85rem 1.6rem;border-radius:999px;text-decoration:none;transition:transform 160ms var(--inn)}
+.knapp:hover{transform:translateY(-2px)}
+.skille{display:flex;align-items:center;gap:var(--s3);color:var(--dempet);font:600 .72rem var(--sans);
+letter-spacing:.14em;text-transform:uppercase;margin:var(--s6) 0 0}
+.skille:before,.skille:after{content:"";flex:1;height:1px;background:var(--kant)}
+.skille b{color:var(--lime)}
+footer{border-top:1px solid var(--kant);padding:var(--s6) 0 calc(var(--s9) + var(--s6));color:var(--dempet);font-size:.85rem}
+.banner{position:fixed;left:50%;transform:translateX(-50%);bottom:0;width:min(1000px,100% - 2.5rem);
+z-index:50;display:flex;align-items:center;gap:var(--s4);
+background:#0f1a14;border:1px solid rgba(123,241,168,.32);border-bottom:0;border-radius:var(--r2) var(--r2) 0 0;
+padding:var(--s3) var(--s4);text-decoration:none;color:var(--krem);box-shadow:0 -8px 30px rgba(0,0,0,.45)}
+.banner .bv{flex:1;min-width:0}
+.banner .bm{font:800 1rem "Sora",system-ui,sans-serif;letter-spacing:.04em}
+.banner .bm b{color:var(--lime)}
+.banner .bm em{font:600 .82rem var(--sans);font-style:normal;letter-spacing:0;color:var(--dempet);margin-left:.4rem}
+.banner .bt{color:var(--dempet);font-size:.82rem;line-height:1.35;margin-top:2px}
+.banner .bc{flex:0 0 auto;background:var(--lime);color:#0b1410;font:600 .92rem var(--sans);
+padding:.6rem 1rem;border-radius:999px}
+@media (max-width:520px){.banner .bt{display:none}}
+</style></head><body>
+
+<div class=heroflate><div class="wrap hero">
+<p class=merkenavn>TRENI<b>.</b> LØPSDAG</p>
+<p class=kicker>Tromsøkarusellen 2026</p>
+<h1>Tretten tirsdager, <em>39 347 kilometer</em></h1>
+<p>Tromsøkarusellen er ukentlige løp på tirsdager fra mai til september, arrangert av
+Troms og Finnmark Bedriftsidrettskrets.</p>
+<p>Serien har aldri hatt en samlet oversikt. Hvert løp har ligget for seg selv siden 5. mai.
+Vi regnet ut hele sesongen fra den offentlige tidtakingen, fordi ingen andre hadde gjort det.</p>
+<div class=tall>
+<div><b>39 347</b><span>kilometer løpt til sammen, 98 % av veien rundt jorda</span></div>
+<div><b>1 313</b><span>ulike løpere på startstreken</span></div>
+<div><b>6 296</b><span>fullføringer i 13 løp</span></div>
+<div><b>342</b><span>løp mer enn halve serien</span></div>
+</div>
+</div>
+</div>
+
+<section class=wrap>
+<div class=sokboks>
+<div class=sokdel>
+<div>
+<p class=kicker>Din sesong</p>
+<h2>Finn din egen sesong og last ned bildet</h2>
+<p class=brod>Skriv navnet ditt slik det står i resultatlistene, så får du hvert løp du var med på,
+med tid, plassering og fart per kilometer. Det er første gang sesongen din ligger samlet, og du kan
+laste ned et bilde av løpene dine og legge det rett i en story.</p>
+<div class=sokrad><input id=q placeholder="Søk på navn" autocomplete=off>
+<span class=hint>Skriv minst tre bokstaver</span></div>
+</div>
+<figure class=demo id=demo><img id=demobilde alt="Eksempel på bildet du kan laste ned">
+<figcaption>Slik ser bildet ut. Navnet og løpene blir dine.</figcaption></figure>
+</div>
+<div id=svar></div>
+</div>
+<div class=skille>Laget av <b>Treni</b></div>
+</section>
+
+<section class="wrap">
+<p class=kicker>Arbeidsplassene</p>
+<h2>286 arbeidsplasser stilte lag</h2>
+<p class=brod>Tromsøkarusellen er bedriftsidrett, så det er arbeidsplassene som møtes.
+51 løpeklubber stilte også, og 503 løpere gikk uten lag på ryggen.
+Under kan dere finne deres egen arbeidsplass.</p>
+<div class=hoyde><div class=h-kort><span class=plass>Flest starter</span><h3>UiT BIL campus Tromsø</h3><p>310 starter fra 60 personer</p></div><div class=h-kort><span class=plass>Flest kilometer</span><h3>PTG Kuldeteknisk</h3><p>758 km gjennom sesongen</p></div><div class=h-kort><span class=plass>Flest med</span><h3>Troms fylkeskommune v/Tromsdalen Vgs</h3><p>18 ulike løpere på startstreken</p></div><div class=h-kort><span class=plass>Mest trofast</span><h3>UiT BIL</h3><p>6,9 løp per person</p></div></div>
+<div class="sokboks lagsok">
+<div class=sokdel>
+<div>
+<p class=kicker>Deres sesong</p>
+<h2>Finn laget deres og last ned bildet</h2>
+<p class=brod>Skriv navnet på arbeidsplassen eller klubben slik det står i resultatlistene, så får
+dere hvert løp laget var med på, med hvor mange som stilte og hvor langt dere løp til sammen. Bildet
+av sesongen kan lastes ned og deles på arbeidsplassen.</p>
+<div class=sokrad><input id=lq placeholder="Søk på arbeidsplass eller klubb" autocomplete=off>
+<span class=hint>Skriv minst tre bokstaver</span></div>
+</div>
+<figure class=demo id=demo2><img id=demobilde2 alt="Eksempel på lagbildet dere kan laste ned">
+<figcaption>Slik ser lagbildet ut. Navnet og løpene blir deres.</figcaption></figure>
+</div>
+<div id=lagsvar></div>
+</div>
+<table style="margin-top:var(--s6)"><tr><th>Arbeidsplass</th><th class=t>Med</th><th class=t>Starter</th><th class=t>Km</th></tr><tr><td>UiT BIL campus Tromsø</td><td class=t>60</td><td class=t>310</td><td class=t>1 855</td></tr><tr><td>PTG Kuldeteknisk</td><td class=t>23</td><td class=t>111</td><td class=t>758</td></tr><tr><td>Troms fylkeskommune v/Tromsdalen Vgs</td><td class=t>18</td><td class=t>88</td><td class=t>536</td></tr><tr><td>UiT BIL</td><td class=t>12</td><td class=t>83</td><td class=t>490</td></tr><tr><td>Multiconsult BIL Tromsø</td><td class=t>13</td><td class=t>65</td><td class=t>438</td></tr><tr><td>KSAT BIL</td><td class=t>16</td><td class=t>59</td><td class=t>381</td></tr><tr><td>Hålogaland Teater</td><td class=t>9</td><td class=t>59</td><td class=t>409</td></tr><tr><td>Helse Nord IKT Bedriftsidrettslag co/Helse Nord IKT HF</td><td class=t>15</td><td class=t>56</td><td class=t>345</td></tr><tr><td>NTG Tromsø</td><td class=t>11</td><td class=t>56</td><td class=t>436</td></tr><tr><td>NORCE BEDRIFTSIDRETTSLAG</td><td class=t>9</td><td class=t>50</td><td class=t>301</td></tr><tr><td>PwC</td><td class=t>14</td><td class=t>48</td><td class=t>316</td></tr><tr><td>SpareBank 1 Nord-Norge</td><td class=t>9</td><td class=t>48</td><td class=t>266</td></tr><tr><td>Microsoft</td><td class=t>8</td><td class=t>47</td><td class=t>300</td></tr><tr><td>Fagskolen i Nord</td><td class=t>9</td><td class=t>46</td><td class=t>227</td></tr><tr><td>WINTERVOLD</td><td class=t>4</td><td class=t>46</td><td class=t>325</td></tr><tr><td>NTG</td><td class=t>6</td><td class=t>33</td><td class=t>185</td></tr><tr><td>Team T</td><td class=t>4</td><td class=t>33</td><td class=t>145</td></tr><tr><td>Bjørn Bygg BIL</td><td class=t>9</td><td class=t>32</td><td class=t>225</td></tr><tr><td>The golden runner boys</td><td class=t>4</td><td class=t>32</td><td class=t>225</td></tr><tr><td>Tromsø kommune Vann og avløp</td><td class=t>6</td><td class=t>31</td><td class=t>193</td></tr><tr><td>UNN</td><td class=t>4</td><td class=t>27</td><td class=t>190</td></tr><tr><td>Team Pigg</td><td class=t>4</td><td class=t>27</td><td class=t>241</td></tr><tr><td>SIFER Nord</td><td class=t>4</td><td class=t>27</td><td class=t>175</td></tr><tr><td>JM Hansen AS</td><td class=t>5</td><td class=t>26</td><td class=t>150</td></tr><tr><td>Aider</td><td class=t>4</td><td class=t>26</td><td class=t>159</td></tr><tr><td>Nofima AS</td><td class=t>5</td><td class=t>23</td><td class=t>167</td></tr><tr><td>Uværet BIL</td><td class=t>3</td><td class=t>22</td><td class=t>149</td></tr><tr><td>Dualog</td><td class=t>3</td><td class=t>21</td><td class=t>136</td></tr><tr><td>Tromsø skiskytterlag</td><td class=t>3</td><td class=t>21</td><td class=t>118</td></tr><tr><td>Tromsø Tele Bedriftsidrettslag</td><td class=t>2</td><td class=t>20</td><td class=t>86</td></tr></table>
+<div class=skille>Laget av <b>Treni</b></div>
+</section>
+
+<section class="wrap">
+<p class=kicker>Klubbene</p>
+<h2>Løpeklubbene i feltet</h2>
+<p class=brod>Klubbene stiller også lag, men de er gjester i en serie som tilhører arbeidsplassene.</p>
+<table><tr><th>Klubb</th><th class=t>Med</th><th class=t>Starter</th><th class=t>Km</th></tr><tr><td>Tromsø Løpeklubb</td><td class=t>36</td><td class=t>176</td><td class=t>1 312</td></tr><tr><td>Northern Runners</td><td class=t>25</td><td class=t>152</td><td class=t>950</td></tr><tr><td>Fastlandet løpeklubb</td><td class=t>8</td><td class=t>34</td><td class=t>214</td></tr><tr><td>Fjellheim Runners</td><td class=t>16</td><td class=t>33</td><td class=t>194</td></tr><tr><td>Tromsø Løpeklubb Veterangruppe</td><td class=t>8</td><td class=t>26</td><td class=t>184</td></tr><tr><td>Nordheim Runners</td><td class=t>6</td><td class=t>24</td><td class=t>168</td></tr><tr><td>Tromsø skiklubb langrenn</td><td class=t>4</td><td class=t>19</td><td class=t>102</td></tr><tr><td>TUIL friidrett</td><td class=t>2</td><td class=t>19</td><td class=t>104</td></tr><tr><td>Tromsø Løpeklubb Veterangruppa</td><td class=t>2</td><td class=t>16</td><td class=t>93</td></tr><tr><td>TUIL Tromsdalen Friidrett</td><td class=t>3</td><td class=t>14</td><td class=t>96</td></tr></table>
+<div class=skille>Laget av <b>Treni</b></div>
+</section>
+
+<section class="wrap">
+<p class=kicker>Løpene</p>
+<h2>Tretten tirsdager</h2>
+<p class=brod>Distansen skifter fra uke til uke, og løperen velger selv kort eller lang løype.
+Derfor kan ikke sesongen rangeres på tid.</p>
+<table><tr><th>Dato</th><th>Løp</th><th class=t>Distanser</th><th class=t>I mål</th></tr><tr><td>05.05</td><td>Folkeparken 3 km og 7 km</td><td class=t>3 km · 7 km</td><td class=t>834</td></tr><tr><td>12.05</td><td>Reinen 5 km og 10 km</td><td class=t>5 km · 10 km</td><td class=t>744</td></tr><tr><td>19.05</td><td>PWC-løpet Holtbakken opp</td><td class=t>3,5 km</td><td class=t>645</td></tr><tr><td>26.05</td><td>Krokenmila 5 km og 10 km</td><td class=t>5 km · 10 km</td><td class=t>621</td></tr><tr><td>02.06</td><td>Reinen 5,10 og 21,1 km</td><td class=t>5 km · 10 km · 21,1 km</td><td class=t>613</td></tr><tr><td>09.06</td><td>Folkeparken 3 km og 7 km</td><td class=t>3 km · 7 km</td><td class=t>561</td></tr><tr><td>16.06</td><td>Reinen 5 km og 10 km</td><td class=t>5 km · 10 km</td><td class=t>380</td></tr><tr><td>23.06</td><td>Folkeparken 3 km og 7 km</td><td class=t>3 km · 7 km</td><td class=t>301</td></tr><tr><td>11.08</td><td>Folkeparken-Langnesvegen-Sommerlyst, 6 km</td><td class=t>6 km</td><td class=t>378</td></tr><tr><td>25.08</td><td>Prestvannet-skibrua tur/retur</td><td class=t>5,2 km</td><td class=t>332</td></tr><tr><td>01.09</td><td>Reinen 5 km og 10 km</td><td class=t>5 km · 10 km</td><td class=t>347</td></tr><tr><td>08.09</td><td>Prestvannet-skibrua tur/retur</td><td class=t>5,2 km</td><td class=t>261</td></tr><tr><td>15.09</td><td>Polarmiljøsenteret-Telegrafbukta t/r</td><td class=t>5,2 km</td><td class=t>279</td></tr></table>
+<div class=skille>Laget av <b>Treni</b></div>
+</section>
+
+<section class="wrap">
+<p class=kicker>Feltet</p>
+<h2>Tempoet svinger med løypa, ikke med formen</h2>
+<p class=brod>Mediantempoet i feltet gikk fra 4:56 per km på Reinen 1. september til 6:29 på
+Telegrafbukta to uker etter. Det er de samme menneskene.</p>
+<table><tr><th>Dato</th><th class=t>Median</th><th class=t>Løpere</th></tr><tr><td>05.05</td><td class=t>5,08 min/km</td><td class=t>834</td></tr><tr><td>12.05</td><td class=t>5,04 min/km</td><td class=t>742</td></tr><tr><td>19.05</td><td class=t>5,69 min/km</td><td class=t>644</td></tr><tr><td>26.05</td><td class=t>5,11 min/km</td><td class=t>620</td></tr><tr><td>02.06</td><td class=t>5,28 min/km</td><td class=t>613</td></tr><tr><td>09.06</td><td class=t>5,21 min/km</td><td class=t>561</td></tr><tr><td>16.06</td><td class=t>5,16 min/km</td><td class=t>379</td></tr><tr><td>23.06</td><td class=t>5,25 min/km</td><td class=t>301</td></tr><tr><td>11.08</td><td class=t>5,50 min/km</td><td class=t>378</td></tr><tr><td>25.08</td><td class=t>5,45 min/km</td><td class=t>332</td></tr><tr><td>01.09</td><td class=t>4,94 min/km</td><td class=t>346</td></tr><tr><td>08.09</td><td class=t>5,30 min/km</td><td class=t>260</td></tr><tr><td>15.09</td><td class=t>6,49 min/km</td><td class=t>279</td></tr></table>
+<h2 style="margin-top:var(--s8)">Hvor mange løp folk tok</h2>
+<table><tr><th>Antall</th><th class=t>Personer</th></tr><tr><td>13 løp</td><td class=t>5</td></tr><tr><td>12 løp</td><td class=t>9</td></tr><tr><td>11 løp</td><td class=t>28</td></tr><tr><td>10 løp</td><td class=t>46</td></tr><tr><td>9 løp</td><td class=t>62</td></tr><tr><td>8 løp</td><td class=t>94</td></tr><tr><td>7 løp</td><td class=t>98</td></tr><tr><td>6 løp</td><td class=t>145</td></tr><tr><td>5 løp</td><td class=t>156</td></tr><tr><td>4 løp</td><td class=t>176</td></tr><tr><td>3 løp</td><td class=t>172</td></tr><tr><td>2 løp</td><td class=t>167</td></tr><tr><td>1 løp</td><td class=t>155</td></tr></table>
+<div class=skille>Laget av <b>Treni</b></div>
+</section>
+
+<section class=wrap>
+<div class=slutt>
+<p class=kicker>Løpetrener på nett</p>
+<h2>Få løpeplan hver uke, bygget på øktene dine</h2>
+<p>Treni leser hver økt du løper, sier om uka var rolig nok, og bygger neste ukes plan på det du
+faktisk gjorde. Du kan spørre om hva som helst underveis og få svar.</p>
+<p>De fleste løper for hardt på de rolige dagene. Det er den vanligste grunnen til at framgangen
+stopper, og til at skaden kommer.</p>
+<p>Ingen venteliste. Du får din egen side med en gang, og planen så snart klokka er koblet og
+historikken er inne. Gratis i testperioden.</p>
+<a class=knapp href="https://treni.no/bli-testloper.php?kilde=tromsokarusellen2026">Prøv Treni</a>
+</div>
+</section>
+
+<footer class=wrap>
+<p>Tallene er hentet fra tidtakingen (EQ Timing) 17.09.2026 og regnet ut av Treni.
+Sju resultater med åpenbart feil tid er holdt utenfor. Siste løp, Reinen Halvmaraton
+22. september, kommer inn når det er ferdig.</p>
+<p>Denne oversikten er laget av Treni, ikke av Troms og Finnmark Bedriftsidrettskrets.</p>
+</footer>
+
+<a class=banner href="https://treni.no/bli-testloper.php?kilde=tromsokarusellen2026">
+<span class=bv><span class=bm>TRENI<b>.</b><em>Løpetrener på nett</em></span>
+<span class=bt>Løpeplan hver uke, bygget på øktene du faktisk løper. Du ser hele uka på
+forhånd, og planen justerer seg etter hvordan det går. Gratis i testperioden.</span></span>
+<span class=bc>Prøv Treni</span></a>
+
+<script>
+// ?kilde=nr i lenka forteller hvor besøket kom fra. Facebook stripper ofte
+// henvisningen, så uten den vet vi ikke hvilken deling som virket.
+var KILDE=(new URLSearchParams(location.search).get('kilde')||'').slice(0,24);
+var LOGG=function(h,d){try{if(/[?&]kort=/.test(location.search)) return; fetch('logg.php?logg='+h,{method:'POST',keepalive:true,
+headers:{'Content-Type':'application/json'},body:JSON.stringify(Object.assign({side:'rot',kilde:KILDE},d||{}))})}catch(e){}};
+// Forhåndsvisningene våre (?kort=) skal ikke telles som besøk.
+var FORHAND=/[?&]kort=/.test(location.search);
+if(!FORHAND) LOGG('besok');
+// Dybden må måles med en gang også: leser du bare toppen og lukker, er
+// dybden det første skjermbildet, ikke null (feilen ga median 0 % 17.09).
+function _dybde(){
+  var h=Math.max(document.body.scrollHeight,1);
+  return Math.min(100,Math.round((window.scrollY+window.innerHeight)/h*100));
+}
+var maksdybde=_dybde();
+window.addEventListener('scroll',function(){
+  var d=_dybde(); if(d>maksdybde) maksdybde=d;
+},{passive:true});
+window.addEventListener('pagehide',function(){
+  if(!FORHAND) LOGG('dybde',{dybde:Math.max(maksdybde,_dybde())});
+});
+document.querySelectorAll('a[href*="treni.no"]').forEach(function(a){
+  a.addEventListener('click',function(){LOGG('ut',{mal:a.className||'lenke'})});
+});
+
+var VIS=false;
+var D=null;
+fetch('data.json?v=202609171530').then(function(r){return r.json()}).then(function(j){D=j});
+var q=document.getElementById('q'), sv=document.getElementById('svar');
+var MND=['jan','feb','mars','april','mai','juni','juli','aug','sep','okt','nov','des'];
+function sek(f){ if(!f) return null; var d=String(f).split(':'); return (+d[0])*60+(+d[1]); }
+function dat(x){ return (+x.slice(8))+'. '+MND[(+x.slice(5,7))-1]; }
+function tid(x){ return String(x||'').replace(/\.\d+$/,''); }
+// Norske tall: mellomrom som tusenskille, komma som desimaltegn. 1311,8 km er
+// tre streker med tall; 1 311,8 km leses med én gang.
+// «297.» alene ser ut som en avkuttet setning. Står feltstørrelsen, sier vi
+// «156. av 575»; gjør den ikke det, sier vi «plass 297».
+function plasstekst(x){
+  if(!x[3]) return '';
+  return x[7]>=x[3] ? x[3]+'. av '+x[7] : 'plass '+x[3];
+}
+function nork(x){
+  var d=String(x).split('.');
+  return d[0].replace(/\B(?=(\d{3})+(?!\d))/g,' ')+(d[1]? ','+d[1]:'');
+}
+function kort(n,p){
+  var s=p.s.filter(function(x){return x[1]&&x[4]&&!x[5]});
+  var snitt=s.length? s.reduce(function(a,x){return a+sek(x[4])},0)/s.length : 0;
+  // beste økt: laveste tempo
+  var best=s.slice().sort(function(a,b){return sek(a[4])-sek(b[4])})[0];
+  var _t=Math.round(snitt), mm=Math.floor(_t/60), ss=_t%60;
+  var alle=(p.n>=13);
+  var setning=(alle? 'Du løp <b>alle 13 løpene</b> i sommer'
+                   : 'Du løp <b>'+p.n+' av 13 løp</b> i sommer')+
+    (best? ', raskest '+dat(best[0])+' med '+best[4]+'/km på '+String(best[1]).replace('.',',')+' km':'')+
+    ', og holdt '+mm+':'+(ss<10?'0':'')+ss+'/km i snitt gjennom sesongen.';
+  // Ett felt per løp (Odd 17.09.2026): dato, hvor det gikk, distanse, tid, fart
+  // og plassering. Alle løpene står framme, ingen er gjemt bak en knapp.
+  var felt=p.s.map(function(x){
+    var rask=!x[5]&&x[4]&&sek(x[4])<snitt;
+    var plass=plasstekst(x);
+    return '<div class="lopkort'+(rask?' rask':'')+'">'+
+      '<div class=d>'+dat(x[0])+'</div>'+
+      '<div class=sted>'+(x[6]||'Tromsøkarusellen')+'</div>'+
+      '<div class=m>'+String(x[1]).replace('.',',')+' km · '+tid(x[2])+(x[5]?' *':'')+'</div>'+
+      '<div class=p>'+(x[5]?'fart uviss':'<b>'+x[4]+'/km</b>')+(plass?' · '+plass:'')+'</div>'+
+      '</div>';
+  }).join('');
+  return '<div class=sesong id="kort-'+encodeURIComponent(n)+'">'+
+    '<h3>'+n+'</h3>'+
+    '<p class=stort>'+p.n+' løp · '+nork(p.km)+' km · '+mm+':'+(ss<10?'0':'')+ss+'/km i snitt</p>'+
+    '<button class=lagre data-navn="'+n.replace(/"/g,'')+'">Lagre bildet</button>'+
+    '<p class=setning>'+setning+'</p>'+
+    '<p class=gridtittel>Alle løpene dine</p>'+
+    '<div class=lopgrid>'+felt+'</div>'+
+    '<p class=soyle-tekst style="margin-top:10px"><span>Grønn strek er et løp du gikk raskere enn ditt eget snitt.</span></p>'+
+    (p.s.some(function(x){return x[5]})? '<p class=soyle-tekst><span>* tidtakingen mistet en registrering her, så tida stemmer ikke med plasseringen. Den er holdt utenfor snittet.</span></p>':'')+
+    '</div>';
+}
+// Lagkortet (Odd 17.09.2026): samme kort for arbeidsplassene. Laget er summen
+// av folkene sine, aldri navnene deres, og snittfarten står bare når minst tre
+// fra laget stilte det løpet.
+// Bakgrunnsfotoene i delekortet er laget med Nano Banana Pro (foto_gen.py,
+// 4:5, Tromsø i høstlys), ett per sted i serien. De ligger på samme domene, så
+// canvas blir ikke «tainted» og bildet kan fortsatt lagres. Kortet henter det
+// stedet løperen løp best, så to naboer ikke får samme bilde.
+var BGC={};
+function bghent(n){
+  if(!BGC[n]){ var im=new Image(); im.src='kort/'+n+'.jpg?v=202609171530'; BGC[n]=im; }
+  return BGC[n];
+}
+function bgnavn(sted){
+  var t=(sted||'').toLowerCase();
+  if(t.indexOf('folkepark')>=0) return 'folkeparken';
+  if(t.indexOf('reinen')>=0) return 'reinen';
+  if(t.indexOf('kroken')>=0) return 'kroken';
+  if(t.indexOf('prestvann')>=0) return 'prestvannet';
+  if(t.indexOf('telegraf')>=0) return 'telegrafbukta';
+  if(t.indexOf('holtbakk')>=0) return 'holtbakken';
+  if(t.indexOf('sommerlyst')>=0) return 'sommerlyst';
+  return 'bg';
+}
+var G=null;
+fetch('lag.json?v=202609171530').then(function(r){return r.json()}).then(function(j){G=j});
+function lagkort(n,p){
+  var snitt=p.s.length? p.s.reduce(function(a,x){return a+x[1]},0)/p.s.length : 0;
+  var flest=p.s.slice().sort(function(a,b){return b[1]-a[1]})[0];
+  var alle=(p.s.length>=13);
+  var setning=(alle? 'Dere stilte i <b>alle 13 løpene</b> i sommer'
+                   : 'Dere stilte i <b>'+p.s.length+' av 13 løp</b> i sommer')+
+    (flest? ', flest '+dat(flest[0])+' da '+flest[1]+' av dere løp' : '')+
+    '. Til sammen '+p.n+' starter og '+nork(p.km)+' kilometer.';
+  var felt=p.s.map(function(x){
+    var opp=x[1]>snitt;
+    return '<div class="lopkort'+(opp?' rask':'')+'">'+
+      '<div class=d>'+dat(x[0])+'</div>'+
+      '<div class=sted>'+(x[3]||'Tromsøkarusellen')+'</div>'+
+      '<div class=m>'+x[1]+' med · '+nork(x[2])+' km</div>'+
+      '<div class=p>'+(x[4]? '<b>'+x[4]+'/km</b> i snitt' : 'for få til å regne snitt')+'</div>'+
+      '</div>';
+  }).join('');
+  return '<div class=sesong>'+
+    '<h3>'+n+'</h3>'+
+    '<p class=stort>'+p.f+(p.f===1?' person · ':' personer · ')+p.n+' starter · '+
+      nork(p.km)+' km</p>'+
+    '<button class="lagre lagre-lag" data-navn="'+n.replace(/"/g,'')+'">Lagre bildet</button>'+
+    '<p class=setning>'+setning+'</p>'+
+    '<p class=gridtittel>Alle løpene deres</p>'+
+    '<div class=lopgrid>'+felt+'</div>'+
+    '<p class=soyle-tekst style="margin-top:10px"><span>Grønn strek er et løp dere stilte flere enn dere pleide. Snittfarten står bare når minst tre fra laget løp.</span></p>'+
+    '</div>';
+}
+// Eksempelkortet ved siden av søket (Odd 17.09.2026: «legg eksempelbilde til
+// høyre, så de ser at det er noe de kan få lastet ned»). Det tegnes av SAMME
+// funksjon som det ekte kortet, så det kan aldri vise noe annet enn det folk
+// faktisk får. Navnet er oppdiktet: vi henger aldri ut en ekte løper.
+var DEMO=[
+  ['5. mai','Folkeparken','7 km · 36:14','5:11/km · 214. av 575',0,7],
+  ['12. mai','Reinen skole','5 km · 25:38','5:08/km · 201. av 418',1,5],
+  ['26. mai','Krokenløp','5 km · 25:02','5:00/km · 188. av 325',1,5],
+  ['9. juni','Folkeparken','7 km · 36:55','5:16/km · 233. av 377',0,7],
+  ['16. juni','Reinen skole','5 km · 25:20','5:04/km · 150. av 276',1,5],
+  ['25. aug','Prestvannet','5,2 km · 27:44','5:20/km · 171. av 332',0,5.2],
+  ['8. sep','Prestvannet','5,2 km · 26:39','5:07/km · 146. av 261',1,5.2],
+  ['15. sep','Telegrafbukta','5,2 km · 27:12','5:14/km · 151. av 279',0,5.2]];
+(function(){
+  if(/[?&]kort=/.test(location.search)) return;
+  var felter=DEMO.map(function(x){
+    return {dato:x[0], sted:x[1], en:x[2], to:x[3], gronn:!!x[4], andel:x[5]/7};
+  });
+  bilde('Kari Nordmann',[[8,'LØP'],['44,6','KILOMETER'],['5:10','SNITT PER KM']],felter,
+    ['Raskest 26. mai: 5:00/km på 5 km.',
+     'Grønn strek er et løp du gikk raskere enn ditt eget snitt.'],
+    '','','reinen',
+    function(du){
+      var im=document.getElementById('demobilde');
+      im.src=du; document.getElementById('demo').classList.add('pa');
+    });
+})();
+
+// Eksempelkortet for laget, tegnet av samme funksjon som det ekte.
+// Navnet er oppdiktet, slik at ingen arbeidsplass står som utstillingsdukke.
+var DEMOLAG=[
+  ['5. mai','Folkeparken','9 med · 55 km','5:31/km i snitt',1,9],
+  ['12. mai','Reinen skole','7 med · 50 km','5:28/km i snitt',0,7],
+  ['19. mai','Holtbakken opp','11 med · 38,5 km','6:02/km i snitt',1,11],
+  ['26. mai','Krokenmila','8 med · 55 km','5:24/km i snitt',0,8],
+  ['9. juni','Folkeparken','10 med · 58 km','5:26/km i snitt',1,10],
+  ['16. juni','Reinen skole','6 med · 40 km','5:19/km i snitt',0,6],
+  ['25. aug','Prestvannet','7 med · 36,4 km','5:33/km i snitt',0,7],
+  ['8. sep','Prestvannet','9 med · 46,8 km','5:25/km i snitt',1,9],
+  ['15. sep','Telegrafbukta','8 med · 41,6 km','5:38/km i snitt',0,8]];
+(function(){
+  if(/[?&]kort=/.test(location.search)) return;
+  var felter=DEMOLAG.map(function(x){
+    return {dato:x[0], sted:x[1], en:x[2], to:x[3], gronn:!!x[4], andel:x[5]/11};
+  });
+  bilde('Eksempelbedriften',[[14,'PERSONER'],[75,'STARTER'],['420,3','KILOMETER']],felter,
+    ['Flest på start 19. mai: 11 av oss.',
+     'Grønn strek er et løp vi stilte flere enn vi pleide.'],
+    '','','telegrafbukta',
+    function(du){
+      var im=document.getElementById('demobilde2');
+      im.src=du; document.getElementById('demo2').classList.add('pa');
+    });
+})();
+
+var lq=document.getElementById('lq'), lsv=document.getElementById('lagsvar');
+lq.addEventListener('input',function(){
+  var s=lq.value.trim().toLowerCase();
+  if(!G||s.length<3){
+    lsv.innerHTML='';
+    var e0=document.getElementById('demo2');
+    if(e0 && document.getElementById('demobilde2').src) e0.classList.add('pa');
+    return;
+  }
+  var t=Object.keys(G).filter(function(n){return n.toLowerCase().indexOf(s)>=0})
+        .sort(function(a,b){return G[b].n-G[a].n}).slice(0,4);
+  if(t.length){LOGG('lagtreff',{lengde:s.length,treff:t.length})}else{LOGG('lagsok',{lengde:s.length,treff:0})}
+  if(!t.length){lsv.innerHTML='<p class=brod>Ingen treff. Prøv et kortere ord fra navnet.</p>';return}
+  lsv.innerHTML=t.map(function(n){return lagkort(n,G[n])}).join('');
+  var dm2=document.getElementById('demo2'); if(dm2) dm2.classList.remove('pa');
+  lsv.querySelectorAll('.lagre-lag').forEach(function(b){
+    b.addEventListener('click',function(){tegn_lag(b.getAttribute('data-navn'))});
+  });
+  t.forEach(function(n){
+    var f2=G[n].s.slice().sort(function(a,b){return b[1]-a[1]})[0];
+    bghent(bgnavn(f2&&f2[3]));
+  });
+});
+
+q.addEventListener('input',function(){
+  var s=q.value.trim().toLowerCase();
+  if(!D||s.length<3){
+    sv.innerHTML='';
+    var d0=document.getElementById('demo');
+    if(d0 && document.getElementById('demobilde').src) d0.classList.add('pa');
+    return;
+  }
+  var t=Object.keys(D).filter(function(n){return n.toLowerCase().indexOf(s)>=0}).slice(0,4);
+  if(t.length){LOGG('treff',{lengde:s.length,treff:t.length})}else{LOGG('sok',{lengde:s.length,treff:0})}
+  if(!t.length){sv.innerHTML='<p class=brod>Ingen treff. Prøv etternavnet.</p>';return}
+  sv.innerHTML=t.map(function(n){return kort(n,D[n])}).join('');
+  var dm=document.getElementById('demo'); if(dm) dm.classList.remove('pa');
+  sv.querySelectorAll('.lagre').forEach(function(b){
+    b.addEventListener('click',function(){tegn(b.getAttribute('data-navn'))});
+  });
+  // Last fotoet mens løperen leser kortet, ikke når han trykker.
+  t.forEach(function(n){
+    var g2=D[n].s.filter(function(x){return x[4]&&!x[5]})
+              .sort(function(a,b){return sek(a[4])-sek(b[4])})[0];
+    bghent(bgnavn(g2&&g2[6]));
+  });
+});
+
+// «Lagre bildet» (Odd 17.09.2026): sesongen tegnes som et bilde løperen kan
+// legge i en story. 1 313 mennesker som deler sin egen sesong med merket vårt
+// på, er en helt annen rekkevidde enn innleggene våre klarer selv.
+function rr(g,x,y,w,h,r){
+  if(g.roundRect){g.beginPath(); g.roundRect(x,y,w,h,r); g.fill();} else {g.fillRect(x,y,w,h);}
+}
+function kutt(g,t,maks){
+  if(g.measureText(t).width<=maks) return t;
+  var u=t; while(u.length>1 && g.measureText(u+'…').width>maks) u=u.slice(0,-1);
+  return u+'…';
+}
+// Sperret tekst (letterSpacing finnes ikke i alle nettlesere, så vi tegner
+// bokstav for bokstav). Brukes på de små etikettene.
+function sperret(g,t,x,y,sp){
+  for(var i=0;i<t.length;i++){ g.fillText(t[i],x,y); x+=g.measureText(t[i]).width+sp; }
+}
+// Nordlyset: tre bånd som bøyer seg over toppen. Det er byen bildet kommer fra,
+// og det gjør bildet til noe folk vil dele (Odd 17.09.2026: «kjedelig bilde nå»).
+function nordlys(g){
+  var band=[[120,'123,241,168',.20],[186,'242,115,74',.17],[262,'123,241,168',.10]];
+  band.forEach(function(b){
+    var y=b[0], gr=g.createLinearGradient(0,y-190,0,y+230);
+    gr.addColorStop(0,'rgba('+b[1]+',0)');
+    gr.addColorStop(.45,'rgba('+b[1]+','+b[2]+')');
+    gr.addColorStop(1,'rgba('+b[1]+',0)');
+    g.fillStyle=gr;
+    g.beginPath(); g.moveTo(-60,y);
+    g.bezierCurveTo(240,y-130,700,y+70,1140,y-90);
+    g.lineTo(1140,y+120);
+    g.bezierCurveTo(700,y+280,240,y+80,-60,y+190);
+    g.closePath(); g.fill();
+  });
+}
+// Stjerner med fast frø, så bildet blir likt hver gang det tegnes.
+function stjerner(g){
+  var f=20260917;
+  for(var i=0;i<90;i++){
+    f=(f*1103515245+12345)%2147483648;
+    var x=(f/2147483648)*1080;
+    f=(f*1103515245+12345)%2147483648;
+    var y=(f/2147483648)*420;
+    f=(f*1103515245+12345)%2147483648;
+    var a=.10+(f/2147483648)*.35;
+    g.fillStyle='rgba(244,241,232,'+a.toFixed(2)+')';
+    g.beginPath(); g.arc(x,y,(f%7===0)?2.2:1.3,0,6.3); g.fill();
+  }
+}
+// Fjellene rundt byen, som bunnlinje under sesongen.
+function fjell(g,topp){
+  var pkt=[[0,70],[90,26],[170,58],[262,10],[360,52],[470,4],[560,46],[660,18],
+           [760,54],[870,22],[960,50],[1080,16]];
+  g.fillStyle='#0d0906';
+  g.beginPath(); g.moveTo(0,1350); g.lineTo(0,topp+pkt[0][1]);
+  for(var i=1;i<pkt.length;i++) g.lineTo(pkt[i][0],topp+pkt[i][1]);
+  g.lineTo(1080,1350); g.closePath(); g.fill();
+  g.strokeStyle='rgba(123,241,168,.22)'; g.lineWidth=2;
+  g.beginPath(); g.moveTo(0,topp+pkt[0][1]);
+  for(var i=1;i<pkt.length;i++) g.lineTo(pkt[i][0],topp+pkt[i][1]);
+  g.stroke();
+}
+// Å lagre bildet (Odd 17.09.2026: «den blir liggende i browseren, fiks sånn at
+// den lagres på kamerarullen»). <a download> med en data-URL gjør ingenting på
+// iPhone og legger bare fila i Nedlastinger på Android. Veien til kamerarullen
+// går gjennom delingsarket: navigator.share med en ekte fil gir «Lagre bilde»
+// på iOS og «Lagre i Bilder» på Android. Alt under er synkront, fordi iOS bare
+// slipper gjennom deling som skjer i samme trykk som brukeren gjorde.
+function _blob(du){
+  var b=atob(du.split(',')[1]), n=b.length, u=new Uint8Array(n);
+  while(n--) u[n]=b.charCodeAt(n);
+  return new Blob([u],{type:'image/png'});
+}
+function _iOS(){
+  return /iP(hone|ad|od)/.test(navigator.userAgent) ||
+         (navigator.platform==='MacIntel' && navigator.maxTouchPoints>1);
+}
+// Siste utvei: vis bildet stort, så kan brukeren holde inne på det og velge
+// «Legg til i Bilder» selv. Det virker i alle nettlesere.
+function _vis_og_hold(du){
+  var w=document.createElement('div');
+  w.style.cssText='position:fixed;inset:0;z-index:99999;background:rgba(8,5,4,.96);'+
+    'overflow:auto;padding:14px;text-align:center;font:400 15px var(--sans)';
+  var p1=document.createElement('p');
+  p1.style.cssText='color:#f4f1e8;margin:4px 0 12px;line-height:1.5';
+  p1.textContent=_iOS()? 'Hold fingeren på bildet og velg «Legg til i Bilder».'
+                       : 'Hold fingeren på bildet og velg «Last ned bilde».';
+  var im=new Image(); im.src=du;
+  im.style.cssText='max-width:100%;height:auto;border-radius:12px';
+  // Lukkeknappen ligger fast øverst: bildet er høyt, og en knapp under det
+  // krever at brukeren scroller helt ned for å komme seg ut.
+  var kn=document.createElement('button');
+  kn.textContent='Lukk'; kn.className='lagre';
+  kn.style.cssText='position:fixed;top:10px;right:12px;z-index:2;padding:.5rem 1rem';
+  kn.onclick=function(){w.remove()};
+  p1.style.paddingRight='90px';
+  w.appendChild(kn); w.appendChild(p1); w.appendChild(im);
+  document.body.appendChild(w);
+}
+function lever(c,filnavn){
+  var du=c.toDataURL('image/png'), blob=_blob(du), fil=null;
+  try { fil=new File([blob],filnavn,{type:'image/png'}); } catch(e) {}
+  // På PC er nedlasting det folk venter seg; delingsarket er for telefonen.
+  var mobil=_iOS() || (navigator.maxTouchPoints>0 && /Android|Mobile/i.test(navigator.userAgent));
+  if(mobil && fil && navigator.canShare && navigator.canShare({files:[fil]}) && navigator.share){
+    navigator.share({files:[fil],title:'Tromsøkarusellen 2026'})
+      .then(function(){LOGG('delt',{})})
+      .catch(function(e){
+        if(e && e.name==='AbortError'){ LOGG('avbrutt',{}); return; }
+        _vis_og_hold(du);
+      });
+    return;
+  }
+  if(_iOS()){ _vis_og_hold(du); return; }      // iOS uten deling: ingen nedlasting
+  try {
+    var u=URL.createObjectURL(blob), a=document.createElement('a');
+    a.href=u; a.download=filnavn; document.body.appendChild(a); a.click();
+    a.remove(); setTimeout(function(){URL.revokeObjectURL(u)},4000);
+  } catch(e) { _vis_og_hold(du); }
+}
+
+// Ett bilde, to bruk: løperens sesong og lagets sesong tegnes med samme hånd.
+// stats = [[tall, etikett] x3], felter = ett per løp.
+function bilde(navn,stats,felter,linjer,filnavn,logg,bgfil,mottak){
+  if(logg) LOGG(logg,{});
+  var BG=bghent(bgfil||'bg');
+  if(!BG.complete){
+    // Fotoet er ikke nede ennå. Vent på det i stedet for å lage et bilde uten.
+    var om=function(){bilde(navn,stats,felter,linjer,filnavn,logg,bgfil,mottak)};
+    BG.addEventListener('load',om,{once:true});
+    BG.addEventListener('error',om,{once:true});
+    return;
+  }
+  var BG_KLAR=BG.naturalWidth>0;
+  // Odd 17.09.2026: navnet, talltavlene og løpsfeltene skal stå SAMMEN nede,
+  // og fotoet skal ha resten. Alt måles derfor som én blokk som bunnstilles,
+  // uten hull mellom delene. Med flere enn åtte løp går rutenettet i fire
+  // kolonner for å få plass; med færre holder tre brede.
+  var GX=15, GY=14, x0=90, STH=120;
+  var KOL=felter.length>8?4:3;
+  var CW=Math.floor((900-(KOL-1)*GX)/KOL);
+  var rader=Math.ceil(felter.length/KOL)||1;
+  var CH=Math.min(122,Math.floor((460-(rader-1)*GY)/rader));
+  var liten=CW<250;
+  var rutH=(rader-1)*(CH+GY)+CH;
+  var c=document.createElement('canvas'); c.width=1080; c.height=1350;
+  var g=c.getContext('2d'); g.textBaseline='alphabetic';
+  var _s=76; while(_s>36){ g.font='700 '+_s+'px Georgia,serif';
+    if(g.measureText(navn).width<=900) break; _s-=3; }
+  var blokkTopp=Math.max(120,1150-(26+_s+28+34+STH+66+rutH+90));
+  g.fillStyle='#120c09'; g.fillRect(0,0,1080,1350);
+  if(BG_KLAR){
+    // Fotoet dekker hele flata, men sløres ned mot bunnen så tallene leses.
+    var s0=BG.naturalWidth/BG.naturalHeight, s1=1080/1350, bw, bh;
+    if(s0>s1){bh=1350; bw=1350*s0;} else {bw=1080; bh=1080/s0;}
+    g.drawImage(BG,(1080-bw)/2,0,bw,bh);
+    // Sløret er lett over blokka, så landskapet får stå, og tett bak tallene.
+    var sl=g.createLinearGradient(0,0,0,1350);
+    var a1=Math.max(.02,(blokkTopp-220)/1350), a2=Math.max(a1+.02,(blokkTopp-30)/1350);
+    sl.addColorStop(0,'rgba(18,12,9,.38)');
+    sl.addColorStop(a1,'rgba(18,12,9,.44)');
+    sl.addColorStop(a2,'rgba(18,12,9,.90)');
+    sl.addColorStop(1,'rgba(18,12,9,.94)');
+    g.fillStyle=sl; g.fillRect(0,0,1080,1350);
+  } else {
+    stjerner(g); nordlys(g);   // reserve hvis fotoet ikke er lastet
+  }
+  // Navnestørrelsen bestemmer blokkhøyden, så den måles før vi plasserer noe.
+  var st=76; while(st>36){ g.font='700 '+st+'px Georgia,serif';
+    if(g.measureText(navn).width<=900) break; st-=3; }
+  var blokkH=26+st+28+34+STH+66+rutH+90;
+  var Y=Math.max(120,1150-blokkH);
+  g.save(); g.shadowColor='rgba(0,0,0,.65)'; g.shadowBlur=18;
+  g.fillStyle='#f2734a'; g.font='700 26px system-ui,sans-serif';
+  sperret(g,'TROMSØKARUSELLEN 2026',90,Y+26,4);
+  g.fillStyle='#f4f1e8'; g.font='700 '+st+'px Georgia,serif';
+  g.fillText(kutt(g,navn,900),90,Y+26+st);
+  g.restore();
+  g.strokeStyle='#f2734a'; g.lineWidth=5;
+  g.beginPath(); g.moveTo(90,Y+26+st+28); g.lineTo(190,Y+26+st+28); g.stroke();
+  // tre talltavler
+  var SW=290, SG=15, sy=Y+26+st+28+34;
+  stats.forEach(function(t,i){
+    var x=90+i*(SW+SG);
+    g.fillStyle='rgba(26,18,13,.86)'; rr(g,x,sy,SW,STH,16);
+    g.fillStyle='rgba(242,115,74,.55)'; rr(g,x,sy,SW,4,2);
+    g.fillStyle='#f4f1e8'; g.font='700 48px system-ui,sans-serif';
+    g.fillText(kutt(g,String(t[0]),SW-44),x+22,sy+66);
+    g.fillStyle='#b3aaa2'; g.font='600 19px system-ui,sans-serif';
+    sperret(g,t[1],x+22,sy+98,2.4);
+  });
+  // rutenettet med løpene
+  var y0=sy+STH+66, bunn=y0+rutH;
+  g.save(); g.shadowColor='rgba(0,0,0,.8)'; g.shadowBlur=12;
+  g.fillStyle='#b3aaa2'; g.font='600 19px system-ui,sans-serif';
+  sperret(g,'HVER TIRSDAG I SOMMER',90,y0-22,3);
+  g.restore();
+  g.strokeStyle='rgba(244,241,232,.14)'; g.lineWidth=1;
+  g.beginPath(); g.moveTo(400,y0-28); g.lineTo(990,y0-28); g.stroke();
+  felter.forEach(function(f,i){
+    var cx=x0+(i%KOL)*(CW+GX), cy=y0+Math.floor(i/KOL)*(CH+GY);
+    g.fillStyle='#1a120d'; rr(g,cx,cy,CW,CH,14);
+    g.strokeStyle='rgba(244,241,232,.07)'; g.lineWidth=1;
+    if(g.roundRect){g.beginPath(); g.roundRect(cx+.5,cy+.5,CW-1,CH-1,14); g.stroke();}
+    g.fillStyle=f.gronn?'#7bf1a8':'#4a3227'; rr(g,cx,cy,6,CH,3);
+    var pad=liten?16:22, bredde=CW-pad*2;
+    g.fillStyle='#b3aaa2'; g.font='600 '+(liten?16:19)+'px system-ui,sans-serif';
+    sperret(g,f.dato.toUpperCase(),cx+pad,cy+CH*0.21,liten?1.4:2);
+    g.fillStyle='#f4f1e8'; g.font='600 '+(liten?22:26)+'px system-ui,sans-serif';
+    g.fillText(kutt(g,f.sted,bredde),cx+pad,cy+CH*0.44);
+    g.font='400 '+(liten?20:23)+'px system-ui,sans-serif';
+    g.fillText(kutt(g,f.en,bredde),cx+pad,cy+CH*0.65);
+    g.fillStyle=f.gronn?'#7bf1a8':'#b3aaa2';
+    g.font='400 '+(liten?17:20)+'px system-ui,sans-serif';
+    g.fillText(kutt(g,f.to,bredde),cx+pad,cy+CH*0.84);
+    // strek langs bunnen: hvor langt/hvor mange dette løpet var
+    g.fillStyle='rgba(244,241,232,.08)'; rr(g,cx+pad,cy+CH-10,bredde,4,2);
+    g.fillStyle=f.gronn?'rgba(123,241,168,.75)':'rgba(242,115,74,.55)';
+    rr(g,cx+pad,cy+CH-10,Math.max(10,bredde*Math.min(1,f.andel)),4,2);
+  });
+  // bunn
+  fjell(g,1186);
+  var y=bunn+48;   // luft mellom siste løpsfelt og «Raskest ...» (Odd 17.09)
+  g.save(); g.shadowColor='rgba(0,0,0,.85)'; g.shadowBlur=14;
+  g.fillStyle='#f4f1e8'; g.font='400 30px system-ui,sans-serif';
+  if(linjer[0]) g.fillText(kutt(g,linjer[0],900),90,y);
+  g.fillStyle='#d9d2c9'; g.font='400 22px system-ui,sans-serif';
+  if(linjer[1]) g.fillText(kutt(g,linjer[1],900),90,y+34);
+  g.restore();
+  g.fillStyle='#7bf1a8'; g.font='700 42px system-ui,sans-serif';
+  g.fillText('TRENI',90,1288);
+  g.beginPath(); g.arc(90+g.measureText('TRENI').width+13,1288,8,0,6.3); g.fill();
+  g.fillStyle='#f4f1e8'; g.font='600 24px system-ui,sans-serif';
+  g.fillText('Løpeplan hver uke, bygget på øktene dine',90,1324);
+  g.fillStyle='#b3aaa2'; g.font='400 24px system-ui,sans-serif';
+  var u='treni.no/tromsokarusellen';
+  g.fillText(u,990-g.measureText(u).width,1324);
+  if(mottak){ mottak(c.toDataURL('image/png')); return; }
+  if(VIS){
+    // Forhåndsvisning: ?kort=Navn[&sted=folkeparken] viser kortet i fanen i
+    // stedet for å laste det ned. Brukes når vi skal se på flere varianter.
+    var w=document.createElement('div');
+    w.style.cssText='position:fixed;inset:0;z-index:99999;background:#0b0705;'+
+      'overflow:auto;display:flex;justify-content:center;align-items:flex-start';
+    var iv=new Image(); iv.src=c.toDataURL('image/png');
+    iv.style.cssText='max-width:100%;height:auto';
+    w.appendChild(iv); document.body.appendChild(w); return;
+  }
+  lever(c,filnavn);
+}
+function tegn(navn){
+  var p=D[navn]; if(!p) return;
+  var s=p.s.filter(function(x){return x[1]&&x[4]&&!x[5]});
+  var snitt=s.length? s.reduce(function(a,x){return a+sek(x[4])},0)/s.length:0;
+  var _t=Math.round(snitt), mm=Math.floor(_t/60), ss=_t%60;
+  var maks=Math.max.apply(null,p.s.map(function(x){return x[1]||0}).concat([1]));
+  var best=s.slice().sort(function(a,b){return sek(a[4])-sek(b[4])})[0];
+  var felter=p.s.map(function(x){
+    return {dato:dat(x[0]), sted:x[6]||'Tromsøkarusellen',
+            en:nork(x[1])+' km · '+tid(x[2])+(x[5]?' *':''),
+            to:(x[5]?'fart uviss':x[4]+'/km')+(plasstekst(x)? ' · '+plasstekst(x):''),
+            gronn:!x[5]&&x[4]&&sek(x[4])<snitt, andel:(x[1]||0)/maks};
+  });
+  bilde(navn,
+    [[p.n,'LØP'],[nork(p.km),'KILOMETER'],[mm+':'+(ss<10?'0':'')+ss,'SNITT PER KM']],
+    felter,
+    [best? 'Raskest '+dat(best[0])+': '+best[4]+'/km på '+nork(best[1])+' km.' : '',
+     'Grønn strek er et løp du gikk raskere enn ditt eget snitt.'],
+    'min-sesong-tromsokarusellen-2026.png','lagre',bgnavn(best&&best[6]));
+}
+function tegn_lag(navn){
+  var p=G[navn]; if(!p) return;
+  var snitt=p.s.length? p.s.reduce(function(a,x){return a+x[1]},0)/p.s.length:0;
+  var maks=Math.max.apply(null,p.s.map(function(x){return x[1]||0}).concat([1]));
+  var flest=p.s.slice().sort(function(a,b){return b[1]-a[1]})[0];
+  var felter=p.s.map(function(x){
+    return {dato:dat(x[0]), sted:x[3]||'Tromsøkarusellen',
+            en:x[1]+' med · '+nork(x[2])+' km',
+            to:x[4]? x[4]+'/km i snitt':'',
+            gronn:x[1]>snitt, andel:(x[1]||0)/maks};
+  });
+  bilde(navn,
+    [[p.f,p.f===1?'PERSON':'PERSONER'],[p.n,'STARTER'],[nork(p.km),'KILOMETER']],
+    felter,
+    [flest? 'Flest på start '+dat(flest[0])+': '+flest[1]+' av oss.' : '',
+     'Grønn strek er et løp vi stilte flere enn vi pleide.'],
+    'laget-vart-tromsokarusellen-2026.png','lagre_lag',bgnavn(flest&&flest[3]));
+}
+
+(function(){
+  var u=new URLSearchParams(location.search), n=u.get('kort');
+  if(!n) return;
+  var st=u.get('sted'), lag=u.get('lag');
+  var t=setInterval(function(){
+    if(lag? !G : !D) return;
+    clearInterval(t);
+    var ekte=bgnavn; if(st) bgnavn=function(){return st};
+    VIS=true; (lag? tegn_lag : tegn)(n); bgnavn=ekte;
+  },200);
+})();
+</script></body></html>

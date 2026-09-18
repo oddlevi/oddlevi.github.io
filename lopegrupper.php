@@ -30,9 +30,9 @@ function e10(?string $s): string { return htmlspecialchars($s ?? '', ENT_QUOTES,
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Løpegrupper i Norge — finn en løpegruppe nær deg | Treni</title>
+<title>Løpegrupper i Norge · finn en løpegruppe nær deg | Treni</title>
 <meta name="description" content="Oversikt over løpegrupper og løpeklubber i hele Norge: organiserte klubber, lavterskelgrupper og butikkgrupper, med lenke til hver gruppe. Finn løpegruppa nær deg.">
-<meta property="og:title" content="Løpegrupper i Norge — finn en løpegruppe nær deg">
+<meta property="og:title" content="Løpegrupper i Norge · finn en løpegruppe nær deg">
 <meta property="og:description" content="Løpeklubber, lavterskelgrupper og butikkgrupper i hele landet, samlet på ett sted.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://treni.no/lopegrupper.php">
@@ -40,7 +40,7 @@ function e10(?string $s): string { return htmlspecialchars($s ?? '', ENT_QUOTES,
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="icon" type="image/png" href="/icon-192.png" sizes="192x192">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="stylesheet" href="stil.css?v=19">
+<link rel="stylesheet" href="stil.css?v=30">
 <style>
 .gr-rad { display:flex; gap:1rem; align-items:center; padding:.7rem 0;
   border-bottom:1px solid hsl(var(--border)); flex-wrap:wrap; }
@@ -63,7 +63,7 @@ function e10(?string $s): string { return htmlspecialchars($s ?? '', ENT_QUOTES,
 
 <header class="hero smal">
   <p class="kicker reveal"><a href="index.html" style="color:inherit">treni.no</a> · løpegrupper</p>
-  <h1 class="reveal" style="font-size:clamp(1.8rem,5vw,2.7rem)">Løpegrupper i Norge —<br>finn gruppa nær deg</h1>
+  <h1 class="reveal" style="font-size:clamp(1.8rem,5vw,2.7rem)">Løpegrupper i Norge,<br>finn gruppa nær deg</h1>
   <p class="ingress reveal">Løpeklubber, lavterskelgrupper og butikkgrupper i hele landet,
   samlet på ett sted. Å løpe sammen med andre er den enkleste måten å holde treningen i
   gang på. Finn gruppa di, møt opp og bli med! 🏃</p>
@@ -71,7 +71,7 @@ function e10(?string $s): string { return htmlspecialchars($s ?? '', ENT_QUOTES,
 
 <section>
 <?php if (!$grupper): ?>
-  <div class="kort"><p style="margin:0">Oversikten fylles i løpet av dagen — kom tilbake litt senere,
+  <div class="kort"><p style="margin:0">Oversikten fylles i løpet av dagen, kom tilbake litt senere,
   eller <a href="mailto:hei@treni.no">send oss en e-post</a>.</p></div>
 <?php else: ?>
   <div style="display:flex; gap:.6rem; margin:.2rem 0 1rem; flex-wrap:wrap">
@@ -89,12 +89,12 @@ function e10(?string $s): string { return htmlspecialchars($s ?? '', ENT_QUOTES,
       background:transparent; color:hsl(var(--fg)); font:inherit; min-width:12rem">
   </div>
   <div class="cta-strip">
-    <b>🎯 Har du gruppa, men mangler planen?</b> Treni bygger treningsplanen din uke for uke —
+    <b>🎯 Har du gruppa, men mangler planen?</b> Treni bygger treningsplanen din uke for uke.
     med en ekte trener på laget og skadefri fremgang som mål.
     <a href="bli-testloper.php"><b>Bli testløper →</b></a>
   </div>
   <?php foreach ($per_fylke as $fylke => $liste): ?>
-  <h2 class="fylke-tittel"><?= e10($fylke) ?> <span class="liten" style="font-family:var(--font-sans)">· <?= count($liste) ?> grupper</span></h2>
+  <h2 class="fylke-tittel"><?= e10($fylke) ?> <span class="liten" style="font-family:var(--font-sans)">· <?= count($liste) ?> <?= count($liste) === 1 ? 'gruppe' : 'grupper' ?></span></h2>
   <?php foreach ($liste as $g): ?>
   <div class="gr-rad" data-nn="<?= isset($FYLKE_NN[$g['fylke'] ?? '']) ? 1 : 0 ?>"
        data-fylke="<?= e10($g['fylke'] ?? '') ?>"
@@ -115,13 +115,13 @@ function e10(?string $s): string { return htmlspecialchars($s ?? '', ENT_QUOTES,
   <?php endforeach; ?>
   <div class="cta-strip" style="margin-top:2rem">
     <b>🏃 Vil du ha en plan å ta med til gruppetreningen?</b> Treni leser treningen din fra
-    Strava og gir deg ukeplan og oppfølging — trenerledet, skadefritt først.
-    <a href="bli-testloper.php"><b>Sett meg på ventelista →</b></a>
+    Strava og gir deg ukeplan og oppfølging, trenerledet, skadefritt først.
+    <a href="bli-testloper.php"><b>Bli med som testløper →</b></a>
   </div>
   <p class="liten" style="margin-top:1.4rem">Oversikten er samlet fra klubbenes og gruppenes
   egne sider og oppdateres jevnlig. Mangler gruppa di, eller stemmer ikke noe?
   <a href="mailto:hei@treni.no?subject=L%C3%B8pegruppe%20som%20mangler">Tips oss</a>,
-  så retter vi det. Treni er ikke tilknyttet gruppene — oppmøte og medlemskap skjer hos hver enkelt.</p>
+  så retter vi det. Treni er ikke tilknyttet gruppene, oppmøte og medlemskap skjer hos hver enkelt.</p>
 <?php endif; ?>
 <script>
 document.querySelectorAll('.gr-filter').forEach(function (kn) {
@@ -188,7 +188,7 @@ function settFilter(region, fylke, ord) {
   <p class="liten">Sjekk gruppas side for treningstider, møt opp og si hei. De aller fleste
   grupper har flere temponivåer, og ingen forventer at du er rask. Vil du ha en plan for
   treningen rundt fellesøktene, er det akkurat det <a href="index.html">Treni</a> gjør:
-  en trenerledet treningsveileder som leser treningen din fra Strava.
+  en trenerledet treningsveileder som leser treningen din fra klokka di (Strava eller Intervals.icu).
   <a href="bli-testloper.php">Bli testløper →</a></p>
   <h3 style="font-size:1.05rem; margin:1.1rem 0 .3rem">Mangler gruppa di?</h3>
   <p class="liten"><a href="mailto:hei@treni.no?subject=L%C3%B8pegruppe%20som%20mangler">Send
@@ -215,9 +215,10 @@ function settFilter(region, fylke, ord) {
   </nav>
   <p>PAULSEN UTVIKLING · org.nr 938 158 614 · Norge ·
      <a href="mailto:hei@treni.no">hei@treni.no</a></p>
-  <p>Powered by Strava — this service is not affiliated with or endorsed by Strava.</p>
+  <p>Powered by Strava. This service is not affiliated with or endorsed by Strava.</p>
 </footer>
 
 </main>
+<script src="/banner.js?v=1" defer></script>
 </body>
 </html>

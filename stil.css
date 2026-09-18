@@ -124,6 +124,10 @@ section { margin-block: clamp(4.5rem, 10vw, 7.5rem); }
             color: hsl(var(--accent)); display: block; margin-bottom: .7rem; }
 .steg b { display: block; margin-bottom: .4rem; font-size: 1.05rem; }
 .steg p { margin: 0; font-size: .9375rem; color: hsl(var(--muted-fg)); }
+/* «Treni hjelper deg med …» avslutter hvert kort (Odd 07.09): svaret på
+   problemet, tydelig skilt fra beskrivelsen over. */
+.steg p.treni-svar { margin-top: .9rem; padding-top: .75rem; font-weight: 600;
+  color: hsl(var(--fg)); border-top: 1px solid hsl(var(--border)); }
 
 ul.liste { padding-left: 1.25rem; margin: .75rem 0; }
 ul.liste li { margin-bottom: .6rem; }
@@ -196,6 +200,24 @@ footer nav a { font-weight: 600; }
 .hero-foto .ingress { color: hsl(40 20% 82%); }
 .hero-foto .ingress b { color: hsl(42 30% 96%); }
 .hero-foto .kicker { color: hsl(84 70% 60%); }
+/* Slagordet (Odd 07.09: «Løp rolig, så kommer du langt») står som kicker over
+   overskriften: brand-linja over hooken. Ikke versaler, litt større enn kickeren. */
+.hero-foto .slagord { text-transform: none; letter-spacing: .01em; font-size: 1.15rem; font-weight: 600;
+  font-style: italic; margin-bottom: .9rem; }
+@media (max-width: 640px) { .hero-foto .slagord { font-size: 1.02rem; } }
+/* Testløper-sitatet i heroen som ekte sitat (Odd 07.09): stor anførsel, lime kant, kilde under. */
+.hero-sitat { margin: 1.6rem 0 0; padding: .2rem 0 .2rem 1.1rem; border-left: 3px solid hsl(var(--accent)); max-width: 34rem; position: relative; }
+.hero-sitat blockquote { margin: 0; font-size: 1.12rem; line-height: 1.5; font-style: italic; color: hsl(var(--fg)); }
+.hero-sitat figcaption { color: hsl(var(--accent)); }
+/* På foto-heroen (mørk bunn) brukes de lyse variantene */
+.hero-foto .hero-sitat { margin: 1.2rem 0 1.6rem; border-left-color: hsl(84 70% 60%); }
+.hero-foto .hero-sitat blockquote { color: hsl(42 30% 96%); }
+.hero-foto .hero-sitat figcaption { color: hsl(84 70% 60%); }
+.hero-sitat blockquote::before { content: "«"; } .hero-sitat blockquote::after { content: "»"; }
+/* Samme grønn som kickerne ellers på sida (Odd 08.09). Den lyse limevarianten
+   gjelder bare inne i foto-heroen, der bunnen er mørk. */
+.hero-sitat figcaption { margin-top: .5rem; font-size: .85rem; letter-spacing: .04em; text-transform: uppercase; color: hsl(var(--accent)); font-weight: 600; }
+.hero-sitat figcaption::before { content: "— "; }
 /* AI-streken (dekorativ aksent-rail) fjernet fra hero-kickeren (Odd 01.09) */
 .hero-foto .kicker::before { display: none; }
 .hero-foto .kicker { gap: 0; }
@@ -209,7 +231,7 @@ footer nav a { font-weight: 600; }
 .skjema label { display: flex; flex-direction: column; gap: .4rem;
                 font-weight: 600; font-size: .9375rem; }
 .skjema .valgfritt { font-weight: 400; color: hsl(var(--muted-fg)); }
-.skjema input, .skjema textarea {
+.skjema input, .skjema textarea, .skjema select {
   font: inherit; font-weight: 400; color: hsl(var(--fg));
   background: hsl(var(--surface)); border: 1px solid hsl(var(--border));
   border-radius: 10px; padding: .7rem .9rem; }
@@ -250,6 +272,7 @@ footer nav a { font-weight: 600; }
 .sprak-felt .radio { display: flex; align-items: center; gap: .5rem; font-weight: 400;
               flex-direction: row; margin-top: .5rem; }
 .sprak-felt input[type="radio"] { width: auto; margin: 0; accent-color: hsl(var(--primary)); }
+.sprak-felt input[type="checkbox"] { width: auto; margin: 0; accent-color: hsl(var(--primary)); }
 .sprak-felt input[type="text"] { margin: 0; padding: .35rem .6rem; text-align: left; }
 
 /* Liten bunnmeny med alle sidene */
@@ -311,3 +334,16 @@ footer nav a { font-weight: 600; }
 .toppmeny a { padding: .15rem .7rem; border-radius: 999px;
               text-decoration: none; color: hsl(var(--fg)); }
 .toppmeny a:hover { background: hsl(var(--primary)); color: hsl(var(--primary-fg)); }
+
+/* 09.09: beviskortet på forsiden — produktet vist, ikke lovet */
+.bevis { margin: 1.4rem 0 .4rem; padding: 0; }
+.bevis figcaption { font-size: .78rem; font-weight: 700; letter-spacing: .1em;
+  text-transform: uppercase; color: hsl(var(--muted-fg)); margin-bottom: .5rem; }
+.bevis-kort { border: 1.5px solid hsl(var(--border)); border-radius: 14px;
+  background: hsl(var(--surface)); padding: 1rem 1.15rem; }
+.bevis-okt { margin: 0 0 .55rem; font-size: .88rem; color: hsl(var(--muted-fg));
+  font-variant-numeric: tabular-nums; }
+.bevis-dom { margin: 0; font-size: 1rem; line-height: 1.55;
+  border-left: 3px solid hsl(var(--gronn, 152 45% 40%)); padding-left: .8rem; }
+.bevis-under { margin: .7rem 0 0; font-size: .92rem; color: hsl(var(--muted-fg)); }
+@media (max-width: 560px) { .bevis-dom { font-size: .95rem; } }

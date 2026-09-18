@@ -59,33 +59,64 @@ function treni_ren(string $s, int $maks, bool $flerlinje = false): string {
  *  ved $std tegn, navngitte ved sin egen grense. Kjøres først i hver handler. */
 function treni_begrens_post(array $grenser = [], int $std = 1000): void {
     foreach ($_POST as $k => $v) {
+        // FLATE LISTER er tillatt (Lola 09.09.2026): avkrysningsbokser sender
+        // «felt[]» som en array. Denne funksjonen SLETTET dem, med kommentaren
+        // «ingen arrays/objekter fra skjemaene våre» — sant helt til fridag-
+        // valget ble lagt inn 08.09. Resultatet var at feltet ALLTID kom fram
+        // som tomt, uansett hva løperen krysset av, og skjema 2 kunne ikke
+        // fullføres i det hele tatt. Nested arrays slettes fortsatt.
+        if (is_array($v)) {
+            $rene = [];
+            foreach (array_slice($v, 0, 20) as $el) {      // maks 20 elementer
+                if (is_string($el)) {
+                    $rene[] = mb_substr($el, 0, $grenser[$k] ?? $std);
+                }
+            }
+            if ($rene) {
+                $_POST[$k] = $rene;
+            } else {
+                unset($_POST[$k]);
+            }
+            continue;
+        }
         if (!is_string($v)) {
-            unset($_POST[$k]);   // ingen arrays/objekter fra skjemaene våre
+            unset($_POST[$k]);   // objekter og annet rart hører ikke hjemme her
             continue;
         }
         $_POST[$k] = mb_substr($v, 0, $grenser[$k] ?? $std);
     }
 }
 
-/** Rategrense per IP for skjemaene: maks 3 per 10 min OG maks 5 per time.
- *  Over grensen: 429 + Retry-After (siden rendres med feilmelding). */
+/** Rategrense per IP for skjemaene: maks 8 per 10 min OG maks 15 per time.
+ *  Over grensen: 429 + Retry-After (siden rendres med feilmelding).
+ *
+ *  Var 3/10 min og 5/t (sikkerhetstest 03.09). Løsnet 09.09 (Odd, Lola-caset):
+ *  Lola på mobil traff taket to kvelder på rad og prøvde seks ganger fra
+ *  bunnen. En som retter én feil og sender igjen tre ganger var sperret.
+ *  Mobilnett deler IP mellom mange, så 3 var for stramt. En bot sender
+ *  hundrevis; 8 og 15 stopper den like godt, og rører ikke et menneske. */
 function treni_skjema_rategrense(): string {
     $ip = treni_ip();
-    if (treni_rategrense("skjema10|" . $ip, 3, 600) || treni_rategrense("skjema60|" . $ip, 5, 3600)) {
-        treni_sikkerhet_logg("skjema: rategrense nådd (3/10 min eller 5/t)");
+    if (treni_rategrense("skjema10|" . $ip, 8, 600) || treni_rategrense("skjema60|" . $ip, 15, 3600)) {
+        treni_sikkerhet_logg("skjema: rategrense nådd (8/10 min eller 15/t)");
         http_response_code(429);
         header("Retry-After: 900");
-        return "For mange forsøk på kort tid — vent noen minutter og prøv igjen.";
+        return treni_sv_txt("For mange forsøk på kort tid — vent noen minutter og prøv igjen.", "Too many attempts in a short time — wait a few minutes and try again.");
     }
     return "";
 }
 
+function treni_sv_txt(string $no, string $en): string {
+    // Engelsk skjema (Odd 07.09, Lola): meldingene følger siden, ikke serveren.
+    $en_side = !empty($GLOBALS["TRENI_EN"]) || str_contains((string) ($_SERVER["SCRIPT_NAME"] ?? ""), "/en/");
+    return $en_side ? $en : $no;
+}
 function treni_spamvern_ok(): string {
     // 1) Tidsfelle: skjema levert under 4 sekunder etter rendering = bot
     $t0 = (int) ($_POST["t0"] ?? 0);
     if ($t0 > 0 && time() - $t0 < 4) {
         treni_sikkerhet_logg("skjema: tidsfelle (< 4 s)");
-        return "Det gikk litt fort — prøv å sende inn en gang til.";
+        return treni_sv_txt("Det gikk litt fort — prøv å sende inn en gang til.", "That was a bit quick — please try submitting once more.");
     }
     // 2) IP-brems: 3 per 10 min og 5 per time (429 over grensen)
     if (($rg = treni_skjema_rategrense()) !== "") {
@@ -104,16 +135,16 @@ function treni_spamvern_ok(): string {
         // strammere (sikkerhetstest 03.09, funn 8): flagget er klientstyrt, så
         // maks 2 slike innsendinger per IP per time, og hver logges.
         if (($_POST["ts_nede"] ?? "") === "1") {
-            if (treni_rategrense("tsnede|" . $ip, 2, 3600)) {
-                treni_sikkerhet_logg("skjema: ts_nede-flagg over grensen (2/t) — avvist");
+            if (treni_rategrense("tsnede|" . $ip, 5, 3600)) {
+                treni_sikkerhet_logg("skjema: ts_nede-flagg over grensen (5/t) — avvist");
                 http_response_code(429);
                 header("Retry-After: 1800");
-                return "Sikkerhetssjekken er utilgjengelig akkurat nå — prøv igjen om en liten stund.";
+                return treni_sv_txt("Sikkerhetssjekken er utilgjengelig akkurat nå — prøv igjen om en liten stund.", "The security check is unavailable right now — please try again shortly.");
             }
             treni_sikkerhet_logg("skjema: Turnstile fail-open (ts_nede=1)");
             return "";
         }
-        return "Sikkerhetssjekken mangler — last siden på nytt og prøv igjen.";
+        return treni_sv_txt("Sikkerhetssjekken mangler — last siden på nytt og prøv igjen.", "The security check is missing — reload the page and try again.");
     }
     $svar = @file_get_contents(
         "https://challenges.cloudflare.com/turnstile/v0/siteverify", false,
@@ -130,20 +161,24 @@ function treni_spamvern_ok(): string {
     $d = json_decode($svar, true);
     if (empty($d["success"])) {
         treni_sikkerhet_logg("skjema: Turnstile avviste token (" . implode(",", (array) ($d["error-codes"] ?? [])) . ")");
-        return "Sikkerhetssjekken godkjente ikke innsendingen — prøv igjen.";
+        return treni_sv_txt("Sikkerhetssjekken godkjente ikke innsendingen — prøv igjen.", "The security check did not approve the submission — please try again.");
     }
     return "";
 }
 
 /** Skjules i skjemaet: tidsfelle-stempel, nedetids-flagg og Turnstile-widgeten.
  *  MERK: script-URL-en MÅ ha /v0/ — uten den svarer Cloudflare 404 (lærdom 27.08). */
-function treni_spamvern_felt(): void {
+function treni_spamvern_felt(bool $en = false): void {
+    // Odd 09.09.2026: på den ENGELSKE sida sto Cloudflare-boksen med «Verifiser
+    // at du er et menneske». Widgeten arver nettleserspråket når vi ikke sier
+    // noe, og Lolas telefon er norsk. Nå følger den siden, ikke telefonen.
     $cfg = @include dirname(__DIR__) . "/turnstile_config.php";
     echo '<input type="hidden" name="t0" value="' . time() . '">' . "\n";
     echo '<input type="hidden" name="ts_nede" value="0" class="ts-nede">' . "\n";
     if (is_array($cfg) && !empty($cfg["sitekey"])) {
         echo '<div class="cf-turnstile" data-sitekey="'
-           . htmlspecialchars($cfg["sitekey"], ENT_QUOTES) . '" data-theme="auto"></div>' . "\n";
+           . htmlspecialchars($cfg["sitekey"], ENT_QUOTES) . '" data-theme="auto"'
+           . ' data-language="' . ($en ? "en" : "nb") . '"></div>' . "\n";
         echo '<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer '
            . 'onerror="document.querySelectorAll(\'.ts-nede\').forEach(function(e){e.value=\'1\'})">'
            . '</script>' . "\n";

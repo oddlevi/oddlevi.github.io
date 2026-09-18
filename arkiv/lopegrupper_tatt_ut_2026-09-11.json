@@ -1,0 +1,91 @@
+[
+ {
+  "navn": "Löplabbet Oslo Sentrum fellestrening",
+  "sted": "Oslo",
+  "fylke": "Oslo",
+  "type": "butikk",
+  "lenke": "https://loplabbet.no/fellestrening",
+  "om": "Butikkdrevet fellestrening og løpekurs fra Löplabbets butikk på Pilestredet."
+ },
+ {
+  "navn": "Löplabbet Fredrikstad",
+  "sted": "Fredrikstad",
+  "fylke": "Østfold",
+  "type": "butikk",
+  "lenke": "https://loplabbet.no/butikker/loplabbet-fredrikstad",
+  "om": "Løpebutikk i Storgata med kompetanse på sko og løpeteknikk, del av Löplabbet-kjeden."
+ },
+ {
+  "navn": "Löplabbet Drammen fellestrening",
+  "sted": "Drammen",
+  "fylke": "Buskerud",
+  "type": "butikk",
+  "lenke": "https://loplabbet.no/fellestrening",
+  "om": "Butikkdrevet løpetrening tirsdager og torsdager klokken 18, informasjon deles i Facebook-gruppen Løpegruppa Löplabbet Drammen."
+ },
+ {
+  "navn": "Löplabbet Tønsberg",
+  "sted": "Tønsberg",
+  "fylke": "Vestfold",
+  "type": "butikk",
+  "lenke": "https://www.facebook.com/loplabbet.Tonsberg/",
+  "om": "Løpebutikk i Foynsenteret med lokalkjent løperfaglig veiledning."
+ },
+ {
+  "navn": "Löplabbet Kristiansand fellestrening",
+  "sted": "Kristiansand",
+  "fylke": "Agder",
+  "type": "butikk",
+  "lenke": "https://loplabbet.no/fellestrening",
+  "om": "Butikkdrevet fellestrening onsdager klokken 18.15, passer for nybegynnere og de som har løpt litt."
+ },
+ {
+  "navn": "Löplabbet Bergen fellestrening",
+  "sted": "Bergen",
+  "fylke": "Vestland",
+  "type": "butikk",
+  "lenke": "https://loplabbet.no/fellestrening",
+  "om": "Butikkdrevet løpegruppe fra Löplabbet, oppmøte utenfor butikken mandager klokken 18.05."
+ },
+ {
+  "navn": "Åsane Løpskarusell",
+  "sted": "Bergen (Åsane)",
+  "fylke": "Vestland",
+  "type": "lavterskel",
+  "lenke": "https://aasane-lopskarusell.no/",
+  "om": "Rimelig løpskarusell med 5 og 10 km distanser gjennom året, start og mål ved Ikea i Åsane."
+ },
+ {
+  "navn": "Voss IL løpskarusell",
+  "sted": "Voss",
+  "fylke": "Vestland",
+  "type": "klubb",
+  "lenke": "https://vossil.no/friidrett/lopskarusell",
+  "om": "Løpskarusell med seks løp i året for både mosjonister og konkurranseløpere, start og mål ved idrettsplassen i Voss."
+ },
+ {
+  "navn": "Löplabbet Trondheim fellestrening",
+  "sted": "Trondheim",
+  "fylke": "Trøndelag",
+  "type": "butikk",
+  "lenke": "https://loplabbet.no/fellestrening",
+  "om": "Butikkdrevet løpegruppe fra Löplabbet i Nordregate, onsdager klokken 19."
+ },
+ {
+  "navn": "Løp i Norge",
+  "sted": "Hele Norge",
+  "fylke": "Nasjonalt",
+  "type": "lavterskel",
+  "lenke": "https://www.friidrett.no/lop-i-norge/",
+  "strava": "https://www.strava.com/clubs/552785",
+  "om": "Norges Friidrettsforbunds offisielle kanal for mosjonsløping, med Strava-klubb med snart 5 000 medlemmer."
+ },
+ {
+  "navn": "Kondistreninga Online",
+  "sted": "Nettbasert (hele landet)",
+  "fylke": "Nasjonalt",
+  "type": "lavterskel",
+  "lenke": "https://kondistreninga.no/kondistreninga-online/",
+  "om": "Gratis nettbasert løpefellesskap for tredemølleløping via direktesendte økter."
+ }
+]

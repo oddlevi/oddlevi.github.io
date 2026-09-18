@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Skjervøy 20:1000 direkte</title>
+<meta name="description" content="Følg Skjervøy 20:1000 og 10:500 direkte: mellomtider, ledere, målgang og din egen løper. Og Trenis fire løpere mot fjorårets tider.">
+<meta property="og:title" content="Skjervøy 20:1000 direkte">
+<meta property="og:description" content="Mellomtider fra Stussnes, Skattørfjellet, Lailafjellet, Trollet og mål. Søk opp løperen din og følg hele veien.">
+<meta property="og:image" content="https://treni.no/skjervoy/og.jpg">
+<meta property="og:url" content="https://treni.no/skjervoy/">
+<meta name="theme-color" content="#123d2a">
+<link rel="icon" href="/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700;800&family=Inter+Tight:wght@400;500;600&display=swap">
+<style>
+:root{--bg:hsl(44 45% 97%);--fg:hsl(160 28% 9%);--muted:hsl(158 10% 36%);--surface:#fff;--border:hsl(148 15% 84%);--primary:hsl(152 62% 20%);--accent:hsl(84 80% 34%);--accent2:hsl(84 85% 88%);--gul:hsl(38 85% 46%);--radius:14px;--sans:"Inter Tight",system-ui,sans-serif;--disp:"Sora",system-ui,sans-serif}
+*{box-sizing:border-box}html,body{margin:0}body{background:var(--bg);color:var(--fg);font:16px/1.45 var(--sans)}
+header{background:linear-gradient(120deg,hsl(160 28% 9%) 20%,var(--primary) 70%,hsl(84 60% 25%) 115%);color:#fff;padding:1.1rem 1rem 1rem}
+.wrap{max-width:760px;margin:0 auto}
+.merke{font:800 .8rem var(--disp);letter-spacing:.08em;text-transform:uppercase;opacity:.85}.merke b{color:hsl(84 80% 60%)}
+h1{font:800 clamp(1.5rem,5.5vw,2.1rem)/1.1 var(--disp);margin:.3rem 0 .2rem;text-wrap:balance}
+.status{font-size:.9rem;opacity:.9;display:flex;flex-wrap:wrap;gap:.3rem 1rem}
+.puls{display:inline-block;width:.55rem;height:.55rem;border-radius:50%;background:hsl(84 80% 60%);margin-right:.35rem;animation:p 1.6s infinite}@keyframes p{50%{opacity:.25}}
+.faner{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.9rem}.faner button{flex:1 1 40%;border:1.5px solid rgba(255,255,255,.35);background:rgba(255,255,255,.08);color:#fff;border-radius:99px;padding:.5rem .8rem;font:700 .95rem var(--disp);cursor:pointer}
+.faner button[aria-selected=true]{background:#fff;color:var(--primary);border-color:#fff}
+main{padding:1rem}section{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:.9rem 1rem;margin:0 0 .9rem}
+h2{font:700 1rem var(--disp);margin:0 0 .6rem;display:flex;align-items:baseline;gap:.5rem}h2 small{font:500 .8rem var(--sans);color:var(--muted)}
+.sok{display:flex;gap:.5rem}.sok input{flex:1;border:1.5px solid var(--border);border-radius:99px;padding:.6rem .95rem;font:inherit;background:var(--bg);color:var(--fg);-webkit-appearance:none}.sok input::placeholder{color:var(--muted);opacity:1}
+.sok input:focus{outline:2px solid var(--accent);outline-offset:1px}
+.treff{list-style:none;margin:.5rem 0 0;padding:0}.treff li{display:flex;justify-content:space-between;align-items:center;padding:.45rem .2rem;border-top:1px solid var(--border);cursor:pointer}.treff li:hover{background:var(--bg)}
+.treff .nr{font:600 .8rem var(--sans);color:var(--muted)}
+.folg{border-top:2px solid var(--accent2);margin-top:.6rem;padding-top:.6rem}
+.kort{border:1.5px solid var(--border);border-radius:12px;padding:.7rem .85rem;margin-top:.6rem;background:var(--bg)}
+.kort .topp{display:flex;justify-content:space-between;gap:.5rem;align-items:flex-start}.kort .navn{font:700 1.05rem var(--disp)}.kort .meta{font-size:.82rem;color:var(--muted)}
+.kort .fjern{border:none;background:none;color:var(--muted);cursor:pointer;font-size:.8rem;padding:.2rem}
+.linje{position:relative;margin:.75rem 0 .3rem;height:8px;border-radius:99px;background:var(--border);overflow:hidden}.linje i{position:absolute;inset:0 auto 0 0;background:linear-gradient(90deg,var(--primary),var(--accent));border-radius:99px}
+.stasj{display:flex;justify-content:space-between;font-size:.7rem;color:var(--muted);margin-bottom:.4rem}
+table{width:100%;border-collapse:collapse;font-size:.9rem;font-variant-numeric:tabular-nums}th{text-align:left;font:600 .72rem var(--sans);text-transform:uppercase;letter-spacing:.05em;color:var(--muted);padding:.25rem .3rem;border-bottom:1px solid var(--border)}td{padding:.4rem .3rem;border-bottom:1px solid var(--border);vertical-align:top}tr:last-child td{border-bottom:none}
+td.t,th.t{text-align:right;white-space:nowrap}.pl{display:inline-block;min-width:1.7rem;text-align:center;border-radius:6px;background:var(--accent2);color:var(--fg);font-weight:700;font-size:.82rem;padding:.05rem .3rem}
+.pl.g{background:hsl(45 95% 55%)}.pl.s{background:hsl(0 0% 85%)}.pl.b{background:hsl(28 60% 70%)}
+.anslag{font-size:.85rem;color:var(--muted);margin:.3rem 0 0}.anslag b{color:var(--fg)}
+.strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(88px,1fr));gap:.4rem}.strip div{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:.45rem .5rem;text-align:center}.strip b{display:block;font:700 1.15rem var(--disp)}.strip span{font-size:.72rem;color:var(--muted)}
+.tom{color:var(--muted);font-size:.9rem;margin:.2rem 0}
+.feed li{display:grid;grid-template-columns:auto 1fr auto;gap:.6rem;padding:.4rem 0;border-top:1px solid var(--border);font-size:.9rem}.feed{list-style:none;margin:0;padding:0}.feed .kl{font-variant-numeric:tabular-nums;color:var(--muted)}
+footer{color:var(--muted);font-size:.8rem;text-align:center;padding:.5rem 1rem 2rem}footer a{color:var(--primary)}
+.del{display:inline-block;margin-top:.5rem;border:1.5px solid var(--border);background:var(--surface);border-radius:99px;padding:.4rem .9rem;font:600 .85rem var(--sans);color:var(--fg);text-decoration:none;cursor:pointer}
+@media (prefers-color-scheme:dark){:root{color-scheme:dark;--bg:hsl(160 20% 8%);--fg:hsl(44 30% 94%);--muted:hsl(150 10% 65%);--surface:hsl(158 18% 12%);--border:hsl(155 12% 22%);--accent2:hsl(84 40% 22%)}.pl.s{background:hsl(0 0% 35%)}.pl.g{color:#111}}
+</style>
+<style>
+.banner{position:sticky;bottom:0;z-index:50;display:flex;align-items:center;gap:.8rem;margin:.5rem auto 0;max-width:760px;background:linear-gradient(120deg,hsl(160 28% 9%),var(--primary));color:#fff;text-decoration:none;padding:.65rem 1rem;border-radius:14px 14px 0 0;box-shadow:0 -6px 24px rgba(0,0,0,.25)}
+.banner .b-venstre{display:flex;flex-direction:column;gap:.1rem;min-width:0;flex:1}.banner .b-merke{font:800 1.2rem var(--disp)}.banner .b-merke b{color:hsl(84 80% 60%)}.banner .b-tekst{font-size:.8rem;line-height:1.25;opacity:.92}
+.banner .b-cta{flex:0 0 auto;background:hsl(84 80% 60%);color:hsl(160 28% 9%);font:800 1rem var(--disp);padding:.75rem 1.1rem;border-radius:99px;white-space:nowrap;box-shadow:0 4px 14px rgba(0,0,0,.25)}
+@media (max-width:420px){.banner .b-tekst{font-size:.74rem}.banner .b-cta{font-size:.92rem;padding:.7rem .9rem}}
+.tlk-knapp{display:inline-block;margin-top:.3rem;border:1.5px solid var(--border);border-radius:99px;padding:.15rem .6rem;font:600 .75rem var(--sans);color:var(--primary);background:var(--surface)}
+.chips{display:flex;flex-wrap:wrap;gap:.35rem;margin:0 0 .8rem}.chips button{border:1.5px solid var(--border);background:var(--surface);color:var(--fg);border-radius:99px;padding:.28rem .7rem;font:600 .8rem var(--sans);cursor:pointer}
+.chips button[aria-pressed=true]{background:var(--primary);color:#fff;border-color:var(--primary)}.chips button small{opacity:.7;font-weight:500}
+.meny{display:flex;gap:.4rem;margin-top:.9rem;background:rgba(255,255,255,.1);border-radius:99px;padding:.25rem}.meny{flex-wrap:wrap}.meny a{flex:1 1 30%;text-align:center;border-radius:99px;padding:.5rem .4rem;font:700 .82rem var(--disp);color:#fff;text-decoration:none;white-space:nowrap}
+.meny a[aria-current=page]{background:#fff;color:var(--primary)}.meny2{margin-top:.5rem}
+.faner{margin-top:.7rem}
+.stat{text-align:right;white-space:nowrap}.stat b{display:block;font:800 1.3rem var(--disp);font-variant-numeric:tabular-nums}.stat span{font-size:.75rem;color:var(--muted)}
+.d{font-weight:700}.d.foran{color:hsl(140 55% 32%)}.d.bak{color:hsl(8 70% 45%)}
+.kort .navn{font:800 1.2rem var(--disp)}
+@media (prefers-color-scheme:dark){.d.foran{color:hsl(140 55% 55%)}.d.bak{color:hsl(8 80% 65%)}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <div class="merke">Treni<b>.</b> direkte</div>
+  <h1 id="tittel">Skjervøy 20:1000</h1>
+  <div class="status"><span><span class="puls"></span><span id="oppdatert">henter …</span></span><span id="start"></span><span id="paameldt"></span></div>
+  <nav class="meny" aria-label="Sider">
+    <a href="https://treni.no/skjervoy/#alle" aria-current="page">Direkte</a>
+    <a href="https://treni.no/skjervoy/resultater/" id="meny-resultater" onclick="window.logg&&window.logg('ut',{'mål':'resultater'})">Resultater</a>
+    <a href="https://treni.no/direkte/" id="meny-arrangor" target="_blank" rel="noopener" onclick="window.logg&&window.logg('ut',{'mål':'direkte'})">For arrangører</a>
+  </nav>
+  <nav class="meny meny2" aria-label="Visning">
+    <a href="#alle" id="meny-alle" aria-current="page" onclick="window.velgAlleEtapper&&window.velgAlleEtapper()">Alle løperne</a>
+    <a href="#tlk" id="meny-tlk">Tromsø Løpeklubb</a>
+    <a href="#tider" id="meny-tider">Passeringstider</a>
+  </nav>
+  <div class="faner" role="tablist" id="faner">
+    <button role="tab" aria-selected="true" data-etappe="306458">20:1000</button>
+    <button role="tab" aria-selected="false" data-etappe="306460">10:500</button>
+    <button role="tab" aria-selected="false" data-etappe="306459">20:1000 trim</button>
+    <button role="tab" aria-selected="false" data-etappe="306461">10:500 trim</button>
+    <button role="tab" aria-selected="false" data-etappe="alle" style="flex-basis:100%">Alle løperne, alle klasser</button>
+  </div>
+</div></header>
+<main class="wrap" id="vis-alle">
+  <div class="chips" id="klasser" aria-label="Klasse"></div>
+  <section id="folg">
+    <h2>🔎 Følg en løper <small>navn, startnummer eller klubb</small></h2>
+    <div class="sok"><input id="q" type="search" placeholder="navn, startnummer eller klubb" autocomplete="off" inputmode="search"></div>
+    <ul class="treff" id="treff"></ul>
+    <div id="mine"></div>
+  </section>
+  <section>
+    <h2 id="loype-h"><span id="loype-tittel">⛰️ Løypa</span> <small id="loype-info"></small></h2>
+    <div class="strip" id="strip"></div>
+  </section>
+  <section>
+    <h2 id="leder-h">🏁 Ledere</h2>
+    <table id="leder"><thead><tr><th>#</th><th>Løper</th><th>Klasse</th><th class="t">Tid</th></tr></thead><tbody></tbody></table>
+    <p class="tom" id="leder-tom">Ingen passeringer ennå.</p>
+    <button type="button" id="leder-mer" hidden style="display:block;width:100%;margin-top:.6rem;border:1.5px solid var(--border);background:var(--surface);border-radius:99px;padding:.55rem;font:700 .9rem var(--disp);color:var(--primary);cursor:pointer">Vis flere</button>
+  </section>
+  <section>
+    <h2>⏱️ Siste passeringer</h2>
+    <ul class="feed" id="siste"></ul>
+    <p class="tom" id="siste-tom">Kommer når løpet er i gang.</p>
+  </section>
+  <p style="text-align:center"><a class="del" id="delknapp">📣 Del denne siden</a> <a class="del" href="https://live.eqtiming.com/74108" target="_blank" rel="noopener" onclick="window.logg&&window.logg('ut',{'mål':'eqtiming'})">Full liste hos EQ Timing</a></p>
+</main>
+<main class="wrap" id="vis-treni" hidden>
+  <p class="tom" style="margin:0 0 .8rem">Fire Treni-løpere på fjellet. 10:500 starter kl. 12:30, 20:1000 kl. 13:00. Tidene måles mot løperens egen beste tid i løpet, og mot lederen ved hver post. <span id="oppdatert2" hidden></span></p>
+  <div id="lopere"></div>
+  <p style="text-align:center"><a class="del" id="delknapp2">📣 Del</a> <a class="del" href="https://treni.no" onclick="window.logg&&window.logg('ut',{'mål':'treni.no'})">Om Treni</a></p>
+</main>
+<main class="wrap" id="vis-tlk" hidden>
+  <h2 style="font:800 1.25rem var(--disp);margin:.2rem 0 .4rem">Følg Tromsø Løpeklubb på løpet Skjervøy 20:1000</h2>
+  <p class="tom" style="margin:0 0 .8rem" id="tlk-intro">Løperne fra Tromsø Løpeklubb i Skjervøy 20:1000 og 10:500, sortert etter hvor langt de har kommet.</p>
+  <section>
+    <table id="tlk-tabell"><thead><tr><th>Løper</th><th>Sist sett</th><th class="t">Tid</th><th class="t">Plass</th></tr></thead><tbody></tbody></table>
+    <p class="tom" id="tlk-tom">Henter …</p>
+  </section>
+  <p style="text-align:center"><a class="del" id="delknapp3">📣 Del</a></p>
+</main>
+<a class="banner" href="https://treni.no/bli-testloper.php?kilde=skjervoy" target="_blank" rel="noopener" onclick="window.logg&&window.logg('ut',{'mål':'banner'})">
+  <span class="b-venstre"><span class="b-merke">Treni<b>.</b></span><span class="b-tekst">Treneren som ser hver økt. Løpeplan hver uke, ekte trener bak.</span></span>
+  <span class="b-cta">Prøv Treni gratis →</span>
+</a>
+<main class="wrap" id="vis-tider" hidden>
+  <h2 style="font:800 1.25rem var(--disp);margin:.2rem 0 .4rem">Usikker på hvordan du skal disponere tida?</h2>
+  <p class="tom" style="margin:0 0 .8rem">Slik lå 437 løpere i 2024 og 2025 ved hver post, sortert etter sluttida de fikk. Finn kolonnen som passer målet ditt. Tallene er gjennomsnitt, så hold deg innenfor pluss minus ett minutt ved Stussnes.</p>
+  <section style="overflow-x:auto">
+    <table style="min-width:640px"><thead><tr><th>Post</th><th class="t">1:40</th><th class="t">1:50</th><th class="t">2:00</th><th class="t">2:15</th><th class="t">2:30</th><th class="t">2:45</th><th class="t">3:00</th><th class="t">3:30</th></tr></thead><tbody><tr><td>Stussnes <small style="color:var(--muted)">2,2 km</small></td><td class="t">11:25</td><td class="t">12:23</td><td class="t">13:25</td><td class="t">15:02</td><td class="t">16:42</td><td class="t">18:08</td><td class="t">19:11</td><td class="t">21:05</td></tr><tr><td>Skattørfjellet <small style="color:var(--muted)">5,7 km</small></td><td class="t">30:32</td><td class="t">33:37</td><td class="t">36:37</td><td class="t">40:54</td><td class="t">44:51</td><td class="t">48:37</td><td class="t">51:47</td><td class="t">58:37</td></tr><tr><td>Lailafjellet <small style="color:var(--muted)">10,7 km</small></td><td class="t">56:02</td><td class="t">1:01:43</td><td class="t">1:07:25</td><td class="t">1:15:19</td><td class="t">1:23:16</td><td class="t">1:30:45</td><td class="t">1:37:50</td><td class="t">1:52:24</td></tr><tr><td>Trollet <small style="color:var(--muted)">16,3 km</small></td><td class="t">1:25:19</td><td class="t">1:34:23</td><td class="t">1:42:49</td><td class="t">1:55:34</td><td class="t">2:08:21</td><td class="t">2:20:12</td><td class="t">2:32:54</td><td class="t">2:56:51</td></tr><tr><td>SIK-huset <small style="color:var(--muted)">18,4 km</small></td><td class="t">1:35:25</td><td class="t">1:45:07</td><td class="t">1:54:51</td><td class="t">2:09:13</td><td class="t">2:23:43</td><td class="t">2:38:06</td><td class="t">2:52:29</td><td class="t">3:20:54</td></tr><tr><td><b>Mål</b> <small style="color:var(--muted)">19,7 km</small></td><td class="t"><b>1:40</b></td><td class="t"><b>1:50</b></td><td class="t"><b>2:00</b></td><td class="t"><b>2:15</b></td><td class="t"><b>2:30</b></td><td class="t"><b>2:45</b></td><td class="t"><b>3:00</b></td><td class="t"><b>3:30</b></td></tr></tbody></table>
+    <p class="tom" style="margin:.5rem 0 0">Kilde: EQ Timing, Skjervøy 20:1000 2024 og 2025, bare fullførte løpere.</p>
+  </section>
+  <section>
+    <h2>💡 Tre ting tallene viser</h2>
+    <ol style="margin:0;padding-left:1.2rem;line-height:1.5">
+      <li><b>Ett minutt ved Stussnes blir ti i mål.</b> Løperne på 1:50 brukte 12:22 dit, løperne på 2:00 brukte 13:27. Åpner du ett minutt for fort, betaler du det tilbake med renter.</li>
+      <li><b>Lailafjellet til Trollet avgjør.</b> 5,6 km og 30 % av hele tida di. Jevnt trykk, la farten synke i det bratteste.</li>
+      <li><b>Nedløpet er nesten likt for alle.</b> Fra SIK-huset til mål bruker de fleste 4 til 5 minutter, uansett nivå. Der er det beina som teller, ikke motet.</li>
+    </ol>
+  </section>
+  <p style="text-align:center"><a class="del" href="#alle">Følg løperne direkte →</a> <a class="del" id="delknapp4">📣 Del</a></p>
+</main>
+<footer>Tider fra EQ Timing, oppdateres hvert 45. sekund. Laget av <a href="https://treni.no">Treni.no</a>, treneren som ser hver økt.</footer>
+<script>
+
+(function(){
+  var ARR=(location.search.match(/[?&]arr=(\d+)/)||[])[1], API='data.php'+(ARR?'?arr='+ARR+'&':'?'), etappe=306458, timer=null, mine=[];
+  window.logg=function(h,data){ if(ARR) return; try{ fetch('data.php?logg='+encodeURIComponent(h),{method:'POST',keepalive:true,headers:{'Content-Type':'application/json'},body:JSON.stringify(data||{})}); }catch(e){} };
+  window.logg('besok',{visning:location.hash==='#treni'?'treni':'alle',ref:(document.referrer||'').slice(0,80)});
+  try{ mine=JSON.parse(localStorage.getItem('skj_mine')||'[]'); }catch(e){}
+  var RATIO={306458:{'Stussnes':.1098,'Skattørfjellet':.304,'Lailafjellet':.563,'Trollet':.855,'SIK-huset':.954,'FV':.995}}; RATIO[306459]=RATIO[306458];
+  if(location.hash==='#treni'){location.hash='';}
+  function $(id){return document.getElementById(id);}
+  function km(x){return (Math.round(x*10)/10).toString().replace('.',',');}
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function fmt(s){s=Math.round(s);var h=Math.floor(s/3600),m=Math.floor(s%3600/60),x=s%60;return h?h+':'+String(m).padStart(2,'0')+':'+String(x).padStart(2,'0'):m+':'+String(x).padStart(2,'0');}
+  function tempo(t){if(!t)return'';var m=Math.floor(t),s=Math.round((t-m)*60);if(s===60){m++;s=0;}return m+':'+String(s).padStart(2,'0')+' /km';}
+  function plass(p){if(!p)return'';return'<span class="pl'+(p===1?' g':p===2?' s':p===3?' b':'')+'">'+p+'</span>';}
+  function kort(n){return n.split(' ').length>2?n.split(' ')[0]+' '+n.split(' ').slice(-1)[0]:n;}
+  var SIM=false;   // simuleringen slått av etter løpet (Odd 12.09 kl. 15:5x)
+  function simOversikt(){
+    // tenkt situasjon kl. 14:05: teten forbi Trollet, hovedfeltet mellom Lailafjellet og Trollet
+    function R(navn,klubb,klasse,sek,pl,plk,tempo,st,km,kl){return{ed:'0',navn:navn,klubb:klubb,klasse:klasse,sek:sek,tid:fmt(sek),plass:pl,plass_kl:plk,tempo:tempo,stasjon:st,km:km,klokke:kl,status:'TIME'};}
+    var e20=etappe===306458;
+    if(!e20){return{hentet:new Date().toISOString().slice(0,10)+'T14:05:12',etappe:{uid:306460,navn:'10:500 konkurranse',km:10.05,paameldt:96,start:'12:30'},
+      stasjoner:[{navn:'Lailafjellet',km:1.8,antall:96},{navn:'Trollet',km:7.4,antall:94},{navn:'SIK-huset',km:9.5,antall:91},{navn:'Mål',km:10.05,antall:88}],
+      leder:{stasjon:'SIK-huset',km:9.5,liste:[]},maal:{antall:88,liste:[R('Mats Nilsen','Skjervøy IK','20-39 Menn',3341,1,1,3.5,'Mål',10.05,'13:25:41'),R('Amund Karlsen','Tromsø Løpeklubb','20-39 Menn',3402,2,2,3.6,'Mål',10.05,'13:26:42'),R('Rune Brustad','Tromsø Løpeklubb','40-59 Menn',3728,9,3,3.6,'Mål',10.05,'13:32:08')]},
+      siste:[R('Rune Brustad','Tromsø Løpeklubb','40-59 Menn',3728,9,3,3.6,'Mål',10.05,'13:32:08'),R('Amund Karlsen','Tromsø Løpeklubb','20-39 Menn',3402,2,2,3.6,'Mål',10.05,'13:26:42')]};}
+    var leder=[R('Henrik Solvang','Tromsø Løpeklubb','20-39 Menn',4890,1,1,5.1,'Trollet',16.3,'14:21:30'),R('Even Bakke','Alta IF','20-39 Menn',4962,2,2,5.2,'Trollet',16.3,'14:22:42'),R('Eirik Haugsnes','Tromsø Løpeklubb','40-59 Menn',5140,3,1,5.3,'Trollet',16.3,'14:25:40'),R('Sindre Moe','Skjervøy IK','20-39 Menn',5201,4,3,5.4,'Trollet',16.3,'14:26:41'),R('Ida Nyland','Tromsø Løpeklubb','20-39 Kvinner',5288,5,1,5.5,'Trollet',16.3,'14:28:08'),R('Jon Arild Berg','Burfjord IL','40-59 Menn',5330,6,2,5.5,'Trollet',16.3,'14:28:50'),R('Kari Sørensen','Skjervøy IK','40-59 Kvinner',5402,7,1,5.6,'Trollet',16.3,'14:30:02'),R('Ola Vik','Bardu IL','20-39 Menn',5455,8,4,5.6,'Trollet',16.3,'14:30:55')];
+    var siste=[R('Joakim Hansen','Tromsø Løpeklubb/KSAT','20-39 Menn',4130,30,17,6.1,'Lailafjellet',10.7,'14:08:50'),R('Ola Vik','Bardu IL','20-39 Menn',5455,8,4,5.6,'Trollet',16.3,'14:30:55'),R('Kari Sørensen','Skjervøy IK','40-59 Kvinner',5402,7,1,5.6,'Trollet',16.3,'14:30:02'),R('Marte Lund','Tromsø Løpeklubb','20-39 Kvinner',4090,28,3,6.0,'Lailafjellet',10.7,'14:08:10'),R('Jon Arild Berg','Burfjord IL','40-59 Menn',5330,6,2,5.5,'Trollet',16.3,'14:28:50'),R('Ida Nyland','Tromsø Løpeklubb','20-39 Kvinner',5288,5,1,5.5,'Trollet',16.3,'14:28:08'),R('Per Hansen','Skjervøy IK','60+ Menn',4010,25,1,6.3,'Lailafjellet',10.7,'14:06:50')];
+    return{hentet:new Date().toISOString().slice(0,10)+'T14:05:12',klasser:[{navn:'20-39 Kvinner',antall:41},{navn:'20-39 Menn',antall:118},{navn:'40-59 Kvinner',antall:52},{navn:'40-59 Menn',antall:109},{navn:'60+ Menn',antall:16}],etappe:{uid:306458,navn:'20:1000 konkurranse',km:19.73,paameldt:336,start:'13:00'},
+      stasjoner:[{navn:'Stussnes',km:2.2,antall:329},{navn:'Skattørfjellet',km:5.7,antall:321},{navn:'Lailafjellet',km:10.7,antall:214},{navn:'Trollet',km:16.3,antall:8},{navn:'SIK-huset',km:18.4,antall:0},{navn:'Mål',km:19.733,antall:0}],
+      leder:{stasjon:'Trollet',km:16.3,liste:leder},maal:{antall:0,liste:[]},siste:siste};
+  }
+  var valgtKl={}; try{ valgtKl=JSON.parse(localStorage.getItem('skj_klasser')||'{}')||{}; }catch(e){}
+  function klParam(){ if(etappe==='alle'){return '';} var v=valgtKl[etappe]||[]; return v.length?'&klasser='+encodeURIComponent(v.join(',')):''; }
+  function tegnKlasser(d){
+    var v=valgtKl[etappe]||[], boks=$('klasser');
+    if(!d.klasser||!d.klasser.length){boks.innerHTML='';return;}
+    // Odd 12.09: «Menn» og «Kvinner» velger alle klassene for det kjønnet
+    var menn=d.klasser.filter(function(k){return /menn|gutter/i.test(k.navn);}).map(function(k){return k.navn;});
+    var kvinner=d.klasser.filter(function(k){return /kvinner|jenter/i.test(k.navn);}).map(function(k){return k.navn;});
+    function lik(a,b){return a.length===b.length&&a.slice().sort().join('|')===b.slice().sort().join('|');}
+    var sum=function(l){return d.klasser.filter(function(k){return l.indexOf(k.navn)>=0;}).reduce(function(s,k){return s+k.antall;},0);};
+    boks.innerHTML='<button type="button" data-kl="" aria-pressed="'+(!v.length)+'">Alle klasser</button>'
+      +'<button type="button" data-gruppe="menn" aria-pressed="'+lik(v,menn)+'">Menn <small>'+sum(menn)+'</small></button>'
+      +'<button type="button" data-gruppe="kvinner" aria-pressed="'+lik(v,kvinner)+'">Kvinner <small>'+sum(kvinner)+'</small></button>'
+      +d.klasser.map(function(k){return'<button type="button" data-kl="'+esc(k.navn)+'" aria-pressed="'+(v.indexOf(k.navn)>=0)+'">'+esc(k.navn)+' <small>'+k.antall+'</small></button>';}).join('');
+    boks.querySelectorAll('button').forEach(function(b){b.addEventListener('click',function(){
+      var k=b.dataset.kl, g=b.dataset.gruppe, v=valgtKl[etappe]||[];
+      if(g){v=lik(v,g==='menn'?menn:kvinner)?[]:(g==='menn'?menn.slice():kvinner.slice());}
+      else if(!k){v=[];}else if(v.indexOf(k)>=0){v=v.filter(function(x){return x!==k;});}else{v.push(k);}
+      valgtKl[etappe]=v; try{localStorage.setItem('skj_klasser',JSON.stringify(valgtKl));}catch(e){} window.logg('klasse',{etappe:etappe,klasser:v.join(',')}); last();
+    });});
+  }
+  var ALLE_ETAPPER=[[306458,'20:1000'],[306460,'10:500'],[306459,'20:1000 trim'],[306461,'10:500 trim']];
+  function tegnOversikt(d){
+      var e=d.etappe; tegnKlasser(d); var kf=(valgtKl[etappe]||[]).length>0;
+      $('tittel').textContent=etappe==='alle'?'Skjervøy 20:1000, alle løperne':'Skjervøy '+(e.navn.indexOf('10:500')>=0?'10:500':'20:1000');
+      $('oppdatert').textContent='oppdatert '+new Date(d.hentet).toLocaleTimeString('no-NO',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+      $('start').textContent=e.start?'start kl. '+e.start:'';
+      $('paameldt').textContent=e.paameldt?e.paameldt+(kf?' i valgte klasser':' påmeldt'):'';
+      $('loype-tittel').textContent=etappe==='alle'?'🏁 I mål per etappe':'⛰️ Løypa';
+      $('loype-info').textContent=etappe==='alle'?'i mål av påmeldte':km(e.km)+' km · '+(d.stasjoner.length-1)+' mellomtider';
+      $('strip').innerHTML=d.stasjoner.map(function(s){return'<div><b>'+s.antall+'</b><span>'+esc(s.navn)+(s.km?' · '+km(s.km)+' km':'')+'</span></div>';}).join('');
+      window._sisteOversikt=d; var visAntall=window._visAntall||50;
+      var lbAlle=d.maal.antall?d.maal.liste:d.leder.liste, lb=lbAlle.slice(0,visAntall), hv=d.maal.antall?'🏁 Målgang <small>'+d.maal.antall+' i mål'+(etappe==='alle'?' i alle klasser, etappe for etappe':'')+'</small>':'🏁 Ledere ved '+esc(d.leder.stasjon||'start')+(d.leder.km?' <small>'+km(d.leder.km)+' km</small>':'');
+      $('leder-h').innerHTML=hv;
+      $('leder').querySelector('tbody').innerHTML=lb.map(function(r){return'<tr data-ed="'+esc(String(r.ed||''))+'" style="cursor:pointer" title="Trykk for passeringene"><td>'+plass(kf&&(valgtKl[etappe]||[]).length===1?r.plass_kl:r.plass)+'</td><td><b>'+esc(kort(r.navn))+'</b>'+(r.klubb?'<br><small style="color:var(--muted)">'+esc(r.klubb)+'</small>':'')+'</td><td><small>'+esc(r.klasse)+'</small></td><td class="t"><b>'+r.tid+'</b>'+(r.plass_kl?'<br><small style="color:var(--muted)">'+r.plass_kl+'. i kl.</small>':'')+'</td></tr>';}).join('');
+      $('leder-tom').hidden=lb.length>0; $('leder').hidden=!lb.length;
+      var mer=$('leder-mer'); mer.hidden=lbAlle.length<=visAntall; mer.textContent='Vis flere ('+Math.max(0,lbAlle.length-visAntall)+' til)';
+      $('leder').querySelectorAll('tbody tr[data-ed]').forEach(function(tr){tr.addEventListener('click',function(){var ed=tr.dataset.ed; if(!ed){return;} if(mine.indexOf(ed)<0){mine.push(ed);try{localStorage.setItem('skj_mine',JSON.stringify(mine));}catch(e){}} window.logg&&window.logg('folg',{fra:'leder'}); lastMine(); setTimeout(function(){var m=$('mine'); if(m){m.scrollIntoView({behavior:'smooth',block:'start'});}},300);});});
+      $('siste').innerHTML=d.siste.map(function(r){return'<li><span class="kl">'+r.klokke.slice(0,5)+'</span><span><b>'+esc(kort(r.navn))+'</b> passerte '+esc(r.stasjon)+' ('+km(r.km)+' km)</span><span class="kl">'+r.tid+(r.plass?' · '+r.plass+'.':'')+'</span></li>';}).join('');
+      $('siste-tom').hidden=d.siste.length>0;
+  }
+  function lastAlleEtapper(){
+    // Odd 13.09: «alle løperne, alle klasser» skal vise ALLE i mål, ikke ti per etappe. Full liste fra resultat-endepunktet,
+    // etappe for etappe (ulike distanser kan ikke sorteres mot hverandre), plass innen etappen.
+    var kortnavn=function(n){return String(n||'').replace(' konkurranse','');};
+    Promise.all([
+      fetch(API+'visning=resultater&etappe=alle&_='+Date.now()).then(function(r){return r.json();}),
+      Promise.all(ALLE_ETAPPER.map(function(e){return fetch(API+'visning=oversikt&etappe='+e[0]+'&_='+Date.now()).then(function(r){return r.json();}).then(function(d){d._kort=e[1];return d;});}))
+    ]).then(function(res){
+      var alle=res[0], ds=res[1], siste=[], stasjoner=[], rekke={};
+      ALLE_ETAPPER.forEach(function(e,i){rekke[e[1]]=i;});
+      stasjoner.push({antall:alle.etappe.fullfort+' av '+alle.etappe.paameldt,navn:'alle etapper',km:0});
+      (alle.etapper||[]).forEach(function(e){stasjoner.push({antall:(e.fullfort||0)+' av '+(e.paameldt||0),navn:kortnavn(e.navn),km:e.km});});
+      var maal=(alle.rader||[]).filter(function(r){return r.status==='TIME';}).map(function(r){var k=kortnavn(r.etappe_navn);return {ed:r.ed,navn:r.navn,klubb:r.klubb,klasse:(r.klasse||'')+' · '+k,plass:r.plass,plass_kl:r.plass_kl,tid:r.tid,sek:r.sek,_r:(rekke[k]||0)*10000+(r.plass||0)};});
+      maal.sort(function(a,b){return a._r-b._r;});
+      ds.forEach(function(d){(d.siste||[]).forEach(function(r){var x=Object.assign({},r);x.stasjon=r.stasjon+' ('+d._kort+')';siste.push(x);});});
+      siste.sort(function(a,b){return b.klokke<a.klokke?-1:1;});
+      tegnOversikt({hentet:alle.hentet,etappe:{navn:'alle',km:0,paameldt:alle.etappe.paameldt,start:''},klasser:[],stasjoner:stasjoner,
+        maal:{antall:alle.etappe.fullfort,liste:maal},leder:{stasjon:'',km:0,liste:[]},siste:siste.slice(0,25)});
+    }).catch(function(){ $('oppdatert').textContent='fikk ikke kontakt, prøver igjen'; });
+    lastMine();
+  }
+  function last(){
+    if(etappe==='alle'){ return lastAlleEtapper(); }
+    (SIM?Promise.resolve(simOversikt()):fetch(API+'visning=oversikt&etappe='+etappe+klParam()+'&_='+Date.now()).then(function(r){return r.json();})).then(tegnOversikt)
+    .catch(function(){ $('oppdatert').textContent='fikk ikke kontakt, prøver igjen'; });
+    lastMine();
+  }
+  function lastMine(){
+    if(SIM){ var sd=window.simData?window.simData():{lopere:[]}; sd.lopere=sd.lopere.slice(0,1); $('mine').innerHTML='<div class="folg">'+sd.lopere.map(kortHtml).join('')+'</div>'; return; }
+    if(!mine.length){ $('mine').innerHTML=''; return; }
+    fetch(API+'ed='+mine.join(',')+'&_='+Date.now()).then(function(r){return r.json();}).then(function(d){
+      $('mine').innerHTML='<div class="folg">'+d.lopere.map(kortHtml).join('')+'</div>';
+      $('mine').querySelectorAll('.fjern').forEach(function(b){b.addEventListener('click',function(){mine=mine.filter(function(x){return x!==b.dataset.ed;});try{localStorage.setItem('skj_mine',JSON.stringify(mine));}catch(e){}lastMine();});});
+    });
+  }
+  function kortHtml(l){
+    var tot=l.etappe_km, sist=l.maal?{km:tot,sek:l.maal.sek,stasjon:'Mål'}:(l.passeringer.length?l.passeringer[l.passeringer.length-1]:null);
+    var pros=sist?Math.min(100,sist.km/tot*100):0;
+    var forrige={km:0,sek:0};
+    function strekk(p){var dk=p.km-forrige.km, ds=p.sek-forrige.sek; var ut=(forrige.sek||forrige.km?'<b>'+fmt(ds)+'</b>':'<b>'+fmt(ds)+'</b>')+(dk>0?'<br><small style="color:var(--muted)">'+fmt(Math.round(ds/dk))+' /km</small>':''); forrige={km:p.km,sek:p.sek}; return ut;}
+    function pl2(p){return (p.plass?'<span class="pl">'+p.plass+'</span>':'')+(p.plass_kl?' <small style="color:var(--muted)">'+p.plass_kl+'. i kl.</small>':'');}
+    var rad=l.passeringer.map(function(p){return'<tr><td>'+esc(p.stasjon)+' <small style="color:var(--muted)">'+km(p.km)+' km</small></td><td class="t"><b>'+p.tid+'</b>'+(p.klokke?'<br><small style="color:var(--muted)">kl. '+p.klokke.slice(0,5)+'</small>':'')+'</td><td class="t">'+strekk(p)+'</td><td class="t">'+pl2(p)+'</td></tr>';}).join('');
+    if(l.maal){var m=l.maal; rad+='<tr><td><b>🏁 Mål</b> <small style="color:var(--muted)">'+km(tot)+' km</small></td><td class="t"><b>'+m.tid+'</b>'+(m.klokke?'<br><small style="color:var(--muted)">kl. '+m.klokke.slice(0,5)+'</small>':'')+'</td><td class="t">'+strekk({km:tot,sek:m.sek})+'</td><td class="t">'+pl2(m)+'</td></tr>';}
+    var ans='';
+    if(!l.maal&&sist&&RATIO[l.etappe]&&RATIO[l.etappe][sist.stasjon]){ans='<p class="anslag">Anslått sluttid <b>'+fmt(sist.sek/RATIO[l.etappe][sist.stasjon])+'</b> om farten holder som fjorårets løpere fra '+esc(sist.stasjon)+'.</p>';}
+    else if(!l.maal&&sist){ans='<p class="anslag">Grovt anslag sluttid <b>'+fmt(sist.sek/(sist.km/tot))+'</b>.</p>';}
+    var st=l.status?'<span class="pl">'+l.status+'</span>':(l.maal?'i mål':(sist?'underveis':'venter på start kl. '+l.start.slice(0,5)));
+    return'<div class="kort"><div class="topp"><div><div class="navn">'+esc(l.navn)+'</div><div class="meta">#'+l.startnr+' · '+esc(l.klasse)+(l.klubb?' · '+esc(l.klubb):'')+' · '+esc(l.etappe_navn)+' · '+st+'</div></div><button class="fjern" data-ed="'+l.ed+'" title="Slutt å følge">✕</button></div>'+
+      '<div class="linje"><i style="width:'+pros+'%"></i></div>'+(rad?'<table><thead><tr><th>Post</th><th class="t">Tid</th><th class="t">Strekk</th><th class="t">Plass</th></tr></thead><tbody>'+rad+'</tbody></table>':'<p class="tom">Ingen passeringer ennå.</p>')+ans+'</div>';
+  }
+  var sokTimer=null;
+  $('q').addEventListener('input',function(){
+    clearTimeout(sokTimer); var q=this.value.trim();
+    if(q.length<2){$('treff').innerHTML='';return;}
+    sokTimer=setTimeout(function(){
+      fetch(API+'q='+encodeURIComponent(q)).then(function(r){return r.json();}).then(function(d){
+        window.logg('sok',{q:q,antall:d.treff.length});
+        $('treff').innerHTML=(d.treff.length>1?'<li data-alle="1"><span><b>Følg alle '+d.treff.length+'</b></span><span class="nr">＋</span></li>':'')+(d.treff.length?d.treff.map(function(t){return'<li data-ed="'+t.ed+'"><span><b>'+esc(t.navn)+'</b> <small style="color:var(--muted)">'+esc(t.klasse)+(t.klubb?' · '+esc(t.klubb):'')+'</small></span><span class="nr">#'+t.startnr+' · '+(t.etappe===306458?'20:1000':'10:500')+'</span></li>';}).join(''):'<li><span class="tom">Ingen treff.</span></li>');
+        $('treff').querySelectorAll('li[data-ed]').forEach(function(li){li.addEventListener('click',function(){var ed=String(li.dataset.ed);var t=d.treff.filter(function(x){return String(x.ed)===ed;})[0]||{};window.logg('folg',{ed:ed,navn:t.navn,klubb:t.klubb,klasse:t.klasse,q:q});if(mine.indexOf(ed)<0){mine.push(ed);try{localStorage.setItem('skj_mine',JSON.stringify(mine));}catch(e){}}$('q').value='';$('treff').innerHTML='';lastMine();});});
+        var alleLi=$('treff').querySelector('li[data-alle]'); if(alleLi){alleLi.addEventListener('click',function(){window.logg('folg_alle',{q:q,antall:d.treff.length,klubb:(d.treff[0]||{}).klubb});d.treff.forEach(function(t){var ed=String(t.ed);if(mine.indexOf(ed)<0){mine.push(ed);}});mine=mine.slice(-12);try{localStorage.setItem('skj_mine',JSON.stringify(mine));}catch(e){}$('q').value='';$('treff').innerHTML='';lastMine();});}
+      });
+    },250);
+  });
+  document.querySelectorAll('.faner button').forEach(function(b){b.addEventListener('click',function(){document.querySelectorAll('.faner button').forEach(function(x){x.setAttribute('aria-selected','false');});b.setAttribute('aria-selected','true');etappe=(b.dataset.etappe==='alle'?'alle':+b.dataset.etappe);window._visAntall=50;window.logg('etappe',{etappe:etappe});last();});});
+  $('delknapp').addEventListener('click',function(){window.logg('del',{visning:'alle'});var u=location.href.split('#')[0];if(navigator.share){navigator.share({title:'Skjervøy 20:1000 direkte',url:u});}else{navigator.clipboard&&navigator.clipboard.writeText(u);this.textContent='Lenke kopiert ✓';}});
+  window.lastAlle=last;
+  $('leder-mer').addEventListener('click',function(){ window._visAntall=(window._visAntall||50)+50; if(window._sisteOversikt){tegnOversikt(window._sisteOversikt);} });
+  // Odd 13.09: valget «Alle løperne» i menyen skal stå på fanen «Alle løperne, alle klasser» som standard
+  window.velgAlleEtapper=function(){ if(etappe==='alle'){return;} etappe='alle'; document.querySelectorAll('.faner button').forEach(function(x){x.setAttribute('aria-selected',x.dataset.etappe==='alle'?'true':'false');}); last(); };
+})();
+
+</script>
+<script>
+
+(function(){
+  var ARR=(location.search.match(/[?&]arr=(\d+)/)||[])[1], API='data.php'+(ARR?'?arr='+ARR+'&':'?');
+  // våre fire: EtappeDeltaker-id hos EQ, kortnavn, og fjorårets passeringer (sekunder) der de finnes
+  // Odd 12.09 kl. 23:3x: Treni-løperne vises ikke lenger med navn her (personvern, F-57: bare med samtykke). De søker seg selv opp.
+  var VAARE=[];
+  var RATIO={306458:{'Stussnes':.1098,'Skattørfjellet':.304,'Lailafjellet':.563,'Trollet':.855,'SIK-huset':.954,'FV':.995}}; RATIO[306459]=RATIO[306458];
+  var STASJ={306458:['Stussnes 2,2','Skattør 5,7','Laila 10,7','Trollet 16,3','SIK 18,4','Mål'],306460:['Laila 1,8','Trollet 7,4','SIK 9,5','Mål']}; STASJ[306459]=STASJ[306458]; STASJ[306461]=STASJ[306460];
+  function $(id){return document.getElementById(id);}
+  function km(x){return (Math.round(x*10)/10).toString().replace('.',',');}
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function fmt(s){s=Math.round(Math.abs(s));var h=Math.floor(s/3600),m=Math.floor(s%3600/60),x=s%60;return h?h+':'+String(m).padStart(2,'0')+':'+String(x).padStart(2,'0'):m+':'+String(x).padStart(2,'0');}
+  function tempo(t){if(!t)return'';var m=Math.floor(t),s=Math.round((t-m)*60);if(s===60){m++;s=0;}return m+':'+String(s).padStart(2,'0')+' /km';}
+  function diff(sek,ref){if(!ref)return'';var d=sek-ref;if(Math.abs(d)<1)return'<span class="d">som beste</span>';return d<0?'<span class="d foran">'+fmt(d)+' foran</span>':'<span class="d bak">'+fmt(d)+' bak</span>';}
+  function last(){
+    var SIM=false;   // simuleringen slått av etter løpet
+    (SIM?Promise.resolve(simData()):fetch(API+'ed='+VAARE.map(function(v){return v.ed;}).join(',')+'&_='+Date.now()).then(function(r){return r.json();})).then(function(d){
+      $('oppdatert').textContent='oppdatert '+new Date(d.hentet).toLocaleTimeString('no-NO',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+      var byEd={}; d.lopere.forEach(function(l){byEd[l.ed]=l;});
+      $('lopere').innerHTML=VAARE.map(function(v){var l=byEd[v.ed];return l?kort(v,l):'<div class="kort"><div class="navn">'+v.kort+'</div><p class="tom">Ikke i startlista.</p></div>';}).join('');
+    }).catch(function(){$('oppdatert').textContent='fikk ikke kontakt, prøver igjen';});
+  }
+  // ?sim=1: tenkt situasjon kl. 14:05 på løpsdagen, til å se hvordan siden blir (Odd 12.09)
+  window.simData=simData;
+  function simData(){
+    function P(st,km,sek,pl,plk,tempo,kl){return{stasjon:st,km:km,sek:sek,tid:fmt(sek),plass:pl,plass_kl:plk,tempo:tempo,klokke:kl,status:'TIME',bak:pl===1?0:(pl-1)*11+4};}
+    return{hentet:new Date().toISOString().slice(0,10)+'T14:05:12',lopere:[
+      {ed:'15946831',navn:'Eirik Dagssønn Haugsnes',startnr:91,klasse:'40-59 Menn',klubb:'Tromsø Løpeklubb',etappe:306458,start:'13:00:00',status:'',etappe_navn:'20:1000 konkurranse',etappe_km:19.73,
+        passeringer:[P('Stussnes',2.2,652,4,1,4.94,'13:10:52'),P('Skattørfjellet',5.7,1798,3,1,5.46,'13:29:58'),P('Lailafjellet',10.7,3355,3,1,5.19,'13:55:55')],maal:null},
+      {ed:'16263679',navn:'Kristoffer Forsberg Olsen',startnr:57,klasse:'40-59 Menn',klubb:'Tromsø Randoneeklubb',etappe:306458,start:'13:00:00',status:'',etappe_navn:'20:1000 konkurranse',etappe_km:19.73,
+        passeringer:[P('Stussnes',2.2,905,61,19,6.86,'13:15:05'),P('Skattørfjellet',5.7,2412,58,18,7.18,'13:40:12')],maal:null},
+      {ed:'15946182',navn:'Joakim Hansen',startnr:201,klasse:'20-39 Menn',klubb:'Tromsø Løpeklubb/KSAT',etappe:306458,start:'13:00:00',status:'',etappe_navn:'20:1000 konkurranse',etappe_km:19.73,
+        passeringer:[P('Stussnes',2.2,842,38,20,6.38,'13:14:02'),P('Skattørfjellet',5.7,2301,35,19,6.95,'13:38:21'),P('Lailafjellet',10.7,4130,30,17,6.1,'14:08:50')],maal:null},
+      {ed:'16530202',navn:'Rune Brustad',startnr:701,klasse:'40-59 Menn',klubb:'Tromsø Løpeklubb',etappe:306460,start:'12:30:00',status:'',etappe_navn:'10:500 konkurranse',etappe_km:10.05,
+        passeringer:[P('Lailafjellet',1.8,760,11,4,7.04,'12:42:40'),P('Trollet',7.4,2890,9,3,6.34,'13:18:10'),P('SIK-huset',9.5,3520,9,3,5.0,'13:28:40')],maal:P('Mål',10.05,3728,9,3,3.6,'13:32:08')}
+    ]};
+  }
+  function kort(v,l){
+    var tot=l.etappe_km, sist=l.maal?{km:tot,sek:l.maal.sek,stasjon:'Mål'}:(l.passeringer.length?l.passeringer[l.passeringer.length-1]:null);
+    var pros=sist?Math.min(100,sist.km/tot*100):0;
+    var status=l.status?l.status:(l.maal?'🏁 i mål':(sist?'underveis, sist sett '+sist.stasjon:'venter på start kl. '+l.start.slice(0,5)));
+    var stat=l.maal?'<div class="stat"><b>'+l.maal.tid+'</b><span>'+(l.maal.plass?l.maal.plass+'. totalt':'')+(l.maal.plass_kl?' · '+l.maal.plass_kl+'. i klassen':'')+'</span></div>':(sist?'<div class="stat"><b>'+sist.tid+'</b><span>ved '+esc(sist.stasjon)+(sist.plass?' · '+sist.plass+'. plass':'')+'</span></div>':'');
+    function bak(p){return p.plass===1?'<span class="d foran">leder</span>':(p.bak?'<span style="color:var(--muted)">'+fmt(p.bak)+'</span>':'');}
+    var rader=l.passeringer.map(function(p){return'<tr><td>'+esc(p.stasjon)+' <small style="color:var(--muted)">'+km(p.km)+' km</small></td><td class="t"><b>'+p.tid+'</b></td><td class="t">'+(v.ref&&v.ref[p.stasjon]?diff(p.sek,v.ref[p.stasjon]):'')+'</td><td class="t">'+bak(p)+'</td><td class="t">'+(p.plass?'<span class="pl">'+p.plass+'</span>':'')+'</td></tr>';}).join('');
+    if(l.maal){rader+='<tr><td><b>🏁 Mål</b></td><td class="t"><b>'+l.maal.tid+'</b></td><td class="t">'+(v.ref&&v.ref['Mål']?diff(l.maal.sek,v.ref['Mål']):'')+'</td><td class="t">'+bak(l.maal)+'</td><td class="t">'+(l.maal.plass?'<span class="pl">'+l.maal.plass+'</span>':'')+(l.maal.plass_kl?'<br><small style="color:var(--muted)">'+l.maal.plass_kl+'. i kl.</small>':'')+'</td></tr>';}
+    var ans='';
+    if(!l.maal&&sist){
+      if(v.ref&&v.ref[sist.stasjon]&&v.ref['Mål']){ans='<p class="anslag">Holder han samme forhold som i sitt beste år herfra, blir sluttida <b>'+fmt(sist.sek*v.ref['Mål']/v.ref[sist.stasjon])+'</b>. Beste: '+fmt(v.ref['Mål'])+'.</p>';}
+      else if(RATIO[l.etappe]&&RATIO[l.etappe][sist.stasjon]){ans='<p class="anslag">Anslått sluttid <b>'+fmt(sist.sek/RATIO[l.etappe][sist.stasjon])+'</b> med fjorårets fordeling av løypa.</p>';}
+      else{ans='<p class="anslag">Grovt anslag sluttid <b>'+fmt(sist.sek/(sist.km/tot))+'</b>.</p>';}
+    }
+    return'<div class="kort"><div class="topp"><div><div class="navn">'+esc(v.kort)+' <small style="font:500 .85rem var(--sans);color:var(--muted)">'+esc(l.navn.replace(/^\S+\s/,'').replace(/^Dagssønn\s/,''))+'</small></div><div class="meta">#'+l.startnr+' · '+esc(l.klasse)+' · '+esc(l.etappe_navn)+(l.klubb?' · '+esc(l.klubb):'')+'<br>'+status+'</div></div>'+stat+'</div>'+
+      '<div class="linje"><i style="width:'+pros+'%"></i></div><div class="stasj">'+(STASJ[l.etappe]||[]).map(function(s){return'<span>'+s+'</span>';}).join('')+'</div>'+
+      (rader?'<table><thead><tr><th>Post</th><th class="t">Tid</th><th class="t">Mot egen beste</th><th class="t">Bak leder</th><th class="t">Plass</th></tr></thead><tbody>'+rader+'</tbody></table>':'<p class="tom">Ingen passeringer ennå.</p>')+ans+
+      '<p class="meta" style="margin:.5rem 0 0">'+esc(v.refnote)+'</p></div>';
+  }
+  $('delknapp2').addEventListener('click',function(){window.logg('del',{visning:'treni'});var u=location.href.split('#')[0];if(navigator.share){navigator.share({title:'Treni-løperne i Skjervøy',url:u});}else{navigator.clipboard&&navigator.clipboard.writeText(u);this.textContent='Lenke kopiert ✓';}});
+  window.lastTreni=last;
+})();
+
+</script>
+<script>
+(function(){   // Tromsø Løpeklubb (Odd 12.09)
+  var STASJ_TLK={306458:['Stussnes 2,2','Skattør 5,7','Laila 10,7','Trollet 16,3','SIK 18,4','Mål'],306460:['Laila 1,8','Trollet 7,4','SIK 9,5','Mål']}; STASJ_TLK[306459]=STASJ_TLK[306458]; STASJ_TLK[306461]=STASJ_TLK[306460];
+  var ARR=(location.search.match(/[?&]arr=(\d+)/)||[])[1], API='data.php'+(ARR?'?arr='+ARR+'&':'?');
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function last(){
+    fetch(API+'klubb='+encodeURIComponent('Tromsø Løpeklubb')+'&_='+Date.now()).then(function(r){return r.json();}).then(function(d){
+      document.getElementById('oppdatert').textContent='oppdatert '+new Date(d.hentet).toLocaleTimeString('no-NO',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+      var tb=document.querySelector('#tlk-tabell tbody'), sistEt=null, html='';
+      d.lopere.forEach(function(l){
+        if(l.etappe!==sistEt){sistEt=l.etappe;html+='<tr><td colspan="4" style="background:var(--bg);font:700 .8rem var(--disp)">'+esc(l.etappe_navn)+'</td></tr>';}
+        var sist=l.maal?null:(l.passeringer.length?l.passeringer[l.passeringer.length-1]:null);
+        var status=l.maal?'🏁 Mål':(sist?esc(sist.stasjon)+' <small style="color:var(--muted)">'+String(sist.km).replace('.',',')+' km</small>':(l.status||'<span style="color:var(--muted)">ikke startet</span>'));
+        var tid=l.maal?l.maal.tid:(sist?sist.tid:''), pl=l.maal?l.maal.plass:(sist?sist.plass:0), plk=l.maal?l.maal.plass_kl:(sist?sist.plass_kl:0);
+        var fmtS=function(x){x=Math.round(x);var h=Math.floor(x/3600),m=Math.floor(x%3600/60),q=x%60;return h?h+':'+String(m).padStart(2,'0')+':'+String(q).padStart(2,'0'):m+':'+String(q).padStart(2,'0');};
+        var tempoS=function(t){if(!t)return'';var m=Math.floor(t),q=Math.round((t-m)*60);if(q===60){m++;q=0;}return m+':'+String(q).padStart(2,'0')+' /km';};
+        var fp={km:0,sek:0}; function strekkT(p){var dk=p.km-fp.km, ds=p.sek-fp.sek; fp={km:p.km,sek:p.sek}; return '<b>'+fmtS(ds)+'</b>'+(dk>0?'<br><small style="color:var(--muted)">'+fmtS(Math.round(ds/dk))+' /km</small>':'');}
+        function plT(p){return (p.plass?'<span class="pl">'+p.plass+'</span>':'')+(p.plass_kl?'<br><small style="color:var(--muted)">'+p.plass_kl+'. i kl.</small>':'');}
+        var det=l.passeringer.map(function(p){return'<tr><td style="padding-left:1rem">'+esc(p.stasjon)+' <small style="color:var(--muted)">'+String(p.km).replace('.',',')+' km</small></td><td class="t"><b>'+p.tid+'</b><br><small style="color:var(--muted)">'+(p.klokke?'kl. '+p.klokke.slice(0,5)+' · ':'')+(p.plass===1?'leder':(p.bak?fmtS(p.bak)+' bak leder':''))+'</small></td><td class="t">'+strekkT(p)+'</td><td class="t">'+plT(p)+'</td></tr>';}).join('');
+        if(l.maal){var mm=l.maal; det+='<tr><td style="padding-left:1rem"><b>🏁 Mål</b> <small style="color:var(--muted)">'+String(Math.round(l.etappe_km*10)/10).replace('.',',')+' km</small></td><td class="t"><b>'+mm.tid+'</b><br><small style="color:var(--muted)">'+(mm.klokke?'kl. '+mm.klokke.slice(0,5)+' · ':'')+(mm.plass===1?'vinner':(mm.bak?fmtS(mm.bak)+' bak vinner':''))+'</small></td><td class="t">'+strekkT({km:l.etappe_km,sek:mm.sek})+'</td><td class="t">'+plT(mm)+'</td></tr>';}
+        var strip=(STASJ_TLK[l.etappe]||[]); var totKm=l.etappe_km, sistP=l.maal?totKm:(l.passeringer.length?l.passeringer[l.passeringer.length-1].km:0);
+        var stripHtml='<div class="linje" style="margin:.5rem 1rem .3rem"><i style="width:'+Math.min(100,sistP/totKm*100)+'%"></i></div><div class="stasj" style="margin:0 1rem .3rem">'+strip.map(function(x){return'<span>'+x+'</span>';}).join('')+'</div>';
+        var kan=det.length>0;
+        html+='<tr'+(kan?' class="tlk-rad" data-ed="'+l.ed+'" style="cursor:pointer"':'')+'><td><b>'+esc(l.navn)+'</b><br><small style="color:var(--muted)">#'+l.startnr+' · '+esc(l.klasse)+'</small>'+(kan?'<br><span class="tlk-knapp">'+(window._tlkOpen&&window._tlkOpen[l.ed]?'Vis mindre ‹':'Se passeringer ›')+'</span>':'')+'</td><td>'+status+'</td><td class="t"><b>'+tid+'</b></td><td class="t">'+(pl?'<span class="pl">'+pl+'</span>'+(plk?'<br><small style="color:var(--muted)">'+plk+'. i kl.</small>':''):'')+'</td></tr>';
+        if(kan){html+='<tr class="tlk-det" data-for="'+l.ed+'"'+(window._tlkOpen&&window._tlkOpen[l.ed]?'':' hidden')+'><td colspan="4" style="padding:0 0 .4rem;background:var(--bg)">'+stripHtml+'<table style="margin:0;font-size:.85rem"><thead><tr><th style="padding-left:1rem">Post</th><th class="t">Tid</th><th class="t">Strekk</th><th class="t">Plass</th></tr></thead><tbody>'+det+'</tbody></table></td></tr>';}
+      });
+      tb.innerHTML=html; document.getElementById('tlk-tom').hidden=d.lopere.length>0; document.getElementById('tlk-tom').textContent='Ingen fra klubben i startlista.';
+      window._tlkOpen=window._tlkOpen||{};
+      tb.querySelectorAll('tr.tlk-rad').forEach(function(r){r.addEventListener('click',function(){var ed=r.dataset.ed, d2=tb.querySelector('tr.tlk-det[data-for="'+ed+'"]'); if(!d2) return; d2.hidden=!d2.hidden; window._tlkOpen[ed]=!d2.hidden; var kn=r.querySelector('.tlk-knapp'); if(kn){kn.textContent=d2.hidden?'Se passeringer ›':'Vis mindre ‹';} if(!d2.hidden&&window.logg){window.logg('tlk_passeringer',{ed:ed});}});});
+      document.getElementById('tlk-intro').textContent=d.lopere.length+' løpere fra Tromsø Løpeklubb i Skjervøy 20:1000 og 10:500, sortert etter hvor langt de har kommet.';
+    }).catch(function(){document.getElementById('oppdatert').textContent='fikk ikke kontakt, prøver igjen';});
+  }
+  window.lastTlk=last;
+  document.getElementById('delknapp3').addEventListener('click',function(){window.logg&&window.logg('del',{visning:'tlk'});var u=location.href.split('#')[0]+'#tlk';if(navigator.share){navigator.share({title:'Tromsø Løpeklubb i Skjervøy 20:1000',url:u});}else{navigator.clipboard&&navigator.clipboard.writeText(u);this.textContent='Lenke kopiert ✓';}});
+})();
+</script>
+<script>
+(function(){
+  if(false){ var sb=document.createElement('div'); sb.style.cssText='background:hsl(38 85% 46%);color:#111;font:700 .9rem var(--disp);text-align:center;padding:.5rem 1rem'; sb.innerHTML='Simulering med oppdiktede tall. <a href="/skjervoy/'+location.hash+'" style="color:#111">Til den ekte siden →</a>'; document.body.insertBefore(sb, document.body.firstChild); }
+  function vis(){
+    var v=location.hash==='#treni'?'treni':(location.hash==='#tlk'?'tlk':(location.hash==='#tider'?'tider':'alle'));
+    if(location.hash==='#alle'&&window.velgAlleEtapper){window.velgAlleEtapper();}
+    if(v==='treni'){v='alle';}
+    ['alle','treni','tlk','tider'].forEach(function(k){var vk=document.getElementById('vis-'+k), mk=document.getElementById('meny-'+k); if(vk){vk.hidden=v!==k;} if(mk){mk.setAttribute('aria-current',v===k?'page':'false');}});
+    document.getElementById('faner').style.display=v==='alle'?'':'none';
+    document.getElementById('tittel').textContent=v==='treni'?'Trenis løpere i Skjervøy 20:1000':(v==='tlk'?'Tromsø Løpeklubb i Skjervøy':(v==='tider'?'Passeringstider, Skjervøy 20:1000':'Skjervøy 20:1000'));
+    if(window.logg&&window._visLogget){window.logg('visning',{visning:v});} window._visLogget=true;
+    oppdater();
+  }
+  function oppdater(){ if(location.hash==='#treni'){window.lastTreni();}else if(location.hash==='#tlk'){window.lastTlk();}else if(location.hash==='#tider'){document.getElementById('oppdatert').textContent='fra 2024 og 2025';}else{window.lastAlle();} }
+  var dk4=document.getElementById('delknapp4'); if(dk4){dk4.addEventListener('click',function(){window.logg&&window.logg('del',{visning:'tider'});var u=location.href.split('#')[0]+'#tider';if(navigator.share){navigator.share({title:'Passeringstider Skjervøy 20:1000',url:u});}else{navigator.clipboard&&navigator.clipboard.writeText(u);this.textContent='Lenke kopiert ✓';}});}
+  window.addEventListener('hashchange',vis);
+  vis(); setInterval(oppdater,45000);
+  document.addEventListener('visibilitychange',function(){if(!document.hidden){oppdater();}});
+})();
+</script>
+</body>
+</html>

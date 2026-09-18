@@ -35,16 +35,16 @@ $til   = 'https://treni.no/bli-testloper.php?kilde=' . rawurlencode($kilde);
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Treni — for deg som løper i nord</title>
-<meta name="description" content="En ekte trener og en motor som ser hver økt. Finn neste løp i nord, eller sett deg på ventelista.">
+<title>Treni · for deg som løper i nord</title>
+<meta name="description" content="En ekte trener og en motor som ser hver økt. Finn neste løp i nord, eller bli testløper med egen side fra dag én.">
 <meta name="robots" content="noindex">
-<meta property="og:title" content="Treni — for deg som løper i nord">
+<meta property="og:title" content="Treni · for deg som løper i nord">
 <meta property="og:description" content="En ekte trener. En som ser hver økt, og aldri sover.">
 <meta property="og:image" content="https://treni.no/bilder/og.jpg">
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="icon" type="image/png" href="/icon-192.png" sizes="192x192">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="stylesheet" href="/stil.css">
+<link rel="stylesheet" href="/stil.css?v=30">
 <style>
   .ig-valg { display:grid; gap:.9rem; max-width:30rem; margin:1.6rem auto 0 }
   .ig-kort {
@@ -79,9 +79,9 @@ $til   = 'https://treni.no/bli-testloper.php?kilde=' . rawurlencode($kilde);
 
 <section class="ig-valg">
   <a class="ig-kort primar" href="<?= htmlspecialchars($til) ?>">
-    <b>Sett meg på ventelista →</b>
-    <span>Vi tar inn løpere i puljer. Du får plass når det er din tur, og en plan
-          bygget for deg av en trener.</span>
+    <b>Bli testløper →</b>
+    <span>Ingen venteliste: du får egen side fra dag én, og planen så snart klokka er koblet og historikken er inne, bygget av en trener
+          på øktene fra klokka di. Du trenger pulsklokke (Garmin, Polar, Suunto, Coros, Wahoo eller Strava).</span>
   </a>
   <a class="ig-kort" href="/lop.php">
     <b>Løpskalenderen</b>
@@ -108,7 +108,7 @@ $til   = 'https://treni.no/bli-testloper.php?kilde=' . rawurlencode($kilde);
   </nav>
   <p>PAULSEN UTVIKLING · org.nr 938 158 614 · Norge ·
      <a href="mailto:hei@treni.no">hei@treni.no</a></p>
-  <p>Powered by Strava — this service is not affiliated with or endorsed by Strava.</p>
+  <p>Powered by Strava. This service is not affiliated with or endorsed by Strava.</p>
 </footer>
 
 </main>

@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Treni: en ekte trener, en som ser hver økt og aldri sover</title>
-<meta name="description" content="Trenerledet løpsveiledning for vei og fjell, bygget på dine egne Strava-data. Konkrete ukesråd i Telegram, med skadeforebygging først.">
-<meta property="og:title" content="Treni: en ekte trener, en som ser hver økt og aldri sover">
-<meta property="og:description" content="Trenerledet løpsveiledning for vei og fjell, bygget på dine egne treningsdata.">
+<title>Treni · treningsplan for løpere, med ekte trener</title>
+<meta name="description" content="De fleste løper for hardt på de rolige dagene. Treni leser hver økt du løper, viser om uka var rolig nok, og anbefaler hva du bør endre til neste uke. En ekte trener ser over rådene du får. Hver uke.">
+<meta property="og:title" content="Løp rolig, hemmeligheten alle raske løpere kjenner.">
+<meta property="og:description" content="Trenerledet plan bygget på øktene fra klokka di. Ekte trener, hver uke.">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://treni.no/bilder/og.jpg">
+<meta property="og:image" content="https://treni.no/bilder/og.jpg?v=20260911c">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:url" content="https://treni.no/">
@@ -18,53 +18,66 @@
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="icon" type="image/png" href="/icon-192.png" sizes="192x192">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="stylesheet" href="stil.css?v=21">
+<link rel="stylesheet" href="stil.css?v=30">
 </head>
 <body>
 <div class="bakteppe" aria-hidden="true"></div>
 <nav class="sprakvalg" aria-label="Språk"><span aria-current="page">NO</span><a href="/en/">EN</a></nav>
-<nav class="toppmeny" aria-label="Meny"><a href="lop.php">🏁 Løpskalender</a></nav>
 <main class="bred">
 
 <header class="hero hero-foto"><div class="indre">
-  <p class="kicker reveal">treni.no</p>
+  <p class="kicker slagord reveal">Løp rolig, hemmeligheten alle raske løpere kjenner.</p>
   <h1 class="reveal">Vet du om du trener<br>riktig akkurat nå?</h1>
-  <p class="ingress reveal" style="margin-bottom:.35rem">Treni leser hver økt du logger på Strava, og en ekte trener ser over rådene du får. Hver uke.</p>
-    <p class="ingress reveal">«Det er supert å kunne ha et så bra verktøy og din
-  kompetanse til å veilede meg, så jeg trener meg i form på rett måte!»<br>
-  <span class="liten" style="opacity:.85">Testløper, august 2026</span></p>
+  <p class="ingress reveal" style="margin-bottom:.35rem">De fleste løper for hardt på de rolige dagene. Treni leser hver økt du løper, viser om uka var rolig nok, og anbefaler hva du bør endre til neste uke. En ekte trener ser over rådene du får. Hver uke.</p>
   <div class="knapper reveal">
-    <a class="btn btn-primar" href="bli-testloper.php">Bli testløper</a>
-    <a class="btn btn-ghost" href="lop.php">🏁 Løpskalender</a>
-    <a class="btn btn-ghost" href="#slik">Slik virker det</a>
-    <a class="btn btn-ghost" href="samarbeid.php">Vi vil samarbeide →</a>
+    <a class="btn btn-primar" href="bli-testloper.php">For løpere</a>
+    <a class="btn btn-primar" href="bli-testloper.php?rolle=coach">For løpecoacher</a>
   </div>
   <div class="hvem reveal">
-    <span>For løpere</span><span>For løpegrupper</span><span>For arrangører</span>
+    <span>Også for løpegrupper</span><span>Også for arrangører</span>
   </div>
 </div></header>
 
 <section aria-label="Hva Treni er">
   <p class="ingress" style="max-width:46rem">Treni er en <b>treningsveileder med trener</b>, for deg som løper på vei
-  eller i fjell. Systemet leser hver økt du logger på Strava: puls, drag, høydemeter og hvordan det kjentes.
-  En trener står bak hvert råd. Målet er ett: <b>at du blir bedre uten å bli skadet</b>.</p>
+  eller i fjell. Systemet leser hver økt fra Strava, Garmin eller klokka di: puls, drag, høydemeter og hvordan det kjentes. Du trenger en pulsklokke som kan kobles til Intervals.icu: Garmin, Polar, Suunto, Coros eller Wahoo.
+  En trener står bak hvert råd. Målet er ett: <b>at du blir bedre uten å bli skadet eller miste gleden</b>. Det starter med at de rolige øktene faktisk er rolige.</p>
+  <figure class="hero-sitat reveal">
+    <blockquote>Det er supert å kunne ha et så bra verktøy og trenerens kompetanse til å veilede meg, så jeg trener meg i form på rett måte!</blockquote>
+    <figcaption>Testløper, august 2026</figcaption>
+  </figure>
+</section>
+
+<section aria-label="Mer om Treni">
+  <div class="knapper" style="margin-top:0">
+    <a class="btn btn-primar" href="bli-testloper.php">For løpere</a>
+    <a class="btn btn-primar" href="bli-testloper.php?rolle=coach">For løpecoacher</a>
+  </div>
+  <div class="knapper" style="margin-top:.6rem">
+    <a class="btn btn-ghost" href="#slik">Slik virker det</a>
+    <a class="btn btn-ghost" href="samarbeid.php">Vi vil samarbeide →</a>
+  </div>
 </section>
 
 <section aria-labelledby="problem-t">
   <p class="kicker">Kjenner du deg igjen?</p>
-  <h2 id="problem-t">De fleste løpere trener uten å vite om det virker</h2>
+  <h2 id="problem-t">De fleste løpere trener hardere enn de tror</h2>
   <ul class="steg" style="list-style:none; padding-left:0">
-    <li><b>Planen kjenner deg ikke</b>
-      <p>Et ferdig program vet ikke hva kroppen din faktisk gjorde forrige uke. Det ser ikke
-      at uka ble hard, at langturen vokste for fort, eller at «rolig» hos deg
-      egentlig er ganske raskt.</p></li>
+    <li><b>«Rolig» er sjelden rolig</b>
+      <p>Hemmeligheten er enkel, men vanskelig å følge. Et ferdig program vet ikke hva kroppen din
+      faktisk gjorde forrige uke. Det ser ikke
+      at «rolig» hos deg egentlig er ganske raskt, at uka ble hard, eller at langturen
+      vokste for fort.</p>
+      <p class="treni-svar">Treni hjelper deg med å se om du traff riktig på øktene dine.</p></li>
     <li><b>Skaden kommer først</b>
       <p>Det som oftest stopper fremgangen er ikke for lite trening. Det er
       <strong>for mye, for fort</strong>. Tegnene ligger i treningsdataene lenge før du kjenner dem
-      i beina. Men noen må faktisk lese dataene.</p></li>
+      i beina. Men noen må lese dem, og si hva du bør endre til neste uke.</p>
+      <p class="treni-svar">Treni hjelper deg med å oppdage tegnene tidlig, og sier fra før de blir en skade.</p></li>
     <li><b>Alene mellom øktene</b>
       <p>En trener som ser deg hver uke har vært for de få. Resten står alene med klokka,
-      Strava og magefølelsen, og gjetter på om de er på rett vei.</p></li>
+      Strava og magefølelsen, og gjetter på om de løper rolig nok.</p>
+      <p class="treni-svar">Treni hjelper deg med å ha en trener i loopen hver uke, uten at du må ha råd til en egen.</p></li>
   </ul>
 </section>
 
@@ -112,7 +125,7 @@
         <div style="height:.85rem; width:78%; border-radius:99px; background:hsl(var(--accent) / .55)"></div>
         <div style="height:.85rem; width:85%; border-radius:99px; background:hsl(var(--accent) / .55)"></div>
       </div>
-      <p style="margin:.8rem 0 0; font-size:.92rem">Hver økt leses fra Strava. Planen
+      <p style="margin:.8rem 0 0; font-size:.92rem">Hver økt leses fra Strava eller Intervals.icu. Planen
       <b>bygger videre fra der du faktisk er</b>, og en ekte trener ser over.</p>
     </div>
   </div>
@@ -128,7 +141,7 @@
       <h3 style="margin-top:0">🛣️ For deg som løper på vei</h3>
       <p>Her styrer <strong>fart og kilometer</strong>: drag med sekunder, terskeløkter
       målt mot din egen fart, og opptrapping uke for uke mot løpet ditt.
-      5 km, 10 km, halv eller hel.</p>
+      5 km, 10 km. halv eller hel.</p>
     </div>
     <div class="kort">
       <h3 style="margin-top:0">⛰️ For deg som løper i fjell og terreng</h3>
@@ -179,7 +192,7 @@
     <div>
       <p class="flow-tittel">🏃 For løperen</p>
       <ol class="flowsteg">
-        <li><div><b>Koble Strava, svar på noen få spørsmål</b>
+        <li><div><b>Koble Strava eller klokka di, svar på noen få spørsmål</b>
           <p>Mål, alder og makspuls. Mer trenger vi ikke spørre om. Treni henter
           historikken din, setter pulssonene dine etter Olympiatoppens skala, og lærer hva
           som er en vanlig uke for deg. Ikke for en gjennomsnittsløper.</p></div></li>
@@ -187,7 +200,7 @@
           <p>Hva forrige uke faktisk var, rolig og hardt, og hva uka som kommer
           bør inneholde, økt for økt, tilpasset løpene dine.</p></div></li>
         <li><div><b>Tren, og bli fulgt opp</b>
-          <p>Hver ukeplan godkjenner du med én knapp, eller ber om endring, så justeres den.
+          <p>Planen kommer til deg. Passer noe ikke, sier du fra, så justeres den.
           Treni følger med gjennom uka, og du kan spørre om alt, når som helst, i din egen
           gruppe med treneren på laget.</p></div></li>
       </ol>
@@ -213,7 +226,7 @@
   <div class="midt-cta">
     <p>Klar til å prøve? Det tar to minutter å melde seg. Samarbeid starter med en kort melding.</p>
     <div class="knapper" style="justify-content:center">
-      <a class="btn btn-primar" href="bli-testloper.php">Sett meg på ventelista</a>
+      <a class="btn btn-primar" href="bli-testloper.php">Bli med som testløper</a>
       <a class="btn btn-ghost" href="samarbeid.php">Vi vil samarbeide →</a>
     </div>
   </div>
@@ -235,10 +248,10 @@
 
 <section aria-label="Nøkkeltall">
   <ul class="tall-rad">
-    <li><span class="tall">76–85 %</span><p>av treningstiden rolig, resten hardt. Det er sånn form bygges</p></li>
-    <li><span class="tall">0–15 %</span><p>økning i uka som mest. Grensen settes etter nivået ditt, ikke én regel for alle</p></li>
+    <li><span class="tall">76 til 85 %</span><p>av treningstiden rolig, resten hardt. Det er sånn form bygges</p></li>
+    <li><span class="tall">0 til 15 %</span><p>økning i uka som mest. Grensen settes etter nivået ditt, ikke én regel for alle</p></li>
     <li><span class="tall">Hele dagen</span><p>leses øktene dine, og Min side oppdateres uten at du melder inn noe</p></li>
-    <li><span class="tall">18</span><p>løpere i Treni nå: 10 i full drift på vei, bane, terreng og ultra, og 8 på vei inn fra ventelista, med egen side og plan fra dag én</p></li>
+    <li><span class="tall" data-lopertall>36</span><p>løpere i Treni nå, på vei, bane, terreng og ultra. Alle har egen side fra dag én, og planen så snart klokka er koblet</p></li>
   </ul>
 </section>
 
@@ -265,7 +278,7 @@
       lange turer. Treni kjenner dem, og lærer deg å <strong>aldri jage puls</strong>. Sonene dine settes ut fra dine egne
       data og sjekkes på nytt hele veien.</p></li>
   </ul>
-  <p class="liten" style="margin-top:1.2rem">Kilder blant annet: Sandbakk med flere 2025 (Sports Medicine – Open)
+  <p class="liten" style="margin-top:1.2rem">Kilder blant annet: Sandbakk med flere 2025 (Sports Medicine. Open)
   · «How much running is too much?» BJSM 2025 · Seiler &amp; Kjerland 2006 · trenerteamets
   egen fagbok om fjelløping</p>
 </section>
@@ -275,13 +288,31 @@
   <h2 id="faar-t">Som å ha en trener som ser hver økt</h2>
   <p>Andre apper venter på at du åpner dem. Treni sier fra selv,
   når det teller. Det er forskjellen på et verktøy og en tjeneste.</p>
+
+  <!-- 09.09: sida lovet og viste aldri. Denne boksen er selve produktet i fire
+       linjer: ikke en graf, men en dom. Tallene er konstruerte, aldri en ekte
+       løpers. -->
+  <figure class="bevis">
+    <figcaption>Slik ser det ut etter en økt</figcaption>
+    <div class="bevis-kort">
+      <p class="bevis-okt">Tirsdag · rolig tur · 7,1 km · 1 t 04 min</p>
+      <p class="bevis-dom"><span aria-hidden="true">✅</span> <b>Riktig utført.</b>
+        Snittpuls 133, mål til og med 135. 13 min lå i sone 2 eller høyere, som er
+        normalt på ditt nivå. Jo mer av turen som ligger i sone 1, jo mer overskudd
+        har du til kvalitetsøkta.</p>
+    </div>
+    <p class="bevis-under">Ingen graf å tolke. Du får svaret: var økta riktig, og
+      hva betyr den for resten av uka. Treneren din ser det samme.</p>
+  </figure>
   <ul class="liste" style="list-style:none; padding-left:0">
     <li><span style="font-size:1.45rem; margin-right:.5rem; vertical-align:-.2rem">📅</span><b>Ukens plan, klar før uka starter</b>: konkrete økter med fart, puls,
-        drag og pauser, bygget på uka du faktisk gjennomførte. Fullfører du uka
-        innen søndag kveld, ligger neste ukes plan hos deg samme kveld. Ellers
-        mandag morgen.</li>
+        drag og pauser, bygget på uka du faktisk gjennomførte. Lørdag spør vi
+        hvordan uka di blir. Har du ikke økt søndag, får du neste ukes plan
+        søndag kl. 12. Fullfører du uka innen søndag kveld, får du den samme
+        kveld. Ellers mandag morgen.</li>
     <li><span style="font-size:1.45rem; margin-right:.5rem; vertical-align:-.2rem">🔕</span><b>Oppfølging uten mas</b>: øktene dine leses hver dag, men du
-        hører fra oss når det teller. Ukens plan søndag kveld eller mandag morgen,
+        hører fra oss når det teller. Ukens plan søndag eller mandag morgen,
+        dagens økt kl. 07 på dager med økt (skru av eller flytt den selv),
         status torsdag, med ros
         når du treffer og en vennlig påminnelse når økta ble hardere enn planlagt.
         Resten av uka: ro. Og Min side når du selv vil kikke.</li>
@@ -292,7 +323,8 @@
         belastningen din i klartekst, hver økt med Trenis merknad, og neste
         ukes plan dag for dag. Bla uke for uke bakover. Hver uke får sin egen
         vurdering, med det som fungerte og det som bør endres.
-        Personlig lenke, oppdatert gjennom dagen.
+        Personlig lenke, oppdatert gjennom dagen. Legg den på hjemskjermen, så åpner den som en app
+        og varsler deg på telefonen når ny plan, melding fra treneren eller en ny økt er inne.
         <a href="min-side.html">Se hvordan den ser ut →</a></li>
     <li><span style="font-size:1.45rem; margin-right:.5rem; vertical-align:-.2rem">📅</span><b>Kalender, egne økter og styrke</b>: flytt økter selv med dra og slipp,
         legg inn styrke, terrengtur eller sykkel som egne økter, og se alt i samme plan.
@@ -301,7 +333,7 @@
         Treni kilometerne per par og sier fra når et par nærmer seg slutten.
         Før hvert løp får du skotips fra dine egne sko, vurdert mot distanse,
         underlag, løype og vær. Trenger du nye, melder du fra
-        med én knapp. Bestilling med partnerrabatt er på vei.</li>
+        med én knapp.</li>
     <li><span style="font-size:1.45rem; margin-right:.5rem; vertical-align:-.2rem">🔒</span><b>Dataene er dine</b>: de lagres hos trenerteamet, aldri hos andre, og selges aldri.
         Koble fra når som helst. <a href="personvern.html">Les personvernerklæringen</a>.</li>
   </ul>
@@ -314,7 +346,7 @@
     <img src="bilder/ebok.jpg" alt="Fjelløper på rygg i solnedgang, fjord og tinder bak" loading="lazy">
     <div>
       <p>Skrevet med <b>en av landets mest erfarne fjelløpere</b>, fysioterapeut og
-      VM-deltager i skyrunning. Kapittel 0 til 12 er publisert. Testløperne får kapitlene
+      VM-deltager i skyrunning. Kapittel 0 til 13 er publisert. Testløperne får kapitlene
       først, rett på sin egen side, med en liten quiz etter hvert kapittel før neste låses opp.</p>
       <ul class="ebok-kap" aria-label="Kapitler">
         <li>🧭 Treningsfilosofien</li>
@@ -331,6 +363,7 @@
         <li>🧩 Treningsplanlegging</li>
         <li>🍂 Ny fjelløpssesong</li>
         <li>🏆 Konkurransesesong og formtopping</li>
+        <li>🥤 Ernæring under konkurranse</li>
       </ul>
     </div>
   </div>
@@ -375,8 +408,8 @@
       <p class="kicker">Status nå</p>
       <h2 style="font-size:1.35rem">Piloten kjører</h2>
       <div class="en-blokk">
-        <p><b>10 løpere</b> er i full drift: vei, bane, terreng og ultra.</p>
-        <p><b>Ventelista</b> er åpen, og 8 løpere står klare. Alle på ventelista får sin egen side med en plan bygget på svarene sine, og ukene kan justeres mens de venter.</p>
+        <p><b><span data-antall="lopere">19</span> løpere</b> er i gang: vei, bane, terreng og ultra.</p>
+        <p><b>Ingen venteliste.</b> Melder du deg, får du din egen side fra dag én, og planen så snart klokka er koblet og historikken er inne.</p>
         <p><b>Gratis i piloten</b>: testerne former produktet sammen med oss.</p>
       </div>
     </div>
@@ -386,10 +419,10 @@
 <section aria-label="Bli med">
   <div class="avslutt">
     <h2>Vil du være med fra starten?</h2>
-    <p>Løpere setter seg på ventelista. Samarbeidspartnere tar kontakt direkte.
+    <p>Løpere melder seg direkte. Samarbeidspartnere tar kontakt.
       Begge deler er uforpliktende.</p>
     <div class="knapper" style="justify-content:center">
-      <a class="btn" href="bli-testloper.php">Jeg er løper, sett meg på lista</a>
+      <a class="btn" href="bli-testloper.php">Jeg er løper, meld meg på</a>
       <a class="btn" href="samarbeid.php">Vi vil samarbeide →</a>
     </div>
   </div>
@@ -412,9 +445,17 @@
   </nav>
   <p>PAULSEN UTVIKLING · org.nr 938 158 614 · Norge ·
      <a href="mailto:hei@treni.no">hei@treni.no</a></p>
-  <p>Powered by Strava — this service is not affiliated with or endorsed by Strava.</p>
+  <p>Powered by Strava. This service is not affiliated with or endorsed by Strava.</p>
 </footer>
 
 </main>
+<script>
+// A-7 (11.09.2026): løpertallet hentes live fra antall.json (skrives av morgenkjøringen),
+// teksten i HTML er bare reserve hvis fila ikke svarer.
+fetch('/antall.json?t=' + Math.floor(Date.now() / 3600000)).then(r => r.ok ? r.json() : null).then(d => {
+  if (d && d.lopere) document.querySelectorAll('[data-antall="lopere"]').forEach(e => { e.textContent = d.lopere; });
+}).catch(() => {});
+</script>
+<script src="/banner.js?v=1" defer></script>
 </body>
 </html>

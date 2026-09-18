@@ -1,0 +1,87 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Treni//Rett Nord 2026//NO
+CALSCALE:GREGORIAN
+X-WR-CALNAME:Rett Nord 2026
+X-WR-TIMEZONE:Europe/Oslo
+BEGIN:VEVENT
+UID:rettnord-2026-1@treni.no
+DTSTAMP:20260918T120000Z
+DTSTART;TZID=Europe/Oslo:20260428T173000
+DTEND;TZID=Europe/Oslo:20260428T190000
+SUMMARY:Bygdeløpet 1: Mosvolddalen coopertest
+LOCATION:Mosvolddalen, Ørnes
+DESCRIPTION:Barn 17:30, voksne 18:00. Gratis, ingen påmelding. Mer på treni.no/rettnord
+URL:https://treni.no/rettnord/
+END:VEVENT
+BEGIN:VEVENT
+UID:rettnord-2026-2@treni.no
+DTSTAMP:20260918T120000Z
+DTSTART;TZID=Europe/Oslo:20260512T173000
+DTEND;TZID=Europe/Oslo:20260512T190000
+SUMMARY:Bygdeløpet 2: Sollivannet rundt
+LOCATION:Sollivannet, Glomfjord
+DESCRIPTION:Barn 300 m 17:30, voksne 2,5 km 18:00. Gratis. Mer på treni.no/rettnord
+URL:https://treni.no/rettnord/
+END:VEVENT
+BEGIN:VEVENT
+UID:rettnord-2026-3@treni.no
+DTSTAMP:20260918T120000Z
+DTSTART;TZID=Europe/Oslo:20260524T120000
+DTEND;TZID=Europe/Oslo:20260524T150000
+SUMMARY:Motbakkecupen 1: Horntinden opp
+LOCATION:Horntinden, Reipå
+DESCRIPTION:Den spektakulære. Mer på treni.no/rettnord
+URL:https://treni.no/rettnord/
+END:VEVENT
+BEGIN:VEVENT
+UID:rettnord-2026-4@treni.no
+DTSTAMP:20260918T120000Z
+DTSTART;TZID=Europe/Oslo:20260606T080000
+DTEND;TZID=Europe/Oslo:20260606T235900
+SUMMARY:Kua Ultra, Kobben Halv, Kobben Mila, Storvika rundt
+LOCATION:Ungdomshuset, Storvika
+DESCRIPTION:Start 08:00 (70 km), 13:00 Hornneset (23 km), 14:00 Mevik (8,6 km), 14:30 Storvika rundt. Mer på treni.no/rettnord
+URL:https://treni.no/rettnord/
+END:VEVENT
+BEGIN:VEVENT
+UID:rettnord-2026-5@treni.no
+DTSTAMP:20260918T120000Z
+DTSTART;TZID=Europe/Oslo:20260718T120000
+DTEND;TZID=Europe/Oslo:20260718T150000
+SUMMARY:Motbakkecupen 2: Stolheisen opp
+LOCATION:Glomfjord alpinsenter
+DESCRIPTION:Den alt for bratte. Mer på treni.no/rettnord
+URL:https://treni.no/rettnord/
+END:VEVENT
+BEGIN:VEVENT
+UID:rettnord-2026-6@treni.no
+DTSTAMP:20260918T120000Z
+DTSTART;TZID=Europe/Oslo:20260901T173000
+DTEND;TZID=Europe/Oslo:20260901T190000
+SUMMARY:Bygdeløpet 3: Mosvolddalen coopertest
+LOCATION:Mosvolddalen, Ørnes
+DESCRIPTION:Barn 17:30, voksne 18:00. Gratis. Mer på treni.no/rettnord
+URL:https://treni.no/rettnord/
+END:VEVENT
+BEGIN:VEVENT
+UID:rettnord-2026-7@treni.no
+DTSTAMP:20260918T120000Z
+DTSTART;TZID=Europe/Oslo:20260912T110000
+DTEND;TZID=Europe/Oslo:20260912T140000
+SUMMARY:Motbakkecupen 3: Nordhesten opp
+LOCATION:Nordhesten, Ørnes
+DESCRIPTION:Den store finalen. Mer på treni.no/rettnord
+URL:https://treni.no/rettnord/
+END:VEVENT
+BEGIN:VEVENT
+UID:rettnord-2026-8@treni.no
+DTSTAMP:20260918T120000Z
+DTSTART;TZID=Europe/Oslo:20260919T110000
+DTEND;TZID=Europe/Oslo:20260919T150000
+SUMMARY:Tour de Ørnes
+LOCATION:Ørnes
+DESCRIPTION:19 km, 900 høydemeter. Start kl. 11. Mer på treni.no/rettnord
+URL:https://treni.no/rettnord/
+END:VEVENT
+END:VCALENDAR

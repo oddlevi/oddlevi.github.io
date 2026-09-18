@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Skjervøy 20:1000 resultater</title>
+<meta name="description" content="Fullstendige resultater fra Skjervøy 20:1000 og 10:500: plass, klasse, tid, bak leder, tempo og mellomtider ved hver post. Filtrer på klasse, kjønn og klubb.">
+<meta property="og:title" content="Skjervøy 20:1000 resultater">
+<meta property="og:description" content="Alle løperne med tid, plass i klassen og mellomtider fra Stussnes, Skattørfjellet, Lailafjellet, Trollet og SIK-huset.">
+<meta property="og:image" content="https://treni.no/skjervoy/og.jpg">
+<meta property="og:url" content="https://treni.no/skjervoy/resultater/">
+<meta name="theme-color" content="#123d2a">
+<link rel="icon" href="/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700;800&family=Inter+Tight:wght@400;500;600&display=swap">
+<style>
+:root{--bg:hsl(44 45% 97%);--fg:hsl(160 28% 9%);--muted:hsl(158 10% 36%);--surface:#fff;--border:hsl(148 15% 84%);--primary:hsl(152 62% 20%);--accent:hsl(84 80% 34%);--accent2:hsl(84 85% 88%);--radius:14px;--disp:"Sora",system-ui,sans-serif;--sans:"Inter Tight",system-ui,sans-serif}
+*{box-sizing:border-box}html,body{margin:0}body{background:var(--bg);color:var(--fg);font:16px/1.45 var(--sans)}
+header{background:linear-gradient(120deg,hsl(160 28% 9%) 20%,var(--primary) 70%,hsl(84 60% 25%) 115%);color:#fff;padding:1.1rem 1rem 1rem}
+.wrap{max-width:760px;margin:0 auto}
+.merke{font:800 .8rem var(--disp);letter-spacing:.08em;text-transform:uppercase;opacity:.85}.merke b{color:hsl(84 80% 60%)}
+h1{font:800 clamp(1.5rem,5.5vw,2.1rem)/1.1 var(--disp);margin:.3rem 0 .2rem;text-wrap:balance}
+.status{font-size:.9rem;opacity:.9;display:flex;flex-wrap:wrap;gap:.3rem 1rem}
+.meny{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.9rem;background:rgba(255,255,255,.1);border-radius:99px;padding:.25rem}.meny a{flex:1 1 30%;text-align:center;border-radius:99px;padding:.5rem .4rem;font:700 .9rem var(--disp);color:#fff;text-decoration:none}
+.meny a[aria-current=page]{background:#fff;color:var(--primary)}.meny2{margin-top:.5rem}
+.faner{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.7rem}.faner button{flex:1 1 40%;border:1.5px solid rgba(255,255,255,.35);background:rgba(255,255,255,.08);color:#fff;border-radius:99px;padding:.5rem .8rem;font:700 .95rem var(--disp);cursor:pointer}
+.faner button[aria-selected=true]{background:#fff;color:var(--primary);border-color:#fff}
+main{padding:1rem}section{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:.9rem 1rem;margin:0 0 .9rem}
+h2{font:700 1rem var(--disp);margin:0 0 .6rem}
+.filtre{display:grid;grid-template-columns:1fr;gap:.6rem}
+@media (min-width:640px){.filtre{grid-template-columns:1fr 1fr}}
+.sok input,.sok select{width:100%;border:1.5px solid var(--border);border-radius:99px;padding:.55rem .95rem;font:inherit;background:var(--bg);color:var(--fg);-webkit-appearance:none}
+.sok input:focus,.sok select:focus{outline:2px solid var(--accent);outline-offset:1px}
+.chips{display:flex;flex-wrap:wrap;gap:.35rem}.chips button{border:1.5px solid var(--border);background:var(--surface);color:var(--fg);border-radius:99px;padding:.28rem .7rem;font:600 .8rem var(--sans);cursor:pointer}
+.chips button[aria-pressed=true]{background:var(--primary);color:#fff;border-color:var(--primary)}.chips button small{opacity:.7;font-weight:500}
+.tabell{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:.88rem;font-variant-numeric:tabular-nums}
+th{text-align:left;font:600 .7rem var(--sans);text-transform:uppercase;letter-spacing:.05em;color:var(--muted);padding:.3rem .35rem;border-bottom:1.5px solid var(--border);white-space:nowrap;cursor:pointer;user-select:none}
+th[aria-sort=ascending]::after{content:" ↑"}th[aria-sort=descending]::after{content:" ↓"}
+td{padding:.35rem .35rem;border-top:1px solid var(--border);vertical-align:top}
+td.t,th.t{text-align:right;white-space:nowrap}
+tr.rad{cursor:pointer}tr.rad:hover td{background:var(--accent2)}
+.pl{display:inline-block;min-width:1.7rem;text-align:center;border-radius:6px;background:var(--accent2);color:var(--fg);font-weight:700;font-size:.82rem;padding:.05rem .3rem}
+.pl.g{background:hsl(45 95% 55%)}.pl.s{background:hsl(0 0% 85%)}.pl.b{background:hsl(28 60% 70%)}
+.navn{font-weight:700}.sub{display:block;font-size:.76rem;color:var(--muted)}
+.st{font:600 .72rem var(--sans);border-radius:6px;padding:.05rem .4rem;background:var(--border)}.st.dnf{background:hsl(8 70% 88%)}.st.dns{background:var(--border)}.st.under{background:hsl(45 95% 80%)}
+tr.mellom td{background:var(--bg);padding:.5rem .6rem}
+.split{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:.4rem}.split div{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:.4rem .5rem}
+.split b{display:block;font:800 1rem var(--disp);font-variant-numeric:tabular-nums}.split span{font-size:.72rem;color:var(--muted)}
+.tom{color:var(--muted);font-size:.9rem;margin:.2rem 0}
+.del{display:inline-block;margin-top:.5rem;border:1.5px solid var(--border);background:var(--surface);border-radius:99px;padding:.4rem .9rem;font:600 .85rem var(--sans);color:var(--fg);text-decoration:none;cursor:pointer}
+.tellere{display:flex;flex-wrap:wrap;gap:.3rem 1rem;font-size:.85rem;color:var(--muted);margin:0 0 .6rem}.tellere b{color:var(--fg)}
+footer{color:var(--muted);font-size:.8rem;text-align:center;padding:.5rem 1rem 2rem}footer a{color:var(--primary)}
+.mer{display:block;width:100%;margin-top:.6rem;border:1.5px solid var(--border);background:var(--surface);border-radius:99px;padding:.55rem;font:700 .9rem var(--disp);color:var(--primary);cursor:pointer}
+@media (max-width:640px){.skjul-m{display:none}}
+@media (prefers-color-scheme:dark){:root{color-scheme:dark;--bg:hsl(160 20% 8%);--fg:hsl(44 30% 94%);--muted:hsl(150 10% 65%);--surface:hsl(158 18% 12%);--border:hsl(155 12% 22%);--accent2:hsl(84 40% 22%)}.pl.s{background:hsl(0 0% 40%)}.st.dnf{background:hsl(8 40% 30%)}.st.under{background:hsl(45 50% 30%)}}
+.banner{position:sticky;bottom:0;z-index:50;display:flex;align-items:center;gap:.8rem;margin:.5rem auto 0;max-width:760px;background:linear-gradient(120deg,hsl(160 28% 9%),var(--primary));color:#fff;text-decoration:none;padding:.65rem 1rem;border-radius:14px 14px 0 0;box-shadow:0 -6px 24px rgba(0,0,0,.25)}
+.banner .b-venstre{display:flex;flex-direction:column;gap:.1rem;min-width:0;flex:1}.banner .b-merke{font:800 1.2rem var(--disp)}.banner .b-merke b{color:hsl(84 80% 60%)}.banner .b-tekst{font-size:.8rem;line-height:1.25;opacity:.92}
+.banner .b-cta{flex:0 0 auto;background:hsl(84 80% 60%);color:hsl(160 28% 9%);font:800 1rem var(--disp);padding:.75rem 1.1rem;border-radius:99px;white-space:nowrap;box-shadow:0 4px 14px rgba(0,0,0,.25)}
+@media (max-width:420px){.banner .b-tekst{font-size:.74rem}.banner .b-cta{font-size:.92rem;padding:.7rem .9rem}}
+body{padding-bottom:.5rem}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <div class="merke">Treni<b>.</b> direkte</div>
+  <h1 id="tittel">Skjervøy 20:1000, resultater</h1>
+  <div class="status"><span id="oppdatert">henter …</span><span id="tall"></span></div>
+  <nav class="meny" aria-label="Visning">
+    <a href="https://treni.no/skjervoy/#alle">Direkte</a>
+    <a href="https://treni.no/skjervoy/resultater/" aria-current="page">Resultater</a>
+    <a href="https://treni.no/direkte/" target="_blank" rel="noopener">For arrangører</a>
+  </nav>
+  <nav class="meny meny2" aria-label="Visning">
+    <a href="https://treni.no/skjervoy/#alle">Alle løperne</a>
+    <a href="https://treni.no/skjervoy/#tlk">Tromsø Løpeklubb</a>
+    <a href="https://treni.no/skjervoy/#tider">Passeringstider</a>
+  </nav>
+  <div class="faner" role="tablist" id="faner">
+    <button role="tab" aria-selected="true" data-etappe="306458">20:1000</button>
+    <button role="tab" aria-selected="false" data-etappe="306460">10:500</button>
+    <button role="tab" aria-selected="false" data-etappe="306459">20:1000 trim</button>
+    <button role="tab" aria-selected="false" data-etappe="306461">10:500 trim</button>
+    <button role="tab" aria-selected="false" data-etappe="alle" style="flex-basis:100%">Alle løperne, søk på tvers av klassene</button>
+  </div>
+</div></header>
+<main class="wrap">
+  <section>
+    <div class="filtre">
+      <div class="sok"><input id="q" type="search" placeholder="Søk navn, startnummer eller klubb" autocomplete="off" inputmode="search"></div>
+      <div class="sok"><select id="klubb"><option value="">Alle klubber</option></select></div>
+    </div>
+    <div class="chips" id="kjonn" style="margin-top:.6rem" aria-label="Kjønn">
+      <button data-kj="" aria-pressed="true">Alle</button><button data-kj="K" aria-pressed="false">Kvinner</button><button data-kj="M" aria-pressed="false">Menn</button>
+    </div>
+    <div class="chips" id="klasser" style="margin-top:.5rem" aria-label="Klasse"></div>
+  </section>
+  <section>
+    <div class="tellere" id="tellere"></div>
+    <div class="tabell">
+      <table id="res">
+        <thead><tr>
+          <th data-sort="plass" class="t">#</th>
+          <th data-sort="plass_kl" class="t">Kl.</th>
+          <th data-sort="startnr" class="t skjul-m">Nr</th>
+          <th data-sort="navn">Løper</th>
+          <th data-sort="klasse" class="skjul-m">Klasse</th>
+          <th data-sort="sek" class="t">Tid</th>
+          <th data-sort="bak" class="t skjul-m">Bak</th>
+          <th data-sort="tempo" class="t skjul-m">Min/km</th>
+        </tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <p class="tom" id="tom">Henter resultater …</p>
+    <button class="mer" id="mer" hidden>Vis flere</button>
+  </section>
+  <p style="text-align:center"><a class="del" id="delknapp">📣 Del</a> <a class="del" id="csv">⬇️ Last ned CSV</a> <a class="del" href="https://live.eqtiming.com/74108" target="_blank" rel="noopener">EQ Timing ↗</a></p>
+</main>
+<a class="banner" href="https://treni.no/bli-testloper.php?kilde=skjervoy_resultater" target="_blank" rel="noopener" onclick="window.logg&&window.logg('ut',{'mål':'banner'})">
+  <span class="b-venstre"><span class="b-merke">Treni<b>.</b></span><span class="b-tekst">Treneren som ser hver økt. Løpeplan hver uke, ekte trener bak.</span></span>
+  <span class="b-cta">Prøv Treni gratis →</span>
+</a>
+<footer>Tider fra EQ Timing. Plasser regnes på gyldige målganger (alle poster passert). Laget av <a href="https://treni.no">Treni.no</a>, treneren som ser hver økt.</footer>
+<script>
+(function(){
+  var API='../data.php?', etappe='306458', data=null, vis=200, sortK='plass', sortR=1, apne={};
+  var f={q:'',klubb:'',kj:'',klasser:[]};
+  function hentParam(){ var p=new URLSearchParams(location.search); if(p.get('etappe')) etappe=p.get('etappe'); f.q=p.get('q')||''; f.klubb=p.get('klubb')||''; f.kj=p.get('kj')||''; f.klasser=(p.get('klasser')||'').split(',').filter(Boolean); }
+  function settParam(){ var p=new URLSearchParams(); if(String(etappe)!=='306458')p.set('etappe',etappe); if(f.q)p.set('q',f.q); if(f.klubb)p.set('klubb',f.klubb); if(f.kj)p.set('kj',f.kj); if(f.klasser.length)p.set('klasser',f.klasser.join(',')); history.replaceState(null,'',location.pathname+(p.toString()?'?'+p:'')); }
+  function fmt(s){ s=Math.round(s); return s>=3600?Math.floor(s/3600)+':'+String(Math.floor(s%3600/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0'):Math.floor(s/60)+':'+String(s%60).padStart(2,'0'); }
+  function tempo(t){ if(!t)return ''; var m=Math.floor(t), s=Math.round((t-m)*60); if(s===60){m++;s=0;} return m+':'+String(s).padStart(2,'0'); }
+  function esc(s){ return String(s||'').replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+  function plKl(n){ return n?'<span class="pl'+(n===1?' g':n===2?' s':n===3?' b':'')+'">'+n+'</span>':''; }
+  function status(r){ return r.status==='TIME'?'':'<span class="st '+(r.status==='DNF'?'dnf':r.status==='UNDERVEIS'?'under':'dns')+'">'+(r.status==='UNDERVEIS'?'underveis':r.status)+'</span>'; }
+  function last(){
+    document.getElementById('oppdatert').textContent='henter …';
+    fetch(API+'visning=resultater&etappe='+etappe+'&_='+Date.now()).then(function(r){return r.json();}).then(function(d){
+      data=d; vis=200;
+      document.getElementById('tittel').textContent=(d.lop||'Skjervøy 20:1000').replace(/ - \d{4}$/,'')+', resultater';
+      document.getElementById('oppdatert').textContent='oppdatert '+new Date(d.hentet).toLocaleTimeString('no',{hour:'2-digit',minute:'2-digit'});
+      document.getElementById('tall').textContent=d.alle?(d.etappe.paameldt+' påmeldte i alle etapper, '+d.etappe.fullfort+' i mål. Søk på tvers av klasser og etapper.'):(d.etappe.navn+', '+d.etappe.km+' km: '+d.etappe.fullfort+' av '+d.etappe.paameldt+' i mål'); if(d.alle&&sortK==='plass'){sortK='navn';sortR=1;}
+      var kl=document.getElementById('klasser'); kl.innerHTML='';
+      d.klasser.forEach(function(k){ var b=document.createElement('button'); b.innerHTML=esc(k.navn)+' <small>'+k.antall+'</small>'; b.setAttribute('aria-pressed',f.klasser.indexOf(k.navn)>=0?'true':'false');
+        b.onclick=function(){ var i=f.klasser.indexOf(k.navn); if(i>=0)f.klasser.splice(i,1); else f.klasser.push(k.navn); b.setAttribute('aria-pressed',i>=0?'false':'true'); vis=200; tegn(); }; kl.appendChild(b); });
+      var sel=document.getElementById('klubb'); sel.innerHTML='<option value="">Alle klubber</option>';
+      d.klubber.forEach(function(k){ var o=document.createElement('option'); o.value=k.navn; o.textContent=k.navn+' ('+k.antall+')'; if(k.navn===f.klubb)o.selected=true; sel.appendChild(o); });
+      tegn();
+    }).catch(function(){ document.getElementById('oppdatert').textContent='fikk ikke hentet resultatene, prøver igjen'; });
+  }
+  function filtrert(){
+    var q=f.q.toLowerCase().trim();
+    return data.rader.filter(function(r){
+      if(f.kj&&r.kjonn!==f.kj)return false;
+      if(f.klubb&&r.klubb!==f.klubb)return false;
+      if(f.klasser.length&&f.klasser.indexOf(r.klasse)<0)return false;
+      if(q&&!(r.navn.toLowerCase().indexOf(q)>=0||String(r.startnr)===q||(r.klubb||'').toLowerCase().indexOf(q)>=0))return false;
+      return true;
+    });
+  }
+  function sorter(a){
+    var rang={TIME:0,UNDERVEIS:1,DNF:2,DSQ:3,DNS:4};
+    return a.sort(function(x,y){
+      if(x.status!==y.status&&(sortK==='plass'||sortK==='plass_kl'||sortK==='sek'||sortK==='bak'||sortK==='tempo'))return (x.status in rang?rang[x.status]:9)-(y.status in rang?rang[y.status]:9);
+      var vx=x[sortK], vy=y[sortK]; if(typeof vx==='string')return sortR*vx.localeCompare(vy,'no');
+      if(!vx&&vy)return 1; if(vx&&!vy)return -1; return sortR*((vx||0)-(vy||0));
+    });
+  }
+  function tegn(){
+    if(!data)return; settParam();
+    var rader=sorter(filtrert()), tb=document.querySelector('#res tbody'), h='', klassefilter=f.klasser.length===1;
+    var poster=data.poster||[];
+    rader.slice(0,vis).forEach(function(r){
+      var pl=klassefilter?r.plass_kl:r.plass, bak=klassefilter?r.bak_kl:r.bak;
+      h+='<tr class="rad" data-ed="'+r.ed+'"><td class="t">'+(r.status==='TIME'?plKl(pl):status(r))+'</td><td class="t">'+(r.status==='TIME'?r.plass_kl:'')+'</td><td class="t skjul-m">'+r.startnr+'</td>'
+        +'<td><span class="navn">'+esc(r.navn)+'</span><span class="sub">'+esc(r.klubb||'')+(window.innerWidth<=640?(r.klubb?' · ':'')+esc(r.klasse):'')+(data.alle?(r.klubb||window.innerWidth<=640?' · ':'')+esc(r.etappe_navn||''):'')+'</span></td>'
+        +'<td class="skjul-m">'+esc(r.klasse)+'</td><td class="t"><b>'+(r.tid||'')+'</b></td><td class="t skjul-m">'+(r.status==='TIME'&&bak?'+'+fmt(bak):'')+'</td><td class="t skjul-m">'+tempo(r.tempo)+'</td></tr>';
+      if(apne[r.ed]){
+        var sp=''; var poster=data.alle?(data.poster_per_etappe[r.etappe]||[]):(data.poster||[]);
+        poster.forEach(function(p,i){ var m=r.mellom[i]; sp+='<div><span>'+esc(p.navn)+' · '+p.km+' km</span><b>'+(m?m.tid:'–')+'</b><span>'+(m?'plass '+m.plass:'ingen passering')+'</span></div>'; });
+        sp+='<div><span>Mål'+(data.alle?' · '+esc(r.etappe_navn||''):' · '+data.etappe.km+' km')+'</span><b>'+(r.tid||'–')+'</b><span>'+(r.status==='TIME'?'plass '+r.plass+', '+r.plass_kl+' i klassen':r.status.toLowerCase())+'</span></div>';
+        h+='<tr class="mellom"><td colspan="8"><div class="split">'+sp+'</div></td></tr>';
+      }
+    });
+    tb.innerHTML=h;
+    document.getElementById('tom').hidden=rader.length>0; document.getElementById('tom').textContent='Ingen løpere passer filteret.';
+    document.getElementById('mer').hidden=rader.length<=vis; document.getElementById('mer').textContent='Vis flere ('+(rader.length-vis)+' til)';
+    var iMaal=rader.filter(function(r){return r.status==='TIME';}).length, dnf=rader.filter(function(r){return r.status==='DNF';}).length, dns=rader.filter(function(r){return r.status==='DNS';}).length;
+    document.getElementById('tellere').innerHTML='<span><b>'+rader.length+'</b> løpere</span><span><b>'+iMaal+'</b> i mål</span>'+(dnf?'<span><b>'+dnf+'</b> brutt</span>':'')+(dns?'<span><b>'+dns+'</b> ikke startet</span>':'')+(klassefilter?'<span>plass og bak leder gjelder klassen</span>':'');
+    document.querySelectorAll('#res th').forEach(function(th){ th.setAttribute('aria-sort',th.dataset.sort===sortK?(sortR>0?'ascending':'descending'):'none'); });
+    tb.querySelectorAll('tr.rad').forEach(function(tr){ tr.onclick=function(){ var ed=tr.dataset.ed; apne[ed]=!apne[ed]; tegn(); }; });
+  }
+  document.getElementById('q').oninput=function(e){ f.q=e.target.value; vis=200; tegn(); };
+  document.getElementById('klubb').onchange=function(e){ f.klubb=e.target.value; vis=200; tegn(); };
+  document.querySelectorAll('#kjonn button').forEach(function(b){ b.onclick=function(){ f.kj=b.dataset.kj; document.querySelectorAll('#kjonn button').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false');}); vis=200; tegn(); }; });
+  document.querySelectorAll('#res th').forEach(function(th){ th.onclick=function(){ var k=th.dataset.sort; if(sortK===k)sortR=-sortR; else {sortK=k; sortR=1;} tegn(); }; });
+  document.getElementById('mer').onclick=function(){ vis+=200; tegn(); };
+  document.querySelectorAll('#faner button').forEach(function(b){ b.onclick=function(){ etappe=b.dataset.etappe; document.querySelectorAll('#faner button').forEach(function(x){x.setAttribute('aria-selected',x===b?'true':'false');}); f.klasser=[]; apne={}; last(); }; });
+  document.getElementById('delknapp').onclick=function(){ var u=location.href; if(navigator.share){navigator.share({title:document.title,url:u});} else {navigator.clipboard&&navigator.clipboard.writeText(u); this.textContent='✅ Lenke kopiert';} };
+  document.getElementById('csv').onclick=function(e){ e.preventDefault(); if(!data)return; var poster=data.poster||[]; var linjer=[['Plass','Plass klasse','Startnr','Navn','Klubb','Klasse','Status','Tid','Bak','Min/km'].concat(poster.map(function(p){return p.navn+' '+p.km+' km';})).join(';')];
+    sorter(filtrert()).forEach(function(r){ linjer.push([r.plass||'',r.plass_kl||'',r.startnr,r.navn,r.klubb||'',r.klasse,r.status,r.tid||'',r.status==='TIME'&&r.bak?fmt(r.bak):'',tempo(r.tempo)].concat(r.mellom.map(function(m){return m?m.tid:'';})).map(function(v){return '"'+String(v).replace(/"/g,'""')+'"';}).join(';')); });
+    var blob=new Blob(['﻿'+linjer.join('\n')],{type:'text/csv;charset=utf-8'}), a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='skjervoy_'+etappe+'_resultater.csv'; document.body.appendChild(a); a.click(); a.remove(); };
+  hentParam();
+  document.getElementById('q').value=f.q;
+  document.querySelectorAll('#kjonn button').forEach(function(x){x.setAttribute('aria-pressed',x.dataset.kj===f.kj?'true':'false');});
+  document.querySelectorAll('#faner button').forEach(function(x){x.setAttribute('aria-selected',x.dataset.etappe===String(etappe)?'true':'false');});
+  last(); setInterval(last,120000);
+})();
+</script>
+</body>
+</html>

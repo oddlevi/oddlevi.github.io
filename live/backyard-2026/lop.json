@@ -1,0 +1,24 @@
+{
+ "slug": "backyard-2026",
+ "navn": "Tromsø Backyard Ultra",
+ "dato": "2026-10-03",
+ "sted": "Tromsø",
+ "event": 80744,
+ "etapper": [
+  {
+   "uid": 329623,
+   "navn": "Backyard 24t",
+   "kort": "Backyard 24t"
+  }
+ ],
+ "referanse": {
+  "event": 77914,
+  "etapper": {
+   "319767": "Backyard 12t"
+  }
+ },
+ "type": "backyard",
+ "runde_km": 6.7,
+ "klubb": "Tromsø Løpeklubb",
+ "klubb_ekstra": {}
+}

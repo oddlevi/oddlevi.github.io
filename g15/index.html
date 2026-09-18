@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Løping for fotball — G15 | Treni</title>
+<title>Løping for fotball · G15 | Treni</title>
 <meta name="description" content="Stikkord fra løpetreninga: soner uten pulsklokke, ukeplan med fotball + løping, styrke og FIFA 11+.">
 <meta name="robots" content="noindex">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚽</text></svg>">
@@ -197,6 +197,12 @@
   footer{margin-top:2.6rem;padding-top:1.2rem;border-top:1px solid var(--line);
     font-size:.8rem;color:var(--muted)}
   @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+  .toppknapp{display:inline-flex;flex-direction:column;align-items:center;gap:.15rem;text-align:center;
+    background:var(--lime);color:hsl(140 40% 10%);text-decoration:none;font-weight:750;font-size:1.1rem;
+    padding:.85rem 1.6rem;border-radius:14px;box-shadow:0 6px 20px -8px hsl(0 0% 0% / .5)}
+  .toppknapp span{font-weight:500;font-size:.8rem;opacity:.85}
+  .toppknapp:hover{filter:brightness(1.08)}
+  @media (max-width:520px){.toppknapp{display:flex;font-size:1.02rem}}
 </style>
 </head>
 <body>
@@ -205,8 +211,10 @@
     <span class="ball">⚽</span>
     <p class="topp">Løpetrening · G15</p>
     <h1>Løp deg bedre i fotball.</h1>
-    <p>Stikkordene fra økta — sånn bruker du løping til å bli en bedre
+    <p>Stikkordene fra økta, sånn bruker du løping til å bli en bedre
       fotballspiller, uten å slite deg ut.</p>
+    <p style="margin:1.2rem 0 0"><a class="toppknapp" href="/g15/styrke.html">💪 Styrkeøvelsene
+      <span>Økt A og B · alle øvelsene med video</span></a></p>
   </div>
 </header>
 
@@ -235,7 +243,14 @@
       .chip.rolig{background:color-mix(in srgb,#1565c0 16%,transparent);color:#1565c0}
       .chip.intervall{background:color-mix(in srgb,#ef6c00 18%,transparent);color:#ef6c00}
       .chip.hvile{background:color-mix(in srgb,var(--fg) 8%,transparent);color:var(--muted)}
+      .chip.styrke{background:color-mix(in srgb,var(--lime) 26%,transparent);color:var(--fg);
+        border-color:color-mix(in srgb,var(--lime) 45%,transparent);text-decoration:none;margin-left:.3rem}
+      a.chip.styrke:hover{background:color-mix(in srgb,var(--lime) 40%,transparent)}
       .plan-merk{font-size:.85rem;color:var(--muted);margin:.4rem 0 0}
+      .ukefokus{display:flex;flex-wrap:wrap;align-items:baseline;gap:.5rem;margin:.1rem 0 .5rem;
+        font-weight:650;font-size:.95rem;color:var(--fg)}
+      .ukefokus span{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.09em;text-transform:uppercase;
+        padding:.15rem .5rem;border-radius:999px;background:color-mix(in srgb,var(--lime) 22%,transparent);color:var(--fg)}
       @media (max-width:520px){.plan-uke td.dag{width:3.4rem;font-size:.62rem}.plan-uke td{padding:.45rem .25rem}}
     </style>
     <script>
@@ -251,12 +266,16 @@
         var ut='';
         p.uker.forEach(function(u){
           ut+='<div class="plan-uke"><h3>Uke '+u.uke+' <span style="font-weight:400;color:var(--muted)">'+pen(u.fra)+' til '+pen(u.til)+'</span></h3>';
+          if(u.fokus){ut+='<p class="ukefokus"><span>Fokus denne uka</span>'+u.fokus+'</p>';}
           ut+='<p class="meta">'+u.fotballdager+' fotballdag'+(u.fotballdager===1?'':'er')+(u.kamper?' · '+u.kamper+' kamp'+(u.kamper===1?'':'er'):'')+' · '+u.lopeokter+' løpeøkt'+(u.lopeokter===1?'':'er')+' · '+u.regel+'</p>';
           ut+='<table>';
           u.dager.forEach(function(d){
             var tid=[d.tid,d.sted].filter(Boolean).join(' · ');
+            // Styrke får egen brikke (Odd 07.09), lenket rett til øktene
+            var stk = /styrke/i.test((d.tekst||'')+' '+(d.navn||''))
+              ? '<a class="chip styrke" href="/g15/styrke.html">💪 Styrke</a>' : '';
             ut+='<tr class="'+(d.gjennomfort?'gjort':'')+'"><td class="dag">'+d.ukedag.slice(0,3)+'<br>'+d.dato.slice(8,10)+'.'+d.dato.slice(5,7)+'</td>'
-              +'<td class="okt">'+chip(d.type)+'<b>'+d.navn+'</b>'+(tid?'<small>'+tid+'</small>':'')+(d.tekst?'<small>'+d.tekst+'</small>':'')+'</td></tr>';
+              +'<td class="okt">'+chip(d.type)+stk+'<b>'+d.navn+'</b>'+(tid?'<small>'+tid+'</small>':'')+(d.tekst?'<small>'+d.tekst+'</small>':'')+'</td></tr>';
           });
           ut+='</table>'+(u.merknad?'<p class="plan-merk">'+u.merknad+'</p>':'')+'</div>';
         });
@@ -271,11 +290,11 @@
   <section id="sporsmal">
     <div class="innspill">
     <p class="kick">✍️ Før økta</p>
-    <h2>Still spørsmål — eller fortell hvordan du trener</h2>
+    <h2>Still spørsmål, eller fortell hvordan du trener</h2>
     <p style="color:var(--muted);font-size:.95rem">Lurer du på noe om løping?
-      Eller trener du noe utenom fotballen — løping, gym, annen idrett?
+      Eller trener du noe utenom fotballen, løping, gym, annen idrett?
       Skriv et par linjer, så blir løpetipsene bedre tilpassa dere.
-      Vær ærlig — trener du ikke noe utenom fotballen, er det også et svar
+      Vær ærlig, trener du ikke noe utenom fotballen, er det også et svar
       som er gull å vite om. Svarene går bare til treneren.</p>
     <div class="takk" id="takk"><b>Takk!</b> Svaret ditt er sendt til treneren. 👍</div>
     <form class="sporsmal" id="skjema" method="post" action="/g15/svar.php">
@@ -298,20 +317,20 @@
     <div class="fokus">
       <span class="merke">FOKUSET</span>
       <span class="t">2</span>
-      <p><b>løpeøkter — som det er plass til</b> — det er dem denne siden handler om.</p>
+      <p><b>løpeøkter, som det er plass til</b>: det er dem denne siden handler om.</p>
     </div>
     <div class="obs">
       <p><b>⚠️ Har dere 3 treninger + kamp ei uke?</b> Da er det plass til
-      1 rolig løpeøkt — intervalløkta kan kuttes.</p>
+      1 rolig løpeøkt, intervalløkta kan kuttes.</p>
     </div>
     <div class="kort">
-      <p><b>🇳🇴 Dette er ikke noe vi har funnet på</b> — alt på denne siden er
+      <p><b>🇳🇴 Dette er ikke noe vi har funnet på</b>: alt på denne siden er
       standard i norske toppmiljøer:</p>
       <p>• <b>4×4-intervallene</b> er utviklet av forskere ved NTNU i
-      Trondheim og dokumentert på norske elite-ungdomsspillere — metoden
+      Trondheim og dokumentert på norske elite-ungdomsspillere, metoden
       norske toppklubber bygde kondisjonstreningen sin på.</p>
       <p>• <b>Oppvarmingsprogrammet (FIFA 11+)</b> er laget av FIFA sammen
-      med Senter for idrettsskadeforskning i Oslo — norsk forskning som i dag
+      med Senter for idrettsskadeforskning i Oslo, norsk forskning som i dag
       brukes av fotballag over hele verden.</p>
       <p>• <b>Sonestyringen</b> (rolig skal være rolig, hardt kontrollert) er
       samme metode som Olympiatoppen bruker på norske landslagsutøvere i alle
@@ -334,8 +353,8 @@
       <div><span class="t">+24 %</span><p>flere involveringer med ball</p></div>
     </div>
     <div class="kort">
-      <p><b>Hvorfor funker det?</b> En kamp er 40–60 sprinter — omtrent én
-      hvert 4.–5. minutt. God kondis gjør at kroppen <b>lader batteriet
+      <p><b>Hvorfor funker det?</b> En kamp er 40 til 60 sprinter, omtrent én
+      hvert 4. til 5, minutt. God kondis gjør at kroppen <b>lader batteriet
       raskere mellom sprintene</b>. Den som fortsatt har fart i beina de
       siste ti minuttene, avgjør kamper.</p>
     </div>
@@ -343,11 +362,11 @@
 
   <section>
     <p class="kick">Det du kjente på løpeturen</p>
-    <h2>De fire sonene — uten pulsklokke</h2>
+    <h2>De fire sonene, uten pulsklokke</h2>
     <div class="soner">
       <div class="sone s1"><div class="stripe"></div><div class="inn">
         <div class="navn"><span>🎵 Syngesonen</span><span>VELDIG ROLIG</span></div>
-        <p>Så rolig at du kan synge. Føles nesten for lett — men det er her
+        <p>Så rolig at du kan synge. Føles nesten for lett, men det er her
         motoren bygges. Proffene bruker MEST av tida si her.</p>
       </div></div>
       <div class="sone s2"><div class="stripe"></div><div class="inn">
@@ -357,18 +376,18 @@
       </div></div>
       <div class="sone s3"><div class="stripe"></div><div class="inn">
         <div class="navn"><span>🥵 Terskel</span><span>KONTROLLERT HARDT</span></div>
-        <p>Bare korte setninger. Jevn, tøff fart du kan holde lenge —
+        <p>Bare korte setninger. Jevn, tøff fart du kan holde lenge.
         intervallfarta. Ikke sprint! Siste draget skal kjennes «jeg hadde
         klart ett til».</p>
       </div></div>
       <div class="sone s4"><div class="stripe"></div><div class="inn">
         <div class="navn"><span>🔥 Sprint</span><span>MAKS</span></div>
-        <p>Umulig å prate. Korte støt — dette er fotballsona di i kamp. Den
+        <p>Umulig å prate. Korte støt, dette er fotballsona di i kamp. Den
         blir bare bedre hvis de andre sonene er på plass.</p>
       </div></div>
     </div>
     <div class="kort">
-      <p><b>Den vanligste feilen:</b> å løpe alt «passe hardt» — for fort til
+      <p><b>Den vanligste feilen:</b> å løpe alt «passe hardt», for fort til
       å bygge motor, for sakte til å bli rask. Velg sone FØR du løper:
       rolig skal være rolig, hardt skal være hardt.</p>
     </div>
@@ -379,9 +398,9 @@
     <h2>Løping ved siden av fotball</h2>
     <p style="color:var(--muted);font-size:.95rem">Fotballøktene og kampen er
       hovedtreningen. Med 2 fotballøkter + kamp i uka har du fin plass til to
-      løpeøkter — sånn her:</p>
+      løpeøkter, sånn her:</p>
     <ul class="uke">
-      <li class="viktig"><span class="em">💬</span><div><b>1 rolig løpetur i uka</b> (30–45 min i
+      <li class="viktig"><span class="em">💬</span><div><b>1 rolig løpetur i uka</b> (30 til 45 min i
         pratefart)<p>På en dag uten fotball. Bygger motoren uten å stjele
         krefter fra trening og kamp.</p></div></li>
       <li class="viktig"><span class="em">🥵</span><div><b>1 intervalløkt: 4 × 4 min i
@@ -389,9 +408,9 @@
         som ga +20 % i kamp. Ikke dagen etter kamp. Uker med 3+ fotballøkter:
         dropp den, behold den rolige turen.</p></div></li>
       <li><span class="em">🔥</span><div><b>Sprint trener du i fotballøktene</b>
-        <p>Den ligger der allerede — spurter, vendinger, småbanespill.</p></div></li>
-      <li><span class="em">😴</span><div><b>Minst 1–2 helt frie dager i uka</b>
-        <p>Kroppen bygger seg sterkere når du hviler — ikke når du trener.</p></div></li>
+        <p>Den ligger der allerede, spurter, vendinger, småbanespill.</p></div></li>
+      <li><span class="em">😴</span><div><b>Minst 1 til 2 helt frie dager i uka</b>
+        <p>Kroppen bygger seg sterkere når du hviler, ikke når du trener.</p></div></li>
     </ul>
     <div class="obs">
       <p><b>⚠️ Øk rolig:</b> aldri mer enn ca. 10 % mer løping fra én uke til
@@ -403,30 +422,30 @@
   <section>
     <p class="kick">Sånn kan uka se ut</p>
     <h2>Tre eksempeluker</h2>
-    <p style="color:var(--muted);font-size:.95rem">Kampdagen kan variere —
+    <p style="color:var(--muted);font-size:.95rem">Kampdagen kan variere.
       flytt brikkene, men behold reglene: aldri intervall dagen etter kamp,
-      styrke i oppvarminga 2×/uke, minst 1–2 helt frie dager.</p>
+      styrke i oppvarminga 2×/uke, minst 1 til 2 helt frie dager.</p>
     <div class="ukeplaner">
 
       <div class="ukeplan">
-        <div class="tittel">Uke A — 2 fotballøkter + kamp <span>· den vanlige uka</span></div>
+        <div class="tittel">Uke A, 2 fotballøkter + kamp <span>· den vanlige uka</span></div>
         <table>
           <tr><td>Man</td><td class="fri">Fri (dagen etter kamp)</td></tr>
           <tr><td>Tir</td><td>Fotball <b>+ styrke i oppvarminga</b> (FIFA 11+)</td></tr>
           <tr><td>Ons</td><td class="lop">🥵 Intervall 4 × 4 min (3 min joggepause)</td></tr>
           <tr><td>Tor</td><td>Fotball <b>+ styrke i oppvarminga</b></td></tr>
           <tr><td>Fre</td><td class="fri">Fri</td></tr>
-          <tr><td>Lør</td><td class="lop">💬 Rolig løpetur 30–45 min i pratefart</td></tr>
+          <tr><td>Lør</td><td class="lop">💬 Rolig løpetur 30 til 45 min i pratefart</td></tr>
           <tr><td>Søn</td><td class="kampen">⚽ KAMP</td></tr>
         </table>
       </div>
 
       <div class="ukeplan">
-        <div class="tittel">Uke B — 3 fotballøkter + kamp <span>· intervalløkta kuttes</span></div>
+        <div class="tittel">Uke B, 3 fotballøkter + kamp <span>· intervalløkta kuttes</span></div>
         <table>
           <tr><td>Man</td><td class="fri">Fri (dagen etter kamp)</td></tr>
           <tr><td>Tir</td><td>Fotball <b>+ styrke i oppvarminga</b> (FIFA 11+)</td></tr>
-          <tr><td>Ons</td><td class="lop">💬 Rolig løpetur 30–45 min i pratefart</td></tr>
+          <tr><td>Ons</td><td class="lop">💬 Rolig løpetur 30 til 45 min i pratefart</td></tr>
           <tr><td>Tor</td><td>Fotball <b>+ styrke i oppvarminga</b></td></tr>
           <tr><td>Fre</td><td>Fotball (lett økt)</td></tr>
           <tr><td>Lør</td><td class="fri">Fri</td></tr>
@@ -435,15 +454,15 @@
       </div>
 
       <div class="ukeplan">
-        <div class="tittel">Uke C — 2–3 fotballøkter, ingen kamp <span>· plass til alt</span></div>
+        <div class="tittel">Uke C, 2 til 3 fotballøkter, ingen kamp <span>· plass til alt</span></div>
         <table>
           <tr><td>Man</td><td class="fri">Fri</td></tr>
           <tr><td>Tir</td><td>Fotball <b>+ styrke i oppvarminga</b> (FIFA 11+)</td></tr>
-          <tr><td>Ons</td><td class="lop">💬 Rolig løpetur 45–60 min — litt lengre når det ikke er kamp</td></tr>
+          <tr><td>Ons</td><td class="lop">💬 Rolig løpetur 45 til 60 min. litt lengre når det ikke er kamp</td></tr>
           <tr><td>Tor</td><td>Fotball <b>+ styrke i oppvarminga</b> og evt. kroppsvektsirkel etterpå</td></tr>
           <tr><td>Fre</td><td class="fri">Fri</td></tr>
-          <tr><td>Lør</td><td class="lop">🥵 Intervall 4 × 4 min (3 min joggepause) — med uthvilte bein etter fridagen</td></tr>
-          <tr><td>Søn</td><td class="fri">Fri (evt. tredje fotballøkt her — ta den lett dagen etter intervall)</td></tr>
+          <tr><td>Lør</td><td class="lop">🥵 Intervall 4 × 4 min (3 min joggepause), med uthvilte bein etter fridagen</td></tr>
+          <tr><td>Søn</td><td class="fri">Fri (evt, tredje fotballøkt her, ta den lett dagen etter intervall)</td></tr>
         </table>
       </div>
 
@@ -454,27 +473,27 @@
     <p class="kick">Styrke</p>
     <h2>Den glemte fotballtreningen</h2>
     <div class="kort">
-      <p><b>Nei, styrketrening hemmer ikke veksten</b> — det er en myte.
+      <p><b>Nei, styrketrening hemmer ikke veksten</b>: det er en myte.
       Med god teknikk er styrke både trygt og noe av det smarteste en ung
       fotballspiller kan gjøre: raskere sprint, høyere hopp, tøffere i
-      duellene — og først og fremst <b>langt færre skader</b>.</p>
+      duellene, og først og fremst <b>langt færre skader</b>.</p>
     </div>
     <div class="tallrad">
       <div><span class="t">−32 %</span><p>skader med 20 min styrke/balanse som oppvarming 2×/uke</p></div>
-      <div><span class="t">−53 %</span><p>belastningsskader — samme program (FIFA 11+)</p></div>
+      <div><span class="t">−53 %</span><p>belastningsskader, samme program (FIFA 11+)</p></div>
       <div><span class="t">½</span><p>hamstringstrekk halveres med én øvelse: nordic hamstring</p></div>
     </div>
     <div class="kort">
       <p><b>Slik gjør dere det enkelt:</b></p>
       <p>1. <b>FIFA 11+ som oppvarming</b> på fotballtreningene (20 min, 2×/uke)
-      — da er styrke, balanse og spenst dekket uten én ekstra økt.</p>
+da er styrke, balanse og spenst dekket uten én ekstra økt.</p>
       <p>2. Eventuelt en kort <b>kroppsvektsirkel</b> etter trening: knebøy,
-      utfall, nordic hamstring, planke — og hopp med <b>kontrollert
+      utfall, nordic hamstring, planke, og hopp med <b>kontrollert
       landing</b>.</p>
-      <p>3. <b>Teknikk før vekt, alltid.</b> Kroppsvekt og lette vekter nå —
+      <p>3. <b>Teknikk før vekt, alltid.</b> Kroppsvekt og lette vekter nå.
       de tunge løftene kommer gradvis når teknikken sitter. Ingen hast, ingen
       maksløft-konkurranser i gymmen.</p>
-      <p>4. Vondt i kne eller hæl? Rolig med hopp og spenst en periode —
+      <p>4. Vondt i kne eller hæl? Rolig med hopp og spenst en periode.
       styrke uten smerte er helt fint.</p>
     </div>
     <div class="kort">
@@ -484,17 +503,17 @@
       <div class="videoer">
         <a class="videokort" href="https://www.youtube.com/watch?v=pK5jcQalrSs" target="_blank" rel="noopener">
           <span class="play">▶</span>
-          <span class="vtekst"><b>Del 1 — løpeøvelser i rolig tempo</b>
+          <span class="vtekst"><b>Del 1, løpeøvelser i rolig tempo</b>
           <small>6 øvelser · åpnes på YouTube</small></span>
         </a>
         <a class="videokort" href="https://www.youtube.com/watch?v=Ov9PHeUdg5Q" target="_blank" rel="noopener">
           <span class="play">▶</span>
-          <span class="vtekst"><b>Del 2 — styrke, balanse og spenst</b>
-          <small>Planke, nordic hamstring, knebøy, hopp — 6 øvelser i 3 nivåer · åpnes på YouTube</small></span>
+          <span class="vtekst"><b>Del 2, styrke, balanse og spenst</b>
+          <small>Planke, nordic hamstring, knebøy, hopp, 6 øvelser i 3 nivåer · åpnes på YouTube</small></span>
         </a>
         <a class="videokort" href="https://www.youtube.com/watch?v=dzgvdl9FlCk" target="_blank" rel="noopener">
           <span class="play">▶</span>
-          <span class="vtekst"><b>Del 3 — løpeøvelser i høyere fart</b>
+          <span class="vtekst"><b>Del 3, løpeøvelser i høyere fart</b>
           <small>Tempoløp, spensthopp, retningsforandringer · åpnes på YouTube</small></span>
         </a>
       </div>
@@ -504,24 +523,141 @@
     </div>
   </section>
 
+  <section id="styrkeokter">
+    <p class="kick">Ukas fokus</p>
+    <h2>Styrkeøktene deres</h2>
+    <style>
+      .m11{display:inline-block;font-family:var(--font-mono);font-size:.6rem;letter-spacing:.06em;
+        padding:.1rem .4rem;border-radius:999px;margin-right:.35rem;vertical-align:.08rem;
+        background:color-mix(in srgb,var(--gress) 16%,transparent);color:var(--gress);
+        border:1px solid color-mix(in srgb,var(--gress) 35%,transparent)}
+      .yt{display:inline-block;font-family:var(--font-mono);font-size:.6rem;letter-spacing:.05em;
+        padding:.08rem .4rem;border-radius:999px;text-decoration:none;white-space:nowrap;
+        background:color-mix(in srgb,var(--rod) 12%,transparent);color:var(--rod);
+        border:1px solid color-mix(in srgb,var(--rod) 30%,transparent)}
+      .yt:hover{background:color-mix(in srgb,var(--rod) 20%,transparent)}
+      .styrkeknapp{display:flex;flex-direction:column;gap:.15rem;align-items:center;text-align:center;
+        background:var(--gress);color:#fff;text-decoration:none;font-weight:700;font-size:1.05rem;
+        padding:.9rem 1.4rem;border-radius:14px;box-shadow:var(--shadow)}
+      .styrkeknapp span{font-weight:400;font-size:.82rem;opacity:.9}
+      .styrkeknapp:hover{background:color-mix(in srgb,var(--gress) 85%,#000)}
+      .mny{display:inline-block;font-family:var(--font-mono);font-size:.6rem;letter-spacing:.06em;
+        padding:.1rem .4rem;border-radius:999px;margin-right:.35rem;vertical-align:.08rem;
+        background:color-mix(in srgb,var(--lime) 25%,transparent);color:var(--fg);
+        border:1px solid color-mix(in srgb,var(--lime) 45%,transparent)}
+    </style>
+    <div class="kort">
+      <p><b>Ti øvelser, 15 til 20 minutter.</b> Alt er kroppsvekt, med en
+      makker eller en benk som eneste utstyr. Økta tas <b>etter</b> fotball
+      eller etter den rolige løpeturen, aldri før.</p>
+      <p>Merket <span class="m11">11+</span> betyr at øvelsen også er med i
+      FIFA 11+, oppvarmingsprogrammet vi anbefaler på fotballtreningene.
+      Begynner dere med 11+ som oppvarming en dag, kan de merkede hoppes over
+      etterpå, og da tar økta ti minutter.</p>
+      <p><b>To økter, A og B.</b> Ta A den ene dagen og B den andre.
+      A jobber mest rett fram, B mest sideveis, sammen dekker de retningene
+      fotball og løping faktisk krever. Vil dere holde det enkelt, kjører dere
+      A begge dagene.</p>
+      <p class="liten" style="opacity:.8">Øvelsene er hentet fra Treni sin
+      øvelsesbank, satt opp av fysioterapeut og fjelløper Eirik Haugsnes.
+      <span class="m11">11+</span> = finnes også i FIFA 11+ ·
+      <span class="mny">NY</span> = det 11+ ikke har.</p>
+      <p style="margin:.9rem 0 .2rem"><a class="styrkeknapp" href="/g15/styrke.html">💪 Åpne styrkeøktene
+        <span>Alle øvelsene med video · lett å ha framme på mobilen</span></a></p>
+    </div>
+
+    <div class="ukeplan" style="margin-top:1rem">
+      <div class="tittel">Styrkeøkt A · rett fram <span>15 til 20 min · 10 min hvis dere har kjørt 11+</span></div>
+      <table>
+        <tr><td>1</td><td><span class="m11">11+</span><b class="lop">Nordic hamstring</b>3 × 3 til 5.
+          Kneståing, makker holder anklene. Senk deg sakte framover på 3 sekunder, ta imot med hendene.
+          Minst 48 timer mellom hver gang. <i>(11+ øvelse 9)</i> <a class="yt" href="https://www.youtube.com/results?search_query=nordic+hamstring+exercise+technique" target="_blank" rel="noopener" title="Se øvelsen på YouTube">▶ video</a></td></tr>
+        <tr><td>2</td><td><span class="m11">11+</span><b>Utfall fremover</b>3 × 8 per bein,
+          eller <b>ettbeins knebøy til benk</b> 3 × 6 per bein. Kneet stopper over foten, ikke innover.
+          <i>(11+ øvelse 11)</i> <a class="yt" href="https://www.youtube.com/results?search_query=forward+lunge+exercise+technique" target="_blank" rel="noopener" title="Se øvelsen på YouTube">▶ video</a></td></tr>
+        <tr><td>3</td><td><span class="mny">NY</span><b class="lop">Copenhagen adduction, kort arm</b>3 × 8 per side.
+          Sideplanke med det øverste beinet på en benk, bøyd kne. Uten benk:
+          <b>klem en ball mellom knærne</b>, 5 × 10 sekunder.
+          Lyske er ikke med i 11+, og lyskestrekk er en av de vanligste fotballskadene. <a class="yt" href="https://www.youtube.com/results?search_query=copenhagen+adduction+short+lever+exercise" target="_blank" rel="noopener" title="Se øvelsen på YouTube">▶ video</a></td></tr>
+        <tr><td>4</td><td><span class="mny">NY</span><b>Ettbeins stående tåhev</b>3 × 12 per bein.
+          Helt opp, helt ned. Øvelsen mot vonde hæler og legger. <a class="yt" href="https://www.youtube.com/results?search_query=single+leg+calf+raise+technique" target="_blank" rel="noopener" title="Se øvelsen på YouTube">▶ video</a></td></tr>
+        <tr><td>5</td><td><span class="mny">NY</span><b>Ettbeins soleushev med bøyd kne</b>2 × 12 per bein.
+          Treffer den dype leggmuskelen som tar støtet når du løper. <a class="yt" href="https://www.youtube.com/results?search_query=bent+knee+calf+raise+soleus" target="_blank" rel="noopener" title="Se øvelsen på YouTube">▶ video</a></td></tr>
+        <tr><td>6</td><td><span class="mny">NY</span><b>Glute bridge</b>3 × 12.
+          Løft hofta til kroppen er rett, hold ett sekund på toppen. Ett bein om det er lett. <a class="yt" href="https://www.youtube.com/results?search_query=glute+bridge+exercise+technique" target="_blank" rel="noopener" title="Se øvelsen på YouTube">▶ video</a></td></tr>
+        <tr><td>7</td><td><span class="mny">NY</span><b>Short-foot</b>3 × 10 per fot.
+          Trekk fotbua opp uten å krølle tærne. Rolig og lite, men det er dette som holder ankelen stabil. <a class="yt" href="https://www.youtube.com/results?search_query=short+foot+exercise+arch" target="_blank" rel="noopener" title="Se øvelsen på YouTube">▶ video</a></td></tr>
+        <tr><td>8</td><td><span class="m11">11+</span><b>Planke</b> 3 × 30 sek og
+          <b>sideplanke</b> 3 × 20 sek per side. Hofta står helt stille.
+          <i>(11+ øvelse 7 og 8)</i> <a class="yt" href="https://www.youtube.com/results?search_query=plank+and+side+plank+technique" target="_blank" rel="noopener" title="Se øvelsen på YouTube">▶ video</a></td></tr>
+        <tr><td>9</td><td><span class="m11">11+</span><b>Ettbeins balanse-reach</b>3 × 6 per bein.
+          Stå på ett bein, strekk det andre rolig framover, til siden og bakover.
+          <i>(11+ øvelse 10)</i> <a class="yt" href="https://www.youtube.com/results?search_query=single+leg+balance+reach+exercise" target="_blank" rel="noopener" title="Se øvelsen på YouTube">▶ video</a></td></tr>
+        <tr><td>10</td><td><span class="m11">11+</span><b>Flerretningshopp med kontrollert landing</b>3 × 5.
+          Land mykt med bøyde knær og <b>stå stille i 2 sekunder</b>. Landingen er hele poenget.
+          <i>(11+ øvelse 12)</i> <a class="yt" href="https://www.youtube.com/results?search_query=multidirectional+jump+landing+technique" target="_blank" rel="noopener" title="Se øvelsen på YouTube">▶ video</a></td></tr>
+      </table>
+    </div>
+
+    <div class="ukeplan" style="margin-top:1rem">
+      <div class="tittel">Styrkeøkt B · sideveis <span>15 min · andre økt i uka</span></div>
+      <table>
+        <tr><td>1</td><td><span class="mny">NY</span><b class="lop">Ettbeins hamstring curl på ball</b>3 × 6 per bein.
+          Ligg på ryggen med hælen på en fotball, løft hofta og rull ballen inn mot deg med ett bein.
+          Bakside lår i en annen vinkel enn nordic hamstring. <a class="yt" href="https://www.youtube.com/results?search_query=single+leg+hamstring+curl+ball" target="_blank" rel="noopener" title="Se øvelsen på YouTube">▶ video</a></td></tr>
+        <tr><td>2</td><td><span class="mny">NY</span><b>Step-down</b>3 × 8 per bein.
+          Stå på en kasse eller et trappetrinn, senk deg sakte ned på ett bein til hælen så vidt tar
+          bakken, opp igjen. Kneet skal ikke falle innover. Den beste øvelsen mot vondt under kneskåla. <a class="yt" href="https://www.youtube.com/results?search_query=step+down+exercise+knee+control" target="_blank" rel="noopener" title="Se øvelsen på YouTube">▶ video</a></td></tr>
+        <tr><td>3</td><td><span class="mny">NY</span><b>Sideutfall</b>3 × 8 per side.
+          Langt steg rett til siden, sett deg ned på det beinet, det andre strakt. Retningen fotball
+          faktisk skjer i, og den Økt A ikke har. <a class="yt" href="https://www.youtube.com/results?search_query=lateral+lunge+technique" target="_blank" rel="noopener" title="Se øvelsen på YouTube">▶ video</a></td></tr>
+        <tr><td>4</td><td><span class="mny">NY</span><b>Sideleie hofteabduksjon</b>3 × 12 per side.
+          Ligg på sida, løft det øverste beinet rolig opp og ned. Holder bekkenet stabilt når du løper. <a class="yt" href="https://www.youtube.com/results?search_query=side+lying+hip+abduction+exercise" target="_blank" rel="noopener" title="Se øvelsen på YouTube">▶ video</a></td></tr>
+        <tr><td>5</td><td><span class="mny">NY</span><b>Isometrisk adduksjon med ball</b>5 × 10 sek.
+          Klem en fotball mellom knærne, hold, slipp. Lyske igjen, men lettere enn Copenhagen. <a class="yt" href="https://www.youtube.com/results?search_query=isometric+adductor+squeeze+ball" target="_blank" rel="noopener" title="Se øvelsen på YouTube">▶ video</a></td></tr>
+        <tr><td>6</td><td><span class="mny">NY</span><b>Tåhev på step</b> 3 × 12 med stort bevegelsesutslag,
+          og <b>tibialis anterior-hev</b> 3 × 15. Den siste er forsida av leggen, mot beinhinnebetennelse. <a class="yt" href="https://www.youtube.com/results?search_query=calf+raise+on+step+full+range+of+motion" target="_blank" rel="noopener" title="Se øvelsen på YouTube">▶ video</a></td></tr>
+        <tr><td>7</td><td><span class="mny">NY</span><b>Dead bug</b>3 × 8 per side.
+          Ligg på ryggen, strekk motsatt arm og bein rolig ut uten at korsryggen slipper gulvet. <a class="yt" href="https://www.youtube.com/results?search_query=dead+bug+exercise+technique" target="_blank" rel="noopener" title="Se øvelsen på YouTube">▶ video</a></td></tr>
+        <tr><td>8</td><td><span class="m11">11+</span><b>Skater jumps</b>3 × 6 per side.
+          Hopp sideveis fra bein til bein, land mykt og hold balansen ett sekund.
+          <i>(11+ øvelse 12, sideveis variant)</i> <a class="yt" href="https://www.youtube.com/results?search_query=skater+jumps+exercise" target="_blank" rel="noopener" title="Se øvelsen på YouTube">▶ video</a></td></tr>
+      </table>
+    </div>
+
+    <div class="kort">
+      <p><b>Slik blir dere sterkere uke for uke:</b> samme øvelser, litt mer
+      hver gang. Uke 1 til 2: lær teknikken, færrest repetisjoner. Uke 3 til 4:
+      opp til øvre antall. Uke 5 og utover: saktere ned i nordic hamstring,
+      dypere ettbeins knebøy, lengre arm i Copenhagen. <b>Teknikk før antall</b>
+      blir teknikken dårlig, stopper du settet. <b>Ingen vekter</b> før dette sitter.</p>
+    </div>
+    <div class="obs">
+      <p><b>⚠️ Når du skal ta det roligere:</b> vondt under kneskåla eller i
+      hælen? Dropp hoppene, behold resten, styrke uten smerte er helt fint.
+      Er du støl i baksida av låret, venter du med nordic hamstring til
+      stølheten er borte. Og si fra til treneren, så justerer vi.</p>
+    </div>
+  </section>
+
   <section>
     <p class="kick">Kroppen din vokser</p>
     <h2>To ting alle på laget bør vite</h2>
     <div class="kort">
-      <p><b>1. Dere er ikke like langt i vokseløpet — og det er normalt.</b>
+      <p><b>1. Dere er ikke like langt i vokseløpet, og det er normalt.</b>
       I et 15-årslag kan kroppene være opptil 3 år fra hverandre i utvikling.
-      Ikke sammenlign fart med de andre — bruk pratetesten på DEG SELV. Flere
+      Ikke sammenlign fart med de andre, bruk pratetesten på DEG SELV. Flere
       av verdens beste var små og seine i utviklingen som 15-åringer.</p>
       <p><b>2. Vondt under kneskåla eller i hælen?</b> Det er vanlig når man
-      vokser (rammer ca. 1 av 5 aktive ungdommer). Det betyr ikke stopp — men
+      vokser (rammer ca. 1 av 5 aktive ungdommer). Det betyr ikke stopp, men
       det betyr <b>si fra til treneren</b>, så justerer vi mengden. Å bite
       tenna sammen gjør det bare verre og langvarig.</p>
     </div>
     <div class="kort">
-      <p><b>Og den hemmelige treningsøkta: søvn.</b> 8–10 timer per natt.
+      <p><b>Og den hemmelige treningsøkta: søvn.</b> 8 til 10 timer per natt.
       Utøvere på deres alder som sover under 8 timer, skader seg nesten
       dobbelt så ofte. Gaming til 01 og trening dagen etter er en dårlig
-      kombo — kroppen bygger seg sterkere mens du sover.</p>
+      kombo, kroppen bygger seg sterkere mens du sover.</p>
     </div>
   </section>
 
@@ -529,26 +665,26 @@
     <div class="husk">
       <h2>📌 Huskelista</h2>
       <ul>
-        <li><b>Kondis vinner kamper</b> — spesielt de siste 10 minuttene</li>
-        <li><b>Rolig skal være rolig</b> — pratetesten bestemmer, ikke stoltheten</li>
-        <li><b>Hardt skal være kontrollert</b> — siste draget best, ikke sistemann i mål</li>
-        <li><b>Maks 10 % mer per uke</b> — kroppen liker trapper, ikke heiser</li>
-        <li><b>Vondt i kne/hæl → si fra</b> — juster, ikke overse</li>
-        <li><b>Styrke 2×/uke i oppvarminga</b> — færre skader, tøffere i duellene</li>
-        <li><b>Sov 8–10 timer</b> — den billigste formen for trening</li>
+        <li><b>Kondis vinner kamper</b>: spesielt de siste 10 minuttene</li>
+        <li><b>Rolig skal være rolig</b>: pratetesten bestemmer, ikke stoltheten</li>
+        <li><b>Hardt skal være kontrollert</b>: siste draget best, ikke sistemann i mål</li>
+        <li><b>Maks 10 % mer per uke</b>: kroppen liker trapper, ikke heiser</li>
+        <li><b>Vondt i kne/hæl → si fra</b>: juster, ikke overse</li>
+        <li><b>Styrke 2×/uke i oppvarminga</b>: færre skader, tøffere i duellene</li>
+        <li><b>Sov 8 til 10 timer</b>: den billigste formen for trening</li>
       </ul>
     </div>
   </section>
 
   <div class="til-skjema">
     <a href="#sporsmal">✍️ Still spørsmål før økta →</a>
-    <p>Skjemaet ligger øverst på siden — svaret går rett til treneren.</p>
+    <p>Skjemaet ligger øverst på siden, svaret går rett til treneren.</p>
   </div>
 
   <footer>
     Basert på forskning på fotball og ungdomstrening (bl.a. Helgerud mfl.
-    2001, Soligard mfl. 2008 — FIFA 11+, Milewski mfl. 2014, van der Horst
-    mfl. 2015 — nordic hamstring) · Løpetrening for G15 · 2026
+    2001, Soligard mfl. 2008. FIFA 11+, Milewski mfl. 2014, van der Horst
+    mfl. 2015, nordic hamstring) · Løpetrening for G15 · 2026
   </footer>
 </main>
 
@@ -559,5 +695,6 @@ if (new URLSearchParams(location.search).has('takk')) {
   document.getElementById('sporsmal').scrollIntoView();
 }
 </script>
+<script src="/banner.js?v=1" defer></script>
 </body>
 </html>
