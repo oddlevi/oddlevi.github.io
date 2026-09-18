@@ -1,0 +1,7 @@
+# HTML og JSON hentes alltid ferskt (18.09.2026: Odds telefon viste gammel side etter deploy).
+# CSS/JS/bilder er versjonert i lenkene og kan mellomlagres.
+<IfModule mod_headers.c>
+  <FilesMatch "\.(html|json|php)$">
+    Header set Cache-Control "no-cache, must-revalidate, max-age=0"
+  </FilesMatch>
+</IfModule>

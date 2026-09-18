@@ -259,7 +259,8 @@ footer nav a { font-weight: 600; }
 .treff table { margin-top: var(--s2); font-size: .9rem; }
 .treff td { padding: .3rem .4rem; }
 .treff td:first-child { font-weight: 600; white-space: nowrap; }
-.treff .status { font-size: .9rem; color: hsl(var(--muted)); }
+.treff .status, .sok .status { font-size: .9rem; color: hsl(var(--muted)); margin-top: var(--s2); }
+.sok .treff table td { padding: .2rem .6rem .2rem 0; white-space: nowrap; }
 
 .sok-topp { margin-top: var(--s3); max-width: none; display: flex; flex-wrap: wrap; gap: var(--s3) var(--s4); align-items: center; padding: var(--s3) var(--s5); background: hsl(var(--surface)); border: 1px solid hsl(var(--border)); border-radius: var(--r2); }
 .sok-topp input { flex: 1 1 16rem; max-width: 26rem; }

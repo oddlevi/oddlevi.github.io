@@ -14,7 +14,7 @@
 <link rel="icon" href="/favicon.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter+Tight:wght@400;600&family=Sora:wght@800&display=swap">
-<link rel="stylesheet" href="stil.css?v=9">
+<link rel="stylesheet" href="stil.css?v=10">
 </head>
 <body data-side="rettnord" data-spor="/lopsdag/data.php?logg=">
 
@@ -64,7 +64,7 @@
   </div>
   <form class="sok sok-topp" action="resultater/" method="get" onsubmit="location.href='resultater/#sok='+encodeURIComponent(this.q.value.trim());return false;">
     <label for="sok-topp">Har du løpt her før? Finn deg selv i resultatene, alle år</label>
-    <input id="sok-topp" name="q" type="search" placeholder="Skriv navn eller klubb, trykk enter" autocomplete="off" spellcheck="false">
+    <input id="sok-topp" name="q" type="search" placeholder="Skriv navn eller klubb" autocomplete="off" spellcheck="false">
   </form>
 </div>
 
@@ -154,9 +154,13 @@
         </tbody>
       </table>
     </div>
-    <div class="knapper" style="display:flex;gap:12px;flex-wrap:wrap;margin-top:24px">
-      <a class="btn btn-ghost" href="rettnord-2026.ics" download>Legg hele sesongen i kalenderen</a>
+    <p style="margin-top:24px;margin-bottom:8px"><b>Legg hele sesongen i kalenderen din.</b> Velg kalenderen du bruker, så følger alle åtte dagene med, og endringer kommer av seg selv.</p>
+    <div class="knapper" style="display:flex;gap:12px;flex-wrap:wrap">
+      <a class="btn btn-ghost" data-spor="kalender apple" href="webcal://treni.no/rettnord/rettnord-2026.ics">iPhone og Mac</a>
+      <a class="btn btn-ghost" data-spor="kalender google" href="https://calendar.google.com/calendar/r?cid=webcal%3A%2F%2Ftreni.no%2Frettnord%2Frettnord-2026.ics" target="_blank" rel="noopener">Google Kalender</a>
+      <a class="btn btn-ghost" data-spor="kalender outlook" href="https://outlook.live.com/calendar/0/addfromweb?url=https%3A%2F%2Ftreni.no%2Frettnord%2Frettnord-2026.ics&amp;name=Rett%20Nord%202026" target="_blank" rel="noopener">Outlook</a>
     </div>
+    <p class="liten" style="margin-top:12px">Bruker du noe annet: <a href="rettnord-2026.ics" download>last ned kalenderfila (.ics)</a> og åpne den i kalenderen din.</p>
     <p class="liten" style="margin-top:12px">Terminlista for 2027 kommer når den er klar.</p>
   </div>
 </section>
@@ -405,7 +409,6 @@
     <form class="sok" action="resultater/" method="get" onsubmit="location.href='resultater/#sok='+encodeURIComponent(this.q.value.trim());return false;">
       <label for="sok-inn">Finn deg selv, alle år</label>
       <input id="sok-inn" name="q" type="search" placeholder="Skriv navn eller klubb" autocomplete="off" spellcheck="false">
-      <p class="liten" style="margin-top:8px">Trykk enter, så åpnes treffene på resultatsiden.</p>
     </form>
     <p><a class="btn btn-primar" href="resultater/">Hall of fame og alle resultater</a></p>
     <p class="liten" style="margin-top:16px">Originallistene hos tidtakerne:</p>
@@ -581,5 +584,6 @@
 })();
 </script>
 <script src="spor.js?v=2" defer></script>
+<script src="sok.js?v=1" defer></script>
 </body>
 </html>
