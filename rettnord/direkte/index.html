@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tour de Ørnes direkte</title>
+<meta name="description" content="Følg Tour de Ørnes 19. september 2026 direkte: målgang etter hvert som løperne kommer inn, ledere, og søk på egen løper.">
+<meta property="og:title" content="Tour de Ørnes direkte">
+<meta property="og:description" content="Målgang, ledere og søk på egen løper. Start kl. 11 på Ørnes, 19 km og 900 høydemeter.">
+<meta property="og:image" content="https://treni.no/rettnord/og.jpg">
+<meta property="og:url" content="https://treni.no/rettnord/direkte/">
+<meta name="theme-color" content="#1a3446">
+<meta name="robots" content="noindex">
+<link rel="icon" href="/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter+Tight:wght@400;600&family=Sora:wght@800&display=swap">
+<link rel="stylesheet" href="../stil.css?v=8">
+<style>
+.dir-hero { background: hsl(var(--surface)); border-bottom: 1px solid hsl(var(--border)); padding-block: clamp(2.5rem, 6vw, 4rem) clamp(2rem, 5vw, 3rem); }
+.dir-hero h1 { font-size: clamp(2.2rem, 6vw, 4rem); line-height: 1.02; margin: 0; font-weight: 500; }
+.status { display: inline-flex; align-items: center; gap: .5rem; margin-top: var(--s4); padding: .4rem .9rem; border-radius: 999px; background: hsl(var(--bg)); border: 1px solid hsl(var(--border)); font-weight: 600; font-size: .95rem; }
+.status i { width: .6rem; height: .6rem; border-radius: 50%; background: hsl(var(--muted)); }
+.status.paagaar i { background: hsl(var(--accent)); animation: puls 1.6s infinite; }
+@keyframes puls { 50% { opacity: .25; } }
+.nokkel b { font-size: 2rem; }
+.kont { margin-top: var(--s6); }
+.kont h2 { display: flex; align-items: baseline; gap: .6rem; flex-wrap: wrap; }
+.kont h2 small { font-family: var(--sans); font-size: .9rem; font-weight: 400; color: hsl(var(--muted)); }
+table.res td.pl { font-family: var(--serif); font-size: 1.1rem; font-weight: 500; width: 3rem; }
+table.res td.tid, table.res th.tid { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+table.res td.klubb { color: hsl(var(--muted)); font-size: .9rem; }
+.kl { display: inline-block; font-size: .72rem; font-weight: 600; padding: .1rem .5rem; border-radius: 999px; margin-left: .3rem; vertical-align: middle; background: hsl(var(--accent-soft)); color: hsl(var(--fg)); }
+.ny { background: hsl(var(--accent-soft)); }
+.folg { background: hsl(var(--surface)); border: 1px solid hsl(var(--border)); border-radius: var(--r2); padding: var(--s4) var(--s5); margin-top: var(--s4); }
+.folg .navn { font-family: var(--serif); font-size: 1.3rem; font-weight: 500; }
+.folg .meta { color: hsl(var(--muted)); font-size: .9rem; }
+.folg .tid { font-family: var(--serif); font-size: 2rem; line-height: 1; margin-top: var(--s2); }
+.tom { color: hsl(var(--muted)); }
+.venter { background: hsl(var(--surface)); border: 1px solid hsl(var(--border)); border-radius: var(--r2); padding: var(--s5); margin-top: var(--s5); }
+details.hele { margin-top: var(--s3); }
+@media (max-width: 640px) { .tabell table.res { min-width: 0; } table.res td.klubb, table.res th:nth-child(3) { display: none; } }
+</style>
+</head>
+<body data-side="rettnord-direkte" data-spor="/lopsdag/data.php?logg=">
+
+<div class="topp">
+  <div class="wrap">
+    <a class="logo" href="../"><i></i>Rett Nord</a>
+    <ul class="meny">
+      <li><a href="../#lopene">Løpene</a></li>
+      <li><a href="../#terminliste">Terminliste</a></li>
+      <li><a href="../resultater/">Resultater</a></li>
+      <li><a href="./" aria-current="page">Direkte</a></li>
+      <li><a href="../#praktisk">Praktisk</a></li>
+      <li><a href="../#om">Om oss</a></li>
+      <li><a href="../#bilder">Bilder</a></li>
+    </ul>
+  </div>
+</div>
+
+<header class="dir-hero" id="topp">
+  <div class="wrap">
+    <p class="kicker">Følg løpet · lørdag 19. september 2026</p>
+    <h1>Tour de Ørnes direkte</h1>
+    <p class="ingress">19 km og 900 høydemeter, start kl. 11 på Ørnes. Her kommer målgangene etter hvert som løperne kommer inn, rett fra tidtakingen. Siden oppdaterer seg selv.</p>
+    <div class="status" id="status"><i></i><span>Henter …</span></div>
+    <ul class="nokkel" id="nokkel">
+      <li><b id="n-mal">0</b><span>i mål</span></li>
+      <li><b id="n-forste">–</b><span>første i mål</span></li>
+      <li><b id="n-siste">–</b><span>siste oppdatering</span></li>
+    </ul>
+    <div class="sok" id="sokboks">
+      <label for="sok-inn">Følg en løper</label>
+      <input id="sok-inn" type="search" placeholder="Skriv navn eller klubb" autocomplete="off" spellcheck="false">
+      <div id="folg"></div>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap smal" id="innhold">
+    <div class="venter" id="venter">
+      <h3>Før start</h3>
+      <p>Tidtakeren publiserer lista når løpet er i gang. Til da: <a href="../#tour-de-ornes">løypa og tipsene for hver del</a>, og <a href="../resultater/">hall of fame fra Kua Ultra</a>.</p>
+      <p class="liten">Resultatene ligger også hos <a href="https://racetracker.no/events/2026/tour-de-ornes/" rel="noopener">RaceTracker</a>.</p>
+    </div>
+    <div id="lister"></div>
+  </div>
+</section>
+
+<div class="treni">
+  <div class="wrap">
+    <div class="ordmerke">Treni<b>.</b></div>
+    <p>Direktesiden er laget av Treni, løpeveilederen fra Nord-Norge. Vi lager løpsdag-sider med resultater, direktevisning og løypetips for løp i nord.</p>
+    <a class="btn" href="https://treni.no">Om Treni</a>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <nav><a href="../#lopene">Løpene</a><a href="../#terminliste">Terminliste</a><a href="../resultater/">Resultater</a><a href="./">Direkte</a><a href="../#praktisk">Praktisk</a><a href="../#om">Om oss</a><a href="../#bilder">Bilder</a></nav>
+    <p>Tider fra RaceTracker (RaceResult), hentet hvert 40. sekund. Laget av <a href="https://treni.no">Treni</a>.</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var LOP = new URLSearchParams(location.search).get('lop') || 'tour-de-ornes-2026';
+  var URL = 'data.php?lop=' + encodeURIComponent(LOP);
+  var D = null, q = '', sett = {}, forste = true;
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return {'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]; }); }
+  function nk(s) { return (s || '').toLowerCase().normalize('NFKC').replace(/[^a-zæøå ]/g, '').replace(/\s+/g, ' ').trim(); }
+  function kl(iso) { var d = new Date(iso); return isNaN(d) ? '' : d.toLocaleTimeString('nb-NO', {hour: '2-digit', minute: '2-digit'}); }
+  function rad(r, ny) {
+    var kj = r.kjonn === 'K' ? '<span class="kl">K</span>' : (r.kjonn === 'M' ? '<span class="kl">M</span>' : '');
+    return '<tr' + (ny ? ' class="ny"' : '') + '><td class="pl">' + r.plass + '</td><td><b>' + esc(r.navn) + '</b>' + kj + '</td><td class="klubb">' + esc(r.klubb) + '</td><td class="tid">' + esc(r.tid) + '</td></tr>';
+  }
+  function tegn() {
+    if (!D) return;
+    var st = document.getElementById('status'), tekst = {venter: 'Venter på start', paagaar: 'Løpet pågår', 'pågår': 'Løpet pågår', ferdig: 'Løpet er ferdig', nede: 'Tidtakeren svarer ikke, viser sist hentede'}[D.status] || D.status;
+    st.className = 'status' + (D.status === 'pågår' ? ' paagaar' : '');
+    st.querySelector('span').textContent = tekst;
+    document.getElementById('n-mal').textContent = D.antall || 0;
+    document.getElementById('n-siste').textContent = kl(D.hentet);
+    if (D.lop && LOP !== 'tour-de-ornes-2026') { document.querySelector('h1').textContent = D.lop + ' direkte'; document.title = D.lop + ' direkte'; }
+    var alle = [];
+    Object.keys(D.konkurranser || {}).forEach(function (k) { D.konkurranser[k].forEach(function (r) { alle.push(r); }); });
+    var f = alle.slice().sort(function (a, b) { return (a.plass || 999) - (b.plass || 999); })[0];
+    document.getElementById('n-forste').textContent = f && D.konkurranser && Object.keys(D.konkurranser).length ? (D.konkurranser[Object.keys(D.konkurranser)[0]][0] || {}).tid || '–' : '–';
+    document.getElementById('venter').hidden = (D.antall || 0) > 0;
+    var ut = '';
+    Object.keys(D.konkurranser || {}).forEach(function (k) {
+      var rows = D.konkurranser[k];
+      var hode = '<thead><tr><th>Plass</th><th>Navn</th><th>Klubb</th><th class="tid">Tid</th></tr></thead>';
+      var topp = rows.slice(0, 10), rest = rows.slice(10);
+      ut += '<div class="kont"><h2>' + esc(k) + ' <small>' + rows.length + ' i mål</small></h2>';
+      ut += '<div class="tabell"><table class="res">' + hode + '<tbody>' + topp.map(function (r) { return rad(r, !forste && !sett[k + '|' + nk(r.navn)]); }).join('') + '</tbody></table></div>';
+      if (rest.length) ut += '<details class="hele"><summary>Alle ' + rows.length + ' i mål</summary><div class="inn"><div class="tabell"><table class="res">' + hode + '<tbody>' + rest.map(function (r) { return rad(r, !forste && !sett[k + '|' + nk(r.navn)]); }).join('') + '</tbody></table></div></div></details>';
+      ut += '</div>';
+      rows.forEach(function (r) { sett[k + '|' + nk(r.navn)] = 1; });
+    });
+    document.getElementById('lister').innerHTML = ut;
+    forste = false;
+    folg();
+  }
+  function folg() {
+    var boks = document.getElementById('folg'); q = nk(document.getElementById('sok-inn').value);
+    if (!D || q.length < 2) { boks.innerHTML = ''; return; }
+    var treff = [];
+    Object.keys(D.konkurranser || {}).forEach(function (k) { D.konkurranser[k].forEach(function (r) { if (nk(r.navn).indexOf(q) !== -1 || nk(r.klubb).indexOf(q) !== -1) treff.push({k: k, r: r}); }); });
+    if (!treff.length) { boks.innerHTML = '<p class="tom" style="margin-top:8px">Ingen i mål med det navnet ennå. Siden oppdaterer seg selv, så la den stå.</p>'; return; }
+    boks.innerHTML = treff.slice(0, 5).map(function (t) {
+      return '<div class="folg"><div class="navn">' + esc(t.r.navn) + '</div><div class="meta">' + esc(t.k) + (t.r.klubb ? ' · ' + esc(t.r.klubb) : '') + ' · ' + t.r.plass + '. plass' + (t.r.klasse ? ' · ' + esc(t.r.klasse) : '') + '</div><div class="tid">' + esc(t.r.tid) + '</div></div>';
+    }).join('');
+  }
+  function hent() {
+    fetch(URL + '&t=' + Math.floor(Date.now() / 40000)).then(function (r) { return r.json(); }).then(function (d) { D = d; tegn(); }).catch(function () {
+      var st = document.getElementById('status'); st.querySelector('span').textContent = 'Får ikke kontakt, prøver igjen';
+    });
+  }
+  document.getElementById('sok-inn').addEventListener('input', folg);
+  hent(); setInterval(hent, 40000);
+  document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'visible') hent(); });
+})();
+</script>
+<script src="../spor.js?v=2" defer></script>
+</body>
+</html>

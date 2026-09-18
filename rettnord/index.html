@@ -14,7 +14,7 @@
 <link rel="icon" href="/favicon.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter+Tight:wght@400;600&family=Sora:wght@800&display=swap">
-<link rel="stylesheet" href="stil.css?v=5">
+<link rel="stylesheet" href="stil.css?v=8">
 </head>
 <body data-side="rettnord" data-spor="/lopsdag/data.php?logg=">
 
@@ -25,6 +25,7 @@
       <li><a href="#lopene">Løpene</a></li>
       <li><a href="#terminliste">Terminliste</a></li>
       <li><a href="resultater/">Resultater</a></li>
+      <li><a href="direkte/">Direkte</a></li>
       <li><a href="#praktisk">Praktisk</a></li>
       <li><a href="#om">Om oss</a></li>
       <li><a href="#bilder">Bilder</a></li>
@@ -59,7 +60,7 @@
       <p>Høstens store nyhet. Start og mål på Ørnes, kl. 11.</p>
       <div class="fakta"><span><b>19 km</b></span><span><b>900</b> høydemeter</span><span><b>600 moh.</b> på toppen</span></div>
     </div>
-    <a class="btn btn-primar" href="https://racetracker.no/events/2026/tour-de-ornes" rel="noopener">Meld deg på</a>
+    <div style="display:grid;gap:8px"><a class="btn btn-primar" href="https://racetracker.no/events/2026/tour-de-ornes" rel="noopener">Meld deg på</a><a class="btn btn-ghost" href="direkte/">Følg løpet direkte</a></div>
   </div>
   <form class="sok sok-topp" action="resultater/" method="get" onsubmit="location.href='resultater/#sok='+encodeURIComponent(this.q.value.trim());return false;">
     <label for="sok-topp">Har du løpt her før? Finn deg selv i resultatene, alle år</label>
@@ -353,6 +354,7 @@
           <li><b>Ned</b>Korte steg og blikket tre meter fram.</li>
           <li><b>Skogen</b>Hold rytmen, ikke øk før du ser mål.</li>
         </ul>
+
         <div style="margin:24px 0 0;display:flex;gap:12px;flex-wrap:wrap">
           <a class="btn btn-primar" href="https://racetracker.no/events/2026/tour-de-ornes" rel="noopener">Meld deg på</a>
           <a class="btn btn-ghost" href="https://www.strava.com/routes/3459848715702183184" rel="noopener">Løypa på Strava</a>
@@ -364,6 +366,23 @@
         <figcaption>Høyt oppe i løypa. Følg merkingen, ikke folk. Foto: Rett Nord (@rett_nord)</figcaption>
       </figure>
     </div>
+  </div>
+</section>
+
+<section id="tips">
+  <div class="wrap">
+    <p class="kicker">Tips og råd før løpet</p>
+    <h2>Slik løper du løpene våre</h2>
+    <p class="ingress">Trenis innlegg om løypene, samlet her. Ett tips for hver del av løypa, fra dem som har løpt den.</p>
+
+        <article class="innlegg" id="tips-tdo">
+          <h3>Løper du Tour de Ørnes i morgen?</h3>
+          <p class="liten">Fra Trenis Instagram 18. september 2026. Sveip gjennom løypa, ett tips for hver del.</p>
+          <ul class="slides" aria-label="Innlegget side for side"><li><img src="bilder/tips/tdo_1.jpg" alt="Side 1 av 5 i Trenis innlegg om Tour de Ørnes-løypa" loading="lazy" width="864" height="1080"></li><li><img src="bilder/tips/tdo_2.jpg" alt="Side 2 av 5 i Trenis innlegg om Tour de Ørnes-løypa" loading="lazy" width="864" height="1080"></li><li><img src="bilder/tips/tdo_3.jpg" alt="Side 3 av 5 i Trenis innlegg om Tour de Ørnes-løypa" loading="lazy" width="864" height="1080"></li><li><img src="bilder/tips/tdo_4.jpg" alt="Side 4 av 5 i Trenis innlegg om Tour de Ørnes-løypa" loading="lazy" width="864" height="1080"></li><li><img src="bilder/tips/tdo_5.jpg" alt="Side 5 av 5 i Trenis innlegg om Tour de Ørnes-løypa" loading="lazy" width="864" height="1080"></li></ul>
+          <p>19 km og 900 høydemeter, start kl. 11 på Ørnes, nytt løp i år. Slik ser løypa ut, og ett tips for hver del: gå det bratteste med hendene på lårene, spis og drikk på ryggen og ikke i bakken, korte steg og blikket tre meter fram i nedløpet, og hold rytmen i skogen der farta lurer.</p>
+          <p>Løper du? Si fra, så følger vi med. Foto fra løypa: Rett Nord (@rett_nord).</p>
+          <p><a class="btn btn-ghost" href="https://www.instagram.com/p/DdbUEjtkXzc/" rel="noopener">Se innlegget på Instagram</a></p>
+        </article>
   </div>
 </section>
 
@@ -388,15 +407,19 @@
       <li><a href="https://racetracker.no/events/2026/tour-de-ornes/" rel="noopener">Tour de Ørnes 2026</a></li>
     </ul>
     <div class="kommer">
-      <p class="kicker">Kommer, via Treni</p>
-      <h3>Alle resultatene på ett sted</h3>
-      <p>Neste steg er å hente resultatene rett fra tidtakingen og vise dem her:</p>
+      <p class="kicker">Laget av Treni</p>
+      <h3>Dette finner du her nå</h3>
       <ul class="liste">
-        <li>Resultater per løp med søk på eget navn, tid, plassering og fart per kilometer.</li>
-        <li>Sammenlagt for Motbakkecupen, regnet automatisk etter hvert løp.</li>
-        <li>Hall of fame: hvem har fullført Kua Ultra flest ganger siden 2021.</li>
-        <li>Din historikk på tvers av årene: har du løpt her før?</li>
-        <li>Direkteside på løpsdagen med passeringer og målgang.</li>
+        <li>Alle resultater fra 2022 til 2026, per løp og distanse, med tid, plassering og klasse.</li>
+        <li>Søk på eget navn eller klubb, alle år på ett sted: har du løpt her før?</li>
+        <li>Hall of fame: hvem har fullført Kua Ultra 70 km flest ganger, og hvem har løpt flest løp i alt.</li>
+        <li>Beste tider per distanse og klasse, og klubbene som stiller flest.</li>
+      </ul>
+      <h3 style="margin-top:24px">Det som kommer</h3>
+      <ul class="liste">
+        <li><b>Følg løpet direkte</b> på løpsdagen: <a href="direkte/">treni.no/rettnord/direkte</a>, med målgang etter hvert som løperne kommer inn, og søk på egen løper. Første gang på Tour de Ørnes 19. september.</li>
+        <li>Sammenlagt for Motbakkecupen, regnet automatisk etter hvert løp, når poengsystemet er klart.</li>
+        <li>Resultatene fra hvert nytt løp inn samme kveld, rett fra tidtakingen.</li>
       </ul>
     </div>
   </div>
@@ -494,7 +517,7 @@
     <p class="kicker">Bilder</p>
     <h2>Fra fjellene</h2>
     <p class="ingress">Fra Tour de Ørnes-løypa og Nordhesten opp, september 2026. Alle foto: Rett Nord (@rett_nord).</p>
-    <div class="galleri" style="margin-top:24px">
+    <div class="galleri" style="margin-top:24px" id="galleri">
       <img src="bilder/rn_hero.jpg" alt="Løper på toppen med fjorden og fjellene bak" loading="lazy">
       <img src="bilder/rn_09.jpg" alt="Løper på vei ned over svaberg" loading="lazy">
       <img src="bilder/rn_01.jpg" alt="Sti oppover åpen fjellside i høstfarger" loading="lazy">
@@ -518,11 +541,34 @@
 
 <footer>
   <div class="wrap">
-    <nav><a href="#lopene">Løpene</a><a href="#terminliste">Terminliste</a><a href="resultater/">Resultater</a><a href="#praktisk">Praktisk</a><a href="#om">Om oss</a></nav>
+    <nav><a href="#lopene">Løpene</a><a href="#terminliste">Terminliste</a><a href="resultater/">Resultater</a><a href="direkte/">Direkte</a><a href="#praktisk">Praktisk</a><a href="#om">Om oss</a></nav>
     <p>Rett Nord, Meløy og Gildeskål. Forslag til ny nettside, laget av <a href="https://treni.no">Treni</a> 18.09.2026. Kart fra OpenStreetMap-bidragsytere.</p>
   </div>
 </footer>
 
+
+<dialog id="lys" class="lys" aria-label="Bildevisning">
+  <button class="lys-lukk" type="button" aria-label="Lukk">✕</button>
+  <button class="lys-forrige" type="button" aria-label="Forrige bilde">‹</button>
+  <figure><img alt=""><figcaption></figcaption></figure>
+  <button class="lys-neste" type="button" aria-label="Neste bilde">›</button>
+</dialog>
+<script>
+(function () {
+  var g = document.getElementById('galleri'), d = document.getElementById('lys');
+  if (!g || !d || !d.showModal) return;
+  var bilder = [].slice.call(g.querySelectorAll('img')), i = 0, img = d.querySelector('img'), cap = d.querySelector('figcaption');
+  function vis(n) { i = (n + bilder.length) % bilder.length; img.src = bilder[i].src; img.alt = bilder[i].alt; cap.textContent = (i + 1) + ' av ' + bilder.length + ' · ' + bilder[i].alt + ' · Foto: Rett Nord'; }
+  bilder.forEach(function (b, n) { b.tabIndex = 0; b.setAttribute('role', 'button'); b.addEventListener('click', function () { vis(n); d.showModal(); }); b.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); vis(n); d.showModal(); } }); });
+  d.querySelector('.lys-lukk').onclick = function () { d.close(); };
+  d.querySelector('.lys-forrige').onclick = function () { vis(i - 1); };
+  d.querySelector('.lys-neste').onclick = function () { vis(i + 1); };
+  d.addEventListener('click', function (e) { if (e.target === d) d.close(); });
+  d.addEventListener('keydown', function (e) { if (e.key === 'ArrowRight') vis(i + 1); if (e.key === 'ArrowLeft') vis(i - 1); });
+  var x0 = null; d.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; }, {passive: true});
+  d.addEventListener('touchend', function (e) { if (x0 === null) return; var dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 40) vis(dx < 0 ? i + 1 : i - 1); x0 = null; });
+})();
+</script>
 <script src="spor.js?v=2" defer></script>
 </body>
 </html>
