@@ -1,10 +1,13 @@
 <?php
-// Skjema 2 (Odds bestilling 19.08): samme spørsmål som Telegram-onboardingen
-// + km/uke. Personlig kode-lenke per påmeldingsrad; svarene lagres i
-// venteliste.svar_json, Odd+Claude varsles i Telegram, og onboarding-vakta
-// leser svarene inn i løperens rad. B-57 (Odd 10.09): skjemaet er steg 3 av 4 (B-63),
-// etter at klokka er koblet og øktene er inne; planen bygges når svarene og
-// historikken er inne.
+// Skjema 2 (Odds bestilling 19.08): personlig kode-lenke per påmeldingsrad; svarene
+// lagres i venteliste.svar_json, Odd+Claude varsles i Telegram, og onboarding-vakta
+// leser svarene inn i løperens rad.
+// Onboarding v3 (B-130, Odd 19.09.2026, F-246 del A): to vinduer med bare det motoren
+// trenger for den første uka. Vindu 1 «Deg»: alder, høyde, vekt, puls. Vindu 2
+// «Løpinga di»: mål, underlag, beste tid, km/uke, økter/uke, lengste siste måned,
+// siste 90 dager, faste fridager, helsesamtykke. Alt annet spørres på min side
+// etterpå, ett spørsmål om dagen. Planen bygges på svarene med en gang («foreløpig
+// plan»), klokka kobles fra planen og planen bygges om når historikken er inne.
 // Revisjon 03.09: serveren står i UTC. «Svarene dine er mottatt»-innslaget
 // fikk UTC-klokkeslett (Trond: 07:32 i stedet for 09:32).
 date_default_timezone_set('Europe/Oslo');
@@ -66,10 +69,9 @@ if (is_array($konfig) && $kode !== "") {
 require_once __DIR__ . "/spamvern.php";
 $vs_rate = false;
 if ($_SERVER["REQUEST_METHOD"] === "POST" && $rad) {
-    treni_begrens_post(["maal" => 600, "rekorder" => 600, "alternativ" => 400,
-                        "styrke" => 400, "alternativ_hva" => 200], 200);
+    treni_begrens_post(["maal" => 600], 200);
     foreach ($_POST as $vs_k => $vs_v) {
-        $vs_fl = in_array($vs_k, ["maal", "rekorder", "alternativ", "styrke"], true);
+        $vs_fl = in_array($vs_k, ["maal"], true);
         // Lister (avkrysningsbokser) vaskes element for element, treni_ren tar
         // bare strenger, og et array her ville kastet TypeError (Lola 09.09).
         $_POST[$vs_k] = is_array($vs_v)
@@ -94,98 +96,41 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && $rad) {
     }
 }
 if ($_SERVER["REQUEST_METHOD"] === "POST" && $rad && !$vs_rate && trim($_POST["nettside"] ?? "") === "") {
+    // Onboarding v3 (F-246): bare feltene den første uka trenger. Alt annet spørres
+    // på min side etterpå (svar_endre.php, samme nøkler), så svar_json får bare det
+    // som faktisk ble svart her. venteliste_inn.py leser alle feltene med .get().
+    $tall = fn(string $n) => trim($_POST[$n] ?? "") === "" ? null : (float) str_replace(",", ".", $_POST[$n]);
     $svar = [
         "maal"      => mb_substr(trim($_POST["maal"] ?? ""), 0, 2500),
         "alder"     => (int) ($_POST["alder"] ?? 0),
+        // 44a (Eirik 16.09): høyde og vekt, KMI regnes i motoren og styrer regelverket
+        // for myke løpere. Vises aldri for løperen. Samme nøkler som svar_endre.php.
+        "hoyde"     => trim($_POST["hoyde"] ?? "") === "" ? null : (int) $_POST["hoyde"],
+        "vekt"      => $tall("vekt"),
         "puls"      => trim($_POST["puls"] ?? "") === "" ? null : (int) $_POST["puls"],
         "beste_tid" => mb_substr(trim($_POST["beste_tid"] ?? ""), 0, 120),
         "km_uke"    => (float) str_replace(",", ".", $_POST["km_uke"] ?? "0"),
         // B6-vernet (Odd 22.08, Silvia-caset): langtur foreskrives aldri over
         // lengste økt siste 30 dager +10 %, generatoren leser dette feltet.
-        "lengste_30d" => ($_POST["lengste_30d"] ?? "") !== ""
-            ? (float) str_replace(",", ".", $_POST["lengste_30d"]) : null,
-        "start_km"  => (float) str_replace(",", ".", $_POST["start_km"] ?? "0"),
+        "lengste_30d" => $tall("lengste_30d"),
         "underlag"  => in_array($_POST["underlag"] ?? "", ["vei", "terreng", "begge"], true)
                        ? $_POST["underlag"] : "begge",
-        "lop_navn"  => mb_substr(trim($_POST["lop_navn"] ?? ""), 0, 120),
-        "lop_km"    => trim($_POST["lop_km"] ?? "") === "" ? null : (float) str_replace(",", ".", $_POST["lop_km"]),
-        "lop_type"  => in_array($_POST["lop_type"] ?? "", ["flatt", "motbakke", "opp_og_ned", "fjell"], true)
-                       ? $_POST["lop_type"] : null,
-        "lop_hm_opp" => trim($_POST["lop_hm_opp"] ?? "") === "" ? null : (int) $_POST["lop_hm_opp"],
-        "lop_hm_ned" => trim($_POST["lop_hm_ned"] ?? "") === "" ? null : (int) $_POST["lop_hm_ned"],
-        "rekorder"  => mb_substr(trim($_POST["rekorder"] ?? ""), 0, 600),
-        "volum_onske" => in_array($_POST["volum_onske"] ?? "", ["oke", "stabil", "usikker"], true)
-                         ? $_POST["volum_onske"] : "stabil",
-        "alternativ" => mb_substr(trim($_POST["alternativ"] ?? ""), 0, 400),
-        "styrke"     => mb_substr(trim($_POST["styrke"] ?? ""), 0, 400),
-        // «Økter per uke» var tvetydig (Odd 04.09, Trond-caset): han svarte 2
-        // og mente to LØPEøkter, styrke og fotball kom i tillegg, men planen
-        // leste 2 som alt han gjør. Fra nå telles de tre hver for seg, og
-        // annen trening må si HVA det er: fotball belaster helt annerledes
-        // enn svømming. Fritekstfeltene over beholdes, de gir mer enn tallet.
+        // «Økter per uke» er LØPEøkter (Odd 04.09, Trond-caset). Styrke og annen
+        // trening spørres om etter planen.
         "n_okter" => trim($_POST["n_okter"] ?? "") === "" ? null
             : max(1, min(14, (int) $_POST["n_okter"])),
-        "n_styrke" => trim($_POST["n_styrke"] ?? "") === "" ? null
-            : max(0, min(7, (int) $_POST["n_styrke"])),
-        "n_alternativ" => trim($_POST["n_alternativ"] ?? "") === "" ? null
-            : max(0, min(14, (int) $_POST["n_alternativ"])),
-        "alternativ_hva" => mb_substr(trim($_POST["alternativ_hva"] ?? ""), 0, 120),
-        // 90-dagersbildet (Eiriks regelverk §2 til 5, Odds go 23.08): historikk og
-        // kontekst, grunnlaget for nivåklassifisering og korridor i planene.
+        // 90-dagersbildet (Eiriks regelverk §2 til 5, Odds go 23.08): grunnlaget for
+        // nivåklassifisering og korridor når historikken fra klokka mangler.
         "siste_90d" => in_array($_POST["siste_90d"] ?? "", ["jevn", "ujevn", "opphold", "mer_for"], true)
                        ? $_POST["siste_90d"] : "jevn",
-        "km_uke_90d" => trim($_POST["km_uke_90d"] ?? "") === "" ? null
-            : (float) str_replace(",", ".", $_POST["km_uke_90d"]),
-        "lengste_90d" => trim($_POST["lengste_90d"] ?? "") === "" ? null
-            : (float) str_replace(",", ".", $_POST["lengste_90d"]),
-        "toppuke_aar" => trim($_POST["toppuke_aar"] ?? "") === "" ? null
-            : (float) str_replace(",", ".", $_POST["toppuke_aar"]),
-        // TIMER per uke (Eirik 04.09 20:25): «Det må også ved onboarding
-        // spørres om timer trening per uke når det kommer til de som skal
-        // følge fjellmetodikk. Andre ligger f.eks. mellom 12-18 timer per
-        // uke.» Fjellmodellens volumklasse V1. V4 og fjellnivå 1 til 5 leser TIMER,
-        // ikke km, og uten klokke leses hele gruppa som V0, «bygg timer før
-        // noe annet», uansett hvor mye de trener. To felt fordi de svarer på
-        // hver sin regel: totaltimer setter volumklassen (§11, all
-        // utholdenhet), løpte timer setter nivået (S-29, kun løping).
-        // Timer spørres nå i TRE deler (Eirik 04.09 23:31: «Styrke som eget
-        // felt. Løping + alternativ (aerob trening) + styrke»). Styrken skilles
-        // ut fordi utholdenhetstotalen, den som setter volumklassen, måler
-        // aerob trening, og den loggede siden av det tallet har aldri talt
-        // styrkeøkter med. Sto styrken i totalen for dem som oppgir tallene
-        // selv, ble løpere med og uten klokke målt med hver sin målestokk.
-        // timer_uke beholdes for dem som svarte før endringen.
-        "timer_uke" => trim($_POST["timer_uke"] ?? "") === "" ? null
-            : (float) str_replace(",", ".", $_POST["timer_uke"]),
-        "timer_alt_uke" => trim($_POST["timer_alt_uke"] ?? "") === "" ? null
-            : (float) str_replace(",", ".", $_POST["timer_alt_uke"]),
-        "timer_lop_uke" => trim($_POST["timer_lop_uke"] ?? "") === "" ? null
-            : (float) str_replace(",", ".", $_POST["timer_lop_uke"]),
-        "timer_styrke_uke" => trim($_POST["timer_styrke_uke"] ?? "") === "" ? null
-            : (float) str_replace(",", ".", $_POST["timer_styrke_uke"]),
-        // Revisjon 10.09 (punkt 2): samme verdisett som onboarding_felt.py og
-        // svar_endre.php (mye/en_del/lite/ingen). «litt» og «nei» fra gamle svar
-        // oversettes ved import (venteliste_inn.py).
-        "fjellvane" => in_array($_POST["fjellvane"] ?? "", ["mye", "en_del", "lite", "ingen"], true)
-                       ? $_POST["fjellvane"] : null,
-        "lop_prioritet" => in_array($_POST["lop_prioritet"] ?? "", ["A", "B", "C", "D"], true)
-                           ? $_POST["lop_prioritet"] : null,
-        // «Uka di» (Odd 08.09, S-87): de fem spørsmålene porten på min side
-        // stilte ETTER planen, flyttet hit så første plan kjenner rammene.
-        // Samme nøkler og verdier som onboarding_felt.py / svar_endre.php.
+        // Faste fridager: planen legger aldri en løpeøkt der. Samme nøkkel og
+        // verdier som onboarding_felt.py / svar_endre.php.
         "hviledag_dag" => (function () {
             $lov = ["ingen", "mandag", "tirsdag", "onsdag", "torsdag", "fredag", "lordag", "sondag"];
             $d = array_values(array_intersect((array) ($_POST["hviledag"] ?? []), $lov));
             if (in_array("ingen", $d, true)) { $d = ["ingen"]; }
             return $d ? implode(",", $d) : null;
         })(),
-        "molle" => in_array($_POST["molle"] ?? "", ["1", "0"], true) ? $_POST["molle"] : null,
-        "langtur_maks_km" => trim($_POST["langtur_maks_km"] ?? "") === "" ? null
-            : (float) str_replace(",", ".", $_POST["langtur_maks_km"]),
-        "langtur_sted" => in_array($_POST["langtur_sted"] ?? "", ["vei", "terreng", "begge"], true)
-                          ? $_POST["langtur_sted"] : null,
-        "korte_sted" => in_array($_POST["korte_sted"] ?? "", ["vei", "terreng", "begge"], true)
-                        ? $_POST["korte_sted"] : null,
     ];
     // Helsesamtykke (personvern 04.09.2026, GDPR art. 9): eget, uttrykkelig
     // steg. Uten avkrysning lagres ingenting, og svarene bevares i skjemaet.
@@ -193,45 +138,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && $rad && !$vs_rate && trim($_POST["n
     if ($helse_ok) {
         $svar["samtykke_helse"] = ["tidspunkt" => date("c"), "versjon" => "2026-09-04"];
     }
-    if ($svar["maal"] === "" || $svar["alder"] < 10 || $svar["alder"] > 99
-        || $svar["km_uke"] <= 0 || $svar["start_km"] <= 0) {
-        $feil = t_("Fyll inn mål, alder, kilometer per uke og ønsket start-kilometer.", "Fill in your goal, age, kilometres per week and your desired starting kilometres.");
-    } elseif ($svar["hviledag_dag"] === null || $svar["molle"] === null || $svar["langtur_maks_km"] === null
-              || $svar["langtur_sted"] === null || $svar["korte_sted"] === null) {
-        // Lola 08.09: «Keep having errors... I did fill up this section». Meldingen
-        // sa bare «punkt 4», så løperen måtte gjette hvilket felt som manglet.
+    if ($svar["alder"] < 10 || $svar["alder"] > 99 || $svar["puls"] === null) {
+        $feil = t_("Vindu 1 «Deg» mangler alder eller høyeste puls.", "Window 1 \"You\" is missing age or highest heart rate.");
+    } elseif ($svar["maal"] === "" || $svar["km_uke"] <= 0 || $svar["beste_tid"] === "" || $svar["hviledag_dag"] === null) {
+        // Lola 08.09: si hvilket felt som mangler, ikke bare «punkt 2».
         $mangler = [];
-        if ($svar["hviledag_dag"] === null)   { $mangler[] = t_("faste fridager", "fixed rest days"); }
-        if ($svar["molle"] === null)          { $mangler[] = t_("om mølle er et alternativ", "whether a treadmill is an option"); }
-        if ($svar["langtur_maks_km"] === null) { $mangler[] = t_("tak for langturen", "cap for the long run"); }
-        if ($svar["langtur_sted"] === null)   { $mangler[] = t_("hvor du tar langturen", "where you do the long run"); }
-        if ($svar["korte_sted"] === null)     { $mangler[] = t_("hvor du tar de korte øktene", "where you do the short sessions"); }
-        $feil = t_("Punkt 4 «Uka di» mangler: ", "Section 4 \"Your week\" is missing: ") . implode(", ", $mangler) . ".";
-    } elseif ($svar["puls"] === null || $svar["beste_tid"] === "" || $svar["rekorder"] === ""
-              || $svar["alternativ"] === "" || $svar["styrke"] === "" || $svar["timer_styrke_uke"] === null
-              || $svar["fjellvane"] === null) {
-        // Revisjon 10.09 (punkt 1/24): skjema 2 krever det samme som porten på min
-        // side (onboarding_felt.py, alle 16 obligatoriske fra 06.09). Før sto sju av
-        // dem som valgfrie her, og porten låste siden til løperen svarte en gang til.
-        $mangler = [];
-        if ($svar["puls"] === null)             { $mangler[] = t_("høyeste målte puls", "highest measured heart rate"); }
-        if ($svar["beste_tid"] === "")          { $mangler[] = t_("beste tid siste halvår", "best time in the last six months"); }
-        if ($svar["rekorder"] === "")           { $mangler[] = t_("personlige rekorder", "personal records"); }
-        if ($svar["timer_styrke_uke"] === null) { $mangler[] = t_("timer styrke per uke", "hours of strength per week"); }
-        if ($svar["styrke"] === "")             { $mangler[] = t_("hva du gjør i styrketreningen", "what you do in your strength training"); }
-        if ($svar["alternativ"] === "")         { $mangler[] = t_("annen trening", "other training"); }
-        if ($svar["fjellvane"] === null)        { $mangler[] = t_("om du er vant til høydemeter", "whether you are used to elevation"); }
-        $feil = t_("Noen felt mangler: ", "Some fields are missing: ") . implode(", ", $mangler)
-              . t_(". Skriv «ingen» eller 0 der det ikke gjelder deg.", ". Write \"none\" or 0 where it does not apply to you.");
-    } elseif ($svar["lop_navn"] !== "" && $svar["lop_prioritet"] === null) {
-        // 79a (Eirik 14.09.2026, S-159): «treni bør alltid spørre løperen om å
-        // rangere løpene sine etter a/b/c/d». Et løp uten bokstav ble til 14.09
-        // regnet som A i ventelistegeneratoren og C i plan-AI-en. Nå kreves
-        // bokstaven når et løp er oppgitt; nettleseren stopper det først (JS under).
-        $feil = t_("Punkt 5: du har oppgitt et løp, si også hvor viktig det er for deg (A, B, C eller D). Da vet planen hvor mye den skal bøye seg for løpet.",
-                   "Section 5: you have named a race, so tell us how important it is to you (A, B, C or D). Then the plan knows how much to bend around it.");
+        if ($svar["maal"] === "")            { $mangler[] = t_("målet ditt", "your goal"); }
+        if ($svar["km_uke"] <= 0)            { $mangler[] = t_("kilometer i uka", "kilometres per week"); }
+        if ($svar["beste_tid"] === "")       { $mangler[] = t_("beste tid siste halvår (skriv «ingen» om du ikke har løpt noe)", "best time in the last six months (write \"none\" if you have not raced)"); }
+        if ($svar["hviledag_dag"] === null)  { $mangler[] = t_("faste fridager (eller «ingen fast dag»)", "fixed rest days (or \"no fixed day\")"); }
+        $feil = t_("Vindu 2 «Løpinga di» mangler: ", "Window 2 \"Your running\" is missing: ") . implode(", ", $mangler) . ".";
     } elseif (!$helse_ok) {
-        $feil = t_("Vi trenger et ja til å behandle helseopplysninger (punkt 6 nederst) før vi kan lage planen din. Svarene dine er tatt vare på i skjemaet.", "We need your yes to processing health data (section 6 at the bottom) before we can build your plan. Your answers are kept in the form.");
+        $feil = t_("Vi trenger et ja til å behandle helseopplysninger (nederst i vindu 2) før vi kan lage planen din. Svarene dine er tatt vare på i skjemaet.", "We need your yes to processing health data (at the bottom of window 2) before we can build your plan. Your answers are kept in the form.");
     } else {
         $pdo->prepare("UPDATE venteliste SET svar_json = ?, svart_at = NOW() WHERE kode = ?")
             ->execute([json_encode($svar, JSON_UNESCAPED_UNICODE), $kode]);
@@ -244,21 +162,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && $rad && !$vs_rate && trim($_POST["n
         // (bygges-stubben under) får det.
         // Revisjon 10.09 (punkt 3 og 40): ingen plan loves her (S-87: neste steg
         // står på siden), og teksten følger løperens språk.
-        $vl_sam = t_('📝 Svarene dine er mottatt. Neste steg står på siden din. ', '📝 Your answers are in. The next step is on your page. ')
+        // Onboarding v3: planen bygges på svarene med en gang, så kvitteringen sier det.
+        $vl_sam = t_('📝 Svarene dine er lagret, og den foreløpige planen bygges nå. ', '📝 Your answers are saved, and your preliminary plan is being built now. ')
                 . t_('Du svarte: Mål: ', 'You answered: Goal: ') . $svar['maal']
                 . t_(' · Alder: ', ' · Age: ') . $svar['alder']
                 . ' · ' . $svar['km_uke'] . t_(' km/uke', ' km/week')
                 . ($svar['n_okter'] !== null ? ' · ' . $svar['n_okter'] . t_(' løpeøkter/uke', ' runs/week') : '')
-                . ($svar['n_styrke'] !== null ? ' · ' . $svar['n_styrke'] . t_(' styrkeøkter/uke', ' strength sessions/week') : '')
-                . ($svar['n_alternativ'] !== null ? ' · ' . $svar['n_alternativ'] . t_(' økter annen trening/uke', ' other sessions/week')
-                    . ($svar['alternativ_hva'] !== '' ? ' (' . $svar['alternativ_hva'] . ')' : '') : '')
+                . ($svar['lengste_30d'] !== null ? t_(' · lengste siste måned: ', ' · longest last month: ') . $svar['lengste_30d'] . ' km' : '')
                 . t_(' · underlag: ', ' · surface: ') . $svar['underlag']
                 . t_(' · puls: ', ' · heart rate: ') . ($svar['puls'] ?? t_('ukjent', 'unknown'))
                 . ($svar['beste_tid'] !== '' ? t_(' · beste tid: ', ' · best time: ') . $svar['beste_tid'] : '')
-                . ($svar['lop_navn'] !== '' ? t_(' · målløp: ', ' · goal race: ') . $svar['lop_navn'] : '')
                 . t_(' · siste 90 dager: ', ' · last 90 days: ') . $svar['siste_90d']
-                . ($svar['toppuke_aar'] !== null ? t_(' · toppuke: ', ' · peak week: ') . $svar['toppuke_aar'] . ' km' : '')
-                . ($svar['fjellvane'] !== null ? t_(' · fjellvane: ', ' · mountain experience: ') . $svar['fjellvane'] : '') . '.';
+                . ($svar['hviledag_dag'] !== null ? t_(' · fridager: ', ' · rest days: ') . $svar['hviledag_dag'] : '') . '.';
         if (is_array($vl_d)) {
             $vl_d['endringer'] = $vl_d['endringer'] ?? [];
             array_unshift($vl_d['endringer'], ['dato' => date('d.m \\k\\l. H:i'),
@@ -274,35 +189,22 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && $rad && !$vs_rate && trim($_POST["n
                     "header" => "Content-Type: application/x-www-form-urlencoded\r\n",
                     "content" => http_build_query([
                         "chat_id" => defined("TRENI_ODD_CHAT") ? TRENI_ODD_CHAT : TRENI_TRENER_CHAT,   // S-87: drift, ikke trener
-                        "text" => "📝 Skjema 2 levert (S-87): " . $rad["navn"]
+                        "text" => "📝 Skjema 2 levert (onboarding v3): " . $rad["navn"]
                                 . " (id " . $rad["id"] . ")\n"
                                 . "Side: https://min.treni.no/venteliste.php?t=" . $kode . "\n"
                                 . "Mål: " . $svar["maal"] . "\n"
                                 . "Alder: " . $svar["alder"]
+                                . ($svar["hoyde"] !== null && $svar["vekt"] !== null ? " · høyde/vekt oppgitt" : " · høyde/vekt ikke oppgitt")
                                 . " · km/uke: " . $svar["km_uke"]
                                 . " · underlag: " . $svar["underlag"] . "\n"
-                                . "Økter: " . ($svar["n_okter"] !== null ? $svar["n_okter"] . " løp" : "løp ikke oppgitt")
-                                . " · " . ($svar["n_styrke"] !== null ? $svar["n_styrke"] . " styrke" : "styrke ikke oppgitt")
-                                . " · " . ($svar["n_alternativ"] !== null ? $svar["n_alternativ"] . " annen trening" : "annen trening ikke oppgitt")
-                                . ($svar["alternativ_hva"] !== "" ? " (" . $svar["alternativ_hva"] . ")" : "") . "\n"
+                                . "Økter: " . ($svar["n_okter"] !== null ? $svar["n_okter"] . " løp/uke" : "ikke oppgitt")
+                                . ($svar["lengste_30d"] !== null ? " · lengste siste måned " . $svar["lengste_30d"] . " km" : "") . "\n"
                                 . "Puls: " . ($svar["puls"] ?? "ukjent")
                                 . " · beste tid: " . ($svar["beste_tid"] ?: "ingen") . "\n"
-                                . ($svar["lop_navn"] !== "" ? "Målløp: " . $svar["lop_navn"]
-                                    . " (" . ($svar["lop_km"] ?? "?") . " km, " . ($svar["lop_type"] ?? "?")
-                                    . ", +" . ($svar["lop_hm_opp"] ?? "?") . "/−" . ($svar["lop_hm_ned"] ?? "?") . " hm)\n" : "")
-                                . ($svar["rekorder"] !== "" ? "Rekorder: " . $svar["rekorder"] . "\n" : "")
                                 . "Siste 90 d: " . $svar["siste_90d"]
-                                . ($svar["km_uke_90d"] !== null ? " · " . $svar["km_uke_90d"] . " km/u" : "")
-                                . ($svar["lengste_90d"] !== null ? " · lengste " . $svar["lengste_90d"] . " km" : "")
-                                . ($svar["timer_lop_uke"] !== null ? " · " . $svar["timer_lop_uke"] . " t løping/uke" : "")
-                                . ($svar["timer_alt_uke"] !== null ? " + " . $svar["timer_alt_uke"] . " t alternativ (aerob)" : "")
-                                . ($svar["timer_styrke_uke"] !== null ? " + " . $svar["timer_styrke_uke"] . " t styrke" : "")
-                                . ($svar["timer_uke"] !== null ? " (oppgitt totalt: " . $svar["timer_uke"] . " t)" : "")
-                                . ($svar["toppuke_aar"] !== null ? " · toppuke " . $svar["toppuke_aar"] . " km" : "")
-                                . ($svar["fjellvane"] !== null ? " · fjellvane: " . $svar["fjellvane"] : "")
-                                . ($svar["lop_prioritet"] !== null ? " · løp-prioritet: " . $svar["lop_prioritet"] : "") . "\n\n"
-                                . "Klokke: " . ($klokke_koblet ? "koblet (Intervals)" : "IKKE koblet ennå") . ". "
-                                . "Onboarding-vakta leser svarene inn og bygger planen når historikken er inne (B-57)."]),
+                                . " · fridager: " . ($svar["hviledag_dag"] ?? "ingen oppgitt") . "\n\n"
+                                . "Klokke: " . ($klokke_koblet ? "koblet (Intervals)" : "ikke koblet ennå") . ". "
+                                . "Onboarding v3: den foreløpige planen bygges på svarene nå, resten av spørsmålene kommer på min side ett om dagen."]),
                     "timeout" => 8]]));
         }
         // Revisjon 10.09 (punkt 31): «bygges»-stubben til den pensjonerte
@@ -395,12 +297,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && $rad && !$vs_rate && trim($_POST["n
 
 <?php elseif ($sendt || $rad["svart_at"]): ?>
   <h1 style="font-size:clamp(1.6rem,5vw,2.2rem)"><?= t_('Takk, ', 'Thanks, ') ?><?= htmlspecialchars(mb_convert_case(explode(" ", trim((string) $rad["navn"]))[0], MB_CASE_TITLE, "UTF-8")) ?>! 🎉</h1>
-  <?php // F-36 (Odd 10.09): kvitteringen er én skjerm med én knapp. Siden din sier resten. ?>
-  <?php if ($klokke_koblet): ?>
-  <p><?= t_('Svarene dine er mottatt. Nå bygger vi planen din på historikken fra klokka, og siden din viser fremdriften.', 'Your answers are in. Now we build your plan on the history from your watch, and your page shows the progress.') ?></p>
-  <?php else: ?>
-  <p><?= t_('Svarene dine er mottatt. Ett steg igjen: koble klokka. Siden din viser deg hvordan.', 'Your answers are in. One step left: connect your watch. Your page shows you how.') ?></p>
-  <?php endif; ?>
+  <?php // F-36 (Odd 10.09): kvitteringen er én skjerm med én knapp. Onboarding v3 (F-246):
+        // planen bygges på svarene med en gang, klokka kobles fra planen på min side. ?>
+  <p><?= t_('Svarene dine er lagret. Planen din bygges nå, det tar et par minutter. Gå tilbake til siden din.', 'Your answers are saved. Your plan is being built now, it takes a couple of minutes. Go back to your page.') ?></p>
   <script>try { Object.keys(localStorage).forEach(function (n) {
     if (n.indexOf('treni_kladd_') === 0) { localStorage.removeItem(n); }
   }); } catch (e) {}</script>
@@ -413,16 +312,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && $rad && !$vs_rate && trim($_POST["n
   <?php if (isset($_GET['ny'])): // rett fra «meld interesse» (Odd 20.08) ?>
   <p style="background:color-mix(in srgb, var(--accent, hsl(84 80% 34%)) 12%, transparent);
      border-radius:10px; padding:.6rem .9rem; font-weight:650; margin-bottom:.4rem">
-     <?= t_('✅ Takk! Steg 3 av 4: spørsmålene.', '✅ Thanks! Step 3 of 4: the questions.') ?></p>
+     <?= t_('✅ Takk! Nå: spørsmålene.', '✅ Thanks! Now: the questions.') ?></p>
   <?php endif; ?>
   <h1 style="font-size:clamp(1.6rem,5vw,2.2rem)"><?= t_('Velkommen, ', 'Welcome, ') ?><?= htmlspecialchars(mb_convert_case(explode(" ", trim((string) $rad["navn"]))[0], MB_CASE_TITLE, "UTF-8")) ?>!</h1>
-  <?php // F-36 (Odd 10.09): én seksjon per skjerm, så ingressen er én setning. ?>
-  <?php if ($klokke_koblet): ?>
-  <?php // F-38 (Odd 10.09, punkt 2): $klokke_koblet er samme oppslag som kvitteringen bruker. ?>
-  <p><?= t_('Klokka er koblet, og øktene dine kommer inn. Steg 3 av 4 er spørsmålene, i tre deler.', 'Your watch is connected, and your activities are coming in. Step 3 of 4 is the questions, in three parts.') ?></p>
-  <?php else: ?>
-  <p><?= t_('Spørsmålene er rammene for planen din, i tre deler. Klokka kobler du på siden din etterpå.', 'The questions are the frames for your plan, in three parts. You connect the watch on your page afterwards.') ?></p>
-  <?php endif; ?>
+  <?php // F-36 (Odd 10.09): én seksjon per skjerm, så ingressen er én setning.
+        // Onboarding v3 (F-246): to vinduer, planen bygges på svarene med en gang. ?>
+  <p><?= t_('Fire minutter, så bygger vi den første uka di. To vinduer: først deg, så løpinga di.', 'Four minutes, then we build your first week. Two windows: first you, then your running.') ?></p>
 
   <?php if ($feil): ?><p class="skjema-feil"><?= htmlspecialchars($feil) ?></p><?php endif; ?>
   <?php // Revisjon 03.09: svarene bevares ved valideringsfeil (før ble alt tømt)
@@ -433,12 +328,30 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && $rad && !$vs_rate && trim($_POST["n
         data-kladd="skjema2" data-en="<?= $EN ? '1' : '0' ?>"
         data-kladd-ferdig="<?= $sendt ? '1' : '0' ?>"
         data-sender="<?= $EN ? 'Sending …' : 'Sender …' ?>"
-        data-send="<?= $EN ? 'Submit' : 'Send inn' ?>">
+        data-send="<?= $EN ? 'Save and build my plan' : 'Lagre og lag planen min' ?>">
     <input type="hidden" name="k" value="<?= htmlspecialchars($kode) ?>">
     <input type="text" name="nettside" value="" style="display:none" tabindex="-1" autocomplete="off">
 
-    <fieldset class="vl-kort">
-      <legend><?= t_('1 · Om deg og målet ditt 🎯', '1 · About you and your goal 🎯') ?></legend>
+    <fieldset class="vl-kort" data-vindu="<?= t_('Deg', 'You') ?>">
+      <legend><?= t_('Deg 🫀', 'You 🫀') ?></legend>
+      <div class="vl-to">
+        <label><?= t_('Alder', 'Age') ?>
+          <input type="number" name="alder" min="10" max="99" required value="<?= $val('alder') ?>"></label>
+        <label><?= t_('Høyeste puls du har målt siste halvår', 'Highest heart rate you have measured in the last six months') ?>
+          <input type="number" name="puls" min="120" max="230" required placeholder="<?= t_('f.eks. 185', 'e.g. 185') ?>" value="<?= $val('puls') ?>">
+          <span class="vl-hint"><?= t_('Har du ikke målt, bruk det høyeste tallet klokka har vist deg på en hard økt. Målt puls fra klokka teller mer enn tallet her.', 'If you have not measured it, use the highest number your watch has shown you in a hard session. Measured heart rate from your watch counts more than the number here.') ?></span></label>
+      </div>
+      <div class="vl-to">
+        <label><?= t_('Høyde (cm)', 'Height (cm)') ?>
+          <input type="number" name="hoyde" min="100" max="250" step="1" placeholder="<?= t_('f.eks. 178', 'e.g. 178') ?>" value="<?= $val('hoyde') ?>"></label>
+        <label><?= t_('Vekt (kg)', 'Weight (kg)') ?>
+          <input type="number" name="vekt" min="30" max="250" step="0.5" placeholder="<?= t_('f.eks. 74', 'e.g. 74') ?>" value="<?= $val('vekt') ?>"></label>
+      </div>
+      <span class="vl-hint"><?= t_('Høyde og vekt brukes bare til å velge riktig regelverk for kroppen din, og vises aldri på siden.', 'Height and weight are used only to pick the right rules for your body, and are never shown on your page.') ?></span>
+    </fieldset>
+
+    <fieldset class="vl-kort" data-vindu="<?= t_('Løpinga di', 'Your running') ?>">
+      <legend><?= t_('Løpinga di 👟', 'Your running 👟') ?></legend>
       <label><?= t_('Hva er målet ditt med løpinga? Kort: hva og når.', 'What is your goal with running? Briefly: what and by when.') ?>
         <textarea name="maal" rows="3" required
           placeholder="<?= t_('F.eks.: gjøre det bra i noen få fjelløp i året …', 'e.g. do well in a few mountain races a year …') ?>"><?= htmlspecialchars(trim($_POST["maal"] ?? "")) ?></textarea></label>
@@ -451,118 +364,34 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && $rad && !$vs_rate && trim($_POST["n
 
 <i><?= t_('Det tar vi med oss. Skriv målet ditt over, kort: hva vil du oppnå, og når?', 'We keep that. Write your goal above, briefly: what do you want to achieve, and by when?') ?></i></span>
       <?php endif; ?>
-      <label><?= t_('Alder', 'Age') ?>
-        <input type="number" name="alder" min="10" max="99" required value="<?= $val('alder') ?>"></label>
-    </fieldset>
-
-    <fieldset class="vl-kort">
-      <legend><?= t_('2 · Puls og tider 🫀', '2 · Heart rate and times 🫀') ?></legend>
-      <label><?= t_('Høyeste puls du har målt i konkurranse eller hard økt siste halvår', 'Highest heart rate you have measured in a race or hard session in the last six months') ?>
-        <input type="number" name="puls" min="120" max="230" required placeholder="<?= t_('f.eks. 185', 'e.g. 185') ?>" value="<?= $val('puls') ?>">
-        <span class="vl-hint"><?= t_('Har du ikke målt, bruk det høyeste tallet klokka har vist deg på en hard økt. Treneren ser på tallet før sonene settes, og målt puls fra klokka teller mer enn tallet her.', 'If you have not measured it, use the highest number your watch has shown you in a hard session. Your coach checks the number before the zones are set, and measured heart rate from your watch counts more than the number here.') ?></span></label>
-      <label><?= t_('Beste tid siste halvår, med distanse', 'Best time in the last six months, with distance') ?> <span class="vl-hint"><?= t_('ingen løp? Skriv «ingen»', 'no races? Write "none"') ?></span>
-        <input type="text" name="beste_tid" required maxlength="120" placeholder="<?= t_('F.eks. 10 km på 52:30', 'e.g. 10 km in 52:30') ?>" value="<?= $val('beste_tid') ?>"></label>
-      <label><?= t_('Personlige rekorder, flate løp og motbakke/fjelløp', 'Personal records, flat races and uphill/mountain races') ?> <span class="vl-hint"><?= t_('ingen? Skriv «ingen»', 'none? Write "none"') ?></span>
-        <textarea name="rekorder" rows="2" required placeholder="<?= t_('F.eks.: 5 km 21:30 · 10 km 45:10 · Storheia Opp 58:20', 'e.g. 5 km 21:30 · 10 km 45:10 · Storheia Uphill 58:20') ?>"><?= $val('rekorder') ?></textarea></label>
-    </fieldset>
-
-    <fieldset class="vl-kort">
-      <legend><?= t_('3 · Treningsuka di 👟', '3 · Your training week 👟') ?></legend>
-      <div class="vl-to">
-        <label><?= t_('Kilometer i en vanlig uke', 'Kilometres in a normal week') ?>
-          <input type="number" name="km_uke" min="1" max="200" step="0.5" required value="<?= $val('km_uke') ?>"></label>
-        <label><?= t_('Hva er det lengste du har løpt de siste 30 dagene? (km)', 'Longest run in the last 30 days (km)') ?>
-          <input type="number" name="lengste_30d" min="0" max="200" step="0.5"
-                 placeholder="<?= t_('f.eks. 12', 'e.g. 12') ?>" value="<?= $val('lengste_30d') ?>"></label>
-        <label><?= t_('Minst så mange km vil jeg starte med i uke 1', 'I want to start week 1 with at least this many km') ?>
-          <input type="number" name="start_km" min="1" max="200" step="0.5" required value="<?= $val('start_km') ?>"></label>
-      </div>
       <label><?= t_('Hvor løper du mest?', 'Where do you run most?') ?>
         <select name="underlag">
           <option value="terreng"<?= $sel('underlag', 'terreng', 'begge') ?>><?= t_('Mest terreng og fjell', 'Mostly trails and mountains') ?></option>
           <option value="vei"<?= $sel('underlag', 'vei', 'begge') ?>><?= t_('Mest vei og asfalt', 'Mostly road and asphalt') ?></option>
           <option value="begge"<?= $sel('underlag', 'begge', 'begge') ?>><?= t_('Begge deler', 'Both') ?></option>
         </select></label>
-      <label><?= t_('Hvordan tenker du om løpemengden fremover?', 'How do you feel about your running volume going forward?') ?>
-        <select name="volum_onske">
-          <option value="stabil"<?= $sel('volum_onske', 'stabil', 'stabil') ?>><?= t_('Jeg ligger på et volum som passer meg nå', 'My current volume suits me') ?></option>
-          <option value="oke"<?= $sel('volum_onske', 'oke', 'stabil') ?>><?= t_('Jeg ønsker å øke løpemengden gradvis', 'I want to increase my volume gradually') ?></option>
-          <option value="usikker"<?= $sel('volum_onske', 'usikker', 'stabil') ?>><?= t_('Usikker, ta det opp med treneren', 'Unsure, discuss with the coach') ?></option>
-        </select></label>
+      <label><?= t_('Beste tid siste halvår, med distanse', 'Best time in the last six months, with distance') ?> <span class="vl-hint"><?= t_('ingen løp? Skriv «ingen»', 'no races? Write "none"') ?></span>
+        <input type="text" name="beste_tid" required maxlength="120" placeholder="<?= t_('F.eks. 10 km på 52:30', 'e.g. 10 km in 52:30') ?>" value="<?= $val('beste_tid') ?>"></label>
       <div class="vl-to">
+        <label><?= t_('Kilometer i en vanlig uke', 'Kilometres in a normal week') ?>
+          <input type="number" name="km_uke" min="1" max="200" step="0.5" required value="<?= $val('km_uke') ?>"></label>
         <label><?= t_('Løpeøkter per uke', 'Running sessions per week') ?>
-          <input type="number" name="n_okter" min="1" max="14" step="1"
+          <input type="number" name="n_okter" min="1" max="14" step="1" required
                  placeholder="<?= t_('f.eks. 3', 'e.g. 3') ?>" value="<?= $val('n_okter') ?>">
-          <span class="vl-hint"><?= t_('Bare løpingen. Styrke og annen trening føres i feltene ved siden av, så de kommer i tillegg og ikke i stedet for.', 'Running only. Strength and other training go in the fields next to this, so they count in addition, not instead.') ?></span></label>
-        <label><?= t_('Styrkeøkter per uke', 'Strength sessions per week') ?>
-          <input type="number" name="n_styrke" min="0" max="7" step="1"
-                 placeholder="<?= t_('0 om du ikke trener styrke', '0 if you don\'t do strength') ?>" value="<?= $val('n_styrke') ?>">
-          <span class="vl-hint"><?= t_('Kommer i tillegg til løpeøktene, ikke i stedet for.', 'In addition to the running sessions, not instead of them.') ?></span></label>
+          <span class="vl-hint"><?= t_('Bare løpingen. Styrke og annen trening spør vi om etterpå.', 'Running only. We ask about strength and other training afterwards.') ?></span></label>
       </div>
       <div class="vl-to">
-        <label><?= t_('Annen trening, antall økter per uke', 'Other training, sessions per week') ?>
-          <input type="number" name="n_alternativ" min="0" max="14" step="1"
-                 placeholder="<?= t_('0 om du ikke har noe', '0 if none') ?>" value="<?= $val('n_alternativ') ?>">
-          <span class="vl-hint"><?= t_('Alt annet enn løping og styrke.', 'Everything except running and strength.') ?></span></label>
-        <label><?= t_('Hva er den andre treningen?', 'What is the other training?') ?>
-          <input type="text" name="alternativ_hva" maxlength="120"
-                 placeholder="<?= t_('F.eks, fotballtrening, sykkel, svømming', 'e.g. football practice, cycling, swimming') ?>" value="<?= $val('alternativ_hva') ?>">
-          <span class="vl-hint"><?= t_('Vi trenger å vite hva det er: fotball belaster kroppen helt annerledes enn svømming.', 'We need to know what it is: football loads the body very differently from swimming.') ?></span></label>
-      </div>
-      <label><?= t_('Driver du med annen trening ved siden av løpinga? Utdyp.', 'Do you do other training alongside your running? Tell us more.') ?> <span class="vl-hint"><?= t_('ingen? Skriv «ingen»', 'none? Write "none"') ?></span>
-        <textarea name="alternativ" rows="2" required placeholder="<?= t_('F.eks.: sykkel 1×/uke, ski om vinteren, fotball på mandager …', 'e.g. cycling once a week, skiing in winter, football on Mondays …') ?>"><?= $val('alternativ') ?></textarea></label>
-      <label><?= t_('Hva gjør du i styrketreningen?', 'What do you do in your strength training?') ?> <span class="vl-hint"><?= t_('ingen styrke? Skriv «ingen»', 'no strength training? Write "none"') ?></span>
-        <textarea name="styrke" rows="2" required placeholder="<?= t_('F.eks.: knebøy, utfall, legghev, mest overkropp …', 'e.g. squats, lunges, calf raises, mostly upper body …') ?>"><?= $val('styrke') ?></textarea></label>
-      <label><?= t_('Hvordan har treningen din vært de siste 3 månedene?', 'How has your training been over the last 3 months?') ?>
-        <select name="siste_90d">
-          <option value="jevn"<?= $sel('siste_90d', 'jevn', 'jevn') ?>><?= t_('Jevn, trent omtrent som nå hele perioden', 'Steady, trained about like now the whole period') ?></option>
-          <option value="ujevn"<?= $sel('siste_90d', 'ujevn', 'jevn') ?>><?= t_('Ujevn, litt av og på', 'Uneven, on and off') ?></option>
-          <option value="opphold"<?= $sel('siste_90d', 'opphold', 'jevn') ?>><?= t_('Opphold, pause eller svært lite trening', 'Break, a pause or very little training') ?></option>
-          <option value="mer_for"<?= $sel('siste_90d', 'mer_for', 'jevn') ?>><?= t_('Jeg trente MER før enn jeg gjør nå', 'I trained MORE before than I do now') ?></option>
-        </select></label>
-      <div class="vl-to">
-        <label><?= t_('Typisk ukevolum siste 3 måneder (km, valgfritt)', 'Typical weekly volume last 3 months (km, optional)') ?>
-          <input type="number" name="km_uke_90d" min="0" max="250" step="0.5"
-                 placeholder="<?= t_('Omtrent som nå? La stå tomt', 'About like now? Leave blank') ?>" value="<?= $val('km_uke_90d') ?>"></label>
-        <label><?= t_('Lengste tur siste 3 måneder (km, valgfritt)', 'Longest run last 3 months (km, optional)') ?>
-          <input type="number" name="lengste_90d" min="0" max="200" step="0.5"
-                 placeholder="<?= t_('f.eks. 18', 'e.g. 18') ?>" value="<?= $val('lengste_90d') ?>"></label>
-      </div>
-      <div class="vl-to">
-        <label><?= t_('Timer LØPING per uke i en vanlig uke (valgfritt)', 'Hours of RUNNING per week in a normal week (optional)') ?>
-          <input type="number" name="timer_lop_uke" min="0" max="30" step="0.5"
-                 placeholder="<?= t_('f.eks. 5', 'e.g. 5') ?>" value="<?= $val('timer_lop_uke') ?>">
-          <span class="vl-hint"><?= t_('Bare løpingen. Det er løpetimene som avgjør hvor mye kroppen tåler av harde økter. Løper du i fjellet, sier timene mer om belastningen enn kilometerne gjør: en bratt time er ikke det samme som en flat time.', 'Running only. Running hours decide how much hard training your body can take. In the mountains, hours say more about the load than kilometres do: a steep hour is not a flat hour.') ?></span></label>
-        <label><?= t_('Timer alternativ trening per uke (valgfritt)', 'Hours of other endurance training per week (optional)') ?>
-          <input type="number" name="timer_alt_uke" min="0" max="30" step="0.5"
-                 placeholder="<?= t_('f.eks. 4', 'e.g. 4') ?>" value="<?= $val('timer_alt_uke') ?>">
-          <span class="vl-hint"><?= t_('Annen kondisjonstrening, ski, sykkel, svømming, gåturer i fjellet, roing. Alt som gir pust og puls uten å være løping. Styrke skal IKKE med her, den har sitt eget felt under.', 'Other endurance training, skiing, cycling, swimming, mountain hiking, rowing. Anything that gets you breathing without being running. Strength does NOT go here; it has its own field below.') ?></span></label>
-      </div>
-      <div class="vl-to">
-        <label><?= t_('Timer styrke per uke', 'Hours of strength per week') ?>
-          <input type="number" name="timer_styrke_uke" min="0" max="20" step="0.5" required
-                 placeholder="<?= t_('0 om du ikke trener styrke', '0 if you do not do strength') ?>" value="<?= $val('timer_styrke_uke') ?>">
-          <span class="vl-hint"><?= t_('0 er et godt svar. Styrkeøktene dine, målt i timer. De telles for seg, styrke bygger kroppen din, men belaster den på en annen måte enn løping og kondisjon, og skal derfor ikke blandes inn i utholdenhetstimene.', 'Your strength sessions, in hours. Counted separately, strength builds your body but loads it differently from running and endurance, so it is not mixed into the endurance hours.') ?></span></label>
-      </div>
-      <div class="vl-to">
-        <label><?= t_('Mest du har løpt i én uke det siste året (km, valgfritt)', 'Most you have run in one week in the last year (km, optional)') ?>
-          <input type="number" name="toppuke_aar" min="0" max="300" step="0.5"
-                 placeholder="<?= t_('f.eks. 45', 'e.g. 45') ?>" value="<?= $val('toppuke_aar') ?>"></label>
-        <label><?= t_('Er du vant til høydemeter og nedoverløping?', 'Are you used to elevation and downhill running?') ?>
-          <select name="fjellvane" required>
-            <option value=""><?= t_('Velg …', 'Choose …') ?></option>
-            <option value="mye"<?= $sel('fjellvane', 'mye', '') ?>><?= t_('Mye, fast del av treningen min', 'A lot, a regular part of my training') ?></option>
-            <option value="en_del"<?= $sel('fjellvane', 'en_del', '') ?>><?= t_('En del, jevnlig', 'Some, regularly') ?></option>
-            <option value="lite"<?= $sel('fjellvane', 'lite', '') ?>><?= t_('Lite, av og til', 'Little, now and then') ?></option>
-            <option value="ingen"<?= $sel('fjellvane', 'ingen', '') ?>><?= t_('Ingen, mest flatt', 'None, mostly flat') ?></option>
+        <label><?= t_('Lengste tur siste 30 dager (km)', 'Longest run in the last 30 days (km)') ?>
+          <input type="number" name="lengste_30d" min="0" max="200" step="0.5"
+                 placeholder="<?= t_('f.eks. 12', 'e.g. 12') ?>" value="<?= $val('lengste_30d') ?>"></label>
+        <label><?= t_('De siste 3 månedene', 'The last 3 months') ?>
+          <select name="siste_90d">
+            <option value="jevn"<?= $sel('siste_90d', 'jevn', 'jevn') ?>><?= t_('Jevn, trent omtrent som nå', 'Steady, trained about like now') ?></option>
+            <option value="ujevn"<?= $sel('siste_90d', 'ujevn', 'jevn') ?>><?= t_('Ujevn, litt av og på', 'Uneven, on and off') ?></option>
+            <option value="opphold"<?= $sel('siste_90d', 'opphold', 'jevn') ?>><?= t_('Opphold, pause eller svært lite', 'Break, a pause or very little') ?></option>
+            <option value="mer_for"<?= $sel('siste_90d', 'mer_for', 'jevn') ?>><?= t_('Jeg trente MER før enn nå', 'I trained MORE before than now') ?></option>
           </select></label>
       </div>
-      <span class="vl-hint"><?= t_('Planen starter på volumet kroppen din er vant til, og bygges trygt derfra. De siste 3 månedene forteller oss hva kroppen din faktisk tåler nå: derfor spør vi.', 'The plan starts at the volume your body is used to and builds safely from there. The last 3 months tell us what your body can actually handle now, that is why we ask.') ?></span>
-    </fieldset>
-
-    <fieldset class="vl-kort" id="uka-di">
-      <legend><?= t_('4 · Uka di 📅', '4 · Your week 📅') ?></legend>
-      <p class="vl-hint" style="margin:0 0 .9rem"><?= t_('Rammer for planen: den legger aldri en løpeøkt på fridagene dine, og langturen går aldri over taket ditt.', 'Frames for the plan: it never puts a run on your rest days, and the long run never exceeds your cap.') ?></p>
       <div class="vl-sp"><?= t_('Er det faste dager du vil ha fri?', 'Are there fixed days you want off?') ?> <span class="vl-hint"><?= t_('(velg én eller flere)', '(pick one or more)') ?></span></div>
       <div class="vl-chips" id="hviledager">
           <label class="vl-chip"><input type="checkbox" name="hviledag[]" value="ingen" <?= in_array('ingen', (array) ($_POST['hviledag'] ?? []), true) ? 'checked' : '' ?>><span><?= t_('ingen fast dag', 'no fixed day') ?></span></label>
@@ -574,101 +403,43 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && $rad && !$vs_rate && trim($_POST["n
           <label class="vl-chip"><input type="checkbox" name="hviledag[]" value="lordag" <?= in_array('lordag', (array) ($_POST['hviledag'] ?? []), true) ? 'checked' : '' ?>><span><?= t_('lørdag', 'Saturday') ?></span></label>
           <label class="vl-chip"><input type="checkbox" name="hviledag[]" value="sondag" <?= in_array('sondag', (array) ($_POST['hviledag'] ?? []), true) ? 'checked' : '' ?>><span><?= t_('søndag', 'Sunday') ?></span></label>
       </div>
-      <div class="vl-to">
-        <label><?= t_('Er mølle et alternativ for deg?', 'Is a treadmill an option for you?') ?>
-          <select name="molle" required>
-            <option value=""<?= $sel('molle', '', '') ?>><?= t_('Velg …', 'Choose …') ?></option>
-            <option value="1"<?= $sel('molle', '1', '') ?>><?= t_('Ja', 'Yes') ?></option>
-            <option value="0"<?= $sel('molle', '0', '') ?>><?= t_('Nei', 'No') ?></option>
-          </select></label>
-        <label><?= t_('Tak for langturen (km)', 'Cap for the long run (km)') ?> <span class="vl-hint"><?= t_('planen går aldri over dette', 'the plan never exceeds this') ?></span>
-          <input type="number" name="langtur_maks_km" min="3" max="100" step="1" required placeholder="<?= t_('f.eks. 20', 'e.g. 20') ?>" value="<?= htmlspecialchars((string) ($_POST['langtur_maks_km'] ?? '')) ?>"></label>
-      </div>
-      <div class="vl-to" style="margin-top:.8rem">
-        <label><?= t_('Hvor tar du helst langturen?', 'Where do you prefer the long run?') ?>
-          <select name="langtur_sted" required>
-            <option value=""<?= $sel('langtur_sted', '', '') ?>><?= t_('Velg …', 'Choose …') ?></option>
-            <option value="vei"<?= $sel('langtur_sted', 'vei', '') ?>><?= t_('Vei og asfalt', 'Road and asphalt') ?></option>
-            <option value="terreng"<?= $sel('langtur_sted', 'terreng', '') ?>><?= t_('Terreng og fjell', 'Trails and mountains') ?></option>
-            <option value="begge"<?= $sel('langtur_sted', 'begge', '') ?>><?= t_('Begge deler', 'Both') ?></option>
-          </select></label>
-        <label><?= t_('Hvor tar du helst de korte øktene?', 'Where do you prefer the short sessions?') ?>
-          <select name="korte_sted" required>
-            <option value=""<?= $sel('korte_sted', '', '') ?>><?= t_('Velg …', 'Choose …') ?></option>
-            <option value="vei"<?= $sel('korte_sted', 'vei', '') ?>><?= t_('Vei og asfalt', 'Road and asphalt') ?></option>
-            <option value="terreng"<?= $sel('korte_sted', 'terreng', '') ?>><?= t_('Terreng og fjell', 'Trails and mountains') ?></option>
-            <option value="begge"<?= $sel('korte_sted', 'begge', '') ?>><?= t_('Begge deler', 'Both') ?></option>
-          </select></label>
-      </div>
-    </fieldset>
-
-    <fieldset class="vl-kort">
-      <legend><?= t_('5 · Løpet du sikter mot 🏁', '5 · The race you are aiming for 🏁') ?> <span class="vl-hint"><?= t_('(valgfritt, jo mer vi vet, jo bedre)', '(optional, the more we know, the better)') ?></span></legend>
-      <label><?= t_('Løpets navn og dato', 'Race name and date') ?>
-        <input type="text" name="lop_navn" placeholder="<?= t_('F.eks. Tromsø Skyrace, 8. august 2027', 'e.g. Tromsø Skyrace, 8 August 2027') ?>" value="<?= $val('lop_navn') ?>"></label>
-      <div class="vl-to">
-        <label><?= t_('Lengde (km)', 'Distance (km)') ?>
-          <input type="number" name="lop_km" min="1" max="300" step="0.1" value="<?= $val('lop_km') ?>"></label>
-        <label><?= t_('Type løp', 'Type of race') ?>
-          <select name="lop_type">
-            <option value=""><?= t_('Velg …', 'Choose …') ?></option>
-            <option value="flatt"<?= $sel('lop_type', 'flatt', '') ?>><?= t_('Flatt (vei/bane)', 'Flat (road/track)') ?></option>
-            <option value="motbakke"<?= $sel('lop_type', 'motbakke', '') ?>><?= t_('Motbakke (bare opp)', 'Uphill only') ?></option>
-            <option value="opp_og_ned"<?= $sel('lop_type', 'opp_og_ned', '') ?>><?= t_('Opp og ned', 'Up and down') ?></option>
-            <option value="fjell"<?= $sel('lop_type', 'fjell', '') ?>><?= t_('Fjelløp / skyrace / ultra', 'Mountain race / skyrace / ultra') ?></option>
-          </select></label>
-      </div>
-      <div class="vl-to">
-        <label><?= t_('Høydemeter opp', 'Elevation gain (m)') ?>
-          <input type="number" name="lop_hm_opp" min="0" max="20000" value="<?= $val('lop_hm_opp') ?>"></label>
-        <label><?= t_('Høydemeter ned', 'Elevation loss (m)') ?>
-          <input type="number" name="lop_hm_ned" min="0" max="20000" value="<?= $val('lop_hm_ned') ?>"></label>
-      </div>
-      <label><?= t_('Hvor viktig er dette løpet for deg?', 'How important is this race to you?') ?> <span class="vl-hint"><?= t_('(må velges når du har oppgitt et løp)', '(required when you have named a race)') ?></span>
-        <select name="lop_prioritet" id="lop_prioritet">
-          <option value=""><?= t_('Velg …', 'Choose …') ?></option>
-          <option value="A"<?= $sel('lop_prioritet', 'A', '') ?>><?= t_('A, hovedmålet mitt, her vil jeg prestere maksimalt', 'A, my main goal, I want to perform at my best') ?></option>
-          <option value="B"<?= $sel('lop_prioritet', 'B', '') ?>><?= t_('B, viktig delmål på veien', 'B, an important stepping stone') ?></option>
-          <option value="C"<?= $sel('lop_prioritet', 'C', '') ?>><?= t_('C, vil gjøre det bra, men ikke hovedmålet', 'C, want to do well, but not the main goal') ?></option>
-          <option value="D"<?= $sel('lop_prioritet', 'D', '') ?>><?= t_('D, testløp / del av treningen', 'D, test race / part of training') ?></option>
-        </select></label>
-    </fieldset>
-
-    <fieldset class="vl-kort" style="border:1.5px solid hsl(148 15% 84%)" id="helsesamtykke">
-      <legend><?= t_('6 · Samtykke til helseopplysninger 🔏', '6 · Consent to health data 🔏') ?></legend>
+      <span class="vl-hint"><?= t_('Planen starter på volumet kroppen din er vant til, og bygges trygt derfra. Resten av spørsmålene kommer på siden din etterpå, ett om dagen.', 'The plan starts at the volume your body is used to and builds safely from there. The rest of the questions come on your page afterwards, one a day.') ?></span>
+      <div id="helsesamtykke" style="border-top:1.5px solid hsl(var(--border)); padding-top:.9rem; margin-top:.3rem">
+      <div class="vl-sp"><?= t_('Samtykke til helseopplysninger 🔏', 'Consent to health data 🔏') ?></div>
       <label style="display:grid; grid-template-columns:auto 1fr; gap:.6rem; align-items:start; font-weight:400">
         <input type="checkbox" name="samtykke_helse" value="ja" required
                style="width:1.25rem; height:1.25rem; margin-top:.15rem"<?= (($_POST["samtykke_helse"] ?? "") === "ja") ? " checked" : "" ?>>
 <?php if ($EN): ?>
         <span><b>Yes, Treni may process health data about me.</b> This covers heart rate
-          from Strava and what I tell you about injuries, illness and my body. The data is
+          from my watch and what I tell you about injuries, illness and my body. The data is
           used only for my training guidance, seen only by my coach and Eirik Haugsnes and
           Odd Levi Paulsen, and sent as extracts to Anthropic to phrase the advice. I can
           withdraw consent at any time by writing to
-          <a href="mailto:hei@treni.no">hei@treni.no</a> or in my group.
+          <a href="mailto:hei@treni.no">hei@treni.no</a> or in the chat on my page.
           <span class="vl-hint" style="display:block; margin-top:.4rem">Heart rate, injuries and
           illness are health data. The law requires a separate yes from you before we can use
           them. Read the <a href="en/privacy.html" target="_blank" rel="noopener">privacy policy</a>.</span>
         </span>
 <?php else: ?>
         <span><b>Ja, Treni kan behandle helseopplysninger om meg.</b> Det gjelder puls fra
-          Strava og det jeg selv forteller om skader, sykdom og kroppen min. Opplysningene
+          klokka og det jeg selv forteller om skader, sykdom og kroppen min. Opplysningene
           brukes bare til treningsveiledningen min, sees bare av treneren min og
           Eirik Haugsnes og Odd Levi Paulsen, og sendes som utdrag til Anthropic for å lage rådtekst. Jeg kan
           trekke samtykket når som helst ved å skrive til
-          <a href="mailto:hei@treni.no">hei@treni.no</a> eller i gruppa mi.
+          <a href="mailto:hei@treni.no">hei@treni.no</a> eller i chatten på siden min.
           <span class="vl-hint" style="display:block; margin-top:.4rem">Puls, skader og sykdom
           er helseopplysninger. Loven krever et eget ja fra deg før vi kan bruke dem. Les
           <a href="personvern.html" target="_blank" rel="noopener">personvernerklæringen</a>.</span>
         </span>
 <?php endif; ?>
       </label>
+      </div>
     </fieldset>
 
-    <button class="btn vl-stor" type="submit"><?= t_('Send inn', 'Submit') ?></button>
+    <button class="btn vl-stor" type="submit"><?= t_('Lagre og lag planen min', 'Save and build my plan') ?></button>
   </form>
   <script src="kladd.js?v=3" defer></script>
-  <p class="liten" style="margin-top:1rem"><?= t_('Svarene brukes bare til å lage veiledningen din, og slettes hvis du ber om det. Du kan endre dem på siden din når planen er klar.', 'Your answers are used only to build your guidance, and deleted if you ask. You can edit them on your page once the plan is ready.') ?></p>
+  <p class="liten" style="margin-top:1rem"><?= t_('Svarene brukes bare til å lage veiledningen din, og slettes hvis du ber om det. Du kan endre dem på siden din når som helst.', 'Your answers are used only to build your guidance, and deleted if you ask. You can edit them on your page at any time.') ?></p>
 <?php endif; ?>
 
   <footer style="margin-top:3rem" class="liten">
@@ -677,8 +448,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && $rad && !$vs_rate && trim($_POST["n
   </footer>
 <script>
 // F-36 / B-63 (Odd 10.09.2026): «Onboardingen bør vise et og et valg i hvert
-// bilde.» Skjema 2 er derfor tre skjermer (Odd 10.09 kl. 15:1x: «tre er bra»):
-// 1 om deg og puls, 2 treningsuka og uka di, 3 løpet, samtykke og send. «Neste»
+// bilde.» Onboarding v3 (F-246, 19.09): skjema 2 er to vinduer, ett fieldset per
+// vindu: 1 «Deg», 2 «Løpinga di» med samtykke og send. «Neste»
 // validerer bare feltene på skjermen (nettleserens egen required-sjekk på de
 // synlige feltene), «Tilbake» går uten sjekk, kladden lagres ved hvert
 // skjermskifte, og skjermen huskes så en tilbakevending lander samme sted.
@@ -693,11 +464,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && $rad && !$vs_rate && trim($_POST["n
     return e.tagName === 'FIELDSET' && e.classList.contains('vl-kort');
   });
   if (seksjoner.length < 2) { return; }
-  // To seksjoner per skjerm: [1+2], [3+4], [5+6]. Skjermene er lister av seksjoner.
-  var skjermer = [];
-  for (var si = 0; si < seksjoner.length; si += 2) {
-    skjermer.push(seksjoner.slice(si, si + 2));
-  }
+  // Ett vindu per seksjon (F-246). Skjermene er lister av seksjoner, som før.
+  var skjermer = seksjoner.map(function (s) { return [s]; });
   var N = skjermer.length;
   function feltI(i) {
     var alle = [];
@@ -742,7 +510,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && $rad && !$vs_rate && trim($_POST["n
     skjermer.forEach(function (gruppe, j) {
       gruppe.forEach(function (s) { s.classList.toggle('vl-skjult', j !== aktiv); });
     });
-    fram.textContent = (aktiv + 1) + (EN ? ' of ' : ' av ') + N;
+    var navn = skjermer[aktiv][0].getAttribute('data-vindu') || '';
+    fram.textContent = (aktiv + 1) + (EN ? ' of ' : ' av ') + N + (navn ? ' · ' + navn : '');
     tilbake.hidden = aktiv === 0;
     neste.hidden = aktiv === N - 1;
     slutt.hidden = aktiv !== N - 1;
@@ -891,17 +660,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && $rad && !$vs_rate && trim($_POST["n
   f.addEventListener('invalid', slaPa, true);
 })();
 
-  // 79a (Eirik 14.09.2026): har løperen skrevet et løp, må A/B/C/D velges.
-  // Nettleserens required-sjekk tar det på skjerm 3, serveren sjekker det samme.
-  (function(){
-    var navn = document.querySelector('input[name="lop_navn"]');
-    var pri = document.getElementById('lop_prioritet');
-    if (!navn || !pri) { return; }
-    function oppdater(){ pri.required = navn.value.trim() !== ''; }
-    navn.addEventListener('input', oppdater);
-    navn.addEventListener('change', oppdater);
-    oppdater();
-  })();
+  // 79a (Eirik 14.09.2026): løpsbolken spørres nå på min side etter planen (F-246),
+  // A/B/C/D-kravet håndheves i svar_endre.php.
   (function(){
     function voks(t){ t.style.height='auto'; t.style.height=(t.scrollHeight+4)+'px'; }
     window.treniVoks = voks;

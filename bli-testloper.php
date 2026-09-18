@@ -52,6 +52,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $feil = $vern;
     } elseif ($navn === "" || !filter_var($epost, FILTER_VALIDATE_EMAIL)) {
         $feil = !empty($TRENI_EN) ? "Please fill in your name and a valid email address." : "Fyll inn navn og en gyldig e-postadresse.";
+    } elseif (strlen(preg_replace('/\D/', '', (string) ($_POST["mobil"] ?? ""))) < 8) {
+        // B-130 (Odd 19.09.2026): mobil er obligatorisk, så vi kan nå løperen når e-posten ikke åpnes
+        $feil = !empty($TRENI_EN) ? "Please fill in a mobile number (at least 8 digits)." : "Fyll inn mobilnummer (minst 8 siffer).";
     } elseif (!$er_coach && (($_POST["klokke"] ?? "") !== "ja")) {
         // Odd 08.09 (S-87): bare løpere med klokke slippes inn — planen bygges på øktene.
         $feil = !empty($TRENI_EN) ? "Treni needs a heart-rate watch that connects to Intervals.icu (Garmin, Polar, Suunto, Coros or Wahoo). Tick the box if you have one."
@@ -382,8 +385,8 @@ if (!empty($TRENI_EN)) { return; }
       <input type="email" name="epost" required autocomplete="email"
              value="<?php echo htmlspecialchars($_POST["epost"] ?? ""); ?>">
     </label>
-    <label>Mobil <span class="valgfritt">(valgfritt, så kan vi nå deg om noe stopper opp)</span>
-      <input type="tel" name="mobil" autocomplete="tel" placeholder="f.eks. 900 00 000"
+    <label>Mobil <span class="valgfritt">(så vi kan nå deg om noe stopper opp)</span>
+      <input type="tel" name="mobil" required minlength="8" autocomplete="tel" placeholder="f.eks. 900 00 000"
              value="<?php echo htmlspecialchars($_POST["mobil"] ?? ""); ?>">
     </label>
     <?php // Telegram-feltet fjernet 13.09.2026 (Odd): all løperkommunikasjon skjer i chatten på min side.
