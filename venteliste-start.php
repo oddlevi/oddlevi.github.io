@@ -186,6 +186,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && $rad && !$vs_rate && trim($_POST["n
             @file_get_contents("https://api.telegram.org/bot" . TRENI_BOT_TOKEN . "/sendMessage",
                 false, stream_context_create(["http" => [
                     "method" => "POST",
+                    "timeout" => 5,   // 19.09.2026 (Odds iPhone-test): uten frist hang siden når Telegram var tregt, og Safari ga opp
                     "header" => "Content-Type: application/x-www-form-urlencoded\r\n",
                     "content" => http_build_query([
                         "chat_id" => defined("TRENI_ODD_CHAT") ? TRENI_ODD_CHAT : TRENI_TRENER_CHAT,   // S-87: drift, ikke trener
