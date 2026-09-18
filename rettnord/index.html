@@ -14,14 +14,15 @@
 <link rel="icon" href="/favicon.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter+Tight:wght@400;600&family=Sora:wght@800&display=swap">
-<link rel="stylesheet" href="stil.css?v=10">
+<link rel="stylesheet" href="stil.css?v=12">
 </head>
 <body data-side="rettnord" data-spor="/lopsdag/data.php?logg=">
 
 <div class="topp">
   <div class="wrap">
     <a class="logo" href="#"><i></i>Rett Nord</a>
-    <ul class="meny">
+    <button class="meny-knapp" type="button" aria-expanded="false" aria-controls="meny">Meny <span aria-hidden="true">☰</span></button>
+    <ul class="meny" id="meny">
       <li><a href="#lopene">Løpene</a></li>
       <li><a href="#terminliste">Terminliste</a></li>
       <li><a href="resultater/">Resultater</a></li>
@@ -583,7 +584,7 @@
   d.addEventListener('touchend', function (e) { if (x0 === null) return; var dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 40) vis(dx < 0 ? i + 1 : i - 1); x0 = null; });
 })();
 </script>
-<script src="spor.js?v=2" defer></script>
+<script src="spor.js?v=3" defer></script>
 <script src="sok.js?v=1" defer></script>
 </body>
 </html>

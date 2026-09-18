@@ -14,7 +14,7 @@
 <link rel="icon" href="/favicon.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter+Tight:wght@400;600&family=Sora:wght@800&display=swap">
-<link rel="stylesheet" href="../stil.css?v=9">
+<link rel="stylesheet" href="../stil.css?v=12">
 <style>
 .hof-hero { background: hsl(var(--surface)); border-bottom: 1px solid hsl(var(--border)); padding-block: clamp(3rem, 7vw, 5rem); }
 .hof-hero h1 { font-size: clamp(2.4rem, 6vw, 4.2rem); line-height: 1.02; margin: 0; font-weight: 500; max-width: 14ch; }
@@ -53,7 +53,8 @@ h3 small { font-family: var(--sans); font-weight: 400; font-size: .9rem; margin-
 <div class="topp">
   <div class="wrap">
     <a class="logo" href="../"><i></i>Rett Nord</a>
-    <ul class="meny">
+    <button class="meny-knapp" type="button" aria-expanded="false" aria-controls="meny">Meny <span aria-hidden="true">☰</span></button>
+    <ul class="meny" id="meny">
       <li><a href="../#lopene">Løpene</a></li>
       <li><a href="../#terminliste">Terminliste</a></li>
       <li><a href="./" aria-current="page">Resultater</a></li>
@@ -195,7 +196,7 @@ h3 small { font-family: var(--sans); font-weight: 400; font-size: .9rem; margin-
   if (location.hash.indexOf('#sok=') === 0) { inn.value = decodeURIComponent(location.hash.slice(5)); vis(); }
 })();
 </script>
-<script src="../spor.js?v=2" defer></script>
+<script src="../spor.js?v=3" defer></script>
 
 </body>
 </html>

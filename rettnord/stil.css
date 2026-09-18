@@ -87,7 +87,14 @@ section + section { border-top: 1px solid hsl(var(--border)); }
 .meny { display: flex; gap: clamp(.6rem, 2vw, 1.4rem); list-style: none; margin: 0; padding: 0; overflow-x: auto; }
 .meny a { text-decoration: none; color: hsl(var(--fg)); font-weight: 600; font-size: .95rem; white-space: nowrap; }
 .meny a:hover { color: hsl(var(--accent)); }
-@media (max-width: 640px) { .meny { display: none; } }
+.meny-knapp { display: none; background: none; border: 1.5px solid hsl(var(--border)); border-radius: 999px; padding: .45rem .9rem; font: inherit; font-weight: 600; font-size: .9rem; color: hsl(var(--fg)); cursor: pointer; }
+@media (max-width: 640px) {
+  .meny-knapp { display: inline-flex; align-items: center; gap: .4rem; }
+  .meny { display: none; position: absolute; left: 0; right: 0; top: 100%; flex-direction: column; gap: 0; background: hsl(var(--bg)); border-bottom: 1px solid hsl(var(--border)); padding: .4rem 0 .6rem; box-shadow: 0 16px 32px hsl(208 40% 4% / .14); overflow: visible; }
+  .topp.apen .meny { display: flex; }
+  .meny li a { display: block; padding: .8rem 1.25rem; font-size: 1.05rem; }
+  .meny li a[aria-current="page"] { color: hsl(var(--accent)); }
+}
 
 /* hero: tekst på fast grunn, bildet i ramme i naturlig størrelse (originalene er 720 px) */
 .hero { position: relative; background: hsl(var(--surface)); border-bottom: 1px solid hsl(var(--border)); }
@@ -288,7 +295,7 @@ footer nav a { font-weight: 600; }
 .lys-lukk { top: 1rem; right: 1rem; font-size: 1.1rem !important; }
 .lys-forrige { left: 1rem; top: 50%; transform: translateY(-50%); }
 .lys-neste { right: 1rem; top: 50%; transform: translateY(-50%); }
-@media (max-width: 640px) { .lys figure { padding: 3.5rem .5rem 1rem; } .lys-forrige, .lys-neste { top: auto; bottom: 1rem; transform: none; } .lys-forrige { left: 1rem; } .lys-neste { right: 1rem; } }
+@media (max-width: 640px) { .lys figure { padding: 3.5rem .5rem 1.5rem; } .lys button { background: hsl(0 0% 100% / .22); } .lys .lys-forrige, .lys .lys-neste { top: 45%; transform: translateY(-50%); width: 3rem; height: 3rem; font-size: 1.9rem; } .lys-forrige { left: .5rem; } .lys-neste { right: .5rem; } .lys figcaption { padding: 0 .5rem; } }
 
 #tips .innlegg { margin-top: var(--s5); }
 #tips .innlegg p { max-width: 70ch; }

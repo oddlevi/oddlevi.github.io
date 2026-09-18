@@ -73,3 +73,12 @@
   window.addEventListener('pagehide', slutt);
   document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'hidden') slutt(); });
 })();
+
+// Mobilmeny (Odd 18.09: «Mangler meny øverst på siden på mobil»)
+(function () {
+  var k = document.querySelector('.meny-knapp'), t = document.querySelector('.topp');
+  if (!k || !t) return;
+  k.addEventListener('click', function () { var apen = t.classList.toggle('apen'); k.setAttribute('aria-expanded', apen ? 'true' : 'false'); });
+  t.addEventListener('click', function (e) { if (e.target.closest('.meny a')) { t.classList.remove('apen'); k.setAttribute('aria-expanded', 'false'); } });
+  document.addEventListener('click', function (e) { if (!t.contains(e.target)) { t.classList.remove('apen'); k.setAttribute('aria-expanded', 'false'); } });
+})();
