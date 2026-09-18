@@ -291,3 +291,11 @@ footer nav a { font-weight: 600; }
 
 #tips .innlegg { margin-top: var(--s5); }
 #tips .innlegg p { max-width: 70ch; }
+
+/* tidsskjema (Rett Nords story 18.09): lett synlig, øverst i løpsseksjonen og på direktesiden */
+.tidsskjema { margin: var(--s5) 0; padding: var(--s4) var(--s5); background: hsl(var(--accent-soft)); border: 1px solid hsl(var(--accent) / .35); border-radius: var(--r2); }
+.tidsskjema h3 { margin: 0 0 var(--s1); }
+.tidsskjema dl { display: grid; grid-template-columns: auto 1fr; gap: var(--s2) var(--s4); margin: var(--s3) 0; }
+.tidsskjema dt { font-family: var(--serif); font-size: 1.15rem; font-weight: 500; white-space: nowrap; }
+.tidsskjema dd { margin: 0; align-self: center; }
+.tidsskjema p:last-child { margin-bottom: 0; }

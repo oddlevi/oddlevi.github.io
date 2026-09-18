@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kua Ultra 2022 til 2026</title>
+<meta name="description" content="Kua Ultra 2022 til 2026: alle løpene, alle resultatene, søk på eget navn. Laget av Treni.">
+<meta property="og:title" content="Kua Ultra 2022 til 2026">
+<meta property="og:description" content="5 løp, 466 fullføringer, 352 deltakere. Søk på eget navn.">
+<meta property="og:url" content="https://treni.no/serie/kua-ultra/">
+<meta name="robots" content="noindex">
+<link rel="icon" href="/favicon.ico">
+<link rel="stylesheet" href="/stil.css?v=30">
+<style>
+:root { --aksent: #e85d1a; }
+main.bred { max-width: 62rem; }
+.nokkel { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 1rem; list-style: none; padding: 0; margin: 1.5rem 0 0; }
+.nokkel li { border-top: 2px solid var(--aksent); padding-top: .5rem; max-width: none; }
+.nokkel b { display: block; font-family: var(--font-serif); font-size: 2rem; line-height: 1; }
+.nokkel span { font-size: .85rem; color: hsl(var(--muted-fg)); }
+.sok input { width: 100%; font: inherit; font-size: 1.05rem; padding: .8rem 1rem; border-radius: 999px; border: 1.5px solid hsl(var(--border)); background: hsl(var(--surface)); color: hsl(var(--fg)); }
+.treff { display: grid; gap: .6rem; margin-top: 1rem; }
+.treff .person { background: hsl(var(--surface)); border: 1px solid hsl(var(--border)); border-radius: var(--radius); padding: .75rem 1rem; }
+.treff .person b { font-family: var(--font-serif); font-size: 1.1rem; }
+.treff table { width: 100%; border-collapse: collapse; font-size: .9rem; margin-top: .4rem; font-variant-numeric: tabular-nums; }
+.treff td { padding: .25rem .4rem; border-top: 1px solid hsl(var(--border)); }
+details.lop { border: 1px solid hsl(var(--border)); border-radius: var(--radius); background: hsl(var(--surface)); margin-bottom: .6rem; }
+details.lop summary { cursor: pointer; padding: .75rem 1rem; display: flex; gap: 1rem; align-items: baseline; flex-wrap: wrap; list-style: none; }
+details.lop summary::-webkit-details-marker { display: none; }
+details.lop .dato { font-size: .85rem; color: hsl(var(--muted-fg)); min-width: 9rem; }
+details.lop .tall { margin-left: auto; color: var(--aksent); font-weight: 650; }
+.tabell { overflow-x: auto; padding: 0 1rem 1rem; }
+table { width: 100%; border-collapse: collapse; font-size: .92rem; font-variant-numeric: tabular-nums; }
+th { text-align: left; font-size: .75rem; text-transform: uppercase; letter-spacing: .06em; color: hsl(var(--muted-fg)); padding: .4rem .5rem; border-bottom: 2px solid hsl(var(--border)); }
+td { padding: .45rem .5rem; border-bottom: 1px solid hsl(var(--border)); }
+.t { text-align: right; white-space: nowrap; }
+.lag { list-style: none; padding: 0; margin: .5rem 0 1.5rem; display: grid; gap: .45rem; }
+.lag li { display: grid; grid-template-columns: minmax(0, 14rem) 1fr auto; gap: .8rem; align-items: center; font-size: .95rem; max-width: none; }
+.lag .navn { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.lag .stolpe { height: 10px; background: hsl(var(--surface-2)); border-radius: 999px; overflow: hidden; }
+.lag .stolpe i { display: block; height: 100%; background: var(--aksent); border-radius: 999px; }
+.lag .n { font-weight: 650; } .lag small { color: hsl(var(--muted-fg)); font-weight: 400; }
+.liste { list-style: none; padding: 0; margin: .5rem 0; display: grid; gap: .3rem; }
+.liste li { display: grid; grid-template-columns: 3rem 1fr; gap: .8rem; align-items: baseline; padding: .5rem 0; border-top: 1px solid hsl(var(--border)); max-width: none; }
+.liste .nr { font-family: var(--font-serif); font-size: 1.8rem; line-height: 1; color: var(--aksent); }
+.liste b { display: block; } .liste .muted { font-size: .9rem; color: hsl(var(--muted-fg)); }
+.treni-band { background: hsl(var(--primary)); color: hsl(var(--primary-fg)); border-radius: calc(var(--radius) + 6px); padding: 1.6rem 1.8rem; display: grid; gap: .6rem; }
+.treni-band a { color: inherit; font-weight: 650; }
+</style>
+</head>
+<body>
+<div class="bakteppe"></div>
+<main class="bred">
+  <section class="hero smal">
+    <p class="kicker">Rett Nord · sesongside</p>
+    <h1>Kua Ultra 2022 til 2026</h1>
+    <p class="ingress">Alle løpene i serien på ett sted: hvert løp, hver deltaker, hvert lag. Søk opp navnet ditt og se sesongen din.</p>
+    <ul class="nokkel">
+      <li><b>5</b><span>løp</span></li>
+      <li><b>466</b><span>fullføringer</span></li>
+      <li><b>352</b><span>ulike deltakere</span></li>
+      <li><b>13 081</b><span>km til sammen</span></li>
+    </ul>
+  </section>
+
+  <section id="sok">
+    <h2>Finn deg selv</h2>
+    <div class="sok"><input id="sok-inn" type="search" placeholder="Skriv navn eller klubb" autocomplete="off" spellcheck="false" aria-describedby="sok-status"><p id="sok-status" class="liten"></p></div>
+    <div id="sok-treff" class="treff"></div>
+  </section>
+
+  <section id="lopene">
+    <h2>Løpene</h2>
+    <details class="lop"><summary><span class="dato">6. juni 2026</span><b>Kua Ultra 2026</b><span class="tall">158 i mål</span></summary><div class="tabell"><table><thead><tr><th>Distanse</th><th class="t">Lengde</th><th class="t">I mål</th></tr></thead><tbody><tr><td>70 km</td><td class="t">70,0 km</td><td class="t">28</td></tr><tr><td>23 km</td><td class="t">23,0 km</td><td class="t">108</td></tr><tr><td>10 km</td><td class="t">10,0 km</td><td class="t">22</td></tr></tbody></table></div></details><details class="lop"><summary><span class="dato">7. juni 2025</span><b>Kua Ultra 2025</b><span class="tall">196 i mål</span></summary><div class="tabell"><table><thead><tr><th>Distanse</th><th class="t">Lengde</th><th class="t">I mål</th></tr></thead><tbody><tr><td>Kua Ultra 70 km</td><td class="t">70,0 km</td><td class="t">23</td></tr><tr><td>Kobben Halvmaraton 23 km</td><td class="t">23,0 km</td><td class="t">135</td></tr><tr><td>Kua Mountain Challenge - 10km</td><td class="t">8,6 km</td><td class="t">38</td></tr></tbody></table></div></details><details class="lop"><summary><span class="dato">8. juni 2024</span><b>Kua Ultra 2024</b><span class="tall">60 i mål</span></summary><div class="tabell"><table><thead><tr><th>Distanse</th><th class="t">Lengde</th><th class="t">I mål</th></tr></thead><tbody><tr><td>Kua Ultra 70 km</td><td class="t">70,0 km</td><td class="t">7</td></tr><tr><td>Kobben Halvmaraton 23 km</td><td class="t">23,0 km</td><td class="t">53</td></tr></tbody></table></div></details><details class="lop"><summary><span class="dato">10. juni 2023</span><b>Kua Ultra 2023</b><span class="tall">26 i mål</span></summary><div class="tabell"><table><thead><tr><th>Distanse</th><th class="t">Lengde</th><th class="t">I mål</th></tr></thead><tbody><tr><td>Kua Ultra 70 km</td><td class="t">70,0 km</td><td class="t">5</td></tr><tr><td>Kobben Halvmaraton 23 km</td><td class="t">23,0 km</td><td class="t">21</td></tr></tbody></table></div></details><details class="lop"><summary><span class="dato">4. juni 2022</span><b>Kua Ultra 2022</b><span class="tall">26 i mål</span></summary><div class="tabell"><table><thead><tr><th>Distanse</th><th class="t">Lengde</th><th class="t">I mål</th></tr></thead><tbody><tr><td>Kua Ultra</td><td class="t">? km</td><td class="t">5</td></tr><tr><td>Kua Halvmaraton</td><td class="t">? km</td><td class="t">21</td></tr></tbody></table></div></details>
+  </section>
+
+  <section id="lag">
+    <h2>Lagene</h2>
+    <p class="liten">Fullførte løp per lag, alle løp i serien. Lagnavn med ulik skrivemåte er slått sammen.</p>
+    <h3>Klubber</h3><ol class="lag"><li><span class="navn">Bodø Bauta løpeklubb</span><span class="stolpe"><i style="width:83%"></i></span><span class="n">19<small> · 10 pers.</small></span></li><li><span class="navn">IL Splint</span><span class="stolpe"><i style="width:78%"></i></span><span class="n">18<small> · 8 pers.</small></span></li><li><span class="navn">Ørnes IL</span><span class="stolpe"><i style="width:35%"></i></span><span class="n">8<small> · 6 pers.</small></span></li><li><span class="navn">Fauske Løpeklubb</span><span class="stolpe"><i style="width:26%"></i></span><span class="n">6<small> · 4 pers.</small></span></li><li><span class="navn">Valnesfjord IL</span><span class="stolpe"><i style="width:26%"></i></span><span class="n">6<small> · 5 pers.</small></span></li><li><span class="navn">B&amp;OI Orientering</span><span class="stolpe"><i style="width:17%"></i></span><span class="n">4<small> · 3 pers.</small></span></li><li><span class="navn">Rennebu IL</span><span class="stolpe"><i style="width:9%"></i></span><span class="n">2<small> · 1 pers.</small></span></li><li><span class="navn">Innstranda IL</span><span class="stolpe"><i style="width:9%"></i></span><span class="n">2<small> · 2 pers.</small></span></li><li><span class="navn">Forra IL</span><span class="stolpe"><i style="width:9%"></i></span><span class="n">2<small> · 2 pers.</small></span></li><li><span class="navn">Nordfold IF</span><span class="stolpe"><i style="width:9%"></i></span><span class="n">2<small> · 2 pers.</small></span></li></ol>
+    <h3>Andre lag</h3><ol class="lag"><li><span class="navn">Bodø Bauta</span><span class="stolpe"><i style="width:100%"></i></span><span class="n">23<small> · 14 pers.</small></span></li><li><span class="navn">Rettnord</span><span class="stolpe"><i style="width:39%"></i></span><span class="n">9<small> · 4 pers.</small></span></li><li><span class="navn">Værangfjord Stiløping</span><span class="stolpe"><i style="width:22%"></i></span><span class="n">5<small> · 3 pers.</small></span></li><li><span class="navn">Meløy ski- og sykkelklubb</span><span class="stolpe"><i style="width:22%"></i></span><span class="n">5<small> · 3 pers.</small></span></li><li><span class="navn">Ørnes</span><span class="stolpe"><i style="width:17%"></i></span><span class="n">4<small> · 2 pers.</small></span></li><li><span class="navn">MSSK</span><span class="stolpe"><i style="width:17%"></i></span><span class="n">4<small> · 2 pers.</small></span></li><li><span class="navn">Spillquell</span><span class="stolpe"><i style="width:17%"></i></span><span class="n">4<small> · 3 pers.</small></span></li><li><span class="navn">Bodø Cycle klubb</span><span class="stolpe"><i style="width:13%"></i></span><span class="n">3<small> · 1 pers.</small></span></li><li><span class="navn">TGK</span><span class="stolpe"><i style="width:13%"></i></span><span class="n">3<small> · 1 pers.</small></span></li><li><span class="navn">Bodø CK</span><span class="stolpe"><i style="width:13%"></i></span><span class="n">3<small> · 1 pers.</small></span></li></ol>
+  </section>
+
+  <section id="trofaste">
+    <h2>Hvor mange løp deltakerne tok</h2>
+    <ol class="liste"><li><span class="nr">5</span><div><b>1 person</b><span class="muted">tok 5 løp</span></div></li><li><span class="nr">4</span><div><b>6 personer</b><span class="muted">tok 4 løp</span></div></li><li><span class="nr">3</span><div><b>17 personer</b><span class="muted">tok 3 løp</span></div></li><li><span class="nr">2</span><div><b>58 personer</b><span class="muted">tok 2 løp</span></div></li><li><span class="nr">1</span><div><b>270 personer</b><span class="muted">tok 1 løp</span></div></li></ol>
+  </section>
+
+  <section>
+    <div class="treni-band">
+      <b>Laget av Treni</b>
+      <p style="margin:0;color:inherit;opacity:.85">Treni er løpeveilederen fra Nord-Norge. Vi lager sider som denne for løp og serier i nord, med resultater, direktevisning og løypetips. Trening bygget på øktene fra klokka di, veiledet av en trener.</p>
+      <p style="margin:0"><a href="https://treni.no">treni.no →</a></p>
+    </div>
+  </section>
+
+  <footer>
+    <p>Tall fra tidtakerne (Roald Frøskeland). Rader der tidtakerens plassering og tida ikke stemmer overens, holdes utenfor rekorder. Vil du ikke stå her, si fra til <a href="mailto:hei@treni.no">hei@treni.no</a>.</p>
+  </footer>
+</main>
+<script>
+(function () {
+  var D = null, inn = document.getElementById('sok-inn'), ut = document.getElementById('sok-treff'), st = document.getElementById('sok-status');
+  function nk(s) { return (s || '').toLowerCase().normalize('NFKC').replace(/[^a-zæøå ]/g, '').replace(/\s+/g, ' ').trim(); }
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return {'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]; }); }
+  function fart(sek, km) { if (!km) return ''; var s = Math.round(sek / km); return Math.floor(s / 60) + ':' + ('0' + (s % 60)).slice(-2) + '/km'; }
+  function tegn() {
+    var q = nk(inn.value); ut.innerHTML = '';
+    if (!D) { st.textContent = 'Henter …'; return; }
+    if (q.length < 2) { st.textContent = q.length ? 'Skriv minst to bokstaver.' : ''; return; }
+    var per = {};
+    D.rader.forEach(function (r) { if (nk(r[0]).indexOf(q) !== -1 || nk(r[1]).indexOf(q) !== -1) { var k = nk(r[0]); (per[k] = per[k] || {navn: r[0], klubb: r[1], rader: []}).rader.push(r); } });
+    var liste = Object.keys(per).map(function (k) { return per[k]; }).sort(function (a, b) { return a.navn.localeCompare(b.navn, 'nb'); });
+    st.textContent = liste.length ? liste.length + ' treff' + (liste.length > 30 ? ', viser 30' : '') : 'Ingen treff.';
+    liste.slice(0, 30).forEach(function (p) {
+      var rows = p.rader.sort(function (a, b) { return a[2] < b[2] ? -1 : 1; }).map(function (r) {
+        var sek = r[6].split(':').reduce(function (a, x) { return a * 60 + parseFloat(x); }, 0);
+        var dd = r[2].split('-'); var dato = dd.length === 3 ? (+dd[2]) + '.' + (+dd[1]) + '.' + dd[0] : r[2];
+        return '<tr><td>' + esc(dato) + '</td><td>' + esc(r[3]) + (r[4] && r[4] !== r[3] ? ' · ' + esc(r[4]) : '') + '</td><td>' + (r[5] ? r[5] + '.' : '') + '</td><td>' + esc(r[6]) + (r[8] ? '' : ' *') + '</td><td>' + esc(fart(sek, r[7])) + '</td></tr>';
+      }).join('');
+      ut.insertAdjacentHTML('beforeend', '<div class="person"><b>' + esc(p.navn) + '</b>' + (p.klubb ? ' <span class="liten">' + esc(p.klubb) + '</span>' : '') + ' <span class="liten">· ' + p.rader.length + ' løp</span><table>' + rows + '</table></div>');
+    });
+  }
+  fetch('data.json?v=2026-09-18').then(function (r) { return r.json(); }).then(function (j) { D = j; tegn(); });
+  var t; inn.addEventListener('input', function () { clearTimeout(t); t = setTimeout(tegn, 120); });
+  try { navigator.sendBeacon('/lopsdag/data.php?logg=besok', new Blob([JSON.stringify({lop: 'serie-kua-ultra', ref: (document.referrer || '').slice(0, 120)})], {type: 'application/json'})); } catch (e) {}
+})();
+</script>
+</body>
+</html>
