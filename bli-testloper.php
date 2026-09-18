@@ -94,6 +94,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     "https://api.telegram.org/bot" . TRENI_BOT_TOKEN . "/sendMessage",
                     false, stream_context_create(["http" => [
                         "method" => "POST",
+                        "timeout" => 5,
                         "header" => "Content-Type: application/x-www-form-urlencoded\r\n",
                         "content" => http_build_query([
                             "chat_id" => defined("TRENI_ODD_CHAT") ? TRENI_ODD_CHAT : TRENI_TRENER_CHAT,   // S-87: drift, ikke trener
@@ -163,6 +164,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     false,
                     stream_context_create(["http" => [
                         "method" => "POST",
+                        "timeout" => 5,
                         "header" => "Content-Type: application/x-www-form-urlencoded\r\n",
                         "content" => http_build_query([
                             "chat_id" => defined("TRENI_ODD_CHAT") ? TRENI_ODD_CHAT : TRENI_TRENER_CHAT,
