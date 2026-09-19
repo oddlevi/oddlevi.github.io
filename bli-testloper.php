@@ -308,7 +308,7 @@ if (!empty($TRENI_EN)) { return; }
   <p class="kicker reveal"><a href="index.html" style="color:inherit">treni.no</a> · <?= $er_coach ? 'for løpecoacher' : 'bli testløper' ?></p>
   <h1 class="reveal" style="font-size:clamp(2rem,6vw,3rem)"><?= $er_coach ? 'Bli med som løpecoach' : 'Få løpeplan hver uke, bygget på øktene dine' ?></h1>
   <?php if (!$er_coach): // Odd 12.09: én konkret setning om hva Treni er, rett under overskriften ?>
-  <p class="reveal" style="font-size:1.15rem;line-height:1.5;max-width:38rem;margin:.6rem 0 0"><b>Treni ser hver økt fra klokka di og planlegger treningsuka di etter hva du har gjort.</b> Gratis i testperioden.</p>
+  <p class="reveal" style="font-size:1.15rem;line-height:1.5;max-width:38rem;margin:.6rem 0 0"><b>Treni ser hver økt fra klokka di og planlegger treningsuka di etter hva du har gjort.</b><br>Gratis i testperioden.</p>
   <?php endif; ?>
 </header>
 
