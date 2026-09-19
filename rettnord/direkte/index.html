@@ -161,6 +161,9 @@ details.hele { margin-top: var(--s3); }
     var f = alle.slice().sort(function (a, b) { return (a.plass || 999) - (b.plass || 999); })[0];
     document.getElementById('n-forste').textContent = f && D.konkurranser && Object.keys(D.konkurranser).length ? (D.konkurranser[Object.keys(D.konkurranser)[0]][0] || {}).tid || '–' : '–';
     document.getElementById('venter').hidden = (D.antall || 0) > 0;
+    // 19.09.2026: før første målgang viser vi hvor mange som har startet
+    var vt = document.querySelector('#venter p, #venter .tekst');
+    if (vt && (D.antall || 0) === 0 && (D.startet || 0) > 0) { vt.textContent = D.startet + ' løpere har startet. Målgangene kommer her etter hvert som de kommer inn, siden oppdaterer seg selv.'; }
     eksempel((D.antall || 0) === 0);
     var ut = '';
     Object.keys(D.konkurranser || {}).forEach(function (k) {

@@ -105,7 +105,7 @@ $KILDER = [
     ['RRPublish/data', 'https://my.raceresult.com/' . $EVENT . '/RRPublish/data/config?page=results&noVisitor=1'],
     ['results', 'https://my.raceresult.com/' . $EVENT . '/results/config?lang=nb&sanitize=true'],
 ];
-$rader = []; $noen_cfg = false;
+$rader = []; $startet = []; $noen_cfg = false;
 foreach ($KILDER as [$API, $cfgurl]) {
     $cfg = json_decode((string) hent($cfgurl, $ref), true);
     if (!is_array($cfg) || empty($cfg['key'])) { continue; }
@@ -128,22 +128,30 @@ foreach ($KILDER as [$API, $cfgurl]) {
         if (!is_array($d) || empty($d['data']) || empty($d['list']['Fields'])) { continue; }
         $df = $d['DataFields'] ?? null;
         $labels = array_map(fn($f) => (string) ($f['Label'] ?: $f['Expression']), $d['list']['Fields']);
-        $flat = function ($x, array $sti) use (&$flat, &$rader, $df, $labels, $kontester, $contest) {
+        $flat = function ($x, array $sti) use (&$flat, &$rader, &$startet, $df, $labels, $kontester, $contest) {
             if (isset($x[0]) && is_array($x[0]) && !is_array($x[0][0] ?? null)) {
                 foreach ($x as $r) {
                     if (!is_array($r)) { continue; }
                     $rec = $df && count($df) === count($r) ? array_combine($df, $r) : array_combine($labels, array_slice($r, -count($labels)));
                     $rec2 = $rec; foreach ($labels as $i => $lab) { $rec2[$lab] = $rec2[$lab] ?? ($r[count($r) - count($labels) + $i] ?? ''); }
-                    $navnfelt = felt($rec2, ['DisplayNameBib', 'Navn', 'FLNAME', 'Name']);
+                    $navnfelt = felt($rec2, ['DisplayNameBib', 'DisplayName', 'Navn', 'FLNAME', 'Name']);
                     if ($navnfelt === '') { $navnfelt = trim(felt($rec2, ['FIRSTNAME', 'Firstname']) . ' ' . felt($rec2, ['LASTNAME', 'Lastname'])); }
                     $navnfelt = preg_replace('/\s*\[\d+\]\s*$/', '', $navnfelt);
+                    // 19.09.2026 (Tour de Ørnes, live): «Etternavn, Fornavn» → «Fornavn Etternavn»
+                    if (preg_match('/^([^,]+),\s*(.+)$/u', $navnfelt, $mn)) { $navnfelt = trim($mn[2]) . ' ' . trim($mn[1]); }
                     $tid = felt($rec2, ['Finish.CHIP', 'Finish.TIME', 'Tid', 'Time', 'Finish']);
+                    // 19.09.2026: live-lista gir tid per passering ({Selector}.Label = Start/…/Finish). Bare målgang teller som tid.
+                    if ($tid === '' && isset($rec2['{Selector}.CHIP'])) {
+                        $lab = (string) ($rec2['{Selector}.Label'] ?? '');
+                        if (preg_match('/finish|mål|maal/i', $lab)) { $tid = (string) $rec2['{Selector}.CHIP']; }
+                    }
                     if ($navnfelt === '') { continue; }
                     $gr = $sti[0] ?? '';
                     $kont = $kontester[$contest] ?? '';
                     if ($kont === '' && preg_match('/^#\d+_(.+)$/', $gr, $m)) { $kont = $m[1]; }
                     $kj = '';
                     foreach ($sti as $s) { if (preg_match('/Kvinner|Female|Women/i', $s)) { $kj = 'K'; } elseif (preg_match('/^(#\d+_)?(Menn|Male|Men)$/i', $s)) { $kj = 'M'; } }
+                    if ($tid === '' && isset($rec2['{Selector}.Label']) && (string) $rec2['{Selector}.Label'] !== '') { $startet[$navnfelt] = true; }
                     $rader[] = ['navn' => $navnfelt, 'klubb' => felt($rec2, ['CLUB', 'Klubb', 'Klubb/Lag']), 'tid' => $tid,
                                 'plass' => (int) rtrim(felt($rec2, ['WithStatus([AUTORANK.p])', 'WithStatus([AUTORANK.P])', 'Tot.', 'Plass', 'Rank']), '.'),
                                 'kjonn' => $kj, 'klasse' => felt($rec2, ['Klasse', 'AGEGROUP.NAME']), 'fodt' => felt($rec2, ['YEAR', 'Fødselsår', 'Født']),
@@ -179,7 +187,8 @@ foreach ($per as $k => &$liste) {
 unset($liste);
 $ut['konkurranser'] = $per;
 $ut['antall'] = array_sum(array_map('count', $per));
-$ut['status'] = $ut['antall'] > 0 ? ($ut['over'] ? 'ferdig' : 'pågår') : 'venter';
+$ut['startet'] = count($startet ?? []);   // 19.09.2026: live-lista viser startpasseringer før noen er i mål
+$ut['status'] = $ut['antall'] > 0 ? ($ut['over'] ? 'ferdig' : 'pågår') : ($ut['startet'] > 0 ? 'pågår' : 'venter');
 $json = json_encode($ut, JSON_UNESCAPED_UNICODE);
 @file_put_contents($CACHE, $json, LOCK_EX);
 echo $json;
