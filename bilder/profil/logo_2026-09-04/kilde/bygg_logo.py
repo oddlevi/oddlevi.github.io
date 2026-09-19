@@ -73,7 +73,7 @@ def bred(ord_, prikk):
   <path d="M 246 292 C 340 292 380 268 452 268 C 530 268 566 244 620 244"
         fill="none" stroke="{LIME}" stroke-width="20" stroke-linecap="round"/>
   <text x="700" y="240" font-family="{SKRIFT}" font-size="52" font-weight="500"
-        letter-spacing="6" fill="{LIME}">TRENERLEDET LØPING</text>
+        letter-spacing="6" fill="{LIME}">LØPEVEILEDER PÅ NETT</text>
 </svg>'''
 
 

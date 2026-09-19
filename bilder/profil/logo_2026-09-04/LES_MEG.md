@@ -35,7 +35,7 @@ Helvetica Neue 800, sperring −12 på rundmerket og −8 på det brede.
 | Mappe | Bruk |
 |---|---|
 | `rund/` | Profilbilder (Instagram, Facebook, LinkedIn), app-ikon, alt kvadratisk. 180 px er profilbildet, 40 px er rutenettet i feeden. |
-| `bred/` | Toppen av nettsider, Facebook-omslag, e-postsignatur, presentasjoner. Inneholder også «TRENERLEDET LØPING». |
+| `bred/` | Toppen av nettsider, Facebook-omslag, e-postsignatur, presentasjoner. Inneholder også «LØPEVEILEDER PÅ NETT» (Odd 19.09.2026, før: «TRENERLEDET LØPING»). |
 | `ikoner/` | `favicon.ico` (16/32/48/64 i én fil), `apple-touch-icon.png` (180), `icon-192`/`icon-512` for PWA-manifestet. |
 | `kilde/` | Vektorene (`.svg`) og `bygg_logo.py` som bygger hele settet på nytt. Trenger du en størrelse som ikke ligger her, kjør skriptet. |
 

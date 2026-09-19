@@ -146,9 +146,14 @@ foreach ($KILDER as [$API, $cfgurl]) {
                         if (preg_match('/finish|mål|maal/i', $lab)) { $tid = (string) $rec2['{Selector}.CHIP']; }
                     }
                     if ($navnfelt === '') { continue; }
-                    $gr = $sti[0] ?? '';
                     $kont = $kontester[$contest] ?? '';
-                    if ($kont === '' && preg_match('/^#\d+_(.+)$/', $gr, $m)) { $kont = $m[1]; }
+                    // 19.09.2026: gruppenøklene er «#1_19km» (konkurranse) og «#2_Male» (kjønn). Sluttlista har
+                    // bare kjønn, live-lista begge. Konkurransen er første gruppe som ikke er et kjønn.
+                    if ($kont === '') {
+                        foreach ($sti as $s0) {
+                            if (preg_match('/^#\d+_(.+)$/', $s0, $m) && !preg_match('/^(Male|Female|Menn|Kvinner|Men|Women)$/i', $m[1])) { $kont = $m[1]; break; }
+                        }
+                    }
                     $kj = '';
                     foreach ($sti as $s) { if (preg_match('/Kvinner|Female|Women/i', $s)) { $kj = 'K'; } elseif (preg_match('/^(#\d+_)?(Menn|Male|Men)$/i', $s)) { $kj = 'M'; } }
                     if ($tid === '' && isset($rec2['{Selector}.Label']) && (string) $rec2['{Selector}.Label'] !== '') { $startet[$navnfelt] = true; }
@@ -170,6 +175,15 @@ if (!$noen_cfg) {
     $ut['status'] = 'nede'; echo json_encode($ut, JSON_UNESCAPED_UNICODE); exit;
 }
 
+// 19.09.2026: samme løper kan komme fra både sluttlista (uten konkurranse) og live-lista (med).
+// Én rad per navn: den med kjent konkurranse vinner, ellers den første.
+$kjent = array_values($kontester ?? []);
+$valgt = [];
+foreach ($rader as $r) {
+    $nk = mb_strtolower($r['navn']);
+    if (!isset($valgt[$nk]) || (!in_array($valgt[$nk]['kontest'], $kjent, true) && in_array($r['kontest'], $kjent, true))) { $valgt[$nk] = $r; }
+}
+$rader = array_values($valgt);
 // gruppér per konkurranse, sorter på tid, regn plass selv når lista ikke gir den
 $per = [];
 foreach ($rader as $r) { if ($r['ferdig']) { $per[$r['kontest']][] = $r; } }
