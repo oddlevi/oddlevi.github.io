@@ -308,7 +308,7 @@ if (!empty($TRENI_EN)) { return; }
   <p class="kicker reveal"><a href="index.html" style="color:inherit">treni.no</a> · <?= $er_coach ? 'for løpecoacher' : 'bli testløper' ?></p>
   <h1 class="reveal" style="font-size:clamp(2rem,6vw,3rem)"><?= $er_coach ? 'Bli med som løpecoach' : 'Få løpeplan hver uke, bygget på øktene dine' ?></h1>
   <?php if (!$er_coach): // Odd 12.09: én konkret setning om hva Treni er, rett under overskriften ?>
-  <p class="reveal" style="font-size:1.15rem;line-height:1.5;max-width:38rem;margin:.6rem 0 0"><b>Treni er en løpetrener på nett.</b> Vi leser hver økt du løper, sier om uka var rolig nok, og bygger neste ukes plan på det du faktisk gjorde. En ekte trener ser over planen og svarer deg. Gratis i testperioden.</p>
+  <p class="reveal" style="font-size:1.15rem;line-height:1.5;max-width:38rem;margin:.6rem 0 0"><b>Treni ser hver økt fra klokka di og planlegger treningsuka di etter hva du har gjort.</b> En ekte trener ser over planen. Gratis i testperioden.</p>
   <?php endif; ?>
 </header>
 
@@ -346,13 +346,8 @@ if (!empty($TRENI_EN)) { return; }
   sin egen side, du får oversikten. Vi tar inn noen få trenere i høst. Fortell kort om deg og løperne
   dine, så tar vi kontakt.</p>
   <?php else: ?>
-  <p>De fleste løper for hardt på de rolige dagene. Det er den vanligste grunnen til at fremgangen
-  stopper, og til at skaden kommer.</p>
-  <p><b>Dette får du:</b> en plan som er din, beskjed om du løp rolig nok eller for hardt,
-  en trener som svarer, og en plan som tåler livet.</p>
-  <p>Ingen venteliste. Du får din egen side med en gang, og planen så snart klokka er koblet og
-  historikken er inne. Fortell kort om deg selv, så er du i gang på fem minutter.
-  Er du løpecoach med egne løpere, velg det under.</p>
+  <p>Fem minutter, så har du din egen side og den første uka di. Løp rolig, hemmeligheten alle raske løpere kjenner.</p>
+  <p class="liten">Er du løpecoach med egne løpere, velg det under.</p>
   <?php endif; ?>
   <?php if ($feil): ?><p class="skjema-feil"><?php echo htmlspecialchars($feil); ?></p><?php endif; ?>
   <?php if ($maal_lop): ?>
