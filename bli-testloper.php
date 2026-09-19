@@ -346,7 +346,7 @@ if (!empty($TRENI_EN)) { return; }
   sin egen side, du får oversikten. Vi tar inn noen få trenere i høst. Fortell kort om deg og løperne
   dine, så tar vi kontakt.</p>
   <?php else: ?>
-  <p>Fem minutter, så har du din egen side og den første uka di. Løp rolig, hemmeligheten alle raske løpere kjenner.</p>
+  <p>Treni - Løp rolig, hemmeligheten alle raske løpere kjenner.</p>
   <p class="liten">Er du løpecoach med egne løpere, velg det under.</p>
   <?php endif; ?>
   <?php if ($feil): ?><p class="skjema-feil"><?php echo htmlspecialchars($feil); ?></p><?php endif; ?>
