@@ -64,6 +64,7 @@ function deltakere(): array {
                 $ut[(string) $eduid] = ['navn' => trim(($u['Fornavn'] ?? '') . ' ' . ($u['Etternavn'] ?? '')),
                     'startnr' => (int) ($d['Startnummer'] ?? 0), 'klasse' => (string) ($d['Klasse']['Navn'] ?? ''),
                     'klubb' => (string) ($d['Klubbnavn'] ?? $u['Klubbnavn'] ?? ''), 'etappe' => $et,
+                    'alder' => (int) ($u['Alder'] ?? $d['Alder'] ?? 0),   // Odd 28.09: løperkortet (kommentator) viser alder, som EQ selv gjør
                     'start' => (string) ($e['StarttidFormatert'] ?? ''),
                     'status' => !empty($e['DNS']) ? 'DNS' : (!empty($e['DNF']) ? 'DNF' : (!empty($e['DSQ']) ? 'DSQ' : ''))];
             }
