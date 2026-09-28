@@ -301,7 +301,7 @@ footer{color:var(--muted);font-size:.8rem;text-align:center;padding:.5rem 1rem 2
       else if(p.plass-forrige.plass>=3){s.push('Falt fra nr. '+forrige.plass+' til nr. '+p.plass+' mellom '+forrige.stasjon+' og '+p.stasjon+'.');}
       forrige=p;}
     if(alle.length>=2){var best=null,verst=null,fk=0,fs=0;
-      alle.forEach(function(p){var dk=p.km-fk,ds=p.sek-fs;if(dk>0.5){var t=ds/dk;var seg={fra:fk?'':'start',til:p.stasjon,t:t};if(!best||t<best.t)best=seg;if(!verst||t>verst.t)verst=seg;}fk=p.km;fs=p.sek;});
+      alle.forEach(function(p){var dk=p.km-fk,ds=p.sek-fs;if(dk>=1.5){var t=ds/dk;var seg={fra:fk?'':'start',til:p.stasjon,t:t};if(!best||t<best.t)best=seg;if(!verst||t>verst.t)verst=seg;}fk=p.km;fs=p.sek;});
       if(best&&verst&&best!==verst){s.push('Raskest inn mot '+best.til+' ('+fmt(Math.round(best.t))+' /km), tyngst inn mot '+verst.til+' ('+fmt(Math.round(verst.t))+' /km).');}}
     if(l.maal){var sist=alle[alle.length-2];if(sist){var vunnet=sist.plass-l.maal.plass;if(vunnet>0){s.push('Vant '+vunnet+' plass'+(vunnet>1?'er':'')+' fra '+sist.stasjon+' til mål.');}else if(vunnet<0){s.push('Tapte '+(-vunnet)+' plass'+(vunnet<-1?'er':'')+' fra '+sist.stasjon+' til mål.');}else{s.push('Holdt plassen fra '+sist.stasjon+' til mål.');}}}
     return s.join(' ');
