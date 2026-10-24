@@ -104,7 +104,7 @@ header{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 88
 .sonevis .bar{height:14px;border-radius:99px;display:flex;overflow:hidden}
 .sonevis .bar i{display:block;height:100%}
 .sonevis p{font-size:14px;color:var(--muted);margin:6px 0 0}
-.skade{display:flex;gap:14px;align-items:flex-start;margin-top:28px;padding:18px 20px;border-radius:var(--r);background:var(--rod-soft);color:var(--fg)}
+.skade{display:flex;gap:14px;align-items:flex-start;max-width:760px;margin:clamp(40px,6vw,72px) auto 0;padding:18px 20px;border-radius:var(--r);background:var(--rod-soft);color:var(--fg)}
 .skade svg{width:26px;height:26px;flex-shrink:0;color:var(--rod);margin-top:2px}
 .skade p{margin:0;font-size:16px;line-height:1.5}
 .skade b{display:block;font-size:18px;color:var(--rod);margin-bottom:2px}
@@ -198,10 +198,10 @@ footer a{text-decoration:none}
       <div class="rad">Slik Treni styrer<div class="bar"><i style="width:40%;background:var(--s1)"></i><i style="width:40%;background:var(--s2)"></i><i style="width:10%;background:var(--s3)"></i><i style="width:8%;background:var(--s4)"></i><i style="width:2%;background:var(--s5)"></i></div></div>
       <p>Tid i pulssoner gjennom uka. Grønt er rolig, varmt er hardt. Illustrasjon.</p>
     </div>
-    <div class="skade"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0zM12 9v4M12 17h.01"/></svg>
-      <p><b>Den vanligste skadeårsaken</b>Det som oftest stopper løpere er ikke for lite trening, men for mye, for fort – for mange harde økter eller en langtur som vokser for raskt. Treni øker gradvis og sier fra før tegnene blir en skade.</p></div>
   </div>
-</div></section>
+</div>
+<div class="c"><div class="skade"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0zM12 9v4M12 17h.01"/></svg>
+      <p><b>Den vanligste skadeårsaken</b>Det som oftest stopper løpere er ikke for lite trening, men for mye, for fort – for mange harde økter eller en langtur som vokser for raskt. Treni øker gradvis og sier fra før tegnene blir en skade.</p></div></div></section>
 
 <section class="slik" id="slik"><div class="c">
   <div class="etikett">Slik virker det</div>
