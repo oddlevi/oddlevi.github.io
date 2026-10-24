@@ -62,6 +62,9 @@ header{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 88
 .meny a{text-decoration:none;color:var(--muted)}
 .meny .liten{color:var(--primary-fg);background:var(--primary);padding:9px 16px;border-radius:999px;font-weight:800}
 @media (max-width:760px){.meny a:not(.liten){display:none}}
+html{scroll-behavior:smooth}
+#last,#slik,#eirik{scroll-margin-top:110px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 .knapper{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
 .k{display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:0 22px;border-radius:999px;font-weight:800;font-size:16px;text-decoration:none;transition:transform 150ms var(--kurve)}
 .k:hover{transform:translateY(-1px)}
