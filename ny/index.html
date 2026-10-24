@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Treni – treningen din, uke for uke</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="Treni lager uka di ut fra det du faktisk løper, og bygger den på nytt når livet skjer. Med reglene til trener Eirik Haugsnes.">
+<meta property="og:title" content="Treni – treningen din, uke for uke">
+<link rel="icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap">
+<style>
+/* Trenis egne tokens (treni2/design/tokens.css). Ingen fargeverdi utenfor :root. */
+:root{
+  --bg:hsl(44 45% 97%);--surface:hsl(0 0% 100%);--fg:hsl(160 28% 9%);--muted:hsl(158 10% 36%);
+  --border:hsl(148 15% 84%);--primary:hsl(152 62% 20%);--primary-fg:hsl(44 45% 97%);
+  --accent:hsl(84 70% 52%);--accent-soft:hsl(84 60% 92%);--primary-soft:hsl(152 40% 93%);
+  --s1:hsl(150 42% 78%);--s2:hsl(152 55% 42%);--s3:hsl(46 95% 52%);--s4:hsl(26 92% 54%);--s5:hsl(5 75% 46%);
+  --mork:hsl(162 24% 5%);--mork-flate:hsl(160 18% 9%);--mork-kant:hsl(156 12% 17%);--lys-tekst:hsl(42 30% 94%);--lys-dempet:hsl(150 8% 62%);
+  --shadow:0 24px 48px -16px hsl(152 62% 20% / .28);
+  --r:12px;--r-xl:24px;
+  --kurve:cubic-bezier(.22,1,.36,1);
+  --note:hsl(43 90% 92%);--note-fg:hsl(43 85% 22%);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:hsl(162 24% 5%);--surface:hsl(160 18% 9%);--fg:hsl(42 30% 94%);--muted:hsl(150 8% 62%);
+  --border:hsl(156 12% 17%);--primary:hsl(84 70% 52%);--primary-fg:hsl(162 24% 5%);
+  --accent-soft:hsl(84 30% 14%);--primary-soft:hsl(152 25% 13%);--shadow:0 24px 48px -16px hsl(0 0% 0% / .6);
+  --note:hsl(43 40% 14%);--note-fg:hsl(43 90% 70%);color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:hsl(162 24% 5%);--surface:hsl(160 18% 9%);--fg:hsl(42 30% 94%);--muted:hsl(150 8% 62%);
+  --border:hsl(156 12% 17%);--primary:hsl(84 70% 52%);--primary-fg:hsl(162 24% 5%);
+  --accent-soft:hsl(84 30% 14%);--primary-soft:hsl(152 25% 13%);--shadow:0 24px 48px -16px hsl(0 0% 0% / .6);
+  --note:hsl(43 40% 14%);--note-fg:hsl(43 90% 70%);color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:Manrope,system-ui,sans-serif;font-size:17px;line-height:1.6;font-feature-settings:"tnum"}
+img{display:block;max-width:100%}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--primary);outline-offset:3px;border-radius:4px}
+.c{max-width:1200px;margin-inline:auto;padding-inline:clamp(16px,4vw,48px)}
+.etikett{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1,h2,h3{font-weight:800;letter-spacing:-.025em;margin:0}
+h2{font-size:clamp(32px,4.4vw,52px);line-height:1.05}
+.lead{font-size:clamp(17px,1.6vw,20px);color:var(--muted);max-width:56ch;margin:16px 0 0}
+header{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.topp{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font-weight:800;font-size:24px;letter-spacing:-.03em;text-decoration:none}
+.logo i{font-style:normal;position:relative}
+.logo i::after{content:"";position:absolute;width:7px;height:7px;border-radius:50%;background:var(--accent);left:50%;top:1px;transform:translateX(-50%);box-shadow:0 0 0 2px var(--bg)}
+.meny{display:flex;gap:28px;align-items:center;font-size:15px;font-weight:600}
+.meny a{text-decoration:none;color:var(--muted)}
+.meny .liten{color:var(--primary-fg);background:var(--primary);padding:9px 16px;border-radius:999px;font-weight:800}
+@media (max-width:760px){.meny a:not(.liten){display:none}}
+.knapper{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.k{display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:0 22px;border-radius:999px;font-weight:800;font-size:16px;text-decoration:none;transition:transform 150ms var(--kurve)}
+.k:hover{transform:translateY(-1px)}
+.k svg{width:20px;height:20px}
+.k.hoved{background:var(--primary);color:var(--primary-fg);box-shadow:var(--shadow)}
+.k.kant{border:1.5px solid var(--border);background:var(--surface)}
+.k small{display:block;font-size:11px;font-weight:600;opacity:.8;line-height:1}
+.k span{line-height:1.1}
+.hero{display:grid;grid-template-columns:7fr 5fr;gap:clamp(32px,5vw,72px);align-items:center;padding-block:clamp(48px,8vw,112px) clamp(64px,9vw,128px)}
+.hero h1{font-size:clamp(44px,7.2vw,92px);line-height:.98;margin-top:18px}
+.hero h1 em{font-style:normal;color:var(--primary)}
+.hero .lead{margin-bottom:32px}
+.tillit{display:flex;align-items:center;gap:12px;margin-top:28px;font-size:14px;color:var(--muted)}
+.tillit img{width:44px;height:44px;border-radius:50%;object-fit:cover;object-position:50% 25%;border:2px solid var(--surface)}
+.tillit b{color:var(--fg)}
+.scene{position:relative;justify-self:center;width:min(100%,420px)}
+.scene .foto{border-radius:var(--r-xl);overflow:hidden;aspect-ratio:4/5}
+.scene .foto img{width:100%;height:100%;object-fit:cover;object-position:50% 30%}
+@media (max-width:900px){.hero{grid-template-columns:1fr}.scene{width:min(100%,380px)}}
+.tel{position:absolute;left:-14%;bottom:-8%;width:62%;background:var(--mork);border-radius:30px;padding:10px;box-shadow:0 30px 60px -20px hsl(160 28% 9% / .55);border:1px solid var(--mork-kant)}
+.skjerm{border-radius:22px;padding:12px 10px;display:grid;gap:8px;color:var(--lys-tekst)}
+.skjerm .t{font-size:11px;font-weight:800;display:flex;justify-content:space-between}
+.skjerm .t i{font-style:normal;color:var(--lys-dempet);font-weight:600}
+.dag{background:var(--accent);color:var(--mork);border-radius:14px;padding:10px}
+.dag small{font-size:8.5px;font-weight:800;letter-spacing:.08em;opacity:.75}
+.dag b{display:block;font-size:19px;line-height:1.05;margin:2px 0 6px;letter-spacing:-.02em}
+.piller{display:flex;gap:4px;flex-wrap:wrap}
+.piller span{background:hsl(162 24% 5% / .12);border-radius:99px;padding:2px 7px;font-size:9px;font-weight:800}
+.stripe{display:flex;gap:4px;align-items:end;height:46px;padding:6px 6px 0;background:var(--mork-flate);border-radius:10px}
+.stripe i{flex:1;border-radius:3px 3px 0 0}
+.boble{background:var(--mork-flate);border:1px solid var(--mork-kant);border-radius:4px 12px 12px 12px;padding:7px 8px;font-size:9.5px;line-height:1.35}
+.boble em{font-style:normal;color:var(--accent);font-weight:800;display:block;font-size:8px;letter-spacing:.08em}
+@media (max-width:520px){.tel{left:-6%;width:66%}}
+.holdning{padding-block:clamp(80px,12vw,160px);border-top:1px solid var(--border)}
+.holdning .stor{font-size:clamp(36px,6vw,80px);line-height:1.02;font-weight:800;letter-spacing:-.035em;max-width:15ch;margin:0}
+.holdning .stor span{color:var(--muted)}
+.to{display:grid;grid-template-columns:5fr 7fr;gap:clamp(32px,6vw,96px);align-items:end}
+.sonevis{display:grid;gap:10px}
+.sonevis .rad{display:grid;grid-template-columns:110px 1fr;gap:14px;align-items:center;font-size:14px;font-weight:600;color:var(--muted)}
+.sonevis .bar{height:14px;border-radius:99px;display:flex;overflow:hidden}
+.sonevis .bar i{display:block;height:100%}
+.sonevis p{font-size:14px;color:var(--muted);margin:6px 0 0}
+@media (max-width:900px){.to{grid-template-columns:1fr}}
+.slik{padding-block:clamp(72px,10vw,140px);background:var(--surface);border-block:1px solid var(--border)}
+.steg{list-style:none;margin:56px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(24px,4vw,56px)}
+.steg li{border-top:2px solid var(--fg);padding-top:20px}
+.steg .n{font-size:14px;font-weight:800;color:var(--primary)}
+.steg h3{font-size:24px;line-height:1.15;margin:8px 0 10px}
+.steg p{margin:0;color:var(--muted);font-size:16px}
+@media (max-width:820px){.steg{grid-template-columns:1fr}}
+.livet{padding-block:clamp(72px,10vw,140px)}
+.uke{margin-top:48px;display:grid;grid-template-columns:repeat(7,1fr);gap:8px}
+.ud{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:12px 10px;min-height:132px;display:flex;flex-direction:column;gap:6px;position:relative}
+.ud .d{font-size:12px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.ud b{font-size:15px;line-height:1.2}
+.ud .m{font-size:13px;color:var(--muted)}
+.ud .f{margin-top:auto;height:6px;border-radius:99px}
+.ud.ikke{border-style:dashed;background:transparent}
+.ud.ikke b{text-decoration:line-through;color:var(--muted)}
+.ud.ny{border:2px solid var(--primary)}
+.ud .merke{position:absolute;top:-10px;right:8px;background:var(--primary);color:var(--primary-fg);font-size:11px;font-weight:800;padding:2px 8px;border-radius:99px}
+.livet .fot{margin-top:20px;font-size:15px;color:var(--muted);max-width:60ch}
+@media (max-width:820px){.uke{grid-template-columns:repeat(2,1fr)}.ud{min-height:auto}}
+.eirik{padding-block:clamp(72px,10vw,140px);border-top:1px solid var(--border)}
+.eirik .to{grid-template-columns:6fr 6fr;align-items:center}
+.eirik .foto{border-radius:var(--r-xl);overflow:hidden;aspect-ratio:1/1}
+.eirik .foto img{width:100%;height:100%;object-fit:cover;object-position:50% 35%}
+.grep{margin-top:32px;display:grid;gap:12px}
+.grep div{background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:var(--r);padding:16px 18px;font-size:17px;font-weight:600;line-height:1.45}
+.grep small{display:block;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.klokka{padding-block:clamp(64px,8vw,112px);background:var(--surface);border-block:1px solid var(--border)}
+.klokka .to{align-items:center}
+.valg{display:grid}
+.valg div{display:flex;gap:14px;align-items:flex-start;padding:18px 0;border-bottom:1px solid var(--border)}
+.valg svg{flex-shrink:0;width:24px;height:24px;color:var(--primary);margin-top:2px}
+.valg b{display:block;font-size:17px}
+.valg span{color:var(--muted);font-size:15px}
+.slutt{background:var(--mork);color:var(--lys-tekst);padding-block:clamp(80px,12vw,160px);text-align:center;position:relative;overflow:hidden}
+.slutt h2{font-size:clamp(40px,6vw,76px);max-width:14ch;margin-inline:auto}
+.slutt p{color:var(--lys-dempet);margin:18px auto 36px;max-width:46ch;font-size:18px}
+.slutt .knapper{justify-content:center}
+.slutt .k.hoved{background:var(--accent);color:var(--mork);box-shadow:none}
+.slutt .k.kant{background:transparent;border-color:var(--mork-kant);color:var(--lys-tekst)}
+.slutt .glod{position:absolute;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,hsl(84 70% 52% / .16),transparent 65%);top:-280px;left:50%;transform:translateX(-50%)}
+footer{background:var(--mork);color:var(--lys-dempet);border-top:1px solid var(--mork-kant);font-size:14px}
+footer .c{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;padding-block:32px}
+footer nav{display:flex;gap:22px;flex-wrap:wrap}
+footer a{text-decoration:none}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<header><div class="c topp">
+  <a class="logo" href="/ny/">Tren<i>i</i></a>
+  <nav class="meny"><a href="#slik">Slik virker det</a><a href="#eirik">Treneren</a><a href="/samarbeid.php">For trenere</a><a class="liten" href="#last">Last ned</a></nav>
+</div></header>
+
+<main>
+<section class="c hero">
+  <div>
+    <div class="etikett">Treningsveileder for løpere</div>
+    <h1>Treningen din, <em>uke for uke</em></h1>
+    <p class="lead">Treni lager uka di ut fra det du faktisk løper – og bygger den på nytt når livet skjer. Rolig når det skal være rolig, hardt når kroppen er klar.</p>
+    <div class="knapper" id="last">
+      <a class="k hoved" href="https://apps.apple.com/no/app/id6825074710"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.4 12.6c0-2.4 2-3.6 2.1-3.7-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.2-2.9.9-3.7.9-.8 0-1.9-.9-3.2-.8-1.6 0-3.1 1-4 2.4-1.7 3-.4 7.3 1.2 9.7.8 1.2 1.8 2.5 3 2.4 1.2 0 1.7-.8 3.1-.8 1.5 0 1.9.8 3.2.8 1.3 0 2.2-1.2 3-2.4.9-1.4 1.3-2.7 1.3-2.8-.1 0-2.5-1-2.5-3.8zM14 5.4c.7-.8 1.1-1.9 1-3-1 0-2.1.7-2.8 1.5-.6.7-1.2 1.8-1 2.9 1 .1 2.1-.6 2.8-1.4z"/></svg><span><small>Last ned i</small>App Store</span></a>
+      <a class="k kant" href="https://play.google.com/store/apps/details?id=no.treni.app"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M5 3.5v17l9-8.5-9-8.5z"/><path d="M14 12l3.5-3.3L20 10.2v3.6l-2.5 1.5z"/></svg><span><small>Last ned på</small>Google Play</span></a>
+    </div>
+    <div class="tillit"><img src="bilder/eirik.jpg" alt=""><span>Bygd på reglene til <b>Eirik Haugsnes</b>, trener og fagansvarlig i Treni.</span></div>
+  </div>
+  <div class="scene">
+    <div class="foto"><img src="bilder/begge.jpg" width="900" height="1200" alt="Løper på sti i lia" fetchpriority="high"></div>
+    <div class="tel" aria-hidden="true"><div class="skjerm">
+      <div class="t">Treni <i>lør 24.10.</i></div>
+      <div class="dag"><small>I DAG · LØRDAG</small><b>Rolig 5 km</b><div class="piller"><span>30 min</span><span>puls under 129</span></div></div>
+      <div class="stripe"><i style="height:40%;background:var(--s2)"></i><i style="height:6%;background:var(--mork-kant)"></i><i style="height:70%;background:var(--s4)"></i><i style="height:6%;background:var(--mork-kant)"></i><i style="height:45%;background:var(--s2)"></i><i style="height:35%;background:var(--accent)"></i><i style="height:95%;background:var(--s3)"></i></div>
+      <div class="boble"><em>VEILEDEREN</em>Godt jobba denne uka. Hvordan kjentes beina etter dragene?</div>
+    </div></div>
+  </div>
+</section>
+
+<section class="holdning"><div class="c to">
+  <p class="stor">Rolig skal være rolig. <span>Det er hele hemmeligheten.</span></p>
+  <div>
+    <p class="lead" style="margin:0 0 28px">De fleste løper for hardt på de rolige dagene. Treni leser hver tur fra klokka di og viser om uka faktisk var rolig nok – før det blir en skade.</p>
+    <div class="sonevis">
+      <div class="rad">Slik det ofte blir<div class="bar"><i style="width:22%;background:var(--s1)"></i><i style="width:20%;background:var(--s2)"></i><i style="width:33%;background:var(--s3)"></i><i style="width:20%;background:var(--s4)"></i><i style="width:5%;background:var(--s5)"></i></div></div>
+      <div class="rad">Slik Treni styrer<div class="bar"><i style="width:40%;background:var(--s1)"></i><i style="width:40%;background:var(--s2)"></i><i style="width:10%;background:var(--s3)"></i><i style="width:8%;background:var(--s4)"></i><i style="width:2%;background:var(--s5)"></i></div></div>
+      <p>Tid i pulssoner gjennom uka. Grønt er rolig, varmt er hardt. Illustrasjon.</p>
+    </div>
+  </div>
+</div></section>
+
+<section class="slik" id="slik"><div class="c">
+  <div class="etikett">Slik virker det</div>
+  <h2 style="margin-top:12px">Fra første tur til ferdig uke</h2>
+  <ol class="steg">
+    <li><div class="n">01</div><h3>Fortell hvor du står</h3><p>Hvor mye du løper nå, målet ditt og dagene som passer. Ærlige tall gir en trygg første uke.</p></li>
+    <li><div class="n">02</div><h3>Koble klokka</h3><p>Treni-feltet på klokka sender hver tur rett til appen. Puls, fart og høydemeter – du trenger ingen andre apper.</p></li>
+    <li><div class="n">03</div><h3>Få uka – hver søndag</h3><p>Uka bygges på nytt ut fra det som faktisk skjedde. Vil du endre noe, sier du fra i appen.</p></li>
+  </ol>
+</div></section>
+
+<section class="livet"><div class="c">
+  <div class="etikett">Når livet skjer</div>
+  <h2 style="margin-top:12px;max-width:18ch">Ferdige planer virker – helt til torsdagen sier nei</h2>
+  <div class="uke">
+    <div class="ud"><span class="d">Man</span><b>Rolig</b><span class="m">40 min</span><i class="f" style="background:var(--s2)"></i></div>
+    <div class="ud"><span class="d">Tir</span><b>Hvile</b><span class="m">–</span></div>
+    <div class="ud"><span class="d">Ons</span><b>Drag</b><span class="m">5 × 4 min</span><i class="f" style="background:var(--s4)"></i></div>
+    <div class="ud ikke"><span class="d">Tor</span><b>Rolig</b><span class="m">Sykt barn</span></div>
+    <div class="ud ny"><span class="merke">Flyttet</span><span class="d">Fre</span><b>Rolig</b><span class="m">30 min</span><i class="f" style="background:var(--s2)"></i></div>
+    <div class="ud"><span class="d">Lør</span><b>Hvile</b><span class="m">–</span></div>
+    <div class="ud"><span class="d">Søn</span><b>Langtur</b><span class="m">Litt kortere</span><i class="f" style="background:var(--s3)"></i></div>
+  </div>
+  <p class="fot">Skriv til veilederen at torsdagen røk. Treni flytter økta, kutter langturen litt – og neste uke tar hensyn til det som faktisk skjedde.</p>
+</div></section>
+
+<section class="eirik" id="eirik"><div class="c to">
+  <div class="foto"><img src="bilder/eirik.jpg" alt="Eirik Haugsnes" loading="lazy"></div>
+  <div>
+    <div class="etikett">Treneren bak</div>
+    <h2 style="margin-top:12px">Eiriks grep, i din uke</h2>
+    <p class="lead">Eirik Haugsnes har satt reglene Treni bygger på. Han følger med på hvordan rådene virker, og har siste ord om faget.</p>
+    <div class="grep">
+      <div><small>Langtur</small>Langturen løper Eirik mest rolig – så lett at han kan snakke i hele setninger.</div>
+      <div><small>Harde økter</small>Eirik løper dragene kontrollert – det siste skal gå like bra som det første.</div>
+    </div>
+  </div>
+</div></section>
+
+<section class="klokka"><div class="c to">
+  <div><div class="etikett">Klokka di</div><h2 style="margin-top:12px">Løp som før. Resten skjer av seg selv.</h2></div>
+  <div class="valg">
+    <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="6"/><path d="M12 10v2l1 1M16.5 7.5 16 4H8l-.5 3.5M7.5 16.5 8 20h8l.5-3.5"/></svg><p style="margin:0"><b>Garmin</b><span>Legg Treni-feltet på klokka. Hver tur kommer inn når du lagrer.</span></p></div>
+    <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V3M7 8l5-5 5 5M5 21h14"/></svg><p style="margin:0"><b>Annen klokke</b><span>Last opp turene dine i appen, så får du samme uke og samme råd.</span></p></div>
+  </div>
+</div></section>
+
+<section class="slutt"><div class="glod"></div><div class="c" style="position:relative">
+  <h2>Neste uke starter på søndag</h2>
+  <p>Last ned Treni, fortell hvor du står, og få første uke med en gang.</p>
+  <div class="knapper"><a class="k hoved" href="https://apps.apple.com/no/app/id6825074710"><span><small>Last ned i</small>App Store</span></a><a class="k kant" href="https://play.google.com/store/apps/details?id=no.treni.app"><span><small>Last ned på</small>Google Play</span></a></div>
+</div></section>
+</main>
+
+<footer><div class="c">
+  <span>Treni · <a href="mailto:hei@treni.no">hei@treni.no</a></span>
+  <nav><a href="/samarbeid.php">For trenere</a><a href="/arrangor/">Løpegrupper og arrangører</a><a href="/personvern.html">Personvern</a><a href="/vilkar.html">Vilkår</a><a href="/en/">English</a></nav>
+</div></footer>
+</body>
+</html>
