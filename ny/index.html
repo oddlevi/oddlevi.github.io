@@ -31,18 +31,18 @@
   --shadow:0 24px 48px -16px hsl(152 62% 20% / .28);
   --r:12px;--r-xl:24px;
   --kurve:cubic-bezier(.22,1,.36,1);
-  --note:hsl(43 90% 92%);--note-fg:hsl(43 85% 22%);
+  --rod:hsl(8 70% 44%);--rod-soft:hsl(8 70% 94%);--note:hsl(43 90% 92%);--note-fg:hsl(43 85% 22%);
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --bg:hsl(162 24% 5%);--surface:hsl(160 18% 9%);--fg:hsl(42 30% 94%);--muted:hsl(150 8% 62%);
   --border:hsl(156 12% 17%);--primary:hsl(84 70% 52%);--primary-fg:hsl(162 24% 5%);
   --accent-soft:hsl(84 30% 14%);--primary-soft:hsl(152 25% 13%);--shadow:0 24px 48px -16px hsl(0 0% 0% / .6);
-  --note:hsl(43 40% 14%);--note-fg:hsl(43 90% 70%);color-scheme:dark}}
+  --rod:hsl(8 80% 60%);--rod-soft:hsl(8 40% 16%);--note:hsl(43 40% 14%);--note-fg:hsl(43 90% 70%);color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:hsl(162 24% 5%);--surface:hsl(160 18% 9%);--fg:hsl(42 30% 94%);--muted:hsl(150 8% 62%);
   --border:hsl(156 12% 17%);--primary:hsl(84 70% 52%);--primary-fg:hsl(162 24% 5%);
   --accent-soft:hsl(84 30% 14%);--primary-soft:hsl(152 25% 13%);--shadow:0 24px 48px -16px hsl(0 0% 0% / .6);
-  --note:hsl(43 40% 14%);--note-fg:hsl(43 90% 70%);color-scheme:dark}
+  --rod:hsl(8 80% 60%);--rod-soft:hsl(8 40% 16%);--note:hsl(43 40% 14%);--note-fg:hsl(43 90% 70%);color-scheme:dark}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--fg);font-family:Manrope,system-ui,sans-serif;font-size:17px;line-height:1.6;font-feature-settings:"tnum"}
 img{display:block;max-width:100%}
@@ -121,6 +121,7 @@ header{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 88
 .ud .f{margin-top:auto;height:6px;border-radius:99px}
 .ud.ikke{border-style:dashed;background:transparent}
 .ud.ikke b{text-decoration:line-through;color:var(--muted)}
+.ud .grunn{display:inline-flex;align-self:flex-start;background:var(--rod-soft);color:var(--rod);font-size:13px;font-weight:800;padding:3px 9px;border-radius:99px}
 .ud.ny{border:2px solid var(--primary)}
 .ud .merke{position:absolute;top:-10px;right:8px;background:var(--primary);color:var(--primary-fg);font-size:11px;font-weight:800;padding:2px 8px;border-radius:99px}
 .livet .fot{margin-top:20px;font-size:15px;color:var(--muted);max-width:60ch}
@@ -212,7 +213,7 @@ footer a{text-decoration:none}
     <div class="ud"><span class="d">Man</span><b>Rolig</b><span class="m">40 min</span><i class="f" style="background:var(--s2)"></i></div>
     <div class="ud"><span class="d">Tir</span><b>Intervall</b><span class="m">5 × 4 min</span><i class="f" style="background:var(--s4)"></i></div>
     <div class="ud"><span class="d">Ons</span><b>Hvile</b><span class="m">–</span></div>
-    <div class="ud ikke"><span class="d">Tor</span><b>Rolig</b><span class="m">Sykt barn</span></div>
+    <div class="ud ikke"><span class="d">Tor</span><b>Rolig</b><span class="grunn">Sykt barn</span></div>
     <div class="ud ny"><span class="merke">Flyttet</span><span class="d">Fre</span><b>Rolig</b><span class="m">30 min</span><i class="f" style="background:var(--s2)"></i></div>
     <div class="ud"><span class="d">Lør</span><b>Langtur</b><span class="m">1 t 30 min</span><i class="f" style="background:var(--s2)"></i></div>
     <div class="ud"><span class="d">Søn</span><b>Hvile</b><span class="m">–</span></div>
