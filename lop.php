@@ -146,7 +146,7 @@ $via9 = function (string $url, array $l) use ($konfig): string {
   <div class="cta-strip">
     <b>🎯 Meldt deg på et løp?</b> Treni bygger treningsplanen din mot akkurat det løpet,
     uke for uke, med en ekte trener på laget og skadefri fremgang som mål.
-    <a href="bli-testloper.php"><b>Bli testløper →</b></a>
+    <a href="https://app.treni.no/"><b>Kom i gang i Treni →</b></a>
   </div>
   <?php foreach ($per_mnd as $mnd => $lopene): ?>
   <h2 class="mnd-tittel"><?= $MND[(int) substr($mnd, 5, 2)] ?> <?= substr($mnd, 0, 4) ?></h2>
@@ -167,9 +167,9 @@ $via9 = function (string $url, array $l) use ($konfig): string {
   <?php endforeach; ?>
   <?php endforeach; ?>
   <div class="cta-strip" style="margin-top:2rem">
-    <b>🏃 Vil du komme forberedt til start?</b> Treni leser treningen din fra klokka di (Strava eller Intervals.icu) og
+    <b>🏃 Vil du komme forberedt til start?</b> Treni henter turene fra klokka di og
     gir deg ukeplan og oppfølging mot løpet ditt, trenerledet, skadefritt først.
-    <a href="bli-testloper.php"><b>Bli med som testløper →</b></a>
+    <a href="https://app.treni.no/"><b>Lag profil i Treni →</b></a>
   </div>
   <p class="liten" style="margin-top:1.4rem">Kalenderen dekker arrangementer med påmelding/tidtaking
   hos EQ Timing de neste 18 månedene, også neste års arrangementer, og oppdateres daglig. Mangler et løp?
@@ -233,8 +233,8 @@ function settFilter(region, fylke) {
   <h3 style="font-size:1.05rem; margin:1.1rem 0 .3rem">Hvordan trener jeg riktig mot et løp?</h3>
   <p class="liten">Gradvis oppbygging, riktig fordeling mellom rolig og hard trening, og
   en plan som topper formen til løpsdagen, det er akkurat det <a href="index.html">Treni</a>
-  gjør: en trenerledet treningsveileder som leser treningen din fra klokka di (Strava eller Intervals.icu) og bygger
-  ukeplanen mot løpet ditt. <a href="bli-testloper.php">Bli testløper →</a></p>
+  gjør: en trenerledet treningsveileder som henter turene fra klokka di og bygger
+  ukeplanen mot løpet ditt. <a href="https://app.treni.no/">Kom i gang i Treni →</a></p>
   <h3 style="font-size:1.05rem; margin:1.1rem 0 .3rem">Mangler et løp i kalenderen?</h3>
   <p class="liten">Kalenderen dekker løp med påmelding hos EQ Timing. Arrangerer du et
   løp som mangler, eller vet om et? <a href="mailto:hei@treni.no">Send oss en e-post</a>,
@@ -248,23 +248,22 @@ function settFilter(region, fylke) {
  {"@type":"Question","name":"Hvilke løp dekker kalenderen?",
   "acceptedAnswer":{"@type":"Answer","text":"Gateløp, terrengløp, motbakkeløp og fjelløp i hele Norge de neste 18 månedene, med fylkesfilter og eget Nord-Norge-filter, hentet automatisk fra EQ Timing og oppdatert daglig."}},
  {"@type":"Question","name":"Hvordan trener jeg riktig mot et løp?",
-  "acceptedAnswer":{"@type":"Answer","text":"Gradvis oppbygging, mest rolig trening og en plan som topper formen til løpsdagen. Treni er en trenerledet treningsveileder som leser treningen din fra klokka di (Strava eller Intervals.icu) og bygger ukeplanen mot løpet ditt."}}]}
+  "acceptedAnswer":{"@type":"Answer","text":"Gradvis oppbygging, mest rolig trening og en plan som topper formen til løpsdagen. Treni er en trenerledet treningsveileder som henter turene fra klokka di og bygger ukeplanen mot løpet ditt."}}]}
 </script>
 
 <footer>
   <nav aria-label="Bunnmeny">
     <a href="index.html">Forsiden</a>
     <a href="lopegrupper.php">Løpegrupper</a>
-    <a href="min-side.html">Min side</a>
+    <a href="https://app.treni.no/">Treni-appen</a>
     <a href="stotte.html">Støtte og kontakt</a>
     <a href="personvern.html">Personvern</a>
   </nav>
   <p>PAULSEN UTVIKLING · org.nr 938 158 614 · Norge ·
      <a href="mailto:hei@treni.no">hei@treni.no</a></p>
-  <p>Powered by Strava. This service is not affiliated with or endorsed by Strava.</p>
 </footer>
 
 </main>
-<script src="/banner.js?v=1" defer></script>
+<script src="/banner.js?v=3" defer></script>
 </body>
 </html>

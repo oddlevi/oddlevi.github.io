@@ -6,5 +6,6 @@ RewriteRule ^(.*)$ https://treni.no/$1 [R=301,L]
 # www -> apex
 RewriteCond %{HTTP_HOST} ^www\.treni\.no$ [NC]
 RewriteRule ^(.*)$ https://treni.no/$1 [R=301,L]
-# bli-med.html (gammel onboarding) -> ny påmelding, vervelenker beholdes (A-6, 11.09.2026)
-RewriteRule ^bli-med\.html$ /bli-med.php [L]
+# Registrering skjer i Treni-appen (Odd 25.10.2026): alle gamle påmeldingssider for Treni 1 sendes dit. 302, ikke 301,
+# så lenkene kan pekes et annet sted senere uten at nettlesere husker omdirigeringen.
+RewriteRule ^(bli-med\.html|bli-med\.php|bli-testloper\.php|venteliste-start\.php|en/join\.php)$ https://app.treni.no/? [R=302,L]
