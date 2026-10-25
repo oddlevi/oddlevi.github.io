@@ -114,9 +114,9 @@ function e10(?string $s): string { return htmlspecialchars($s ?? '', ENT_QUOTES,
   <?php endforeach; ?>
   <?php endforeach; ?>
   <div class="cta-strip" style="margin-top:2rem">
-    <b>🏃 Vil du ha en plan å ta med til gruppetreningen?</b> Treni leser treningen din fra
-    Strava og gir deg ukeplan og oppfølging, trenerledet, skadefritt først.
-    <a href="bli-testloper.php"><b>Bli med som testløper →</b></a>
+    <b>🏃 Vil du ha en plan å ta med til gruppetreningen?</b> Treni henter turene fra
+    klokka di og gir deg ukeplan og oppfølging, trenerledet, skadefritt først.
+    <a href="https://app.treni.no/"><b>Lag profil i Treni →</b></a>
   </div>
   <p class="liten" style="margin-top:1.4rem">Oversikten er samlet fra klubbenes og gruppenes
   egne sider og oppdateres jevnlig. Mangler gruppa di, eller stemmer ikke noe?
@@ -188,8 +188,8 @@ function settFilter(region, fylke, ord) {
   <p class="liten">Sjekk gruppas side for treningstider, møt opp og si hei. De aller fleste
   grupper har flere temponivåer, og ingen forventer at du er rask. Vil du ha en plan for
   treningen rundt fellesøktene, er det akkurat det <a href="index.html">Treni</a> gjør:
-  en trenerledet treningsveileder som leser treningen din fra klokka di (Strava eller Intervals.icu).
-  <a href="bli-testloper.php">Bli testløper →</a></p>
+  en trenerledet treningsveileder som henter turene fra klokka di.
+  <a href="https://app.treni.no/">Kom i gang i Treni →</a></p>
   <h3 style="font-size:1.05rem; margin:1.1rem 0 .3rem">Mangler gruppa di?</h3>
   <p class="liten"><a href="mailto:hei@treni.no?subject=L%C3%B8pegruppe%20som%20mangler">Send
   oss en e-post</a> med navn og lenke, så legger vi den inn.</p>
@@ -215,10 +215,9 @@ function settFilter(region, fylke, ord) {
   </nav>
   <p>PAULSEN UTVIKLING · org.nr 938 158 614 · Norge ·
      <a href="mailto:hei@treni.no">hei@treni.no</a></p>
-  <p>Powered by Strava. This service is not affiliated with or endorsed by Strava.</p>
 </footer>
 
 </main>
-<script src="/banner.js?v=1" defer></script>
+<script src="/banner.js?v=3" defer></script>
 </body>
 </html>
