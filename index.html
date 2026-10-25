@@ -1,462 +1,268 @@
-<!DOCTYPE html>
-<html lang="no">
+<!doctype html>
+<html lang="nb">
 <head>
-<meta name="facebook-domain-verification" content="b1pu74cnr1h0wo46hg93hl5paz147h" />
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Treni · treningsplan for løpere, med ekte trener</title>
-<meta name="description" content="De fleste løper for hardt på de rolige dagene. Treni leser hver økt du løper, viser om uka var rolig nok, og anbefaler hva du bør endre til neste uke. En ekte trener ser over rådene du får. Hver uke.">
-<meta property="og:title" content="Løp rolig, hemmeligheten alle raske løpere kjenner.">
-<meta property="og:description" content="Trenerledet plan bygget på øktene fra klokka di. Ekte trener, hver uke.">
+<title>Treni – treningen din, uke for uke</title>
+<meta name="description" content="Treni lager uka di ut fra det du faktisk løper, og bygger den på nytt når livet skjer. Med reglene til trener Eirik Haugsnes.">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://treni.no/bilder/og.jpg?v=20260911c">
+<meta property="og:site_name" content="Treni">
+<meta property="og:title" content="Treni – treningen din, uke for uke">
+<meta property="og:description" content="Treni lager uka di ut fra det du faktisk løper, og bygger den på nytt når livet skjer. Rolig når det skal være rolig.">
+<meta property="og:image" content="https://treni.no/ny/bilder/deling.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Treni – treningen din, uke for uke. Løper på sti i lia.">
 <meta property="og:url" content="https://treni.no/">
+<meta property="og:locale" content="nb_NO">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="alternate" hreflang="no" href="https://treni.no/">
-<link rel="alternate" hreflang="en" href="https://treni.no/en/">
-<link rel="icon" href="/favicon.ico" sizes="32x32">
-<link rel="icon" type="image/png" href="/icon-192.png" sizes="192x192">
+<link rel="icon" href="/favicon.ico">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="stylesheet" href="stil.css?v=30">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap">
+<style>
+/* Trenis egne tokens (treni2/design/tokens.css). Ingen fargeverdi utenfor :root. */
+:root{
+  --bg:hsl(44 45% 97%);--surface:hsl(0 0% 100%);--fg:hsl(160 28% 9%);--muted:hsl(158 10% 36%);
+  --border:hsl(148 15% 84%);--primary:hsl(152 62% 20%);--primary-fg:hsl(44 45% 97%);
+  --accent:hsl(84 70% 52%);--accent-soft:hsl(84 60% 92%);--primary-soft:hsl(152 40% 93%);
+  --s1:hsl(150 42% 78%);--s2:hsl(152 55% 42%);--s3:hsl(46 95% 52%);--s4:hsl(26 92% 54%);--s5:hsl(5 75% 46%);
+  --mork:hsl(162 24% 5%);--mork-flate:hsl(160 18% 9%);--mork-kant:hsl(156 12% 17%);--lys-tekst:hsl(42 30% 94%);--lys-dempet:hsl(150 8% 62%);
+  --shadow:0 24px 48px -16px hsl(152 62% 20% / .28);
+  --r:12px;--r-xl:24px;
+  --kurve:cubic-bezier(.22,1,.36,1);
+  --rod:hsl(8 70% 44%);--rod-soft:hsl(8 70% 94%);--note:hsl(43 90% 92%);--note-fg:hsl(43 85% 22%);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:hsl(162 24% 5%);--surface:hsl(160 18% 9%);--fg:hsl(42 30% 94%);--muted:hsl(150 8% 62%);
+  --border:hsl(156 12% 17%);--primary:hsl(84 70% 52%);--primary-fg:hsl(162 24% 5%);
+  --accent-soft:hsl(84 30% 14%);--primary-soft:hsl(152 25% 13%);--shadow:0 24px 48px -16px hsl(0 0% 0% / .6);
+  --rod:hsl(8 80% 60%);--rod-soft:hsl(8 40% 16%);--note:hsl(43 40% 14%);--note-fg:hsl(43 90% 70%);color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:hsl(162 24% 5%);--surface:hsl(160 18% 9%);--fg:hsl(42 30% 94%);--muted:hsl(150 8% 62%);
+  --border:hsl(156 12% 17%);--primary:hsl(84 70% 52%);--primary-fg:hsl(162 24% 5%);
+  --accent-soft:hsl(84 30% 14%);--primary-soft:hsl(152 25% 13%);--shadow:0 24px 48px -16px hsl(0 0% 0% / .6);
+  --rod:hsl(8 80% 60%);--rod-soft:hsl(8 40% 16%);--note:hsl(43 40% 14%);--note-fg:hsl(43 90% 70%);color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:Manrope,system-ui,sans-serif;font-size:17px;line-height:1.6;font-feature-settings:"tnum"}
+img{display:block;max-width:100%}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--primary);outline-offset:3px;border-radius:4px}
+.c{max-width:1200px;margin-inline:auto;padding-inline:clamp(16px,4vw,48px)}
+.etikett{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1,h2,h3{font-weight:800;letter-spacing:-.025em;margin:0}
+h2{font-size:clamp(32px,4.4vw,52px);line-height:1.05}
+.lead{font-size:clamp(17px,1.6vw,20px);color:var(--muted);max-width:56ch;margin:16px 0 0}
+header{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.topp{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font-weight:800;font-size:24px;letter-spacing:-.03em;text-decoration:none}
+.logo i{font-style:normal;position:relative}
+.logo i::after{content:"";position:absolute;width:7px;height:7px;border-radius:50%;background:var(--accent);left:50%;top:1px;transform:translateX(-50%);box-shadow:0 0 0 2px var(--bg)}
+.meny{display:flex;gap:28px;align-items:center;font-size:15px;font-weight:600}
+.meny a{text-decoration:none;color:var(--muted)}
+.meny .liten{color:var(--primary-fg);background:var(--primary);padding:9px 16px;border-radius:999px;font-weight:800}
+@media (max-width:760px){.meny a:not(.liten){display:none}}
+html{scroll-behavior:smooth}
+#last,#slik,#eirik{scroll-margin-top:110px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+.knapper{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.k{display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:0 22px;border-radius:999px;font-weight:800;font-size:16px;text-decoration:none;transition:transform 150ms var(--kurve)}
+.k:hover{transform:translateY(-1px)}
+.k svg{width:20px;height:20px}
+.k.hoved{background:var(--primary);color:var(--primary-fg);box-shadow:var(--shadow)}
+.k.kant{border:1.5px solid var(--border);background:var(--surface)}
+.k.snart{opacity:.6;cursor:default}
+.k small{display:block;font-size:11px;font-weight:600;opacity:.8;line-height:1}
+.k span{line-height:1.1}
+.hero{display:grid;grid-template-columns:7fr 5fr;gap:clamp(32px,5vw,72px);align-items:center;padding-block:clamp(48px,8vw,112px) clamp(64px,9vw,128px)}
+.hero h1{font-size:clamp(44px,7.2vw,92px);line-height:.98;margin-top:18px}
+.hero h1 em{font-style:normal;color:var(--primary)}
+.hero .lead{margin-bottom:32px}
+.tillit{display:flex;align-items:center;gap:12px;margin-top:28px;font-size:14px;color:var(--muted)}
+.tillit img{width:44px;height:44px;border-radius:50%;object-fit:cover;object-position:50% 25%;border:2px solid var(--surface)}
+.tillit b{color:var(--fg)}
+.scene{position:relative;justify-self:center;width:min(100%,420px)}
+.scene .foto{border-radius:var(--r-xl);overflow:hidden;aspect-ratio:4/5}
+.scene .foto img{width:100%;height:100%;object-fit:cover;object-position:50% 30%}
+@media (max-width:900px){.hero{grid-template-columns:1fr}.scene{width:min(100%,380px)}}
+.tel{position:absolute;left:-14%;bottom:-8%;width:62%;background:var(--mork);border-radius:30px;padding:10px;box-shadow:0 30px 60px -20px hsl(160 28% 9% / .55);border:1px solid var(--mork-kant)}
+.skjerm{border-radius:22px;padding:12px 10px;display:grid;gap:8px;color:var(--lys-tekst)}
+.skjerm .t{font-size:11px;font-weight:800;display:flex;justify-content:space-between}
+.skjerm .t i{font-style:normal;color:var(--lys-dempet);font-weight:600}
+.dag{background:var(--accent);color:var(--mork);border-radius:14px;padding:10px}
+.dag small{font-size:8.5px;font-weight:800;letter-spacing:.08em;opacity:.75}
+.dag b{display:block;font-size:19px;line-height:1.05;margin:2px 0 6px;letter-spacing:-.02em}
+.piller{display:flex;gap:4px;flex-wrap:wrap}
+.piller span{background:hsl(162 24% 5% / .12);border-radius:99px;padding:2px 7px;font-size:9px;font-weight:800}
+.stripe{display:flex;gap:4px;align-items:end;height:46px;padding:6px 6px 0;background:var(--mork-flate);border-radius:10px}
+.stripe i{flex:1;border-radius:3px 3px 0 0}
+.boble{background:var(--mork-flate);border:1px solid var(--mork-kant);border-radius:4px 12px 12px 12px;padding:7px 8px;font-size:9.5px;line-height:1.35}
+.boble em{font-style:normal;color:var(--accent);font-weight:800;display:block;font-size:8px;letter-spacing:.08em}
+@media (max-width:520px){.tel{left:-6%;width:66%}}
+.holdning{padding-block:clamp(80px,12vw,160px);border-top:1px solid var(--border)}
+.holdning .stor{font-size:clamp(36px,6vw,80px);line-height:1.02;font-weight:800;letter-spacing:-.035em;max-width:15ch;margin:0}
+.holdning .stor span{color:var(--muted)}
+.to{display:grid;grid-template-columns:5fr 7fr;gap:clamp(32px,6vw,96px);align-items:end}
+.sonevis{display:grid;gap:10px}
+.sonevis .rad{display:grid;grid-template-columns:110px 1fr;gap:14px;align-items:center;font-size:14px;font-weight:600;color:var(--muted)}
+.sonevis .bar{height:14px;border-radius:99px;display:flex;overflow:hidden}
+.sonevis .bar i{display:block;height:100%}
+.sonevis p{font-size:14px;color:var(--muted);margin:6px 0 0}
+.skade{display:flex;gap:14px;align-items:flex-start;max-width:760px;margin:clamp(40px,6vw,72px) auto 0;padding:18px 20px;border-radius:var(--r);background:var(--rod-soft);color:var(--fg)}
+.skade svg{width:26px;height:26px;flex-shrink:0;color:var(--rod);margin-top:2px}
+.skade p{margin:0;font-size:16px;line-height:1.5}
+.skade b{display:block;font-size:18px;color:var(--rod);margin-bottom:2px}
+@media (max-width:900px){.to{grid-template-columns:1fr}}
+.slik{padding-block:clamp(72px,10vw,140px);background:var(--surface);border-block:1px solid var(--border)}
+.steg{list-style:none;margin:56px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(24px,4vw,56px)}
+.steg li{border-top:2px solid var(--fg);padding-top:20px}
+.steg .n{font-size:14px;font-weight:800;color:var(--primary)}
+.steg h3{font-size:24px;line-height:1.15;margin:8px 0 10px}
+.steg p{margin:0;color:var(--muted);font-size:16px}
+@media (max-width:820px){.steg{grid-template-columns:1fr}}
+.livet{padding-block:clamp(72px,10vw,140px)}
+.uke{margin-top:48px;display:grid;grid-template-columns:repeat(7,1fr);gap:8px}
+.ud{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:12px 10px;min-height:132px;display:flex;flex-direction:column;gap:6px;position:relative}
+.ud .d{font-size:12px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.ud b{font-size:15px;line-height:1.2}
+.ud .m{font-size:13px;color:var(--muted)}
+.ud .f{margin-top:auto;height:6px;border-radius:99px}
+.ud.ikke{border-style:dashed;border-color:var(--rod);background:var(--surface);transform:rotate(-4deg) translateY(4px);z-index:1;box-shadow:0 10px 24px -12px hsl(8 70% 44% / .35)}
+.ud.ikke b{text-decoration:line-through;color:var(--muted)}
+.ud .grunn{display:inline-flex;align-self:flex-start;background:var(--rod-soft);color:var(--rod);font-size:13px;font-weight:800;padding:3px 9px;border-radius:99px}
+.ud.ny{border:2px solid var(--primary)}
+.ud .merke{position:absolute;top:-10px;right:8px;background:var(--primary);color:var(--primary-fg);font-size:11px;font-weight:800;padding:2px 8px;border-radius:99px}
+.livet .fot{margin-top:20px;font-size:15px;color:var(--muted);max-width:60ch}
+@media (max-width:820px){.uke{grid-template-columns:repeat(2,1fr)}.ud{min-height:auto}}
+.eirik{padding-block:clamp(72px,10vw,140px);border-top:1px solid var(--border)}
+.eirik .to{grid-template-columns:6fr 6fr;align-items:center}
+.eirik .foto{border-radius:var(--r-xl);overflow:hidden;aspect-ratio:1/1}
+.eirik .foto img{width:100%;height:100%;object-fit:cover;object-position:50% 35%}
+@media (max-width:900px){.eirik .to{grid-template-columns:1fr}.eirik .foto{aspect-ratio:4/3}}
+.grep{margin-top:32px;display:grid;gap:12px}
+.grep div{background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:var(--r);padding:16px 18px;font-size:17px;font-weight:600;line-height:1.45}
+.grep .hvorfor{background:var(--accent-soft);border-left-color:var(--primary);font-size:18px}
+.grep small{display:block;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.klokka{padding-block:clamp(64px,8vw,112px);background:var(--surface);border-block:1px solid var(--border)}
+.klokka .to{align-items:center}
+.valg{display:grid}
+.valg div{display:flex;gap:14px;align-items:flex-start;padding:18px 0;border-bottom:1px solid var(--border)}
+.valg svg{flex-shrink:0;width:24px;height:24px;color:var(--primary);margin-top:2px}
+.valg b{display:block;font-size:17px}
+.valg span{color:var(--muted);font-size:15px}
+.slutt{background:var(--mork);color:var(--lys-tekst);padding-block:clamp(80px,12vw,160px);text-align:center;position:relative;overflow:hidden}
+.slutt h2{font-size:clamp(40px,6vw,76px);max-width:14ch;margin-inline:auto}
+.slutt p{color:var(--lys-dempet);margin:18px auto 36px;max-width:46ch;font-size:18px}
+.slutt .knapper{justify-content:center}
+.slutt .k.hoved{background:var(--accent);color:var(--mork);box-shadow:none}
+.slutt .k.kant{background:transparent;border-color:var(--mork-kant);color:var(--lys-tekst)}
+.slutt .glod{position:absolute;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,hsl(84 70% 52% / .16),transparent 65%);top:-280px;left:50%;transform:translateX(-50%)}
+footer{background:var(--mork);color:var(--lys-dempet);border-top:1px solid var(--mork-kant);font-size:14px}
+footer .c{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;padding-block:32px}
+footer nav{display:flex;gap:22px;flex-wrap:wrap}
+footer a{text-decoration:none}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
 </head>
 <body>
-<div class="bakteppe" aria-hidden="true"></div>
-<nav class="sprakvalg" aria-label="Språk"><span aria-current="page">NO</span><a href="/en/">EN</a></nav>
-<main class="bred">
 
-<header class="hero hero-foto"><div class="indre">
-  <p class="kicker slagord reveal">Løp rolig, hemmeligheten alle raske løpere kjenner.</p>
-  <h1 class="reveal">Vet du om du trener<br>riktig akkurat nå?</h1>
-  <p class="ingress reveal" style="margin-bottom:.35rem">De fleste løper for hardt på de rolige dagene. Treni leser hver økt du løper, viser om uka var rolig nok, og anbefaler hva du bør endre til neste uke. En ekte trener ser over rådene du får. Hver uke.</p>
-  <div class="knapper reveal">
-    <a class="btn btn-primar" href="bli-testloper.php">For løpere</a>
-    <a class="btn btn-primar" href="bli-testloper.php?rolle=coach">For løpecoacher</a>
-  </div>
-  <div class="hvem reveal">
-    <span>Også for løpegrupper</span><span>Også for arrangører</span>
-  </div>
+<header><div class="c topp">
+  <a class="logo" href="/">Tren<i>i</i></a>
+  <nav class="meny"><a href="#slik">Slik virker det</a><a href="#eirik">Treneren</a><a class="liten" href="#last">Last ned</a></nav>
 </div></header>
 
-<section aria-label="Hva Treni er">
-  <p class="ingress" style="max-width:46rem">Treni er en <b>treningsveileder med trener</b>, for deg som løper på vei
-  eller i fjell. Systemet leser hver økt fra Strava, Garmin eller klokka di: puls, drag, høydemeter og hvordan det kjentes. Du trenger en pulsklokke som kan kobles til Intervals.icu: Garmin, Polar, Suunto, Coros eller Wahoo.
-  En trener står bak hvert råd. Målet er ett: <b>at du blir bedre uten å bli skadet eller miste gleden</b>. Det starter med at de rolige øktene faktisk er rolige.</p>
-  <figure class="hero-sitat reveal">
-    <blockquote>Det er supert å kunne ha et så bra verktøy og trenerens kompetanse til å veilede meg, så jeg trener meg i form på rett måte!</blockquote>
-    <figcaption>Testløper, august 2026</figcaption>
-  </figure>
-</section>
-
-<section aria-label="Mer om Treni">
-  <div class="knapper" style="margin-top:0">
-    <a class="btn btn-primar" href="bli-testloper.php">For løpere</a>
-    <a class="btn btn-primar" href="bli-testloper.php?rolle=coach">For løpecoacher</a>
-  </div>
-  <div class="knapper" style="margin-top:.6rem">
-    <a class="btn btn-ghost" href="#slik">Slik virker det</a>
-    <a class="btn btn-ghost" href="samarbeid.php">Vi vil samarbeide →</a>
-  </div>
-</section>
-
-<section aria-labelledby="problem-t">
-  <p class="kicker">Kjenner du deg igjen?</p>
-  <h2 id="problem-t">De fleste løpere trener hardere enn de tror</h2>
-  <ul class="steg" style="list-style:none; padding-left:0">
-    <li><b>«Rolig» er sjelden rolig</b>
-      <p>Hemmeligheten er enkel, men vanskelig å følge. Et ferdig program vet ikke hva kroppen din
-      faktisk gjorde forrige uke. Det ser ikke
-      at «rolig» hos deg egentlig er ganske raskt, at uka ble hard, eller at langturen
-      vokste for fort.</p>
-      <p class="treni-svar">Treni hjelper deg med å se om du traff riktig på øktene dine.</p></li>
-    <li><b>Skaden kommer først</b>
-      <p>Det som oftest stopper fremgangen er ikke for lite trening. Det er
-      <strong>for mye, for fort</strong>. Tegnene ligger i treningsdataene lenge før du kjenner dem
-      i beina. Men noen må lese dem, og si hva du bør endre til neste uke.</p>
-      <p class="treni-svar">Treni hjelper deg med å oppdage tegnene tidlig, og sier fra før de blir en skade.</p></li>
-    <li><b>Alene mellom øktene</b>
-      <p>En trener som ser deg hver uke har vært for de få. Resten står alene med klokka,
-      Strava og magefølelsen, og gjetter på om de løper rolig nok.</p>
-      <p class="treni-svar">Treni hjelper deg med å ha en trener i loopen hver uke, uten at du må ha råd til en egen.</p></li>
-  </ul>
-</section>
-
-<section aria-labelledby="lever-t">
-  <p class="kicker">Forskjellen</p>
-  <h2 id="lever-t">Ferdige planer virker, helt til livet skjer</h2>
-  <p>Hva skjedde sist du ble forkjølet i uke 2? Eller jobben tok ei uke? Eller kroppen sa nei en torsdag?</p>
-  <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
-       gap:1rem; margin:1.2rem 0">
-    <div style="border:1.5px solid hsl(var(--border)); border-radius:var(--radius);
-         padding:1.1rem 1.2rem; background:hsl(var(--surface-2) / .6)">
-      <p style="margin:0 0 .6rem; font-weight:750; letter-spacing:.03em;
-         text-transform:uppercase; font-size:.78rem; opacity:.65">📄 Ferdig app-plan</p>
-      <div style="display:flex; flex-direction:column; gap:.45rem" aria-hidden="true">
-        <div style="height:.85rem; width:70%; border-radius:99px; background:hsl(var(--fg) / .18)"></div>
-        <div style="height:.85rem; width:85%; border-radius:99px; background:hsl(var(--fg) / .18)"></div>
-        <div style="display:flex; align-items:center; gap:.5rem">
-          <div style="height:.85rem; width:60%; border-radius:99px; background:hsl(var(--fg) / .18);
-               text-decoration:line-through"></div>
-          <span style="font-size:.95rem">🤒</span>
-          <span style="font-size:.75rem; opacity:.6; white-space:nowrap">livet skjedde</span>
-        </div>
-        <div style="height:.85rem; width:75%; border-radius:99px; background:hsl(var(--fg) / .18)"></div>
-        <div style="height:.85rem; width:85%; border-radius:99px; background:hsl(var(--fg) / .18)"></div>
-        <div style="height:.85rem; width:78%; border-radius:99px; background:hsl(var(--fg) / .18)"></div>
-      </div>
-      <p style="margin:.8rem 0 0; font-size:.92rem">Planen går videre som om ingenting
-      skjedde. Og <b>du</b> får skylda for at du henger etter.</p>
+<main>
+<section class="c hero">
+  <div>
+    <div class="etikett">Treningsveileder for løpere</div>
+    <h1>Treningen din, <em>uke for uke</em></h1>
+    <p class="lead">Treni lager uka di ut fra det du faktisk løper – og bygger den på nytt når livet skjer. Rolig når det skal være rolig, hardt når kroppen er klar.</p>
+    <div class="knapper" id="last">
+      <a class="k hoved" href="https://play.google.com/store/apps/details?id=no.treni.app"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M5 3.5v17l9-8.5-9-8.5z"/><path d="M14 12l3.5-3.3L20 10.2v3.6l-2.5 1.5z"/></svg><span><small>Last ned på</small>Google Play</span></a><span class="k kant snart" aria-disabled="true"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.4 12.6c0-2.4 2-3.6 2.1-3.7-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.2-2.9.9-3.7.9-.8 0-1.9-.9-3.2-.8-1.6 0-3.1 1-4 2.4-1.7 3-.4 7.3 1.2 9.7.8 1.2 1.8 2.5 3 2.4 1.2 0 1.7-.8 3.1-.8 1.5 0 1.9.8 3.2.8 1.3 0 2.2-1.2 3-2.4.9-1.4 1.3-2.7 1.3-2.8-.1 0-2.5-1-2.5-3.8zM14 5.4c.7-.8 1.1-1.9 1-3-1 0-2.1.7-2.8 1.5-.6.7-1.2 1.8-1 2.9 1 .1 2.1-.6 2.8-1.4z"/></svg><span><small>Kommer snart i</small>App Store</span></span>
     </div>
-    <div style="border:2px solid hsl(var(--accent) / .55); border-radius:var(--radius);
-         padding:1.1rem 1.2rem; background:hsl(var(--accent) / .07); box-shadow:var(--shadow-md)">
-      <p style="margin:0 0 .6rem; font-weight:750; letter-spacing:.03em;
-         text-transform:uppercase; font-size:.78rem; color:hsl(var(--primary))">🌱 Treni-planen</p>
-      <div style="display:flex; flex-direction:column; gap:.45rem" aria-hidden="true">
-        <div style="height:.85rem; width:70%; border-radius:99px; background:hsl(var(--accent) / .55)"></div>
-        <div style="height:.85rem; width:85%; border-radius:99px; background:hsl(var(--accent) / .55)"></div>
-        <div style="display:flex; align-items:center; gap:.5rem">
-          <div style="height:.85rem; width:34%; border-radius:99px; background:hsl(var(--accent) / .3)"></div>
-          <span style="font-size:.75rem; color:hsl(var(--primary)); font-weight:650">→ justert ✓</span>
-        </div>
-        <div style="display:flex; align-items:center; gap:.5rem">
-          <div style="height:.85rem; width:60%; border-radius:99px; background:hsl(var(--accent) / .45)"></div>
-          <span style="font-size:.75rem; color:hsl(var(--primary)); font-weight:650">bygger opp</span>
-        </div>
-        <div style="height:.85rem; width:78%; border-radius:99px; background:hsl(var(--accent) / .55)"></div>
-        <div style="height:.85rem; width:85%; border-radius:99px; background:hsl(var(--accent) / .55)"></div>
-      </div>
-      <p style="margin:.8rem 0 0; font-size:.92rem">Hver økt leses fra Strava eller Intervals.icu. Planen
-      <b>bygger videre fra der du faktisk er</b>, og en ekte trener ser over.</p>
-    </div>
+    <div class="tillit"><img src="/ny/bilder/eirik.jpg" alt=""><span>Bygd på reglene til <b>Eirik Haugsnes</b>, trener og fagansvarlig i Treni.</span></div>
   </div>
-  <p><b>En plan som lever, for løpere som lever.</b> Ikke bare for den godt trente
-  løperen appene ble laget for.</p>
-</section>
-
-<section aria-labelledby="underlag-t">
-  <p class="kicker">Vei eller fjell</p>
-  <h2 id="underlag-t">Løper du på asfalt, i fjellet, eller begge deler?</h2>
-  <div class="steg" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr))">
-    <div class="kort">
-      <h3 style="margin-top:0">🛣️ For deg som løper på vei</h3>
-      <p>Her styrer <strong>fart og kilometer</strong>: drag med sekunder, terskeløkter
-      målt mot din egen fart, og opptrapping uke for uke mot løpet ditt.
-      5 km, 10 km. halv eller hel.</p>
-    </div>
-    <div class="kort">
-      <h3 style="margin-top:0">⛰️ For deg som løper i fjell og terreng</h3>
-      <p>I terrenget sier kilometerne lite. Her styrer <strong>tid, puls og høydemeter</strong>.
-      Motbakke som egen økt, nedoverløping som egen ferdighet, og et regnskap
-      som teller det terrenget faktisk kostet.</p>
-    </div>
-  </div>
-  <p class="liten" style="margin-top:.9rem">Felles for begge: samme sikkerhetsregler og
-  samme trener. Mange gjør begge deler. Treni ser hvilket underlag
-  hver økt gikk på, og vurderer den deretter.</p>
-  <div style="display:grid; gap:1.4rem 1.1rem; margin-top:1.6rem; text-align:center;
-              grid-template-columns:repeat(auto-fit, minmax(200px, 1fr))">
-    <div><span style="font-size:1.7rem" aria-hidden="true">🛡️</span>
-      <p style="margin:.35rem 0 0"><b>Vakt på hver enkelt økt</b><br>
-      <span class="liten">En studie av 5&nbsp;205 løpere i 2025 viste at det er enkeltøkta
-      som skader. Treni passer på både uka og hver økt.</span></p></div>
-    <div><span style="font-size:1.7rem" aria-hidden="true">🏋️</span>
-      <p style="margin:.35rem 0 0"><b>All trening teller</b><br>
-      <span class="liten">Styrke, ski, sykkel og fotball regnes med i
-      det kroppen din bærer.</span></p></div>
-    <div><span style="font-size:1.7rem" aria-hidden="true">🌦️</span>
-      <p style="margin:.35rem 0 0"><b>Været er tenkt på</b><br>
-      <span class="liten">De viktigste øktene legges på de tørreste dagene der du
-      faktisk bor.</span></p></div>
-    <div><span style="font-size:1.7rem" aria-hidden="true">🏁</span>
-      <p style="margin:.35rem 0 0"><b>Løpene dine styrer planen</b><br>
-      <span class="liten">Oppkjøring og nedtrapping mot løpene dine, på vei
-      som i fjell.</span></p></div>
+  <div class="scene">
+    <div class="foto"><img src="/ny/bilder/begge.jpg" width="900" height="1200" alt="Løper på sti i lia" fetchpriority="high"></div>
+    <div class="tel" aria-hidden="true"><div class="skjerm">
+      <div class="t">Treni <i>lør 24.10.</i></div>
+      <div class="dag"><small>I DAG · LØRDAG</small><b>Rolig 5 km</b><div class="piller"><span>30 min</span><span>puls under 129</span></div></div>
+      <div class="stripe"><i style="height:40%;background:var(--s2)"></i><i style="height:6%;background:var(--mork-kant)"></i><i style="height:70%;background:var(--s4)"></i><i style="height:6%;background:var(--mork-kant)"></i><i style="height:45%;background:var(--s2)"></i><i style="height:35%;background:var(--accent)"></i><i style="height:95%;background:var(--s3)"></i></div>
+      <div class="boble"><em>VEILEDEREN</em>Godt jobba denne uka. Hvordan kjentes beina etter dragene?</div>
+    </div></div>
   </div>
 </section>
 
-<section aria-labelledby="lopkal-t">
-  <p class="kicker">Løpskalenderen</p>
-  <h2 id="lopkal-t">🏁 Vet du hvilket løp som er neste?</h2>
-  <p style="max-width:46rem">Gateløp, terrengløp og fjelløp i hele Norge, med eget filter for Nord-Norge. Dato, sted og
-  påmeldingslenke, hentet automatisk fra tidtakersystemet og oppdatert hver dag.
-  Finn neste løp, meld deg på, og tren riktig mot det.</p>
-  <div class="knapper">
-    <a class="btn btn-primar" href="lop.php">Se løpskalenderen →</a>
-  </div>
-</section>
-
-<section id="slik" aria-labelledby="slik-t">
-  <p class="kicker">Slik virker det</p>
-  <h2 id="slik-t">Enkelt for begge sider</h2>
-  <div class="to-spalter" style="gap:2.2rem">
-    <div>
-      <p class="flow-tittel">🏃 For løperen</p>
-      <ol class="flowsteg">
-        <li><div><b>Koble Strava eller klokka di, svar på noen få spørsmål</b>
-          <p>Mål, alder og makspuls. Mer trenger vi ikke spørre om. Treni henter
-          historikken din, setter pulssonene dine etter Olympiatoppens skala, og lærer hva
-          som er en vanlig uke for deg. Ikke for en gjennomsnittsløper.</p></div></li>
-        <li><div><b>Få mandagsrapport og ukeplan</b>
-          <p>Hva forrige uke faktisk var, rolig og hardt, og hva uka som kommer
-          bør inneholde, økt for økt, tilpasset løpene dine.</p></div></li>
-        <li><div><b>Tren, og bli fulgt opp</b>
-          <p>Planen kommer til deg. Passer noe ikke, sier du fra, så justeres den.
-          Treni følger med gjennom uka, og du kan spørre om alt, når som helst, i din egen
-          gruppe med treneren på laget.</p></div></li>
-      </ol>
-    </div>
-    <div>
-      <p class="flow-tittel">🤝 For samarbeidspartneren</p>
-      <ol class="flowsteg">
-        <li><div><b>Løpegrupper: flere folk på økt</b>
-          <p>Det er det dere får ut av det, helt konkret. Har klubben intervall tirsdag kl. 17:15,
-          legger Treni ukas intervalløkt <b>dit</b>, med tid og sted, i medlemmenes egne
-          ukeplaner. Slik gjør vi det med Tromsø Løpeklubb i dag: fellesøktene blir navet,
-          ikke konkurrenten.</p></div></li>
-        <li><div><b>Arrangører: deltagere som trener riktig mot akkurat ditt løp</b>
-          <p>Løpet ditt legges inn som mål med distanse, høydemeter og terreng. Planene bygger
-          mot det i ukevis, med formtopping inn mot start. Forberedte, skadefrie deltagere
-          får bedre løpsopplevelser, og kommer igjen neste år.</p></div></li>
-        <li><div><b>Vi bygger det sammen</b>
-          <p>Piloten kjører nå, og samarbeidsformene er åpne: klubbøkter i planene, tilbud til
-          deltagere før løp, felles innhold. <a href="samarbeid.php">Ta kontakt</a>, så finner vi formen.</p></div></li>
-      </ol>
+<section class="holdning"><div class="c to">
+  <p class="stor">Rolig skal være rolig. <span>Det er hele hemmeligheten.</span></p>
+  <div>
+    <p class="lead" style="margin:0 0 28px">De fleste løper for hardt på de rolige dagene. Treni leser hver tur fra klokka di og viser om uka faktisk var rolig nok – før det blir en skade.</p>
+    <div class="sonevis">
+      <div class="rad">Slik det ofte blir<div class="bar"><i style="width:22%;background:var(--s1)"></i><i style="width:20%;background:var(--s2)"></i><i style="width:33%;background:var(--s3)"></i><i style="width:20%;background:var(--s4)"></i><i style="width:5%;background:var(--s5)"></i></div></div>
+      <div class="rad">Slik Treni styrer<div class="bar"><i style="width:40%;background:var(--s1)"></i><i style="width:40%;background:var(--s2)"></i><i style="width:10%;background:var(--s3)"></i><i style="width:8%;background:var(--s4)"></i><i style="width:2%;background:var(--s5)"></i></div></div>
+      <p>Tid i pulssoner gjennom uka. Grønt er rolig, varmt er hardt. Illustrasjon.</p>
     </div>
   </div>
-  <div class="midt-cta">
-    <p>Klar til å prøve? Det tar to minutter å melde seg. Samarbeid starter med en kort melding.</p>
-    <div class="knapper" style="justify-content:center">
-      <a class="btn btn-primar" href="bli-testloper.php">Bli med som testløper</a>
-      <a class="btn btn-ghost" href="samarbeid.php">Vi vil samarbeide →</a>
+</div>
+<div class="c"><div class="skade"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0zM12 9v4M12 17h.01"/></svg>
+      <p><b>Den vanligste skadeårsaken</b>Det som oftest stopper løpere er ikke for lite trening, men for mye, for fort – for mange harde økter eller en langtur som vokser for raskt. Treni øker gradvis og sier fra før tegnene blir en skade.</p></div></div></section>
+
+<section class="slik" id="slik"><div class="c">
+  <div class="etikett">Slik virker det</div>
+  <h2 style="margin-top:12px">Fra første tur til ferdig uke</h2>
+  <ol class="steg">
+    <li><div class="n">01</div><h3>Fortell hvor du står</h3><p>Hvor mye du løper nå, målet ditt og dagene som passer. Ærlige tall gir en trygg første uke.</p></li>
+    <li><div class="n">02</div><h3>Koble klokka</h3><p>Treni-feltet på klokka sender hver tur rett til appen. Puls, fart og høydemeter – du trenger ingen andre apper.</p></li>
+    <li><div class="n">03</div><h3>Få uka – hver søndag</h3><p>Uka bygges på nytt ut fra det som faktisk skjedde. Vil du endre noe, sier du fra i appen.</p></li>
+  </ol>
+</div></section>
+
+<section class="livet"><div class="c">
+  <div class="etikett">Når livet skjer</div>
+  <h2 style="margin-top:12px;max-width:18ch">Ferdige planer virker – helt til torsdagen sier nei</h2>
+  <div class="uke">
+    <div class="ud"><span class="d">Man</span><b>Rolig</b><span class="m">40 min</span><i class="f" style="background:var(--s2)"></i></div>
+    <div class="ud"><span class="d">Tir</span><b>Intervall</b><span class="m">5 × 4 min</span><i class="f" style="background:var(--s4)"></i></div>
+    <div class="ud"><span class="d">Ons</span><b>Hvile</b><span class="m">–</span></div>
+    <div class="ud ikke"><span class="d">Tor</span><b>Rolig</b><span class="grunn">Sykt barn</span></div>
+    <div class="ud ny"><span class="merke">Flyttet</span><span class="d">Fre</span><b>Rolig</b><span class="m">30 min</span><i class="f" style="background:var(--s2)"></i></div>
+    <div class="ud"><span class="d">Lør</span><b>Langtur</b><span class="m">1 t 30 min</span><i class="f" style="background:var(--s2)"></i></div>
+    <div class="ud"><span class="d">Søn</span><b>Hvile</b><span class="m">–</span></div>
+  </div>
+  <p class="fot">Skriv til veilederen at torsdagen røk. Treni flytter den rolige økta til fredag, så langturen på lørdag står – og neste uke tar hensyn til det som faktisk skjedde.</p>
+</div></section>
+
+<section class="eirik" id="eirik"><div class="c to">
+  <div class="foto"><img src="/ny/bilder/eirik.jpg" alt="Eirik Haugsnes" loading="lazy"></div>
+  <div>
+    <div class="etikett">Treneren bak</div>
+    <h2 style="margin-top:12px">Eiriks grep, i din uke</h2>
+    <p class="lead">Eirik Haugsnes har satt reglene Treni bygger på. Han følger med på hvordan rådene virker, og har siste ord om faget.</p>
+    <div class="grep">
+      <div class="hvorfor"><small>Overskudd i hverdagen</small>Rolige økter bygger formen uten å tappe deg. Du har krefter igjen til hverdagen – og til de harde øktene.</div>
+      <div><small>Langtur</small>Langturen løper Eirik mest rolig – så lett at han kan snakke i hele setninger.</div>
+      <div><small>Harde økter</small>Eirik løper dragene kontrollert – det siste skal gå like bra som det første.</div>
     </div>
   </div>
-</section>
+</div></section>
 
-<section aria-labelledby="prinsipp-t">
-  <blockquote class="sitat" id="prinsipp-t">Det er ikke hvor mye du løper som skader deg.
-  Det er hvor mye mer enn kroppen er vant til.</blockquote>
-  <p>Det er prinsippet bak hver eneste vurdering. At du føler deg i form, beskytter deg ikke mot skade.</p>
-  <p class="liten">Konkret, på to nivåer. <b>Uka</b> måles mot snittet av de fire siste,
-  og holdes innenfor det kroppen tåler, mellom 80 og 130 prosent
-  (<a href="https://doi.org/10.1136/bjsports-2015-095788">Gabbett 2016</a>,
-  <a href="https://doi.org/10.1136/bjsports-2015-094817">Hulin 2016</a>). Og <b>hver
-  enkelt økt</b> måles mot den lengste du har gjort de siste 30 dagene. En stor studie
-  fra 2025 med <a href="https://pure.au.dk/portal/en/publications/how-much-running-is-too-much-identifying-high-risk-running-sessio/">5&nbsp;205
-  løpere</a> viste at det er der skadene faktisk kommer fra. Begge vaktene, sammen
-  med trenerens blikk.</p>
-</section>
-
-<section aria-label="Nøkkeltall">
-  <ul class="tall-rad">
-    <li><span class="tall">76 til 85 %</span><p>av treningstiden rolig, resten hardt. Det er sånn form bygges</p></li>
-    <li><span class="tall">0 til 15 %</span><p>økning i uka som mest. Grensen settes etter nivået ditt, ikke én regel for alle</p></li>
-    <li><span class="tall">Hele dagen</span><p>leses øktene dine, og Min side oppdateres uten at du melder inn noe</p></li>
-    <li><span class="tall" data-lopertall>38</span><p>løpere i Treni nå, på vei, bane, terreng og ultra. Alle har egen side fra dag én, og planen så snart klokka er koblet</p></li>
-  </ul>
-</section>
-
-<section aria-labelledby="faglig-t">
-  <p class="kicker">Faglig grunnlag</p>
-  <h2 id="faglig-t">Forskning i bunn, trenererfaring på topp</h2>
-  <p class="liten">Rådene er ikke synsing. Hvert prinsipp kan spores til publisert
-  forskning eller til dokumentert trenerpraksis, og vi sier alltid hvilken av delene det er.</p>
-  <ul class="steg" style="list-style:none; padding-left:0; grid-template-columns:repeat(auto-fit,minmax(340px,1fr))">
-    <li><b>Rolig skal være rolig, målt på tid</b>
-      <p>Verdens beste utholdenhetsutøvere legger <strong>80 til 90 prosent av treningen</strong> i
-      rolige soner. Treni måler fordelingen din hver uke, på tid og ikke antall økter, og
-      sier fra når de rolige turene sklir opp i fart. Rommet ditt er <strong>76 til 85 prosent rolig</strong>, resten hardt.</p></li>
-    <li><b>Ingen byks</b>
-      <p>Studien med 5 205 løpere fant rundt <strong>60 prosent høyere skaderisiko</strong> når én økt
-      bykser forbi det lengste kroppen har gjort de siste 30 dagene. Treni fanger byksene før de
-      skjer, i planen, ikke etterpå.</p></li>
-    <li><b>Terreng måles riktig</b>
-      <p>I fjellet lyver kilometerne. Terrengøkter vurderes på <strong>tid og høydemeter</strong>, opp og
-      ned, slik trenere med fjellbakgrunn gjør det. En «kort» tur med 1 600 høydemeter
-      behandles som den harde økta den er.</p></li>
-    <li><b>Puls og følelse, ikke bare klokka</b>
-      <p>Pulsen har blindsoner: den henger etter på slitne dager og kryper oppover på
-      lange turer. Treni kjenner dem, og lærer deg å <strong>aldri jage puls</strong>. Sonene dine settes ut fra dine egne
-      data og sjekkes på nytt hele veien.</p></li>
-  </ul>
-  <p class="liten" style="margin-top:1.2rem">Kilder blant annet: Sandbakk med flere 2025 (Sports Medicine. Open)
-  · «How much running is too much?» BJSM 2025 · Seiler &amp; Kjerland 2006 · trenerteamets
-  egen fagbok om fjelløping</p>
-</section>
-
-<section aria-labelledby="faar-t">
-  <p class="kicker">Det du får</p>
-  <h2 id="faar-t">Som å ha en trener som ser hver økt</h2>
-  <p>Andre apper venter på at du åpner dem. Treni sier fra selv,
-  når det teller. Det er forskjellen på et verktøy og en tjeneste.</p>
-
-  <!-- 09.09: sida lovet og viste aldri. Denne boksen er selve produktet i fire
-       linjer: ikke en graf, men en dom. Tallene er konstruerte, aldri en ekte
-       løpers. -->
-  <figure class="bevis">
-    <figcaption>Slik ser det ut etter en økt</figcaption>
-    <div class="bevis-kort">
-      <p class="bevis-okt">Tirsdag · rolig tur · 7,1 km · 1 t 04 min</p>
-      <p class="bevis-dom"><span aria-hidden="true">✅</span> <b>Riktig utført.</b>
-        Snittpuls 133, mål til og med 135. 13 min lå i sone 2 eller høyere, som er
-        normalt på ditt nivå. Jo mer av turen som ligger i sone 1, jo mer overskudd
-        har du til kvalitetsøkta.</p>
-    </div>
-    <p class="bevis-under">Ingen graf å tolke. Du får svaret: var økta riktig, og
-      hva betyr den for resten av uka. Treneren din ser det samme.</p>
-  </figure>
-  <ul class="liste" style="list-style:none; padding-left:0">
-    <li><span style="font-size:1.45rem; margin-right:.5rem; vertical-align:-.2rem">📅</span><b>Ukens plan, klar før uka starter</b>: konkrete økter med fart, puls,
-        drag og pauser, bygget på uka du faktisk gjennomførte. Lørdag spør vi
-        hvordan uka di blir. Har du ikke økt søndag, får du neste ukes plan
-        søndag kl. 12. Fullfører du uka innen søndag kveld, får du den samme
-        kveld. Ellers mandag morgen.</li>
-    <li><span style="font-size:1.45rem; margin-right:.5rem; vertical-align:-.2rem">🔕</span><b>Oppfølging uten mas</b>: øktene dine leses hver dag, men du
-        hører fra oss når det teller. Ukens plan søndag eller mandag morgen,
-        dagens økt kl. 07 på dager med økt (skru av eller flytt den selv),
-        status torsdag, med ros
-        når du treffer og en vennlig påminnelse når økta ble hardere enn planlagt.
-        Resten av uka: ro. Og Min side når du selv vil kikke.</li>
-    <li><span style="font-size:1.45rem; margin-right:.5rem; vertical-align:-.2rem">🤝</span><b>En trener med navn</b>: ikke en app alene. Rådene ses over av et menneske
-        som kjenner deg, og alt som handler om helse går til fagfolk, aldri til en maskin.</li>
-    <li><span style="font-size:1.45rem; margin-right:.5rem; vertical-align:-.2rem">💬</span><b>På ditt språk</b>: all veiledning på norsk eller engelsk, du velger.</li>
-    <li><span style="font-size:1.45rem; margin-right:.5rem; vertical-align:-.2rem">📊</span><b><a href="min-side.html">Min side, din egen treningsoversikt</a></b>:
-        belastningen din i klartekst, hver økt med Trenis merknad, og neste
-        ukes plan dag for dag. Bla uke for uke bakover. Hver uke får sin egen
-        vurdering, med det som fungerte og det som bør endres.
-        Personlig lenke, oppdatert gjennom dagen. Legg den på hjemskjermen, så åpner den som en app
-        og varsler deg på telefonen når ny plan, melding fra treneren eller en ny økt er inne.
-        <a href="min-side.html">Se hvordan den ser ut →</a></li>
-    <li><span style="font-size:1.45rem; margin-right:.5rem; vertical-align:-.2rem">📅</span><b>Kalender, egne økter og styrke</b>: flytt økter selv med dra og slipp,
-        legg inn styrke, terrengtur eller sykkel som egne økter, og se alt i samme plan.
-        Styrke kommer med trenerens maler og en øvelsesbank med animasjoner.</li>
-    <li><span style="font-size:1.45rem; margin-right:.5rem; vertical-align:-.2rem">👟</span><b>Skoene dine, fulgt opp</b>: velg sko på øktene i Strava, så teller
-        Treni kilometerne per par og sier fra når et par nærmer seg slutten.
-        Før hvert løp får du skotips fra dine egne sko, vurdert mot distanse,
-        underlag, løype og vær. Trenger du nye, melder du fra
-        med én knapp.</li>
-    <li><span style="font-size:1.45rem; margin-right:.5rem; vertical-align:-.2rem">🔒</span><b>Dataene er dine</b>: de lagres hos trenerteamet, aldri hos andre, og selges aldri.
-        Koble fra når som helst. <a href="personvern.html">Les personvernerklæringen</a>.</li>
-  </ul>
-</section>
-
-<section aria-labelledby="ebok-t">
-  <p class="kicker">E-boka</p>
-  <h2 id="ebok-t">📚 «Trening for fjelløping»</h2>
-  <div class="ebok-grid">
-    <img src="bilder/ebok.jpg" alt="Fjelløper på rygg i solnedgang, fjord og tinder bak" loading="lazy">
-    <div>
-      <p>Skrevet med <b>en av landets mest erfarne fjelløpere</b>, fysioterapeut og
-      VM-deltager i skyrunning. Kapittel 0 til 13 er publisert. Testløperne får kapitlene
-      først, rett på sin egen side, med en liten quiz etter hvert kapittel før neste låses opp.</p>
-      <ul class="ebok-kap" aria-label="Kapitler">
-        <li>🧭 Treningsfilosofien</li>
-        <li>🫀 Intensitet og soner</li>
-        <li>🧱 Grunnmuren</li>
-        <li>⚡ Intervalltrening</li>
-        <li>🏔 Distansetrening</li>
-        <li>🏁 Etter målstreken</li>
-        <li>🥾 Teknikk</li>
-        <li>💪 Styrke</li>
-        <li>🪜 Trappetrening</li>
-        <li>🦵 Gangsperra</li>
-        <li>🌲 Restitusjon og variert terreng</li>
-        <li>🧩 Treningsplanlegging</li>
-        <li>🍂 Ny fjelløpssesong</li>
-        <li>🏆 Konkurransesesong og formtopping</li>
-        <li>🥤 Ernæring under konkurranse</li>
-      </ul>
-    </div>
+<section class="klokka"><div class="c to">
+  <div><div class="etikett">Klokka di</div><h2 style="margin-top:12px">Løp som før. Resten skjer av seg selv.</h2></div>
+  <div class="valg">
+    <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="6"/><path d="M12 10v2l1 1M16.5 7.5 16 4H8l-.5 3.5M7.5 16.5 8 20h8l.5-3.5"/></svg><p style="margin:0"><b>Garmin</b><span>Legg Treni-feltet på klokka. Hver tur kommer inn når du lagrer.</span></p></div>
+    <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V3M7 8l5-5 5 5M5 21h14"/></svg><p style="margin:0"><b>Annen klokke</b><span>Last opp turene dine i appen, så får du samme uke og samme råd.</span></p></div>
   </div>
-  <div class="midt-cta">
-    <p>Testløperne leser kapitlene først. Alt annet på denne siden er inkludert.</p>
-    <a class="btn btn-primar" href="bli-testloper.php">Bli testløper</a>
-  </div>
-</section>
+</div></section>
 
-<section aria-labelledby="sier-t">
-  <p class="kicker">Testløperne sier</p>
-  <h2 id="sier-t">Ekte ord fra løperne som tester nå</h2>
-  <div class="omtaler">
-    <figure class="omtale">
-      <blockquote>«Ja, proft opplegg! 😃»</blockquote>
-      <figcaption>Testløper, mosjonist</figcaption>
-    </figure>
-    <figure class="omtale">
-      <blockquote>«Fint å få feedback så e ikkje bli førr ivrig og pådrar me en skade 😃»</blockquote>
-      <figcaption>Testløper i oppbygging</figcaption>
-    </figure>
-    <figure class="omtale">
-      <blockquote>«Alt i orden! Supert å få teste dette! 😃💪🔥»</blockquote>
-      <figcaption>Testløper, juli 2026</figcaption>
-    </figure>
-  </div>
-  <p class="liten">Sitatene er ordrette, fra testløpernes egne meldinger. Navnene holder vi for oss selv.</p>
-</section>
-
-<section aria-label="Miljøet og status">
-  <div class="to-spalter">
-    <div>
-      <p class="kicker">Miljøet</p>
-      <h2 style="font-size:1.35rem">Bygget i og for løpsmiljøet i nord</h2>
-      <p class="liten">Treni utvikles tett på løperne som bruker det, fra mosjonister i
-      oppbygging til løpere som jakter pallplasser på vei og i skyrace. Klubbøkter, lokale løp og
-      terrenget her oppe er ikke tillegg til produktet. Det er utgangspunktet. En egen e-bok om
-      trening for fjelløping, skrevet med trenerteamet, publiseres kapittel for kapittel for
-      løperne.</p>
-    </div>
-    <div>
-      <p class="kicker">Status nå</p>
-      <h2 style="font-size:1.35rem">Piloten kjører</h2>
-      <div class="en-blokk">
-        <p><b><span data-antall="lopere">19</span> løpere</b> er i gang: vei, bane, terreng og ultra.</p>
-        <p><b>Ingen venteliste.</b> Melder du deg, får du din egen side fra dag én, og planen så snart klokka er koblet og historikken er inne.</p>
-        <p><b>Gratis i piloten</b>: testerne former produktet sammen med oss.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section aria-label="Bli med">
-  <div class="avslutt">
-    <h2>Vil du være med fra starten?</h2>
-    <p>Løpere melder seg direkte. Samarbeidspartnere tar kontakt.
-      Begge deler er uforpliktende.</p>
-    <div class="knapper" style="justify-content:center">
-      <a class="btn" href="bli-testloper.php">Jeg er løper, meld meg på</a>
-      <a class="btn" href="samarbeid.php">Vi vil samarbeide →</a>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <nav aria-label="Bunnmeny" class="bunnmeny">
-    <div class="meny-gruppe"><span class="meny-tittel">Sider</span>
-      <a href="bli-testloper.php">Bli testløper</a>
-      <a href="min-side.html">Min side (demo)</a>
-      <a href="lop.php">Løpskalender</a>
-    <a href="stotte.html">Støtte og kontakt</a>
-      <a href="personvern.html">Personvern</a>
-      <a href="/en/">In English</a>
-    </div>
-    <div class="meny-gruppe"><span class="meny-tittel">For testløpere og trener</span>
-      <a href="https://min.treni.no/">Min side, innlogging med personlig lenke</a>
-      <a href="https://dashbord.treni.no/">Trenerdashbord (passord)</a>
-    </div>
-  </nav>
-  <p>PAULSEN UTVIKLING · org.nr 938 158 614 · Norge ·
-     <a href="mailto:hei@treni.no">hei@treni.no</a></p>
-  <p>Powered by Strava. This service is not affiliated with or endorsed by Strava.</p>
-</footer>
-
+<section class="slutt"><div class="glod"></div><div class="c" style="position:relative">
+  <h2>Neste uke starter på søndag</h2>
+  <p>Last ned Treni, fortell hvor du står, og få første uke med en gang.</p>
+  <div class="knapper"><a class="k hoved" href="https://play.google.com/store/apps/details?id=no.treni.app"><span><small>Last ned på</small>Google Play</span></a><span class="k kant snart" aria-disabled="true"><span><small>Kommer snart i</small>App Store</span></span></div>
+</div></section>
 </main>
-<script>
-// A-7 (11.09.2026): løpertallet hentes live fra antall.json (skrives av morgenkjøringen),
-// teksten i HTML er bare reserve hvis fila ikke svarer.
-fetch('/antall.json?t=' + Math.floor(Date.now() / 3600000)).then(r => r.ok ? r.json() : null).then(d => {
-  if (d && d.lopere) document.querySelectorAll('[data-antall="lopere"]').forEach(e => { e.textContent = d.lopere; });
-}).catch(() => {});
-</script>
-<script src="/banner.js?v=1" defer></script>
+
+<footer><div class="c">
+  <span>Treni · <a href="mailto:hei@treni.no">hei@treni.no</a></span>
+  <nav><a href="/arrangor/">Løpegrupper og arrangører</a><a href="/personvern.html">Personvern</a><a href="/vilkar.html">Vilkår</a><a href="/en/">English</a></nav>
+</div></footer>
 </body>
 </html>
