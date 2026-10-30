@@ -25,6 +25,20 @@ foreach ($per_fylke as &$liste) {
 }
 unset($liste);
 function e10(?string $s): string { return htmlspecialchars($s ?? '', ENT_QUOTES, 'UTF-8'); }
+// Lenkene til gruppene går via mellomsiden videre.php (Odd 30.10.2026, som løpskalenderen):
+// «skal Treni lage uka di rundt fellesøktene?» før gruppas side. HMAC-signert mål-URL hindrer åpen redirect.
+$konfig = [];
+$cfg_sti = dirname(__DIR__) . "/dashbord_config.php";
+if (is_readable($cfg_sti)) {
+    $k10 = include $cfg_sti;
+    if (is_array($k10)) { $konfig = $k10; }
+}
+$via10 = function (string $url, array $g) use ($konfig): string {
+    $nokkel = (string) ($konfig['videre_secret'] ?? $konfig['db_pass'] ?? '');
+    if ($nokkel === '') { return $url; }   // uten nøkkel: rett til gruppa, som før
+    return 'videre.php?type=gruppe&til=' . urlencode($url) . '&s=' . substr(hash_hmac('sha256', $url, $nokkel), 0, 16)
+         . '&gruppe=' . urlencode($g['navn'] ?? '') . '&sted=' . urlencode($g['sted'] ?? '');
+};
 // Knappene til butikkene, som på forsida. Klikket logges i treni.no/g med kanalen.
 function butikkknapper10(string $k): string {
     return '<div class="knapper">'
@@ -51,7 +65,7 @@ function butikkknapper10(string $k): string {
 <link rel="icon" href="/favicon.ico">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap">
-<link rel="stylesheet" href="/ny/side.css?v=1">
+<link rel="stylesheet" href="/ny/side.css?v=2">
 </head>
 <body>
 
@@ -108,10 +122,10 @@ function butikkknapper10(string $k): string {
     </div>
     <div class="lenker">
       <?php if (!empty($g['strava'])): ?>
-        <a class="tekstlenke" href="<?= e10($g['strava']) ?>" rel="noopener nofollow" target="_blank">Strava-klubben</a>
+        <a class="tekstlenke" href="<?= e10($via10($g['strava'], $g)) ?>" rel="nofollow">Strava-klubben</a>
       <?php endif; ?>
       <?php if (!empty($g['lenke'])): ?>
-        <a class="k kant smal" href="<?= e10($g['lenke']) ?>" rel="noopener nofollow" target="_blank">Til gruppa →</a>
+        <a class="k kant smal" href="<?= e10($via10($g['lenke'], $g)) ?>" rel="nofollow">Til gruppa →</a>
       <?php endif; ?>
     </div>
   </div>

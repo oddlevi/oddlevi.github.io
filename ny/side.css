@@ -19,6 +19,9 @@
   --accent-soft:hsl(84 30% 14%);--primary-soft:hsl(152 25% 13%);--shadow:0 24px 48px -16px hsl(0 0% 0% / .6);color-scheme:dark}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--fg);font-family:Manrope,system-ui,sans-serif;font-size:17px;line-height:1.6;font-feature-settings:"tnum"}
+/* Bunnen står nederst også på korte sider (mellomsiden) */
+body{min-height:100vh;display:flex;flex-direction:column}
+main{flex:1}
 img{display:block;max-width:100%}
 a{color:inherit}
 :focus-visible{outline:2px solid var(--primary);outline-offset:3px;border-radius:4px}

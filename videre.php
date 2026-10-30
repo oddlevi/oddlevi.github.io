@@ -1,6 +1,7 @@
 <?php
 // Mellomside før ekstern påmelding (Odds idé 31.08.2026): alle påmeldings- og
-// løpsside-lenker i løpskalenderen går via denne — ett enkelt spørsmål om
+// løpsside-lenker i løpskalenderen går via denne. Fra 30.10.2026 (Odd) også lenkene til
+// gruppene i løpegruppe-oversikten (?type=gruppe&gruppe=…&sted=…) — ett enkelt spørsmål om
 // Treni skal lage treningsplanen mot løpet, med onboarding som hovedvalg og
 // «gå videre til påmelding» i liten skrift nederst.
 // Åpen redirect-vern: mål-URL-en er HMAC-signert av lop.php (nøkkel =
@@ -20,7 +21,10 @@ if ($til !== '' && is_readable($cfg_sti)) {
         $gyldig = hash_equals($fasit, $sig);
     }
 }
-if (!$gyldig) { header('Location: /lop.php'); exit; }
+$type = (($_GET['type'] ?? '') === 'gruppe') ? 'gruppe' : 'lop';
+$gruppe = mb_substr(trim((string) ($_GET['gruppe'] ?? '')), 0, 90);
+$sted = mb_substr(trim((string) ($_GET['sted'] ?? '')), 0, 60);
+if (!$gyldig) { header('Location: ' . ($type === 'gruppe' ? '/lopegrupper.php' : '/lop.php')); exit; }
 function e9(?string $s): string { return htmlspecialchars($s ?? '', ENT_QUOTES, 'UTF-8'); }
 $MND9 = [1 => 'januar', 'februar', 'mars', 'april', 'mai', 'juni', 'juli',
          'august', 'september', 'oktober', 'november', 'desember'];
@@ -41,11 +45,11 @@ function butikkknapper8(string $k): string {
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
-<title><?= $lop ? e9($lop) . ' · ' : '' ?>tren riktig mot løpet | Treni</title>
+<title><?php if ($type === 'gruppe'): ?><?= $gruppe ? e9($gruppe) . ' · ' : '' ?>løpegruppe | Treni<?php else: ?><?= $lop ? e9($lop) . ' · ' : '' ?>tren riktig mot løpet | Treni<?php endif; ?></title>
 <link rel="icon" href="/favicon.ico">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap">
-<link rel="stylesheet" href="/ny/side.css?v=1">
+<link rel="stylesheet" href="/ny/side.css?v=2">
 </head>
 <body>
 
@@ -55,6 +59,25 @@ function butikkknapper8(string $k): string {
 </div></header>
 
 <main>
+<?php if ($type === 'gruppe'): ?>
+<section class="c sidehode">
+  <a class="etikett" href="/lopegrupper.php" style="text-decoration:none">← Løpegruppene</a>
+  <h1><?= $gruppe ? e9($gruppe) : 'Løpegruppa' ?><?= $sted ? '<em> · ' . e9($sted) . '</em>' : '' ?></h1>
+</section>
+
+<section class="c">
+  <div class="treni-boks" style="margin-top:0">
+    <div>
+      <b>Skal Treni lage uka di rundt fellesøktene?</b>
+      <p>Treni lager uka di ut fra det du faktisk løper, og bygger den på nytt når livet skjer. Fellesøktene passer rett inn.
+      Én måned gratis.</p>
+    </div>
+    <?= butikkknapper8('gruppe-videre') ?>
+  </div>
+  <p style="margin:28px 0 72px">
+    <a class="k kant" href="<?= e9($til) ?>" target="_blank" rel="noopener nofollow">Nei takk, gå videre til gruppa →</a></p>
+</section>
+<?php else: ?>
 <section class="c sidehode">
   <a class="etikett" href="/lop.php" style="text-decoration:none">← Løpskalenderen</a>
   <h1><?= $lop ? e9($lop) : 'Løpet ditt' ?><?= $dato_pen ? '<em> · ' . e9($dato_pen) . '</em>' : '' ?></h1>
@@ -72,6 +95,7 @@ function butikkknapper8(string $k): string {
   <p style="margin:28px 0 72px">
     <a class="k kant" href="<?= e9($til) ?>" target="_blank" rel="noopener nofollow">Nei takk, gå videre til påmeldingen hos arrangøren →</a></p>
 </section>
+<?php endif; ?>
 </main>
 
 <footer><div class="c">
