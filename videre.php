@@ -25,48 +25,58 @@ function e9(?string $s): string { return htmlspecialchars($s ?? '', ENT_QUOTES, 
 $MND9 = [1 => 'januar', 'februar', 'mars', 'april', 'mai', 'juni', 'juli',
          'august', 'september', 'oktober', 'november', 'desember'];
 $dato_pen = $dato ? ((int) substr($dato, 8, 2)) . '. ' . $MND9[(int) substr($dato, 5, 2)] : '';
+// Knappene til butikkene, som på forsida. Klikket logges i treni.no/g med kanalen «lop-videre».
+// Odd 30.10.2026: samme profil og design som forsida (ny/side.css). «Gratis i testperioden» og
+// «ingen betaling» er tatt ut – Treni koster etter prøvemåneden.
+function butikkknapper8(string $k): string {
+    return '<div class="knapper">'
+        . '<a class="k hoved" href="/g/?til=android&amp;k=' . e9($k) . '" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M5 3.5v17l9-8.5-9-8.5z"/><path d="M14 12l3.5-3.3L20 10.2v3.6l-2.5 1.5z"/></svg><span><small>Last ned på</small>Google Play</span></a>'
+        . '<a class="k kant" href="/g/?til=ios&amp;k=' . e9($k) . '" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.4 12.6c0-2.4 2-3.6 2.1-3.7-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.2-2.9.9-3.7.9-.8 0-1.9-.9-3.2-.8-1.6 0-3.1 1-4 2.4-1.7 3-.4 7.3 1.2 9.7.8 1.2 1.8 2.5 3 2.4 1.2 0 1.7-.8 3.1-.8 1.5 0 1.9.8 3.2.8 1.3 0 2.2-1.2 3-2.4.9-1.4 1.3-2.7 1.3-2.8-.1 0-2.5-1-2.5-3.8zM14 5.4c.7-.8 1.1-1.9 1-3-1 0-2.1.7-2.8 1.5-.6.7-1.2 1.8-1 2.9 1 .1 2.1-.6 2.8-1.4z"/></svg><span><small>Last ned i</small>App Store</span></a>'
+        . '</div>';
+}
 ?>
-<!DOCTYPE html>
-<html lang="no">
+<!doctype html>
+<html lang="nb">
 <head>
 <meta charset="utf-8">
-<link rel="icon" href="/favicon.ico" sizes="32x32">
-<link rel="icon" type="image/png" href="/icon-192.png" sizes="192x192">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
-<title><?= $lop ? e9($lop) . '' : '' ?>tren riktig mot løpet | Treni</title>
-<link rel="stylesheet" href="stil.css?v=30">
+<title><?= $lop ? e9($lop) . ' · ' : '' ?>tren riktig mot løpet | Treni</title>
+<link rel="icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap">
+<link rel="stylesheet" href="/ny/side.css?v=1">
 </head>
 <body>
-<div class="bakteppe" aria-hidden="true"></div>
-<main>
-<header class="hero smal" style="padding-bottom:.5rem">
-  <p class="kicker"><a href="lop.php" style="color:inherit">← løpskalenderen</a></p>
-  <h1 style="font-size:clamp(1.7rem,5vw,2.4rem)">
-    <?= $lop ? e9($lop) : 'Løpet ditt' ?><?= $dato_pen ? ' · ' . e9($dato_pen) : '' ?></h1>
-</header>
 
-<section style="max-width:36rem">
-  <div style="border:2px solid hsl(var(--primary) / .45); border-radius:var(--radius);
-       padding:1.6rem 1.5rem; background:hsl(var(--primary) / .06)">
-    <p style="font-size:1.15rem; font-weight:650; margin:0 0 .5rem">
-      Skal vi hjelpe deg å trene riktig, og mest mulig optimalt, mot løpet? 🏃</p>
-    <p style="margin:0 0 1.1rem">Treni lager treningsplanen <b>sammen med deg</b>:
-      uke for uke frem mot <?= $lop ? e9($lop) : 'løpsdagen' ?>, tilpasset nivået ditt,
-      lest rett fra klokka di, med en ekte trener på laget og skadefri fremgang som mål.
-      Gratis i testperioden.</p>
-    <a href="bli-testloper.php?lop=<?= urlencode($lop) ?><?= $dato ? '&dato=' . e9($dato) : '' ?>&til=<?= urlencode($til) ?>&s=<?= e9($sig) ?>"
-       style="display:inline-block; padding:.8rem 1.6rem; border-radius:999px;
-       background:hsl(var(--primary)); color:hsl(var(--primary-fg)); font-weight:700;
-       font-size:1.05rem; text-decoration:none">✅ Ja takk, opprett Treni-treningsplan</a>
-    <p class="liten" style="margin:.8rem 0 0; color:hsl(var(--muted-fg, var(--fg)))">
-      2 minutter å komme i gang · ingen betaling · du kan melde deg på løpet etterpå.</p>
+<header><div class="c topp">
+  <a class="logo" href="/" aria-label="Treni">Tren<i aria-hidden="true">ı</i></a>
+  <nav class="meny" aria-label="Hovedmeny"><a href="/lop.php">Løpskalender</a><a href="/lopegrupper.php">Løpegrupper</a></nav>
+</div></header>
+
+<main>
+<section class="c sidehode">
+  <a class="etikett" href="/lop.php" style="text-decoration:none">← Løpskalenderen</a>
+  <h1><?= $lop ? e9($lop) : 'Løpet ditt' ?><?= $dato_pen ? '<em> · ' . e9($dato_pen) . '</em>' : '' ?></h1>
+</section>
+
+<section class="c">
+  <div class="treni-boks" style="margin-top:0">
+    <div>
+      <b>Skal Treni lage uka di mot <?= $lop ? e9($lop) : 'løpet' ?>?</b>
+      <p>Treni lager uka di ut fra det du faktisk løper, og bygger den på nytt når livet skjer. Én måned gratis.
+      Du kan melde deg på løpet etterpå.</p>
+    </div>
+    <?= butikkknapper8('lop-videre') ?>
   </div>
-  <p class="liten" style="margin:1.6rem 0 0; text-align:center">
-    <a href="<?= e9($til) ?>" target="_blank" rel="noopener nofollow"
-       style="color:inherit; opacity:.75">Nei takk, gå videre til påmeldingen hos arrangøren →</a></p>
+  <p style="margin:28px 0 72px">
+    <a class="k kant" href="<?= e9($til) ?>" target="_blank" rel="noopener nofollow">Nei takk, gå videre til påmeldingen hos arrangøren →</a></p>
 </section>
 </main>
+
+<footer><div class="c">
+  <span>Treni · <a href="mailto:hei@treni.no">hei@treni.no</a></span>
+  <nav aria-label="Bunnmeny"><a href="/">Forsiden</a><a href="/lop.php">Løpskalender</a><a href="/lopegrupper.php">Løpegrupper</a><a href="/personvern.html">Personvern</a></nav>
+</div></footer>
 </body>
 </html>

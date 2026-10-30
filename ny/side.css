@@ -1,0 +1,106 @@
+/* Felles stil for undersidene på treni.no (løpskalenderen, løpegruppene, mellomsiden før påmelding).
+   Samme tokens og grunnform som forsida (index.html, som har sin stil inline) – Trenis tokens fra
+   treni2/design/tokens.css. Endres et token, endres det begge steder. Ingen fargeverdi utenfor :root. */
+:root{
+  --bg:hsl(44 45% 97%);--surface:hsl(0 0% 100%);--fg:hsl(160 28% 9%);--muted:hsl(158 10% 36%);
+  --border:hsl(148 15% 84%);--primary:hsl(152 62% 20%);--primary-fg:hsl(44 45% 97%);
+  --accent:hsl(84 70% 52%);--accent-soft:hsl(84 60% 92%);--primary-soft:hsl(152 40% 93%);
+  --mork:hsl(162 24% 5%);--mork-flate:hsl(160 18% 9%);--mork-kant:hsl(156 12% 17%);--lys-tekst:hsl(42 30% 94%);--lys-dempet:hsl(150 8% 62%);
+  --shadow:0 24px 48px -16px hsl(152 62% 20% / .28);
+  --r:12px;--r-xl:24px;--kurve:cubic-bezier(.22,1,.36,1);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:hsl(162 24% 5%);--surface:hsl(160 18% 9%);--fg:hsl(42 30% 94%);--muted:hsl(150 8% 62%);
+  --border:hsl(156 12% 17%);--primary:hsl(84 70% 52%);--primary-fg:hsl(162 24% 5%);
+  --accent-soft:hsl(84 30% 14%);--primary-soft:hsl(152 25% 13%);--shadow:0 24px 48px -16px hsl(0 0% 0% / .6);color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:hsl(162 24% 5%);--surface:hsl(160 18% 9%);--fg:hsl(42 30% 94%);--muted:hsl(150 8% 62%);
+  --border:hsl(156 12% 17%);--primary:hsl(84 70% 52%);--primary-fg:hsl(162 24% 5%);
+  --accent-soft:hsl(84 30% 14%);--primary-soft:hsl(152 25% 13%);--shadow:0 24px 48px -16px hsl(0 0% 0% / .6);color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:Manrope,system-ui,sans-serif;font-size:17px;line-height:1.6;font-feature-settings:"tnum"}
+img{display:block;max-width:100%}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--primary);outline-offset:3px;border-radius:4px}
+.c{max-width:1000px;margin-inline:auto;padding-inline:clamp(16px,4vw,48px)}
+.etikett{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1,h2,h3{font-weight:800;letter-spacing:-.025em;margin:0}
+.lead{font-size:clamp(17px,1.6vw,20px);color:var(--muted);max-width:60ch;margin:16px 0 0}
+.liten{font-size:14px;color:var(--muted)}
+
+/* Topp og bunn – som forsida */
+header{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.topp{display:flex;align-items:center;justify-content:space-between;height:64px;gap:16px}
+.logo{font-weight:800;font-size:24px;letter-spacing:-.03em;text-decoration:none}
+.logo i{font-style:normal;position:relative}
+.logo i::after{content:"";position:absolute;width:7px;height:7px;border-radius:50%;background:var(--accent);left:50%;top:2px;transform:translateX(-50%)}
+.meny{display:flex;gap:24px;align-items:center;font-size:15px;font-weight:600}
+.meny a{text-decoration:none;color:var(--muted)}
+.meny a[aria-current="page"]{color:var(--fg)}
+.meny .liten{color:var(--primary-fg);background:var(--primary);padding:9px 16px;border-radius:999px;font-weight:800;font-size:15px}
+@media (max-width:640px){.meny a:not(.liten){display:none}}
+footer{background:var(--mork);color:var(--lys-dempet);border-top:1px solid var(--mork-kant);font-size:14px}
+footer .c{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;padding-block:32px}
+footer nav{display:flex;gap:22px;flex-wrap:wrap}
+footer a{text-decoration:none}
+
+/* Knapper – som forsida */
+.knapper{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.k{display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:0 22px;border-radius:999px;font-weight:800;font-size:16px;text-decoration:none;transition:transform 150ms var(--kurve)}
+.k:hover{transform:translateY(-1px)}
+.k svg{width:20px;height:20px}
+.k.hoved{background:var(--primary);color:var(--primary-fg);box-shadow:var(--shadow)}
+.k.kant{border:1.5px solid var(--border);background:var(--surface);color:var(--fg)}
+.k small{display:block;font-size:11px;font-weight:600;opacity:.8;line-height:1}
+.k span{line-height:1.1}
+.k.smal{min-height:44px;padding:0 16px;font-size:15px}
+
+/* Sidehodet */
+.sidehode{padding-block:clamp(40px,7vw,88px) clamp(24px,4vw,40px)}
+.sidehode h1{font-size:clamp(40px,6.4vw,72px);line-height:1;margin-top:14px;max-width:16ch}
+.sidehode h1 em{font-style:normal;color:var(--primary)}
+
+/* Filtrene */
+.filtre{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:8px}
+.pille{min-height:44px;padding:0 18px;border-radius:999px;border:1.5px solid var(--border);background:var(--surface);color:var(--fg);font:inherit;font-size:15px;font-weight:700;cursor:pointer}
+.pille[aria-pressed="true"]{background:var(--primary);border-color:var(--primary);color:var(--primary-fg)}
+.filtre select,.filtre input{min-height:44px;padding:0 16px;border-radius:999px;border:1.5px solid var(--border);background:var(--surface);color:var(--fg);font:inherit;font-size:15px;font-weight:600}
+.filtre input{min-width:min(100%,240px);flex:1 1 200px}
+
+/* Lista */
+.gruppetittel{font-size:clamp(24px,3vw,32px);margin:48px 0 8px;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.gruppetittel span{font-size:14px;font-weight:700;letter-spacing:0;color:var(--muted)}
+.liste{display:grid;gap:8px}
+.rad{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:16px;align-items:center;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:14px 16px}
+.rad.uten-dato{grid-template-columns:minmax(0,1fr) auto}
+.rad b{font-size:17px;line-height:1.25}
+.rad .sted{display:block;font-size:14px;color:var(--muted);margin-top:2px}
+.dato{width:52px;text-align:center;line-height:1;font-weight:800}
+.dato b{display:block;font-size:24px;letter-spacing:-.02em}
+.dato small{display:block;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+.merke{display:inline-block;vertical-align:2px;margin-left:6px;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:99px;background:var(--primary-soft);color:var(--primary)}
+.lenker{display:flex;gap:12px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+.lenker .tekstlenke{font-size:14px;font-weight:700;color:var(--muted);text-decoration:none}
+@media (max-width:560px){.rad{grid-template-columns:auto minmax(0,1fr)}.rad.uten-dato{grid-template-columns:1fr}.rad .lenker{grid-column:1/-1;justify-content:flex-start}}
+
+/* Treni-boksen midt i lista */
+.treni-boks{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px 24px;align-items:center;margin:24px 0 8px;padding:20px 22px;border-radius:var(--r-xl);background:var(--accent-soft);border:1px solid var(--border)}
+.treni-boks b{display:block;font-size:19px;letter-spacing:-.01em}
+.treni-boks p{margin:4px 0 0;color:var(--muted);font-size:16px;max-width:52ch}
+@media (max-width:760px){.treni-boks{grid-template-columns:1fr}}
+
+/* Om-delen */
+.om{padding-block:clamp(56px,8vw,96px);border-top:1px solid var(--border);margin-top:56px}
+.om h2{font-size:clamp(28px,3.6vw,40px);margin-bottom:8px}
+.om h3{font-size:19px;margin:28px 0 6px}
+.om p{margin:0;color:var(--muted);max-width:64ch}
+
+/* Slutten – som forsida */
+.slutt{background:var(--mork);color:var(--lys-tekst);padding-block:clamp(72px,10vw,128px);text-align:center;position:relative;overflow:hidden}
+.slutt h2{font-size:clamp(36px,5.4vw,64px);max-width:14ch;margin-inline:auto;line-height:1.05}
+.slutt p{color:var(--lys-dempet);margin:18px auto 32px;max-width:46ch;font-size:18px}
+.slutt .knapper{justify-content:center}
+.slutt .k.hoved{background:var(--accent);color:var(--mork);box-shadow:none}
+.slutt .k.kant{background:transparent;border-color:var(--mork-kant);color:var(--lys-tekst)}
+.slutt .glod{position:absolute;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,hsl(84 70% 52% / .16),transparent 65%);top:-280px;left:50%;transform:translateX(-50%)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}

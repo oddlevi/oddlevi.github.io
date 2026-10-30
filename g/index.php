@@ -24,16 +24,15 @@ $logg = dirname(__DIR__, 2) . '/butikk_klikk.jsonl';
     'mobil' => (bool) preg_match('/Mobile|Android|iPhone/i', (string) ($_SERVER['HTTP_USER_AGENT'] ?? '')),
 ], JSON_UNESCAPED_UNICODE) . "\n", FILE_APPEND | LOCK_EX);
 
-// Apples kampanjelenke trenger leverandørnøkkelen (pt) fra Trenis App Store Connect. Tom til Odd har hentet
-// den – da teller bare loggen over for iPhone.
-const APPLE_PT = '';
+// Apples kampanjelenke med leverandørnøkkelen (pt) fra Trenis App Store Connect (App Analytics → Campaigns →
+// «Generate a Campaign Link», hentet 30.10.2026). Apple viser en kampanje først ved fem nedlastinger.
+const APPLE_PT = '129644944';
 
 if ($til === 'android') {
     $url = 'https://play.google.com/store/apps/details?id=no.treni.app'
          . '&utm_source=treni.no&utm_medium=lenke&utm_campaign=' . rawurlencode($k);
 } else {
-    $url = 'https://apps.apple.com/no/app/treni/id6825074710'
-         . (APPLE_PT !== '' ? '?pt=' . APPLE_PT . '&ct=' . rawurlencode($k) . '&mt=8' : '');
+    $url = 'https://apps.apple.com/app/apple-store/id6825074710?pt=' . APPLE_PT . '&ct=' . rawurlencode($k) . '&mt=8';
 }
 
 header('Cache-Control: no-store');
