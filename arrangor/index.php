@@ -19,8 +19,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         @file_put_contents(dirname(__DIR__, 2) . "/arrangor_henvendelser.jsonl", json_encode($rad, JSON_UNESCAPED_UNICODE) . "\n", FILE_APPEND | LOCK_EX);
         $kropp = "Ny henvendelse fra løpegruppe eller arrangør (treni.no/arrangor)\n\nNavn: $navn\nGruppe eller løp: $lop\nDato: $dato\nE-post: $epost\n\n$melding\n";
         $ok = false;
-        try { require_once dirname(__DIR__, 2) . "/epost_smtp.php"; if (function_exists("treni_epost_send")) { $ok = treni_epost_send("hei@treni.no", "Løpegruppe/arrangør: $lop", $kropp); } } catch (Throwable $e) { $ok = false; }
-        if (!$ok) { @mail("hei@treni.no", "Løpegruppe/arrangør: $lop", $kropp, "From: hei@treni.no"); }
+        try { require_once dirname(__DIR__, 2) . "/epost_smtp.php"; if (function_exists("treni_epost_send")) { $ok = treni_epost_send("hei@treni.no", "Løpegruppe/arrangør: $lop", $kropp, $epost); } } catch (Throwable $e) { $ok = false; }
+        if (!$ok) { @mail("hei@treni.no", "Løpegruppe/arrangør: $lop", $kropp, "From: hei@treni.no\r\nReply-To: " . $epost); }
         $sendt = true;
     }
 }

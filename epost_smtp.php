@@ -6,7 +6,9 @@ declare(strict_types=1);
 // PHP mail() rett fra webserveren brukes KUN som nødfallback (usignert).
 // App-passordet ligger i ../epost_hei_apppassord.txt (utenfor docroot, 600).
 
-function treni_epost_send(string $til, string $emne, string $kropp): bool
+// $svar_til (valgfri, Odd 30.10.2026): avsenderens e-post fra skjemaet blir svaradresse (Reply-To), så «Svar» i Gmail
+// går til den som skrev – ikke til hei@ selv. Bare gyldige adresser (FILTER_VALIDATE_EMAIL slipper ikke gjennom linjeskift).
+function treni_epost_send(string $til, string $emne, string $kropp, string $svar_til = ''): bool
 {
     $passordfil = __DIR__ . '/epost_hei_apppassord.txt';
     if (!is_readable($passordfil)) {
@@ -56,6 +58,7 @@ function treni_epost_send(string $til, string $emne, string $kropp): bool
 
         $emne_b64 = '=?UTF-8?B?' . base64_encode($emne) . '?=';
         $melding = "From: Treni <{$konto}>\r\n"
+                 . (filter_var($svar_til, FILTER_VALIDATE_EMAIL) ? "Reply-To: <{$svar_til}>\r\n" : "")
                  . "To: <{$til}>\r\n"
                  . "Subject: {$emne_b64}\r\n"
                  . "MIME-Version: 1.0\r\n"

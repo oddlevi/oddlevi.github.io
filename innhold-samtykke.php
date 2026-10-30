@@ -44,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $ok1 = treni_epost_send("hei@treni.no", "📸 Innholdssamtykke: " . $navn,
             "Navn: " . $navn . "\nE-post: " . $epost . "\nSier ja til: " . $hva_tekst . "\n"
             . ($kommentar !== "" ? "Kommentar: " . $kommentar . "\n" : "")
-            . "Lagret i databasen: " . ($lagret ? "ja" : "NEI, bare denne e-posten") . "\n" . date("Y-m-d H:i"));
+            . "Lagret i databasen: " . ($lagret ? "ja" : "NEI, bare denne e-posten") . "\n" . date("Y-m-d H:i"), $epost);
         treni_epost_send($epost, "Takk, samtykket ditt er registrert hos Treni",
             "Hei " . $navn . "!\n\nDu har sagt ja til at Treni kan bruke: " . $hva_tekst . " i innlegg og storyer på Instagram og Facebook.\n\n"
             . "Vi spør deg alltid før et konkret innlegg går ut, og du kan trekke samtykket når som helst ved å svare på denne e-posten.\n\n"
