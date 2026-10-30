@@ -90,7 +90,7 @@ function butikkknapper9(string $k): string {
 <link rel="icon" href="/favicon.ico">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap">
-<link rel="stylesheet" href="/ny/side.css?v=2">
+<link rel="stylesheet" href="/ny/side.css?v=3">
 <script type="application/ld+json">
 <?= json_encode(["@context" => "https://schema.org", "@graph" => array_map(fn($l) => [
     "@type" => "SportsEvent",

@@ -8,15 +8,16 @@
   --mork:hsl(162 24% 5%);--mork-flate:hsl(160 18% 9%);--mork-kant:hsl(156 12% 17%);--lys-tekst:hsl(42 30% 94%);--lys-dempet:hsl(150 8% 62%);
   --shadow:0 24px 48px -16px hsl(152 62% 20% / .28);
   --r:12px;--r-xl:24px;--kurve:cubic-bezier(.22,1,.36,1);
+  --rod:hsl(8 70% 40%);--rod-soft:hsl(8 70% 94%);
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --bg:hsl(162 24% 5%);--surface:hsl(160 18% 9%);--fg:hsl(42 30% 94%);--muted:hsl(150 8% 62%);
   --border:hsl(156 12% 17%);--primary:hsl(84 70% 52%);--primary-fg:hsl(162 24% 5%);
-  --accent-soft:hsl(84 30% 14%);--primary-soft:hsl(152 25% 13%);--shadow:0 24px 48px -16px hsl(0 0% 0% / .6);color-scheme:dark}}
+  --accent-soft:hsl(84 30% 14%);--primary-soft:hsl(152 25% 13%);--shadow:0 24px 48px -16px hsl(0 0% 0% / .6);--rod:hsl(8 80% 60%);--rod-soft:hsl(8 40% 16%);color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:hsl(162 24% 5%);--surface:hsl(160 18% 9%);--fg:hsl(42 30% 94%);--muted:hsl(150 8% 62%);
   --border:hsl(156 12% 17%);--primary:hsl(84 70% 52%);--primary-fg:hsl(162 24% 5%);
-  --accent-soft:hsl(84 30% 14%);--primary-soft:hsl(152 25% 13%);--shadow:0 24px 48px -16px hsl(0 0% 0% / .6);color-scheme:dark}
+  --accent-soft:hsl(84 30% 14%);--primary-soft:hsl(152 25% 13%);--shadow:0 24px 48px -16px hsl(0 0% 0% / .6);--rod:hsl(8 80% 60%);--rod-soft:hsl(8 40% 16%);color-scheme:dark}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--fg);font-family:Manrope,system-ui,sans-serif;font-size:17px;line-height:1.6;font-feature-settings:"tnum"}
 /* Bunnen står nederst også på korte sider (mellomsiden) */
@@ -107,3 +108,23 @@ footer a{text-decoration:none}
 .slutt .k.kant{background:transparent;border-color:var(--mork-kant);color:var(--lys-tekst)}
 .slutt .glod{position:absolute;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,hsl(84 70% 52% / .16),transparent 65%);top:-280px;left:50%;transform:translateX(-50%)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* Skjema (samarbeid) – samme form som /arrangor/ */
+.to-kort{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-bottom:28px}
+.to-kort>div{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-xl);padding:20px 22px;display:flex;flex-direction:column;gap:6px}
+.to-kort b{font-size:19px;letter-spacing:-.01em;line-height:1.25}
+.to-kort p{margin:0;color:var(--muted);font-size:16px}
+@media (max-width:700px){.to-kort{grid-template-columns:1fr}}
+.skjema{max-width:640px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-xl);padding:22px}
+.skjema label{display:block;font-weight:700;margin:16px 0 6px;font-size:15px}
+.skjema label:first-child{margin-top:0}
+.skjema input[type=text],.skjema input[type=email],.skjema input[type=tel],.skjema textarea{width:100%;min-height:48px;padding:12px 14px;border:1.5px solid var(--border);border-radius:var(--r);background:var(--bg);color:var(--fg);font:inherit;font-size:16px}
+.skjema fieldset{border:0;padding:0;margin:16px 0 0}
+.skjema legend{font-weight:700;font-size:15px;margin-bottom:6px;padding:0}
+.skjema .valg{display:flex;align-items:center;gap:10px;font-weight:600;margin:6px 0;min-height:32px}
+.skjema .valg input{width:20px;height:20px;accent-color:var(--primary)}
+.skjema .valgfritt{font-weight:500;color:var(--muted)}
+.skjema button{margin-top:20px;border:0;cursor:pointer;font-family:inherit}
+.skjema .krukke{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.skjema-feil{max-width:640px;background:var(--rod-soft);color:var(--rod);border-radius:var(--r);padding:12px 16px;font-weight:700}
+

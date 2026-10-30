@@ -3,6 +3,7 @@ require_once __DIR__ . "/spamvern.php";
 // Samarbeidsskjema for løpegrupper, klubber og arrangører. Lagres i
 // samarbeid-tabellen (vises i trenerens dashbord, fanen «Samarbeid») og
 // varsles på e-post + Telegram. Honningkrukke («nettside») stopper boter.
+// Odd 30.10.2026: nytt innhold i forsidas design (ny/side.css), takk-e-post med lenker til appen til den som skrev.
 $sendt = false;
 $feil = "";
 $TYPER = [
@@ -37,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                . "\nHva de ser for seg:\n" . ($melding !== "" ? $melding : "(ikke utfylt)") . "\n";
         // Gmail-røret (Odds beslutning 20.08): DKIM-signert, innboks + Sendt-arkiv.
         require_once dirname(__DIR__) . "/epost_smtp.php";
-        $epost_ok = treni_epost_send("hei@treni.no", "Samarbeid: " . $org, $tekst);
+        $epost_ok = treni_epost_send("hei@treni.no", "Samarbeid: " . $org, $tekst, $epost);
         if (!$epost_ok) {   // nødfallback: usignert server-mail (kan spamme)
             $hode = "From: Treni <hei@treni.no>\r\n"
                   . "Reply-To: " . str_replace(["\r", "\n"], "", $epost) . "\r\n"
@@ -87,124 +88,108 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $tg_ok = $svar !== false && strpos($svar, '"ok":true') !== false;
         }
         $sendt = $epost_ok || $tg_ok;
+        if ($sendt) {
+            // Kort svar til den som skrev, med lenker til appen via treni.no/g (Odd 30.10.2026: «gjør det samme» som /arrangor/).
+            // Bare Gmail-røret – ingen usignert reserve.
+            $svar_tekst = "Hei $navn,\n\ntakk for at dere vil samarbeide med Treni. Vi svarer deg på denne e-posten så snart vi kan.\n\n"
+                        . "Treni lager uka di ut fra det du faktisk løper, og bygger den på nytt når livet skjer. Prøv selv:\n"
+                        . "Google Play: https://treni.no/g/?til=android&k=epost-samarbeid\n"
+                        . "App Store: https://treni.no/g/?til=ios&k=epost-samarbeid\n\n"
+                        . "Hilsen Treni\nhei@treni.no\n";
+            try { treni_epost_send($epost, "Takk for meldingen om samarbeid med Treni", $svar_tekst); } catch (Throwable $e) { }
+        }
         if (!$sendt) {
             $feil = "Noe gikk galt hos oss. Send gjerne en e-post direkte i stedet.";
         }
     }
 }
 ?>
-<!DOCTYPE html>
-<html lang="no">
+<!doctype html>
+<html lang="nb">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Samarbeid med Treni</title>
-<meta name="description" content="Løpegrupper, klubber og arrangører: fortell hva dere ser for dere, så finner vi formen sammen.">
+<meta name="description" content="Løpegrupper, klubber og arrangører: fortell hva dere ser for dere, så tar vi en prat.">
 <meta name="robots" content="noindex">
 <meta property="og:title" content="Samarbeid med Treni">
-<meta property="og:description" content="Løpegrupper, klubber og arrangører: fortell hva dere ser for dere, så finner vi formen sammen.">
+<meta property="og:description" content="Løpegrupper, klubber og arrangører: fortell hva dere ser for dere, så tar vi en prat.">
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="Treni">
 <meta property="og:url" content="https://treni.no/samarbeid.php">
-<meta property="og:image" content="https://treni.no/bilder/og.jpg">
-<link rel="icon" href="/favicon.ico" sizes="32x32">
-<link rel="icon" type="image/png" href="/icon-192.png" sizes="192x192">
+<meta property="og:image" content="https://treni.no/ny/bilder/deling.jpg">
+<link rel="icon" href="/favicon.ico">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="stylesheet" href="stil.css?v=30">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap">
+<link rel="stylesheet" href="/ny/side.css?v=3">
 </head>
 <body>
-<div class="bakteppe" aria-hidden="true"></div>
+
+<header><div class="c topp">
+  <a class="logo" href="/" aria-label="Treni">Tren<i aria-hidden="true">ı</i></a>
+  <nav class="meny" aria-label="Hovedmeny"><a href="/lop.php">Løpskalender</a><a href="/lopegrupper.php">Løpegrupper</a><a class="liten" href="/#last">Last ned</a></nav>
+</div></header>
+
 <main>
-
-<header class="hero smal">
-  <p class="kicker reveal"><a href="index.html" style="color:inherit">treni.no</a> · samarbeid</p>
-  <h1 class="reveal" style="font-size:clamp(1.8rem,5vw,2.7rem)">Vi bygger det sammen,<br>og hjelper dine løpere</h1>
-</header>
-
+<section class="c sidehode">
+  <span class="etikett">Samarbeid</span>
 <?php if ($sendt): ?>
-<section>
-  <div class="kort">
-    <h3 style="margin-top:0">Takk<?php if (!empty($navn)) echo ", " . htmlspecialchars(explode(" ", $navn)[0]); ?>! 🤝</h3>
-    <p>Henvendelsen er mottatt, vi i Treni tar kontakt på e-post
-    <?php if (!empty($mobil)) echo "eller mobil "; ?>innen kort tid, så finner vi
-    formen sammen.</p>
-    <p style="margin-bottom:0"><a href="index.html">← Tilbake til forsiden</a></p>
-  </div>
+  <h1>Takk<?php if (!empty($navn)) echo ", " . htmlspecialchars(explode(" ", $navn)[0]); ?>!</h1>
+  <p class="lead">Vi har fått henvendelsen<?php if (!empty($org)) echo " fra <b>" . htmlspecialchars($org) . "</b>"; ?>, og tar kontakt på e-post<?php if (!empty($mobil)) echo " eller mobil"; ?> så snart vi kan.</p>
+  <p style="margin:24px 0 72px"><a class="k kant" href="/">Til forsiden</a></p>
 </section>
 <?php else: ?>
-<section>
-  <div class="to-spalter" style="margin:1.2rem 0 1.4rem">
-    <div class="kort">
-      <p style="font-size:1.55rem; margin:0" aria-hidden="true">👟</p>
-      <h2 style="font-size:1.08rem; margin:.35rem 0 .4rem">Løpegrupper:<br>flere folk på økt</h2>
-      <p style="margin:0; font-size:.95rem">Fellesøktene deres legges rett inn i medlemmenes
-      ukeplaner, med tid og sted. Slik gjør vi det med Tromsø Løpeklubb i dag.</p>
+  <h1>Vil dere samarbeide <em>med Treni?</em></h1>
+  <p class="lead">Treni er en treningsveileder for løpere. Appen lager uka di ut fra det du faktisk løper, og bygger den på nytt
+  når livet skjer – med reglene til trener Eirik Haugsnes.</p>
+</section>
+
+<section class="c">
+  <div class="to-kort">
+    <div>
+      <span class="etikett">Løpegrupper og klubber</span>
+      <b>Smartere trening mellom fellesøktene</b>
+      <p>Har dere en gruppe eller klubb, og vil at medlemmene skal trene godt også mellom fellesøktene? Fortell oss om dere.</p>
     </div>
-    <div class="kort">
-      <p style="font-size:1.55rem; margin:0" aria-hidden="true">🏁</p>
-      <h2 style="font-size:1.08rem; margin:.35rem 0 .4rem">Arrangører: deltagere som<br>trener riktig mot ditt løp</h2>
-      <p style="margin:0; font-size:.95rem">Løpet legges inn som mål med distanse, høydemeter
-      og terreng, og planene topper formen inn mot start.</p>
+    <div>
+      <span class="etikett">Arrangører</span>
+      <b>Deltakere som trener mot løpet ditt</b>
+      <p>Treni lager ukeplanen tilpasset formen og løpet løperen sikter mot. Fortell oss om løpet, så finner vi ut hva vi kan få til.</p>
     </div>
   </div>
-  <p>Vi er i pilotfasen, og døra er åpen, fra en enkel avtale om fellesøkter
-  til noe større. Skriv et par setninger om hvem dere er og hva dere ønsker,
-  så tar vi i Treni kontakt.</p>
+
   <?php if ($feil): ?><p class="skjema-feil"><?php echo htmlspecialchars($feil); ?></p><?php endif; ?>
-  <form method="post" action="samarbeid.php" class="skjema">
-    <label>Kontaktperson
-      <input type="text" name="navn" required autocomplete="name"
-             value="<?php echo htmlspecialchars($_POST["navn"] ?? ""); ?>">
-    </label>
-    <label>Løpegruppe, klubb eller arrangement
-      <input type="text" name="organisasjon" required autocomplete="organization"
-             placeholder="f.eks. Tromsø Løpeklubb"
-             value="<?php echo htmlspecialchars($_POST["organisasjon"] ?? ""); ?>">
-    </label>
-    <fieldset class="sprak-felt">
+  <form method="post" action="/samarbeid.php" class="skjema">
+    <label for="navn">Kontaktperson</label>
+    <input id="navn" type="text" name="navn" required autocomplete="name" value="<?php echo htmlspecialchars($_POST["navn"] ?? ""); ?>">
+    <label for="organisasjon">Løpegruppe, klubb eller arrangement</label>
+    <input id="organisasjon" type="text" name="organisasjon" required autocomplete="organization" placeholder="F.eks. Tromsø Løpeklubb" value="<?php echo htmlspecialchars($_POST["organisasjon"] ?? ""); ?>">
+    <fieldset>
       <legend>Hvem er dere?</legend>
       <?php foreach ($TYPER as $verdi => $navn_t): ?>
-      <label class="radio"><input type="radio" name="type" value="<?php echo $verdi; ?>"
-        <?php echo ($_POST["type"] ?? "lopegruppe") === $verdi ? "checked" : ""; ?>>
-        <?php echo $navn_t; ?></label>
+      <label class="valg"><input type="radio" name="type" value="<?php echo $verdi; ?>" <?php echo ($_POST["type"] ?? "lopegruppe") === $verdi ? "checked" : ""; ?>> <?php echo $navn_t; ?></label>
       <?php endforeach; ?>
     </fieldset>
-    <label>E-post
-      <input type="email" name="epost" required autocomplete="email"
-             value="<?php echo htmlspecialchars($_POST["epost"] ?? ""); ?>">
-    </label>
-    <label>Mobil <span class="valgfritt">(valgfritt)</span>
-      <input type="tel" name="mobil" autocomplete="tel" placeholder="f.eks. 900 00 000"
-             value="<?php echo htmlspecialchars($_POST["mobil"] ?? ""); ?>">
-    </label>
-    <label>Hva ser dere for dere? <span class="valgfritt">(valgfritt, faste fellesøkter,
-      et løp dere arrangerer, antall medlemmer …)</span>
-      <textarea name="melding" rows="4"><?php echo htmlspecialchars($_POST["melding"] ?? ""); ?></textarea>
-    </label>
-    <label class="krukke" aria-hidden="true">Nettside
-      <input type="text" name="nettside" tabindex="-1" autocomplete="off">
-    </label>
-    <?php treni_spamvern_felt(); ?>
-    <button type="submit" class="btn btn-primar">Send henvendelsen</button>
+    <label for="epost">E-post</label>
+    <input id="epost" type="email" name="epost" required autocomplete="email" value="<?php echo htmlspecialchars($_POST["epost"] ?? ""); ?>">
+    <label for="mobil">Mobil <span class="valgfritt">(valgfritt)</span></label>
+    <input id="mobil" type="tel" name="mobil" autocomplete="tel" placeholder="F.eks. 900 00 000" value="<?php echo htmlspecialchars($_POST["mobil"] ?? ""); ?>">
+    <label for="melding">Hva ser dere for dere? <span class="valgfritt">(valgfritt – fellesøkter, et løp dere arrangerer, antall medlemmer …)</span></label>
+    <textarea id="melding" name="melding" rows="4"><?php echo htmlspecialchars($_POST["melding"] ?? ""); ?></textarea>
+    <label class="krukke" aria-hidden="true">Nettside <input type="text" name="nettside" tabindex="-1" autocomplete="off"></label>
+    <div style="margin-top:14px"><?php treni_spamvern_felt(); ?></div>
+    <button type="submit" class="k hoved">Send henvendelsen</button>
   </form>
-  <p class="liten" style="margin-top:1.5rem">Foretrekker du e-post? Skriv direkte til
-  <a href="mailto:hei@treni.no?subject=Samarbeid%20med%20Treni">hei@treni.no</a>.
-  Opplysningene brukes kun til å svare dere.
-  <a href="personvern.html">les personvernerklæringen</a>.</p>
+  <p class="liten" style="margin:16px 0 72px">Foretrekker du e-post? Skriv til
+  <a href="mailto:hei@treni.no?subject=Samarbeid%20med%20Treni">hei@treni.no</a>. Vi bruker opplysningene bare til å svare dere
+  (<a href="/personvern.html">personvern</a>).</p>
 </section>
 <?php endif; ?>
-
-<footer>
-  <nav aria-label="Bunnmeny">
-    <a href="index.html">Hjem</a>
-    <a href="stotte.html">Støtte og kontakt</a>
-    <a href="personvern.html">Personvern</a>
-  </nav>
-  <p>PAULSEN UTVIKLING · org.nr 938 158 614 · Norge ·
-     <a href="mailto:hei@treni.no">hei@treni.no</a></p>
-  <p>Powered by Strava. This service is not affiliated with or endorsed by Strava.</p>
-</footer>
-
 </main>
-<script src="/banner.js?v=1" defer></script>
+
+<footer><div class="c">
+  <span>Treni · <a href="mailto:hei@treni.no">hei@treni.no</a></span>
+  <nav aria-label="Bunnmeny"><a href="/">Forsiden</a><a href="/lop.php">Løpskalender</a><a href="/lopegrupper.php">Løpegrupper</a><a href="/personvern.html">Personvern</a><a href="/vilkar.html">Vilkår</a></nav>
+</div></footer>
 </body>
 </html>
