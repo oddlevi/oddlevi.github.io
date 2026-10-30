@@ -21,6 +21,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $ok = false;
         try { require_once dirname(__DIR__, 2) . "/epost_smtp.php"; if (function_exists("treni_epost_send")) { $ok = treni_epost_send("hei@treni.no", "Løpegruppe/arrangør: $lop", $kropp, $epost); } } catch (Throwable $e) { $ok = false; }
         if (!$ok) { @mail("hei@treni.no", "Løpegruppe/arrangør: $lop", $kropp, "From: hei@treni.no\r\nReply-To: " . $epost); }
+        // Kort svar til den som skrev, med lenker til appen via treni.no/g (Odd 30.10.2026 «ja» til teksten).
+        // Bare Gmail-røret – ingen usignert reserve, så svaret aldri havner i søppelpost hos mottakeren.
+        $svar = "Hei $navn,\n\ntakk for at du skrev om $lop. Vi svarer deg på denne e-posten så snart vi kan.\n\n"
+              . "Treni lager uka di ut fra det du faktisk løper, og bygger den på nytt når livet skjer. Prøv selv:\n"
+              . "Google Play: https://treni.no/g/?til=android&k=epost-arrangor\n"
+              . "App Store: https://treni.no/g/?til=ios&k=epost-arrangor\n\n"
+              . "Hilsen Treni\nhei@treni.no\n";
+        try { if (function_exists("treni_epost_send")) { treni_epost_send($epost, "Takk for meldingen om $lop", $svar); } } catch (Throwable $e) { }
         $sendt = true;
     }
 }
