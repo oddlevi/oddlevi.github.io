@@ -70,6 +70,13 @@ input,textarea{width:100%;padding:12px 14px;border:1px solid var(--border);borde
 .liten{font-size:.85rem;color:var(--muted)}
 a{color:var(--primary)}
 footer .c{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-block:32px;font-size:.9rem;color:var(--muted)}
+/* Knappene til appene på takkesida (Odd 30.10.2026), som på forsida */
+.takk-app{margin:24px 0;padding:18px 20px;border-radius:16px;background:var(--surface);border:1px solid var(--border)}
+.takk-app b{display:block;font-size:1.1rem}.takk-app p{margin:4px 0 0;color:var(--muted)}
+.knapper{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
+.knapper .k{margin-top:0;display:inline-flex;align-items:center;gap:10px;min-height:52px;font-weight:800}
+.knapper .k.kant{background:var(--surface);color:var(--fg);border:1.5px solid var(--border)}
+.knapper .k svg{width:20px;height:20px}.knapper .k small{display:block;font-size:11px;font-weight:600;opacity:.8;line-height:1}.knapper .k span{line-height:1.1}
 </style>
 </head>
 <body>
@@ -79,6 +86,11 @@ footer .c{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;pad
   <div class="etikett">Løpegrupper og arrangører</div>
   <h1>Takk, <?= htmlspecialchars(explode(" ", $navn)[0]) ?>!</h1>
   <p class="lead">Vi har fått meldingen om <b><?= htmlspecialchars($lop) ?></b>. Odd Levi svarer deg på e-post.</p>
+  <div class="takk-app">
+    <b>Mens du venter: prøv Treni selv</b>
+    <p>Treni lager uka di ut fra det du faktisk løper, og bygger den på nytt når livet skjer. Én måned gratis.</p>
+    <div class="knapper"><a class="k hoved" href="/g/?til=android&amp;k=takk-arrangor" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M5 3.5v17l9-8.5-9-8.5z"/><path d="M14 12l3.5-3.3L20 10.2v3.6l-2.5 1.5z"/></svg><span><small>Last ned på</small>Google Play</span></a><a class="k kant" href="/g/?til=ios&amp;k=takk-arrangor" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.4 12.6c0-2.4 2-3.6 2.1-3.7-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.2-2.9.9-3.7.9-.8 0-1.9-.9-3.2-.8-1.6 0-3.1 1-4 2.4-1.7 3-.4 7.3 1.2 9.7.8 1.2 1.8 2.5 3 2.4 1.2 0 1.7-.8 3.1-.8 1.5 0 1.9.8 3.2.8 1.3 0 2.2-1.2 3-2.4.9-1.4 1.3-2.7 1.3-2.8-.1 0-2.5-1-2.5-3.8zM14 5.4c.7-.8 1.1-1.9 1-3-1 0-2.1.7-2.8 1.5-.6.7-1.2 1.8-1 2.9 1 .1 2.1-.6 2.8-1.4z"/></svg><span><small>Last ned i</small>App Store</span></a></div>
+  </div>
   <p><a href="/">Til forsida</a></p>
 <?php else: ?>
   <div class="etikett">Løpegrupper og arrangører</div>
