@@ -198,5 +198,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   <span>Treni · <a href="mailto:hei@treni.no">hei@treni.no</a></span>
   <nav aria-label="Bunnmeny"><a href="/">Forsiden</a><a href="/lop.php">Løpskalender</a><a href="/lopegrupper.php">Løpegrupper</a><a href="/personvern.html">Personvern</a><a href="/vilkar.html">Vilkår</a></nav>
 </div></footer>
+<script src="/besok.js" defer></script>
 </body>
 </html>

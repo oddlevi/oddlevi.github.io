@@ -223,5 +223,6 @@ function settFilter(region, fylke, ord) {
  {"@type":"Question","name":"Må jeg være rask for å bli med?",
   "acceptedAnswer":{"@type":"Answer","text":"Nei. De aller fleste løpegrupper har flere temponivåer, og lavterskelgruppene er laget nettopp for at alle skal kunne være med."}}]}
 </script>
+<script src="/besok.js" defer></script>
 </body>
 </html>

@@ -257,5 +257,6 @@ function settFilter(region, fylke) {
  {"@type":"Question","name":"Hvordan trener jeg riktig mot et løp?",
   "acceptedAnswer":{"@type":"Answer","text":"Gradvis oppbygging, mest rolig trening og en plan som tåler at uka ikke går som planlagt. Treni bygger uka ut fra det du faktisk løper, mot løpet du sikter mot."}}]}
 </script>
+<script src="/besok.js" defer></script>
 </body>
 </html>
