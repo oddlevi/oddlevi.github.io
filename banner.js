@@ -5,7 +5,8 @@
   var kilde = (location.pathname.replace(/^\/|\/$/g, '') || 'forside').replace(/[^a-z0-9_-]/gi, '_');
   var a = document.createElement('a');
   a.className = 'treni-banner';
-  a.href = (en ? '/en/join.php' : '/bli-testloper.php') + '?kilde=' + encodeURIComponent(kilde);
+  // 1.11.2026 (S-17): Treni 1-påmeldingen er stengt (bli-testloper.php og en/join.php sender til app.treni.no). Banneret går rett til nedlastingen.
+  a.href = en ? '/en/#last' : '/#last'; void kilde;
   a.target = '_blank'; a.rel = 'noopener';
   a.innerHTML = '<span class="tb-venstre"><span class="tb-merke">Treni<b>.</b></span><span class="tb-tekst">'
     + (en ? 'The coach who sees every session. A running plan every week, a real coach behind it.' : 'Treneren som ser hver økt. Løpeplan hver uke, ekte trener bak.')
