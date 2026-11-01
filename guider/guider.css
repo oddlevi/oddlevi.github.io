@@ -229,6 +229,13 @@ h2.del small{display:block;font-size:13px;letter-spacing:.1em;text-transform:upp
 .tema-kort{min-height:150px}
 .tema-kort.aktiv{background:var(--accent-soft);border-color:transparent}
 .tema-kort p{font-size:14.5px;color:var(--muted);margin:0;line-height:1.5}
+/* Hele kortet er lenken (Odd 1.11 kl. 21:18 «Alle temaboksene må fungere som en stor link»): lenken i kortet strekkes over hele boksen */
+.tema-kort,.kort-rad li{position:relative}
+.tema-kort a::after,.kort-rad a::after{content:"";position:absolute;inset:0;border-radius:inherit}
+.tema-kort:has(a),.kort-rad li:has(a){cursor:pointer;transition:border-color .15s ease,transform .15s ease}
+.tema-kort:has(a):hover,.kort-rad li:has(a):hover{border-color:var(--primary);transform:translateY(-2px)}
+.tema-kort:has(a:focus-visible),.kort-rad li:has(a:focus-visible){outline:2px solid var(--primary);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){.tema-kort:has(a):hover,.kort-rad li:has(a):hover{transform:none}}
 .tema-kort .antall{font-size:13px;font-weight:700;color:var(--primary);margin-top:auto}
 .art-liste{display:grid;gap:12px;margin:0;padding:0;list-style:none}
 .art-kort{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 16px;align-items:center;padding:18px 20px;border:1px solid var(--border);border-radius:var(--r-xl);background:var(--surface);text-decoration:none;color:var(--fg)}
