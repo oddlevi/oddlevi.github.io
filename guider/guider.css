@@ -164,7 +164,7 @@ h2.del small{display:block;font-size:13px;letter-spacing:.1em;text-transform:upp
 .tlys{display:grid;grid-template-columns:86px minmax(0,1fr) minmax(0,.8fr);gap:12px;align-items:center;padding:12px 14px;border-radius:var(--r);background:var(--surface);border:1px solid var(--border);border-left-width:6px;font-size:15.5px;line-height:1.45}
 .tlys b{font-size:15px}
 .tlys em{font-style:normal;font-weight:800}
-.tlys.gronn{border-left-color:var(--s2)}.tlys.gul{border-left-color:var(--s3)}.tlys.oransje{border-left-color:var(--s4)}.tlys.rod{border-left-color:var(--s5)}
+.tlys.gronn{border-left-color:var(--s2)}.tlys.gul{border-left-color:var(--s3)}.tlys.bla{border-left-color:hsl(212 80% 50%)}.tlys.oransje{border-left-color:var(--s4)}.tlys.rod{border-left-color:var(--s5)}
 @media (max-width:560px){.tlys{grid-template-columns:1fr;gap:2px}}
 
 /* Treni-delen */
