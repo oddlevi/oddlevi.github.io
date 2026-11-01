@@ -65,6 +65,19 @@ $via9 = function (string $url, array $l) use ($konfig): string {
 };
 // Knappene til butikkene, som på forsida. Klikket logges i treni.no/g med kanalen.
 // Odd 30.10.2026: samme profil og design som forsida (ny/side.css), tekstene etter budskapet for Treni.
+// Guidene (treni.no/guider, 1.11.2026, Odd «legg lenkene i løpskalenderen»): kalenderen er sida Google alt stoler på,
+// så løpene lenker til fagguidene. I dag finnes bare guide 1 (skader og overbelastning); fjell-, motbakke-, ultra- og
+// maratonløp får lenken. Når fjellguiden og maratonguiden kommer, byttes adressen per type her.
+function guide9(array $l): ?array {
+    $n = mb_strtolower((string) ($l['navn'] ?? ''));
+    if (preg_match('/fjell|\bopp\b|topp|trail|terreng|ultra|backyard|motbakke|stair|trapp/u', $n)) {
+        return ['type' => 'fjell', 'url' => '/guider/skader/unnga-overbelastning/', 'tekst' => 'Guide: høydemeter uten skade'];
+    }
+    if (preg_match('/maraton|marathon|mila\b|milen\b/u', $n)) {
+        return ['type' => 'lang', 'url' => '/guider/skader/unnga-overbelastning/', 'tekst' => 'Guide: øk uten å bli skadet'];
+    }
+    return null;
+}
 function butikkknapper9(string $k): string {
     return '<div class="knapper">'
         . '<a class="k hoved" href="/g/?til=android&amp;k=' . e9($k) . '" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M5 3.5v17l9-8.5-9-8.5z"/><path d="M14 12l3.5-3.3L20 10.2v3.6l-2.5 1.5z"/></svg><span><small>Last ned på</small>Google Play</span></a>'
@@ -90,7 +103,7 @@ function butikkknapper9(string $k): string {
 <link rel="icon" href="/favicon.ico">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap">
-<link rel="stylesheet" href="/ny/side.css?v=3">
+<link rel="stylesheet" href="/ny/side.css?v=4">
 <script type="application/ld+json">
 <?= json_encode(["@context" => "https://schema.org", "@graph" => array_map(fn($l) => [
     "@type" => "SportsEvent",
@@ -116,7 +129,7 @@ function butikkknapper9(string $k): string {
 
 <header><div class="c topp">
   <a class="logo" href="/" aria-label="Treni">Tren<i aria-hidden="true">ı</i></a>
-  <nav class="meny" aria-label="Hovedmeny"><a href="/lop.php" aria-current="page">Løpskalender</a><a href="/lopegrupper.php">Løpegrupper</a><a class="liten" href="#last">Last ned</a></nav>
+  <nav class="meny" aria-label="Hovedmeny"><a href="/lop.php" aria-current="page">Løpskalender</a><a href="/lopegrupper.php">Løpegrupper</a><a href="/guider/">Guider</a><a class="liten" href="#last">Last ned</a></nav>
 </div></header>
 
 <main>
@@ -152,6 +165,15 @@ function butikkknapper9(string $k): string {
     <?= butikkknapper9('lop') ?>
   </div>
 
+  <aside class="guide-boks" aria-labelledby="guide-boks-t">
+    <span class="etikett">Før løpet</span>
+    <div>
+      <b id="guide-boks-t"><a href="/guider/skader/unnga-overbelastning/">Slik løper du for å unngå skader og overbelastning</a></b>
+      <p>De fleste løpeskader kommer av for mye, for fort og med for lite hvile. Mønstrene som gir skader, tegnene du skal se etter og sju grep som virker. Fagguide med trener Eirik Haugsnes som kilde, 9 minutter.</p>
+    </div>
+    <a class="tekstlenke" href="/guider/">Alle guidene →</a>
+  </aside>
+
   <?php foreach ($per_mnd as $mnd => $lopene): ?>
   <h2 class="gruppetittel mnd-tittel"><?= $MND[(int) substr($mnd, 5, 2)] ?> <?= substr($mnd, 0, 4) ?> <span><?= count($lopene) ?> løp</span></h2>
   <div class="liste">
@@ -163,6 +185,9 @@ function butikkknapper9(string $k): string {
       <?php if (!empty($l['by'])): ?><span class="sted"><?= e9($l['by']) ?></span><?php endif; ?>
     </div>
     <div class="lenker">
+    <?php if ($g9 = guide9($l)): ?>
+      <a class="tekstlenke guide-lenke" data-guide="<?= e9($g9['type']) ?>" href="<?= e9($g9['url']) ?>"><?= e9($g9['tekst']) ?> →</a>
+    <?php endif; ?>
     <?php if (!empty($l['pamelding'])): ?>
       <a class="k kant smal" href="<?= e9($via9($l['pamelding'], $l)) ?>">Påmelding →</a>
     <?php elseif (!empty($l['live'])): ?>
@@ -189,9 +214,10 @@ function butikkknapper9(string $k): string {
   <p>Trykk «Påmelding» ved løpet. Du sendes videre til arrangørens påmeldingsside. Påmelding og betaling skjer hos
   arrangøren, ikke hos Treni.</p>
   <h3>Hvordan trener jeg riktig mot et løp?</h3>
-  <p>Gradvis oppbygging, mest rolig trening og en plan som tåler at uka ikke går som planlagt. Det er det
-  <a href="/">Treni</a> gjør: uka di bygges ut fra det du faktisk løper, mot løpet du sikter mot, med reglene til trener
-  Eirik Haugsnes.</p>
+  <p>Gradvis oppbygging, mest rolig trening og en plan som tåler at uka ikke går som planlagt. Start med guiden
+  <a href="/guider/skader/unnga-overbelastning/">Slik løper du for å unngå skader og overbelastning</a>, og se
+  <a href="/guider/">alle guidene for løpere</a>. Det er det samme <a href="/">Treni</a> gjør i uka di: den bygges ut fra det du
+  faktisk løper, mot løpet du sikter mot, med reglene til trener Eirik Haugsnes.</p>
   <h3>Mangler et løp i kalenderen?</h3>
   <p>Kalenderen dekker løp med påmelding hos EQ Timing. Arrangerer du et løp som mangler, eller vet om et?
   <a href="mailto:hei@treni.no">Send oss en e-post</a>, så legger vi det inn.</p>
