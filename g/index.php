@@ -14,10 +14,10 @@ if ($k === '') {
     $k = 'web';
 }
 
-// Logg klikket. Fila ligger UTENFOR public_html, som ig_besok.jsonl. Ingen IP og ingen identifiserende
+// Logg klikket (ikke driftsvaktens timessjekk av lenkene, k=driftsvakt, 1.11.2026). Fila ligger UTENFOR public_html, som ig_besok.jsonl. Ingen IP og ingen identifiserende
 // data – bare når, hvilken butikk og hvilken kanal.
 $logg = dirname(__DIR__, 2) . '/butikk_klikk.jsonl';
-@file_put_contents($logg, json_encode([
+if ($k !== 'driftsvakt') @file_put_contents($logg, json_encode([
     'ts'    => date('c'),
     'til'   => $til,
     'k'     => $k,
