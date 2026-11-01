@@ -95,8 +95,17 @@
  }
 ]
 </script>
+<style>
+/* Endringsmerking for Eirik (Odd 1.11 kl. 21:29): vises bare med ?endret i lenken, vanlige lesere ser ingenting */
+.vis-endret .e{background:hsl(50 100% 70%);color:hsl(160 28% 9%);border-radius:4px;padding:0 3px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.vis-endret .e-blokk{box-shadow:0 0 0 3px hsl(48 100% 50%);background:hsl(50 100% 92%)}
+.endret-stripe{display:none}
+.vis-endret .endret-stripe{display:block;position:sticky;top:0;z-index:50;background:hsl(50 100% 70%);color:hsl(160 28% 9%);font:700 14px/1.4 Manrope,system-ui,sans-serif;padding:10px 16px;text-align:center}
+</style>
+<script>if(/[?&]endret\b/.test(location.search))document.documentElement.classList.add("vis-endret")</script>
 </head>
 <body>
+<div class="endret-stripe">Gult = rettet etter svarene dine i runde 14 (1. november). Resten er som før.</div>
 <header class="topp-linje"><div class="c topp">
   <a class="logo" href="/" aria-label="Treni">Tren<i aria-hidden="true">ı</i></a>
   <nav class="meny" aria-label="Hovedmeny"><a href="/lop.php">Løpskalender</a><a href="/lopegrupper.php">Løpegrupper</a><a href="/guider/">Guider</a><a class="liten" href="/#last">Last ned</a></nav>
@@ -129,7 +138,7 @@
   <section class="oppsummert" aria-labelledby="ko">
     <h2 id="ko">Kort oppsummert</h2>
     <ul>
-      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg><span>Kroppen trenger tid: kondisjonen kommer ofte før sener, bein og leddbånd tåler belastningen.</span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg><span>Kroppen trenger tid: <span class="e">kondisjonen kommer ofte før sener, bein og leddbånd tåler belastningen.</span></span></li>
       <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg><span>Øk gradvis, hold de rolige turene rolige, og gi kroppen hvile mellom de harde.</span></li>
       <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M9 15l2 2 4-4"/></svg><span>Smerte som blir verre mens du løper, eller som endrer steget, er et tegn på å stoppe, ikke på å bite tennene sammen.</span></li>
     </ul>
@@ -152,7 +161,7 @@
   <p>Kroppen fikk mer enn den rakk å bygge seg opp for. Derfor starter forebygging ikke med strekk eller nye sko, men med hvordan uka di er satt sammen.</p>
 
   <h2 class="del" id="d2"><small>Del 2</small>Derfor får løpere belastningsskader</h2>
-  <p>Kondisjonen blir bedre på noen uker. Sener, ledd og skjelett bruker lengre tid på å tåle mer. Derfor kan du føle deg klar for mer før kroppen faktisk er det. Kondisjonen kommer ofte før sener, bein og leddbånd (ligamenter) har tilpasset seg belastningen. Viljen har også mye å si, og den overstyrer ofte fornuften. Fire mønstre går igjen:</p>
+  <p>Kondisjonen blir bedre på noen uker. Sener, ledd og skjelett bruker lengre tid på å tåle mer. Derfor kan du føle deg klar for mer før kroppen faktisk er det. <span class="e">Kondisjonen kommer ofte før sener, bein og leddbånd (ligamenter) har tilpasset seg belastningen.</span> Viljen har også mye å si, og den overstyrer ofte fornuften. Fire mønstre går igjen:</p>
 </div></section>
 
 <section class="g"><div class="mellom">
@@ -197,10 +206,10 @@
 
 <section class="g"><div class="mellom">
   <div class="skader">
-    <article class="skade"><span class="sted">Leggen, innsiden</span><h3>Medialt tibialt stressyndrom</h3><p>Ømhet langs innsiden av leggbeinet, ofte på begge sider. Kjennes gjerne i starten av turen og etter løping. I dagligtale kalles det beinhinnebetennelse.</p></article>
-    <article class="skade"><span class="sted">Akillessena</span><h3>Plager i akillessena</h3><p>Stiv og øm sene bak ankelen, verst de første stegene om morgenen eller i starten av turen.</p></article>
-    <article class="skade"><span class="sted">Foran kneet</span><h3>Hopperkne (patellarsenetendinopati)</h3><p>Smerte i senen rett under kneskåla, som blir verre i nedoverbakker og i trapper.</p></article>
-    <article class="skade"><span class="sted">Utsiden av kneet</span><h3>Løperkne (smerter fra IT-båndet)</h3><p>Stikkende smerte på utsiden av kneet, som ofte kommer etter en viss tid på turen og tvinger deg til å stoppe.</p></article>
+    <article class="skade"><span class="sted">Leggen, innsiden</span><h3><span class="e">Medialt tibialt stressyndrom</span></h3><p>Ømhet langs innsiden av leggbeinet, ofte på begge sider. Kjennes gjerne i starten av turen og etter løping. <span class="e">I dagligtale kalles det beinhinnebetennelse.</span></p></article>
+    <article class="skade"><span class="sted"><span class="e">Akillessena</span></span><h3><span class="e">Plager i akillessena</span></h3><p>Stiv og øm sene bak ankelen, verst de første stegene om morgenen eller i starten av turen.</p></article>
+    <article class="skade"><span class="sted">Foran kneet</span><h3><span class="e">Hopperkne (patellarsenetendinopati)</span></h3><p><span class="e">Smerte i senen rett under kneskåla, som blir verre i nedoverbakker og i trapper.</span></p></article>
+    <article class="skade"><span class="sted">Utsiden av kneet</span><h3><span class="e">Løperkne (smerter fra IT-båndet)</span></h3><p>Stikkende smerte på utsiden av kneet, som ofte kommer etter en viss tid på turen og tvinger deg til å stoppe.</p></article>
     <article class="skade"><span class="sted">Under hælen</span><h3>Plantar fascitt</h3><p>Smerte under hælen eller i fotbuen, verst de første stegene om morgenen.</p></article>
     <article class="skade varsel"><span class="sted">Ett punkt på et bein</span><h3>Tretthetsbrudd</h3><p>Smerte på ett lite, bestemt punkt, som blir verre når du løper og ikke går over. Stopp løpingen og kontakt lege.</p></article>
   </div>
@@ -252,11 +261,11 @@
   <div class="lys-tabell">
     <div class="tlys gronn"><b>Grønt</b><span>Øktene føles som ventet, ingen nye vondter, du henter deg inn som vanlig</span><em>Øk eller fortsett</em></div>
     <div class="tlys gul"><b>Gult</b><span>Litt mer trøtt, øktene føles noe tyngre</span><em>Hold belastningen og følg med</em></div>
-    <div class="tlys bla"><b>Blått</b><span>Planlagt hard periode, for eksempel før et løp (formtopping). Trøttheten er ventet, og roligere dager kommer etterpå</span><em>Fortsett planen</em></div>
+    <div class="tlys bla e-blokk"><b>Blått</b><span>Planlagt hard periode, for eksempel før et løp (formtopping). Trøttheten er ventet, og roligere dager kommer etterpå</span><em>Fortsett planen</em></div>
     <div class="tlys oransje"><b>Oransje</b><span>Formen faller, trøttheten slipper ikke, øktene er klart tyngre</span><em>Ta ned belastningen</em></div>
     <div class="tlys rod"><b>Rødt</b><span>Smerte som blir verre, sykdom, overskuddet kommer ikke tilbake</span><em>Stopp økningen og finn årsaken</em></div>
   </div>
-  <p>Blått er med fordi trøtthet ikke alltid er et faresignal. Har du med vilje lagt inn en hard periode før et løp, er det ventet å bli sliten. Det viktige er at planen har roligere dager etterpå.</p>
+  <p><span class="e">Blått er med fordi trøtthet ikke alltid er et faresignal. Har du med vilje lagt inn en hard periode før et løp, er det ventet å bli sliten. Det viktige er at planen har roligere dager etterpå.</span></p>
   <p class="illu">Trafikklyset er Eirik Haugsnes' modell for belastningsstyring.</p>
   <p>To situasjoner går igjen:</p>
 </div></section>
@@ -318,7 +327,7 @@
     <details><summary>Hvor mange harde økter bør jeg ha i uka?</summary><p>Det kommer an på hvor mye du løper. De fleste mosjonister trenger færre enn de tror, og alltid rolige dager imellom.</p></details>
     <details><summary>Hvorfor blir jeg så støl etter nedoverbakker?</summary><p>Nedover bremser lårmusklene for hvert steg, og det sliter mer enn løping på flatt. Kroppen venner seg raskt til det når den møter det jevnlig. Ta derfor med litt nedoverløping hver uke, i stedet for mye på én gang.</p></details>
     <details><summary>Hjelper nye sko mot skader?</summary><p>Sko som passer deg, er bra. Men de fleste skader kommer av hvordan uka er satt sammen, og der hjelper ikke nye sko alene.</p></details>
-    <details><summary>Hvordan starter jeg igjen etter en pause?</summary><p>Bruk større sikkerhetsmargin enn før. Kondisjonen kommer raskere tilbake enn evnen sener, bein og leddbånd har til å tåle belastning. Ta utgangspunkt i det du har løpt de siste 30 dagene, ikke det du løp før pausen.</p></details>
+    <details><summary>Hvordan starter jeg igjen etter en pause?</summary><p>Bruk større sikkerhetsmargin enn før. <span class="e">Kondisjonen kommer raskere tilbake enn evnen sener, bein og leddbånd har til å tåle belastning.</span> Ta utgangspunkt i det du har løpt de siste 30 dagene, ikke det du løp før pausen.</p></details>
     <details><summary>Trenger jeg pulsbelte?</summary><p>Nei, men et pulsbelte måler mer presist enn klokka på håndleddet, særlig i intervaller og kulde. Viser klokka uventet høy puls på en rolig tur, kan det være en målefeil.</p></details>
   </div>
 </div></section>
@@ -327,8 +336,8 @@
   <h2 class="kilde-tittel">Kilder</h2>
   <ol class="kildeliste">
     <li>Frandsen JSB m.fl. (2025): <i>How much running is too much? Identifying high-risk running sessions in a 5200-person cohort study.</i> British Journal of Sports Medicine 59(17):1203–10. <a href="https://pubmed.ncbi.nlm.nih.gov/40623829/">PubMed 40623829</a>. Brukt i grep 1 og svaret om økning per uke.</li>
-    <li>Eirik Haugsnes: <i>Trening for fjelløping</i>, kapitlet om belastningsstyring – «kondisjonen kommer før sener, bein og leddbånd», «ikke øk alt samtidig», nedoverløping (grep 2 og 5) og trafikklyset (del 6).</li>
-    <li>De vanligste løpeskadene (del 3): alminnelig fagkunnskap, gått gjennom og rettet av Eirik Haugsnes 1. november 2026.</li>
+    <li>Eirik Haugsnes: <i>Trening for fjelløping</i>, kapitlet om belastningsstyring – <span class="e">«kondisjonen kommer før sener, bein og leddbånd»</span>, «ikke øk alt samtidig», nedoverløping (grep 2 og 5) og trafikklyset (del 6).</li>
+    <li>De vanligste løpeskadene (del 3): alminnelig fagkunnskap, <span class="e">gått gjennom og rettet av Eirik Haugsnes 1. november 2026.</span></li>
   </ol>
 </div></section>
 
@@ -337,7 +346,7 @@
   <ul class="kort-rad">
     <li><a href="/guider/skader/"><small>Tema</small><b>Skader og belastning</b><span class="liten">Alle guidene om å tåle mer uten å bli skadet.</span></a></li>
     <li class="kommer"><small>Kommer</small><b>Bli raskere ved å løpe roligere</b><span>Slik finner du rolig fart, med og uten puls.</span></li>
-    <li class="kommer"><small>Kommer</small><b>Tilbake etter pause eller skade</b><span>Kondisjonen kommer før sener og bein.</span></li>
+    <li class="kommer"><small>Kommer</small><b>Tilbake etter pause eller skade</b><span><span class="e">Kondisjonen kommer før sener og bein.</span></span></li>
   </ul>
 </div></section>
 
