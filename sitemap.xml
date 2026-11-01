@@ -8,4 +8,7 @@
   <url><loc>https://treni.no/stotte.html</loc><changefreq>yearly</changefreq><priority>0.2</priority></url>
   <url><loc>https://treni.no/personvern.html</loc><changefreq>yearly</changefreq><priority>0.1</priority></url>
   <url><loc>https://treni.no/lopegrupper.php</loc></url>
+  <url><loc>https://treni.no/guider/</loc><lastmod>2026-11-01</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://treni.no/guider/skader/</loc><lastmod>2026-11-01</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://treni.no/guider/skader/unnga-overbelastning/</loc><lastmod>2026-11-01</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
 </urlset>
