@@ -16,14 +16,53 @@
 <link rel="icon" type="image/png" href="/icon-192.png" sizes="192x192">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="stylesheet" href="stil.css?v=30">
+<style>
+/* Felles topp- og bunnmeny (1.11.2026, Odd: «menyen på treni.no sidene må være det samme»). Ser ut som forsida og ny/side.css. */
+:root{
+  --tm-bg:hsl(44 45% 97%);--tm-fg:hsl(160 28% 9%);--tm-muted:hsl(158 10% 36%);--tm-border:hsl(148 15% 84%);
+  --tm-primary:hsl(152 62% 20%);--tm-primary-fg:hsl(44 45% 97%);--tm-accent:hsl(84 70% 52%);
+  --tm-mork:hsl(162 24% 5%);--tm-mork-kant:hsl(156 12% 17%);--tm-lys-dempet:hsl(150 8% 62%);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --tm-bg:hsl(162 24% 5%);--tm-fg:hsl(42 30% 94%);--tm-muted:hsl(150 8% 62%);--tm-border:hsl(156 12% 17%);
+  --tm-primary:hsl(84 70% 52%);--tm-primary-fg:hsl(162 24% 5%);--tm-mork:hsl(160 20% 8%)}}
+:root[data-theme="dark"]{
+  --tm-bg:hsl(162 24% 5%);--tm-fg:hsl(42 30% 94%);--tm-muted:hsl(150 8% 62%);--tm-border:hsl(156 12% 17%);
+  --tm-primary:hsl(84 70% 52%);--tm-primary-fg:hsl(162 24% 5%);--tm-mork:hsl(160 20% 8%)}
+.tm-topp{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--tm-bg) 88%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--tm-border);font-family:Manrope,system-ui,sans-serif}
+.tm-topp .tm-c,.tm-bunn .tm-c{max-width:1200px;margin-inline:auto;padding-inline:clamp(16px,4vw,48px)}
+.tm-topp .tm-c{display:flex;align-items:center;justify-content:space-between;gap:16px;height:64px}
+.tm-logo{font-weight:800;font-size:24px;letter-spacing:-.03em;text-decoration:none;color:var(--tm-fg)}
+.tm-logo i{font-style:normal;position:relative;color:inherit}
+.tm-logo i::after{content:"";position:absolute;width:7px;height:7px;border-radius:50%;background:var(--tm-accent);left:50%;top:2px;transform:translateX(-50%)}
+.tm-meny{display:flex;gap:24px;align-items:center;font-size:15px;font-weight:600}
+.tm-meny a{text-decoration:none;color:var(--tm-muted)}
+.tm-meny a[aria-current="page"]{color:var(--tm-fg)}
+.tm-meny .tm-liten{color:var(--tm-primary-fg);background:var(--tm-primary);padding:9px 16px;border-radius:999px;font-weight:800}
+@media (max-width:640px){.tm-meny a:not(.tm-liten){display:none}}
+.tm-bunn{background:var(--tm-mork);color:var(--tm-lys-dempet);border-top:1px solid var(--tm-mork-kant);font-size:14px;font-family:Manrope,system-ui,sans-serif;margin-top:48px}
+.tm-bunn .tm-c{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;padding-block:32px}
+.tm-bunn nav{display:flex;gap:22px;flex-wrap:wrap}
+.tm-bunn a{text-decoration:none;color:inherit;font-weight:500}
+.tm-bunn a:hover,.tm-meny a:hover{text-decoration:underline}
+/* Støttesida ligger i Treni 1-oppsettet med smal spalte: topp og bunn strekkes til full bredde */
+.tm-topp,.tm-bunn{width:100vw;max-width:none;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);box-sizing:border-box}
+footer.tm-bunn{padding:0;margin-bottom:0}
+.tm-bunn nav{margin-bottom:0}
+.tm-bunn nav a{font-weight:500}
+</style>
 </head>
 <body>
 <div class="bakteppe" aria-hidden="true"></div>
 <nav class="sprakvalg" aria-label="Språk"><span aria-current="page">NO</span><a href="#en-t">EN</a></nav>
 <main>
 
+<header class="tm-topp"><div class="tm-c">
+  <a class="tm-logo" href="/" aria-label="Treni">Tren<i aria-hidden="true">ı</i></a>
+  <nav class="tm-meny" aria-label="Hovedmeny"><a href="/lop.php">Løpskalender</a><a href="/lopegrupper.php">Løpegrupper</a><a href="/guider/">Guider</a><a class="tm-liten" href="/#last">Last ned</a></nav>
+</div></header>
 <header class="hero smal">
-  <p class="kicker reveal"><a href="index.html" style="color:inherit">treni.no</a> · støtte</p>
+  <p class="kicker reveal">Støtte</p>
   <h1 class="reveal" style="font-size:clamp(2rem,6vw,3rem)">Støtte og kontakt</h1>
 </header>
 
@@ -55,17 +94,12 @@
   Access, or remove Treni under Settings → Apps on intervals.icu; email us to have stored data deleted (within 30 days, with confirmation).</p>
 </section>
 
-<footer>
-  <nav aria-label="Bunnmeny">
-    <a href="index.html">Hjem</a>
-    <a href="personvern.html">Personvern</a>
-  </nav>
-  <p>PAULSEN UTVIKLING · org.nr 938 158 614 · Norge ·
-     <a href="mailto:hei@treni.no">hei@treni.no</a></p>
-  <p>Powered by Strava. This service is not affiliated with or endorsed by Strava.</p>
-</footer>
+<footer class="tm-bunn"><div class="tm-c">
+  <span>Treni · Paulsen Utvikling, org.nr 938 158 614 · <a href="mailto:hei@treni.no">hei@treni.no</a></span>
+  <nav aria-label="Bunnmeny"><a href="/lop.php">Løpskalender</a><a href="/lopegrupper.php">Løpegrupper</a><a href="/guider/">Guider</a><a href="/arrangor/">For arrangører</a><a href="/personvern.html">Personvern</a><a href="/vilkar.html">Vilkår</a><a href="/en/">English</a></nav>
+</div></footer>
 
 </main>
-<script src="/banner.js?v=1" defer></script>
+<script src="/banner.js?v=3" defer></script>
 </body>
 </html>

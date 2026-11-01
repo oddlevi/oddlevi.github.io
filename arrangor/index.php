@@ -78,9 +78,42 @@ footer .c{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;pad
 .knapper .k.kant{background:var(--surface);color:var(--fg);border:1.5px solid var(--border)}
 .knapper .k svg{width:20px;height:20px}.knapper .k small{display:block;font-size:11px;font-weight:600;opacity:.8;line-height:1}.knapper .k span{line-height:1.1}
 </style>
+<style>
+/* Felles topp- og bunnmeny (1.11.2026, Odd: «menyen på treni.no sidene må være det samme»). Ser ut som forsida og ny/side.css. */
+:root{
+  --tm-bg:hsl(44 45% 97%);--tm-fg:hsl(160 28% 9%);--tm-muted:hsl(158 10% 36%);--tm-border:hsl(148 15% 84%);
+  --tm-primary:hsl(152 62% 20%);--tm-primary-fg:hsl(44 45% 97%);--tm-accent:hsl(84 70% 52%);
+  --tm-mork:hsl(162 24% 5%);--tm-mork-kant:hsl(156 12% 17%);--tm-lys-dempet:hsl(150 8% 62%);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --tm-bg:hsl(162 24% 5%);--tm-fg:hsl(42 30% 94%);--tm-muted:hsl(150 8% 62%);--tm-border:hsl(156 12% 17%);
+  --tm-primary:hsl(84 70% 52%);--tm-primary-fg:hsl(162 24% 5%);--tm-mork:hsl(160 20% 8%)}}
+:root[data-theme="dark"]{
+  --tm-bg:hsl(162 24% 5%);--tm-fg:hsl(42 30% 94%);--tm-muted:hsl(150 8% 62%);--tm-border:hsl(156 12% 17%);
+  --tm-primary:hsl(84 70% 52%);--tm-primary-fg:hsl(162 24% 5%);--tm-mork:hsl(160 20% 8%)}
+.tm-topp{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--tm-bg) 88%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--tm-border);font-family:Manrope,system-ui,sans-serif}
+.tm-topp .tm-c,.tm-bunn .tm-c{max-width:1200px;margin-inline:auto;padding-inline:clamp(16px,4vw,48px)}
+.tm-topp .tm-c{display:flex;align-items:center;justify-content:space-between;gap:16px;height:64px}
+.tm-logo{font-weight:800;font-size:24px;letter-spacing:-.03em;text-decoration:none;color:var(--tm-fg)}
+.tm-logo i{font-style:normal;position:relative;color:inherit}
+.tm-logo i::after{content:"";position:absolute;width:7px;height:7px;border-radius:50%;background:var(--tm-accent);left:50%;top:2px;transform:translateX(-50%)}
+.tm-meny{display:flex;gap:24px;align-items:center;font-size:15px;font-weight:600}
+.tm-meny a{text-decoration:none;color:var(--tm-muted)}
+.tm-meny a[aria-current="page"]{color:var(--tm-fg)}
+.tm-meny .tm-liten{color:var(--tm-primary-fg);background:var(--tm-primary);padding:9px 16px;border-radius:999px;font-weight:800}
+@media (max-width:640px){.tm-meny a:not(.tm-liten){display:none}}
+.tm-bunn{background:var(--tm-mork);color:var(--tm-lys-dempet);border-top:1px solid var(--tm-mork-kant);font-size:14px;font-family:Manrope,system-ui,sans-serif;margin-top:48px}
+.tm-bunn .tm-c{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;padding-block:32px}
+.tm-bunn nav{display:flex;gap:22px;flex-wrap:wrap}
+.tm-bunn a{text-decoration:none;color:inherit;font-weight:500}
+.tm-bunn a:hover,.tm-meny a:hover{text-decoration:underline}
+</style>
 </head>
 <body>
-<header><div class="c"><a class="logo" href="/" aria-label="Treni">Tren<i aria-hidden="true">ı</i></a><a href="/">Til forsida</a></div></header>
+<header class="tm-topp"><div class="tm-c">
+  <a class="tm-logo" href="/" aria-label="Treni">Tren<i aria-hidden="true">ı</i></a>
+  <nav class="tm-meny" aria-label="Hovedmeny"><a href="/lop.php">Løpskalender</a><a href="/lopegrupper.php">Løpegrupper</a><a href="/guider/">Guider</a><a class="tm-liten" href="/#last">Last ned</a></nav>
+</div></header>
 <main class="c">
 <?php if ($sendt): ?>
   <div class="etikett">Løpegrupper og arrangører</div>
@@ -110,6 +143,9 @@ footer .c{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;pad
   <p class="liten" style="margin-top:14px">Vi bruker opplysningene bare til å svare deg. Du kan også skrive til <a href="mailto:hei@treni.no">hei@treni.no</a>.</p>
 <?php endif; ?>
 </main>
-<footer><div class="c"><span>Treni · <a href="mailto:hei@treni.no">hei@treni.no</a></span><span><a href="/personvern.html">Personvern</a> · <a href="/vilkar.html">Vilkår</a></span></div></footer>
+<footer class="tm-bunn"><div class="tm-c">
+  <span>Treni · <a href="mailto:hei@treni.no">hei@treni.no</a></span>
+  <nav aria-label="Bunnmeny"><a href="/lop.php">Løpskalender</a><a href="/lopegrupper.php">Løpegrupper</a><a href="/guider/">Guider</a><a href="/arrangor/">For arrangører</a><a href="/personvern.html">Personvern</a><a href="/vilkar.html">Vilkår</a><a href="/en/">English</a></nav>
+</div></footer>
 </body>
 </html>

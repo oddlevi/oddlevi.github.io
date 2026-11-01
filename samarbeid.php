@@ -127,7 +127,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 <header><div class="c topp">
   <a class="logo" href="/" aria-label="Treni">Tren<i aria-hidden="true">ı</i></a>
-  <nav class="meny" aria-label="Hovedmeny"><a href="/lop.php">Løpskalender</a><a href="/lopegrupper.php">Løpegrupper</a><a class="liten" href="/#last">Last ned</a></nav>
+  <nav class="meny" aria-label="Hovedmeny"><a href="/lop.php">Løpskalender</a><a href="/lopegrupper.php">Løpegrupper</a><a href="/guider/">Guider</a><a class="liten" href="/#last">Last ned</a></nav>
 </div></header>
 
 <main>
@@ -196,7 +196,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 <footer><div class="c">
   <span>Treni · <a href="mailto:hei@treni.no">hei@treni.no</a></span>
-  <nav aria-label="Bunnmeny"><a href="/">Forsiden</a><a href="/lop.php">Løpskalender</a><a href="/lopegrupper.php">Løpegrupper</a><a href="/personvern.html">Personvern</a><a href="/vilkar.html">Vilkår</a></nav>
+  <nav aria-label="Bunnmeny"><a href="/lop.php">Løpskalender</a><a href="/lopegrupper.php">Løpegrupper</a><a href="/guider/">Guider</a><a href="/arrangor/">For arrangører</a><a href="/personvern.html">Personvern</a><a href="/vilkar.html">Vilkår</a><a href="/en/">English</a></nav>
 </div></footer>
 <script src="/besok.js" defer></script>
 </body>

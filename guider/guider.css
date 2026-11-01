@@ -45,7 +45,7 @@ header.topp-linje{position:sticky;top:0;z-index:5;background:color-mix(in srgb,v
 .meny a{text-decoration:none;color:var(--muted)}
 .meny a[aria-current="page"],.meny a.her{color:var(--fg)}
 .meny .liten{color:var(--primary-fg);background:var(--primary);padding:9px 16px;border-radius:999px;font-weight:800}
-@media (max-width:760px){.meny a:not(.liten):not(.her){display:none}}
+@media (max-width:760px){.meny a:not(.liten){display:none}}
 footer{background:var(--mork);color:var(--lys-dempet);border-top:1px solid var(--mork-kant);font-size:14px}
 footer .c{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;padding-block:32px}
 footer nav{display:flex;gap:22px;flex-wrap:wrap}

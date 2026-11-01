@@ -165,7 +165,7 @@ function butikkknapper10(string $k): string {
 
 <footer><div class="c">
   <span>Treni · <a href="mailto:hei@treni.no">hei@treni.no</a></span>
-  <nav aria-label="Bunnmeny"><a href="/">Forsiden</a><a href="/lop.php">Løpskalender</a><a href="/guider/">Guider</a><a href="/arrangor/">Løpegrupper og arrangører</a><a href="/personvern.html">Personvern</a><a href="/vilkar.html">Vilkår</a></nav>
+  <nav aria-label="Bunnmeny"><a href="/lop.php">Løpskalender</a><a href="/lopegrupper.php">Løpegrupper</a><a href="/guider/">Guider</a><a href="/arrangor/">For arrangører</a><a href="/personvern.html">Personvern</a><a href="/vilkar.html">Vilkår</a><a href="/en/">English</a></nav>
 </div></footer>
 
 <script>
