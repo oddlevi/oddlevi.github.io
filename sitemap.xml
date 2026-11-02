@@ -8,7 +8,20 @@
   <url><loc>https://treni.no/stotte.html</loc><changefreq>yearly</changefreq><priority>0.2</priority></url>
   <url><loc>https://treni.no/personvern.html</loc><changefreq>yearly</changefreq><priority>0.1</priority></url>
   <url><loc>https://treni.no/lopegrupper.php</loc></url>
-  <url><loc>https://treni.no/guider/</loc><lastmod>2026-11-01</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://treni.no/guider/skader/</loc><lastmod>2026-11-01</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://treni.no/guider/skader/unnga-overbelastning/</loc><lastmod>2026-11-01</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://treni.no/guider/</loc><lastmod>2026-11-02</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://treni.no/guider/skader/</loc><lastmod>2026-11-02</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://treni.no/guider/skader/unnga-overbelastning/</loc><lastmod>2026-11-02</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://treni.no/guider/puls/</loc><lastmod>2026-11-02</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://treni.no/guider/hvile/</loc><lastmod>2026-11-02</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://treni.no/guider/fjell/</loc><lastmod>2026-11-02</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://treni.no/guider/lopeprogram/</loc><lastmod>2026-11-02</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://treni.no/guider/skader/tilbake-etter-pause/</loc><lastmod>2026-11-02</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://treni.no/guider/puls/rolig-loping-puls/</loc><lastmod>2026-11-02</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://treni.no/guider/puls/tallene-fra-treningsklokka/</loc><lastmod>2026-11-02</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://treni.no/guider/hvile/hvile-og-restitusjon/</loc><lastmod>2026-11-02</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://treni.no/guider/fjell/fjellop-trening/</loc><lastmod>2026-11-02</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://treni.no/guider/lopeprogram/treningsprogram-halvmaraton-maraton/</loc><lastmod>2026-11-02</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://treni.no/guider/lopeprogram/begynne-a-lope/</loc><lastmod>2026-11-02</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://treni.no/guider/lopeprogram/lopeprogram-3-dager-i-uka/</loc><lastmod>2026-11-02</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://treni.no/guider/lopeprogram/trener-du-alene/</loc><lastmod>2026-11-02</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
 </urlset>
