@@ -119,6 +119,7 @@ h2.del small{display:block;font-size:13px;letter-spacing:.1em;text-transform:upp
 .soner .bar{display:flex;height:12px;border-radius:99px;overflow:hidden}
 .soner .bar i{display:block;height:100%}
 .illu{font-size:11px;color:var(--muted);margin:-14px 0 20px}
+.tabell-rull + .illu{margin:10px 0 24px}
 
 /* sitat */
 .sitat{display:grid;grid-template-columns:64px minmax(0,1fr);gap:16px;align-items:start;margin:28px 0;padding:22px;border-radius:var(--r-xl);background:var(--primary-soft)}
