@@ -5,9 +5,13 @@
   if (navigator.doNotTrack === '1') return;
   var URL_ = 'https://app.treni.no/api/v1/besok';
   var q = new URLSearchParams(location.search);
+  // Kampanjen fra Instagram og Facebook (?fra=<kampanje>, Treni 2.0 I-3 fase 5): telles som kanal «kampanje» med utm_source «fra»,
+  // så besøket kan ses per innlegg i Superadmin → Analyse → Sosiale medier. En ekte utm_source går foran.
+  var us = q.get('utm_source'), uc = q.get('utm_campaign'), fra = q.get('fra');
+  if (!us && fra && /^[A-Za-z0-9_.-]{1,40}$/.test(fra)) { us = 'fra'; uc = fra.toLowerCase(); }
   function send(d) {
     var b = JSON.stringify(Object.assign({ side: location.pathname, henviser: document.referrer || null,
-      utm_source: q.get('utm_source'), utm_campaign: q.get('utm_campaign'), bredde: window.innerWidth,
+      utm_source: us, utm_campaign: uc, bredde: window.innerWidth,
       sprak: navigator.language }, d));
     try {
       fetch(URL_, { method: 'POST', body: b, headers: { 'Content-Type': 'application/json' }, keepalive: true, mode: 'cors' }).catch(function () {});

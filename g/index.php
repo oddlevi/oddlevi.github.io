@@ -17,12 +17,31 @@ if ($k === '') {
 // Logg klikket (ikke driftsvaktens timessjekk av lenkene, k=driftsvakt, 1.11.2026). Fila ligger UTENFOR public_html, som ig_besok.jsonl. Ingen IP og ingen identifiserende
 // data – bare når, hvilken butikk og hvilken kanal.
 $logg = dirname(__DIR__, 2) . '/butikk_klikk.jsonl';
-if ($k !== 'driftsvakt') @file_put_contents($logg, json_encode([
-    'ts'    => date('c'),
-    'til'   => $til,
-    'k'     => $k,
-    'mobil' => (bool) preg_match('/Mobile|Android|iPhone/i', (string) ($_SERVER['HTTP_USER_AGENT'] ?? '')),
-], JSON_UNESCAPED_UNICODE) . "\n", FILE_APPEND | LOCK_EX);
+if ($k !== 'driftsvakt') {
+    @file_put_contents($logg, json_encode([
+        'ts'    => date('c'),
+        'til'   => $til,
+        'k'     => $k,
+        'mobil' => (bool) preg_match('/Mobile|Android|iPhone/i', (string) ($_SERVER['HTTP_USER_AGENT'] ?? '')),
+    ], JSON_UNESCAPED_UNICODE) . "\n", FILE_APPEND | LOCK_EX);
+    // Treni 2.0 (I-3 fase 5): klikket telles også i Trenis egen base (POST /api/v1/besok), med kampanjen, så Analyse → Sosiale medier
+    // ser /g-klikk per innlegg, også rett fra en story eller bio-lenka. side="/g" holdes utenfor «Klikk videre» (klikk fra en treni.no-side
+    // er alt telt av besok.js). Fila over står som reserve. Høyst 1 sekund, og en feil stopper aldri videresendingen.
+    if (function_exists('curl_init')) {
+        $ch = curl_init('https://app.treni.no/api/v1/besok');
+        curl_setopt_array($ch, [
+            CURLOPT_POST           => true,
+            CURLOPT_POSTFIELDS     => json_encode(['type' => 'klikk', 'side' => '/g', 'maal' => $til === 'android' ? 'play' : 'appstore',
+                                                   'utm_source' => 'g', 'utm_campaign' => $k]),
+            CURLOPT_HTTPHEADER     => ['Content-Type: application/json'],
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_TIMEOUT        => 1,
+            CURLOPT_CONNECTTIMEOUT => 1,
+        ]);
+        @curl_exec($ch);
+        @curl_close($ch);
+    }
+}
 
 // Apples kampanjelenke med leverandørnøkkelen (pt) fra Trenis App Store Connect (App Analytics → Campaigns →
 // «Generate a Campaign Link», hentet 30.10.2026). Apple viser en kampanje først ved fem nedlastinger.
