@@ -104,7 +104,7 @@ function butikkknapper9(string $k): string {
 <link rel="icon" href="/favicon.ico">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap">
-<link rel="stylesheet" href="/ny/side.css?v=5">
+<link rel="stylesheet" href="/ny/side.css?v=7">
 <script type="application/ld+json">
 <?= json_encode(["@context" => "https://schema.org", "@graph" => array_map(fn($l) => [
     "@type" => "SportsEvent",
@@ -174,10 +174,10 @@ function butikkknapper9(string $k): string {
   <aside class="guide-boks" aria-labelledby="guide-boks-t">
     <span class="etikett">Før løpet</span>
     <div>
-      <b id="guide-boks-t"><a href="/guider/skader/unnga-overbelastning/">Slik løper du for å unngå skader og overbelastning</a></b>
+      <b id="guide-boks-t"><a href="/guider/skader/unnga-overbelastning/" target="_blank" rel="noopener">Slik løper du for å unngå skader og overbelastning</a></b>
       <p>De fleste løpeskader kommer av for mye, for fort og med for lite hvile. Mønstrene som gir skader, tegnene du skal se etter og sju grep som virker. Fagguide med trener Eirik Haugsnes som kilde, 9 minutter.</p>
     </div>
-    <a class="k kant smal" href="/guider/">Alle guidene →</a>
+    <a class="k kant smal" href="/guider/" target="_blank" rel="noopener">Alle guidene →</a>
   </aside>
 
   <?php foreach ($per_mnd as $mnd => $lopene): ?>
@@ -192,7 +192,7 @@ function butikkknapper9(string $k): string {
     </div>
     <div class="lenker">
     <?php if ($g9 = guide9($l)): ?>
-      <a class="tekstlenke guide-lenke" data-guide="<?= e9($g9['type']) ?>" href="<?= e9($g9['url']) ?>"><?= e9($g9['tekst']) ?> →</a>
+      <a class="tekstlenke guide-lenke" data-guide="<?= e9($g9['type']) ?>" href="<?= e9($g9['url']) ?>" target="_blank" rel="noopener"><?= e9($g9['tekst']) ?> →</a>
     <?php endif; ?>
     <?php if (!empty($l['pamelding'])): ?>
       <a class="k kant smal" href="<?= e9($via9($l['pamelding'], $l)) ?>">Påmelding →</a>
@@ -224,8 +224,8 @@ function butikkknapper9(string $k): string {
   arrangøren, ikke hos Treni.</p>
   <h3>Hvordan trener jeg riktig mot et løp?</h3>
   <p>Gradvis oppbygging, mest rolig trening og en plan som tåler at uka ikke går som planlagt. Start med guiden
-  <a href="/guider/skader/unnga-overbelastning/">Slik løper du for å unngå skader og overbelastning</a>, og se
-  <a href="/guider/">alle guidene for løpere</a>. Det er det samme <a href="/">Treni</a> gjør i uka di: den bygges ut fra det du
+  <a href="/guider/skader/unnga-overbelastning/" target="_blank" rel="noopener">Slik løper du for å unngå skader og overbelastning</a>, og se
+  <a href="/guider/" target="_blank" rel="noopener">alle guidene for løpere</a>. Det er det samme <a href="/">Treni</a> gjør i uka di: den bygges ut fra det du
   faktisk løper, mot løpet du sikter mot, med reglene til trener Eirik Haugsnes.</p>
   <h3>Mangler et løp i kalenderen?</h3>
   <p>Kalenderen dekker løp med påmelding hos EQ Timing. Arrangerer du et løp som mangler, eller vet om et?

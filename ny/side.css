@@ -105,7 +105,11 @@ footer a{text-decoration:none}
 .guide-boks b a{color:var(--fg);text-decoration:none}
 .guide-boks b a:hover{text-decoration:underline}
 .guide-boks p{margin:4px 0 0;color:var(--muted);font-size:15px;max-width:60ch;line-height:1.5}
-.guide-boks>.k{white-space:nowrap}
+.guide-boks>.k{white-space:nowrap;position:relative;z-index:1}
+/* Hele boksen er trykkflate for guiden i tittelen. Knappen ligger over og beholder sitt eget mål (Odd 4.11.2026) */
+.guide-boks{position:relative;transition:border-color 150ms var(--kurve)}
+.guide-boks b a::after{content:"";position:absolute;inset:0;border-radius:var(--r-xl)}
+.guide-boks:hover{border-color:var(--primary)}
 @media (max-width:760px){.guide-boks{grid-template-columns:1fr;gap:6px}.guide-boks .etikett{padding-top:0}.guide-boks>.k{justify-content:center;margin-top:10px}}
 .lenker .guide-lenke{color:var(--primary)}
 .lenker .guide-lenke:hover{text-decoration:underline}

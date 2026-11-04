@@ -60,7 +60,7 @@ function butikkknapper8(string $k): string {
 <link rel="icon" href="/favicon.ico">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap">
-<link rel="stylesheet" href="/ny/side.css?v=5">
+<link rel="stylesheet" href="/ny/side.css?v=7">
 </head>
 <body>
 
@@ -106,10 +106,10 @@ function butikkknapper8(string $k): string {
   <aside class="guide-boks" aria-labelledby="guide-boks-t">
     <span class="etikett">Tips før løpet</span>
     <div>
-      <b id="guide-boks-t"><a href="<?= e9($guide9[0]) ?>"><?= e9($guide9[1]) ?></a></b>
+      <b id="guide-boks-t"><a href="<?= e9($guide9[0]) ?>" target="_blank" rel="noopener"><?= e9($guide9[1]) ?></a></b>
       <p><?= e9($guide9[2]) ?></p>
     </div>
-    <a class="k kant smal" href="<?= e9($guide9[0]) ?>">Les guiden →</a>
+    <a class="k kant smal" href="<?= e9($guide9[0]) ?>" target="_blank" rel="noopener">Les guiden →</a>
   </aside>
   <p style="margin:28px 0 72px">
     <a class="k kant" href="<?= e9($til) ?>" target="_blank" rel="noopener nofollow">Nei takk, gå videre til påmeldingen hos arrangøren →</a></p>
