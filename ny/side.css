@@ -70,6 +70,12 @@ footer a{text-decoration:none}
 .pille[aria-pressed="true"]{background:var(--primary);border-color:var(--primary);color:var(--primary-fg)}
 .filtre select,.filtre input{min-height:44px;padding:0 16px;border-radius:999px;border:1.5px solid var(--border);background:var(--surface);color:var(--fg);font:inherit;font-size:15px;font-weight:600}
 .filtre input{min-width:min(100%,240px);flex:1 1 200px}
+/* Søket i løpskalenderen (4.11.2026). 16 px i feltet, ellers zoomer iPhone inn når det får fokus */
+.lop-sok{flex:1 1 100%}
+.lop-sok label{display:block;font-size:14px;font-weight:800;margin-bottom:6px}
+.lop-sok input{width:100%;min-height:52px;padding:0 20px;font-size:16px}
+.lop-treff{margin:16px 0 0;font-size:15px;font-weight:800}
+.lop-ingen{margin-top:16px}
 
 /* Lista */
 .gruppetittel{font-size:clamp(24px,3vw,32px);margin:48px 0 8px;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
@@ -99,8 +105,8 @@ footer a{text-decoration:none}
 .guide-boks b a{color:var(--fg);text-decoration:none}
 .guide-boks b a:hover{text-decoration:underline}
 .guide-boks p{margin:4px 0 0;color:var(--muted);font-size:15px;max-width:60ch;line-height:1.5}
-.guide-boks>.tekstlenke{font-size:14px;font-weight:800;color:var(--primary);text-decoration:none;white-space:nowrap}
-@media (max-width:760px){.guide-boks{grid-template-columns:1fr;gap:6px}.guide-boks .etikett{padding-top:0}}
+.guide-boks>.k{white-space:nowrap}
+@media (max-width:760px){.guide-boks{grid-template-columns:1fr;gap:6px}.guide-boks .etikett{padding-top:0}.guide-boks>.k{justify-content:center;margin-top:10px}}
 .lenker .guide-lenke{color:var(--primary)}
 .lenker .guide-lenke:hover{text-decoration:underline}
 

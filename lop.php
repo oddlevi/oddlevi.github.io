@@ -103,7 +103,7 @@ function butikkknapper9(string $k): string {
 <link rel="icon" href="/favicon.ico">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap">
-<link rel="stylesheet" href="/ny/side.css?v=4">
+<link rel="stylesheet" href="/ny/side.css?v=5">
 <script type="application/ld+json">
 <?= json_encode(["@context" => "https://schema.org", "@graph" => array_map(fn($l) => [
     "@type" => "SportsEvent",
@@ -146,6 +146,10 @@ function butikkknapper9(string $k): string {
   <a href="mailto:hei@treni.no">send oss en e-post</a>.</p>
 <?php else: ?>
   <div class="filtre" role="group" aria-label="Filtrer løpene">
+    <div class="lop-sok">
+      <label for="lop-sok">Søk etter løp</label>
+      <input type="search" id="lop-sok" placeholder="Løp eller sted, for eksempel Tromsø" autocomplete="off" enterkeyhint="search">
+    </div>
     <button type="button" class="pille lop-filter" data-region="alle" aria-pressed="true">Hele Norge</button>
     <button type="button" class="pille lop-filter" data-region="nn" aria-pressed="false">Nord-Norge</button>
     <label for="fylke-valg" style="position:absolute;left:-9999px">Fylke</label>
@@ -156,6 +160,7 @@ function butikkknapper9(string $k): string {
       <?php endforeach; ?>
     </select>
   </div>
+  <p class="lop-treff" id="lop-treff" role="status" hidden></p>
 
   <div class="treni-boks">
     <div>
@@ -171,7 +176,7 @@ function butikkknapper9(string $k): string {
       <b id="guide-boks-t"><a href="/guider/skader/unnga-overbelastning/">Slik løper du for å unngå skader og overbelastning</a></b>
       <p>De fleste løpeskader kommer av for mye, for fort og med for lite hvile. Mønstrene som gir skader, tegnene du skal se etter og sju grep som virker. Fagguide med trener Eirik Haugsnes som kilde, 9 minutter.</p>
     </div>
-    <a class="tekstlenke" href="/guider/">Alle guidene →</a>
+    <a class="k kant smal" href="/guider/">Alle guidene →</a>
   </aside>
 
   <?php foreach ($per_mnd as $mnd => $lopene): ?>
@@ -198,6 +203,9 @@ function butikkknapper9(string $k): string {
   <?php endforeach; ?>
   </div>
   <?php endforeach; ?>
+
+  <p class="lead lop-ingen" id="lop-ingen" hidden>Fant ikke løpet? Prøv et annet ord, eller
+  <a href="mailto:hei@treni.no?subject=L%C3%B8p%20som%20mangler%20i%20kalenderen">tips oss</a>, så legger vi det inn.</p>
 
   <p class="liten" style="margin-top:32px">Kalenderen dekker arrangementer med påmelding eller tidtaking hos EQ Timing de neste
   18 månedene, og oppdateres hver dag. Mangler et løp? <a href="mailto:hei@treni.no?subject=L%C3%B8p%20som%20mangler%20i%20kalenderen">Tips oss</a>,
@@ -254,23 +262,52 @@ function aktivRegion() {
   var a = document.querySelector('.lop-filter[aria-pressed="true"]');
   return a ? a.dataset.region : 'alle';
 }
+var sokFelt = document.getElementById('lop-sok');
+if (sokFelt) {
+  sokFelt.addEventListener('input', function () {
+    settFilter(aktivRegion(), fylkeVelger ? fylkeVelger.value : '');
+  });
+}
+// Tromso finner Tromsø og Asen finner Åsen
+function vask(t) {
+  return t.toLowerCase().replace(/ø/g, 'o').replace(/æ/g, 'ae').replace(/å/g, 'a').replace(/aa/g, 'a')
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+}
+function sokTekst(r) {
+  if (r.dataset.sok === undefined) {
+    r.dataset.sok = vask(r.querySelector('.dato').nextElementSibling.textContent + ' ' + r.dataset.fylke);
+  }
+  return r.dataset.sok;
+}
 function settFilter(region, fylke) {
   document.querySelectorAll('.lop-filter').forEach(function (x) {
     x.setAttribute('aria-pressed', x.dataset.region === region ? 'true' : 'false');
   });
   var nn = region === 'nn';
+  var ordene = sokFelt ? vask(sokFelt.value).split(/\s+/).filter(Boolean) : [];
+  var treff = 0;
   document.querySelectorAll('.lop-rad').forEach(function (r) {
-    var ok = (!nn || r.dataset.nn === '1') && (!fylke || r.dataset.fylke === fylke);
+    var ok = (!nn || r.dataset.nn === '1') && (!fylke || r.dataset.fylke === fylke)
+      && ordene.every(function (o) { return sokTekst(r).indexOf(o) !== -1; });
     r.style.display = ok ? '' : 'none';
+    if (ok) { treff++; }
   });
   document.querySelectorAll('.mnd-tittel').forEach(function (m) {
-    var liste = m.nextElementSibling, synlig = false;
+    var liste = m.nextElementSibling, antall = 0;
     if (liste) {
-      liste.querySelectorAll('.lop-rad').forEach(function (r) { if (r.style.display !== 'none') { synlig = true; } });
-      liste.style.display = synlig ? '' : 'none';
+      liste.querySelectorAll('.lop-rad').forEach(function (r) { if (r.style.display !== 'none') { antall++; } });
+      liste.style.display = antall ? '' : 'none';
     }
-    m.style.display = synlig ? '' : 'none';
+    m.style.display = antall ? '' : 'none';
+    m.querySelector('span').textContent = antall + ' løp';
   });
+  // Mens noen søker kommer treffene rett under feltet, uten boksene imellom
+  var soker = ordene.length > 0;
+  document.querySelectorAll('.treni-boks, .guide-boks').forEach(function (b) { b.style.display = soker ? 'none' : ''; });
+  var linje = document.getElementById('lop-treff');
+  linje.hidden = !soker;
+  linje.textContent = soker ? (treff ? treff + ' løp passer' : 'Ingen løp passer «' + sokFelt.value.trim() + '»') : '';
+  document.getElementById('lop-ingen').hidden = !(soker && treff === 0);
 }
 </script>
 
