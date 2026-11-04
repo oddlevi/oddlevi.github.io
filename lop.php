@@ -67,9 +67,9 @@ $via9 = function (string $url, array $l) use ($konfig): string {
 // Knappene til butikkene, som på forsida. Klikket logges i treni.no/g med kanalen.
 // Odd 30.10.2026: samme profil og design som forsida (ny/side.css), tekstene etter budskapet for Treni.
 // Guidene (treni.no/guider, 1.11.2026, Odd «legg lenkene i løpskalenderen»): kalenderen er sida Google alt stoler på,
-// så løpene lenker til fagguidene. Fjell-, motbakke-, ultra- og maratonløp får lenken i lista. Typen følger med til
-// videre.php, som viser guiden som tips før løpssiden, og skadeguiden for alle andre løp (Odd 4.11.2026).
-function guide9(array $l): ?array {
+// så løpene lenker til fagguidene. Alle løp får lenke i lista (Odd 4.11.2026): fjell- og ultraløp fjellguiden,
+// maratonløp maratonguiden, alle andre skadeguiden. Typen følger med til videre.php, som viser samme guide som tips.
+function guide9(array $l): array {
     $n = mb_strtolower((string) ($l['navn'] ?? ''));
     if (preg_match('/fjell|\bopp\b|topp|trail|terreng|ultra|backyard|motbakke|stair|trapp/u', $n)) {
         return ['type' => 'fjell', 'url' => '/guider/fjell/fjellop-trening/', 'tekst' => 'Guide: høydemeter uten skade'];
@@ -77,7 +77,7 @@ function guide9(array $l): ?array {
     if (preg_match('/maraton|marathon|mila\b|milen\b/u', $n)) {
         return ['type' => 'lang', 'url' => '/guider/lopeprogram/treningsprogram-halvmaraton-maraton/', 'tekst' => 'Guide: bygg ukene mot løpet'];
     }
-    return null;
+    return ['type' => 'alle', 'url' => '/guider/skader/unnga-overbelastning/', 'tekst' => 'Guide: løp uten skader'];
 }
 function butikkknapper9(string $k): string {
     return '<div class="knapper">'
