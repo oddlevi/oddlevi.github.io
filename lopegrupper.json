@@ -778,5 +778,23 @@
   "type": "klubb",
   "lenke": "https://torridalil.spond.club/",
   "om": "Lavterskel løpegruppe åpen for alle fra 5. klasse og oppover."
+ },
+ {
+  "navn": "Hell Ultraløperklubb",
+  "sted": "Hell",
+  "fylke": "Trøndelag",
+  "type": "klubb",
+  "lenke": "https://www.hell24.run/",
+  "om": "Ultraløperklubb, åpen for alle som liker å løpe, uavhengig av hvor fort og langt.",
+  "id": "hell-ultra",
+  "lop": [
+   "Hell Backyard Ultra",
+   "Hell Løpefestival",
+   "Rotvollfjæra Frontyard Ultra",
+   "Muruvik Backyard Ultra",
+   "Rondane Backyard Ultra",
+   "Stjørdalsmila",
+   "Krukes Ultra Trail"
+  ]
  }
 ]

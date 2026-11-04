@@ -121,6 +121,9 @@ function butikkknapper10(string $k): string {
       <span class="sted"><?= e10($g['sted']) ?><?= !empty($g['om']) ? ' · ' . e10($g['om']) : '' ?></span>
     </div>
     <div class="lenker">
+      <?php if (!empty($g['id']) && !empty($g['lop'])): ?>
+        <a class="tekstlenke" href="/lop.php?klubb=<?= e10($g['id']) ?>">Løpene deres</a>
+      <?php endif; ?>
       <?php if (!empty($g['strava'])): ?>
         <a class="tekstlenke" href="<?= e10($via10($g['strava'], $g)) ?>" rel="nofollow">Strava-klubben</a>
       <?php endif; ?>

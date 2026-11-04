@@ -81,7 +81,7 @@ function butikkknapper8(string $k): string {
     <div>
       <b>Skal Treni lage uka di rundt fellesøktene?</b>
       <p>Treni lager uka di ut fra det du faktisk løper, og bygger den på nytt når livet skjer. Fellesøktene passer rett inn.
-      Én måned gratis.</p>
+      3 uker gratis, én måned i App Store.</p>
     </div>
     <?= butikkknapper8('gruppe-videre') ?>
   </div>
@@ -98,7 +98,7 @@ function butikkknapper8(string $k): string {
   <div class="treni-boks" style="margin-top:0">
     <div>
       <b>Skal Treni lage uka di mot <?= $lop ? e9($lop) : 'løpet' ?>?</b>
-      <p>Treni lager uka di ut fra det du faktisk løper, og bygger den på nytt når livet skjer. Én måned gratis.
+      <p>Treni lager uka di ut fra det du faktisk løper, og bygger den på nytt når livet skjer. 3 uker gratis, én måned i App Store.
       Du kan melde deg på løpet etterpå.</p>
     </div>
     <?= butikkknapper8('lop-videre') ?>
@@ -112,7 +112,7 @@ function butikkknapper8(string $k): string {
     <a class="k kant smal" href="<?= e9($guide9[0]) ?>" target="_blank" rel="noopener">Les guiden →</a>
   </aside>
   <p style="margin:28px 0 72px">
-    <a class="k kant" href="<?= e9($til) ?>" target="_blank" rel="noopener nofollow">Nei takk, gå videre til påmeldingen hos arrangøren →</a></p>
+    <a class="k kant" href="<?= e9($til) ?>" target="_blank" rel="noopener nofollow">Nei takk, gå videre til <?= ($_GET['mal'] ?? '') === 'side' ? 'løpssiden' : 'påmeldingen hos arrangøren' ?> →</a></p>
 </section>
 <?php endif; ?>
 </main>

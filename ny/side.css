@@ -112,6 +112,9 @@ footer a{text-decoration:none}
 .guide-boks:hover{border-color:var(--primary)}
 @media (max-width:760px){.guide-boks{grid-template-columns:1fr;gap:6px}.guide-boks .etikett{padding-top:0}.guide-boks>.k{justify-content:center;margin-top:10px}}
 .lenker .guide-lenke{color:var(--primary)}
+/* Klubben bak løpet (4.11.2026). Egen linje med 44 px trykkflate i lista */
+.klubb-lenke{display:inline-flex;align-items:center;min-height:44px;margin-block:-8px;font-size:14px;font-weight:700;color:var(--primary);text-decoration:none}
+.klubb-lenke:hover{text-decoration:underline}
 .lenker .guide-lenke:hover{text-decoration:underline}
 
 /* Om-delen */

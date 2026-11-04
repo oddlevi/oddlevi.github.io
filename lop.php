@@ -40,6 +40,27 @@ if (is_readable($cfg_sti)) {
         } catch (Throwable $e) { /* siden vises med tom-melding */ }
     }
 }
+// Klubbene bak løpene (Odd 4.11.2026, «hell ultraløpeklubb fronter noen løp»): radardataene har ikke arrangør, så
+// koblingen står i lopegrupper.json på klubben (id og lop). Løpsnavnet må starte med teksten, uten årstall.
+// ?klubb=<id> viser bare klubbens løp, på en adresse klubben kan dele.
+$klubber = [];
+foreach ((json_decode((string) @file_get_contents(__DIR__ . '/lopegrupper.json'), true) ?: []) as $g) {
+    if (!empty($g['id']) && !empty($g['lop'])) { $klubber[$g['id']] = $g; }
+}
+foreach ($lop as &$l) {
+    foreach ($klubber as $id => $k) {
+        foreach ($k['lop'] as $start) {
+            if (mb_stripos($l['navn'], $start) === 0) { $l['klubb'] = $id; $l['arrangor'] = $k['navn']; }
+        }
+    }
+}
+unset($l);
+$klubb_id = is_string($_GET['klubb'] ?? null) ? $_GET['klubb'] : '';
+$klubb = $klubber[$klubb_id] ?? null;
+if ($klubb) {
+    $egne = array_values(array_filter($lop, fn($l) => ($l['klubb'] ?? '') === $klubb_id));
+    if ($egne) { $lop = $egne; } else { $klubb = null; }
+}
 $MND = [1 => 'Januar', 'Februar', 'Mars', 'April', 'Mai', 'Juni', 'Juli',
         'August', 'September', 'Oktober', 'November', 'Desember'];
 $per_mnd = [];
@@ -91,20 +112,27 @@ function butikkknapper9(string $k): string {
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<?php if ($klubb): ?>
+<title>Løpene til <?= e9($klubb['navn']) ?>: datoer og påmelding | Treni</title>
+<meta name="description" content="Alle kommende løp fra <?= e9($klubb['navn']) ?> med dato, sted og påmelding. Oppdateres daglig.">
+<meta property="og:title" content="Løpene til <?= e9($klubb['navn']) ?>">
+<meta property="og:description" content="Alle kommende løp fra <?= e9($klubb['navn']) ?>, med dato, sted og påmelding, samlet på ett sted.">
+<?php else: ?>
 <title>Løpskalender Norge <?= date('Y') ?>: alle løp med påmelding | Treni</title>
 <meta name="description" content="Komplett oversikt over kommende løp i hele Norge: gateløp, terrengløp og fjelløp med dato, sted og påmeldingslenke. Oppdateres daglig.">
 <meta property="og:title" content="Løpskalender Norge · alle løp med påmelding">
 <meta property="og:description" content="Gateløp, terrengløp og fjelløp i hele landet, dato, sted og påmelding, samlet på ett sted. Oppdateres daglig.">
+<?php endif; ?>
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Treni">
 <meta property="og:image" content="https://treni.no/ny/bilder/deling.jpg">
-<meta property="og:url" content="https://treni.no/lop.php">
+<meta property="og:url" content="https://treni.no/lop.php<?= $klubb ? '?klubb=' . e9($klubb_id) : '' ?>">
 <meta property="og:locale" content="nb_NO">
-<link rel="canonical" href="https://treni.no/lop.php">
+<link rel="canonical" href="https://treni.no/lop.php<?= $klubb ? '?klubb=' . e9($klubb_id) : '' ?>">
 <link rel="icon" href="/favicon.ico">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap">
-<link rel="stylesheet" href="/ny/side.css?v=7">
+<link rel="stylesheet" href="/ny/side.css?v=8">
 <script type="application/ld+json">
 <?= json_encode(["@context" => "https://schema.org", "@graph" => array_map(fn($l) => [
     "@type" => "SportsEvent",
@@ -135,10 +163,16 @@ function butikkknapper9(string $k): string {
 
 <main>
 <section class="c sidehode">
+<?php if ($klubb): ?>
+  <a class="etikett" href="/lop.php" style="text-decoration:none">← Alle løp</a>
+  <h1>Løpene til<br><em><?= e9($klubb['navn']) ?>.</em></h1>
+  <p class="lead"><?= e9($klubb['om']) ?> <a href="<?= e9($klubb['lenke']) ?>" rel="nofollow">Til klubbens side</a>.</p>
+<?php else: ?>
   <span class="etikett">Løpskalender</span>
   <h1>Alle løp i Norge,<br><em>på ett sted.</em></h1>
   <p class="lead">Gateløp, terrengløp og fjelløp med dato, sted og påmelding, hentet fra tidtakersystemet EQ Timing<?= $sist ? ' og oppdatert ' . e9((string) (int) substr($sist, 8, 2)) . '.' . e9((string) (int) substr($sist, 5, 2)) : '' ?>.
   Fant du løpet ditt? Da vet du hva du skal trene mot.</p>
+<?php endif; ?>
 </section>
 
 <section class="c">
@@ -146,6 +180,7 @@ function butikkknapper9(string $k): string {
   <p class="lead">Kalenderen fylles i løpet av dagen. Kom tilbake litt senere, eller
   <a href="mailto:hei@treni.no">send oss en e-post</a>.</p>
 <?php else: ?>
+<?php if (!$klubb): ?>
   <div class="filtre" role="group" aria-label="Filtrer løpene">
     <div class="lop-sok">
       <label for="lop-sok">Søk etter løp</label>
@@ -162,6 +197,7 @@ function butikkknapper9(string $k): string {
     </select>
   </div>
   <p class="lop-treff" id="lop-treff" role="status" hidden></p>
+<?php endif; ?>
 
   <div class="treni-boks">
     <div>
@@ -171,6 +207,7 @@ function butikkknapper9(string $k): string {
     <?= butikkknapper9('lop') ?>
   </div>
 
+<?php if (!$klubb): ?>
   <aside class="guide-boks" aria-labelledby="guide-boks-t">
     <span class="etikett">Før løpet</span>
     <div>
@@ -179,6 +216,7 @@ function butikkknapper9(string $k): string {
     </div>
     <a class="k kant smal" href="/guider/" target="_blank" rel="noopener">Alle guidene →</a>
   </aside>
+<?php endif; ?>
 
   <?php foreach ($per_mnd as $mnd => $lopene): ?>
   <h2 class="gruppetittel mnd-tittel"><?= $MND[(int) substr($mnd, 5, 2)] ?> <?= substr($mnd, 0, 4) ?> <span><?= count($lopene) ?> løp</span></h2>
@@ -189,6 +227,7 @@ function butikkknapper9(string $k): string {
     <div>
       <b><?= e9($l['navn']) ?></b>
       <?php if (!empty($l['by'])): ?><span class="sted"><?= e9($l['by']) ?></span><?php endif; ?>
+      <?php if (!$klubb && !empty($l['klubb'])): ?><a class="klubb-lenke" href="/lop.php?klubb=<?= e9($l['klubb']) ?>"><?= e9($l['arrangor']) ?></a><?php endif; ?>
     </div>
     <div class="lenker">
     <?php if ($g9 = guide9($l)): ?>
@@ -197,7 +236,7 @@ function butikkknapper9(string $k): string {
     <?php if (!empty($l['pamelding'])): ?>
       <a class="k kant smal" href="<?= e9($via9($l['pamelding'], $l)) ?>">Påmelding →</a>
     <?php elseif (!empty($l['live'])): ?>
-      <a class="tekstlenke" href="<?= e9($via9($l['live'], $l)) ?>">Løpssiden →</a>
+      <a class="tekstlenke" href="<?= e9($via9($l['live'], $l)) ?>&amp;mal=side">Løpssiden →</a>
     <?php endif; ?>
     </div>
   </div>
