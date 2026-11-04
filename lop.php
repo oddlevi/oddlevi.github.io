@@ -61,20 +61,21 @@ $via9 = function (string $url, array $l) use ($konfig): string {
     $n = $nokkel9 !== '' ? substr(hash_hmac('sha256', $url, $nokkel9), 0, 16) : '';
     return 'videre.php?til=' . urlencode($url) . '&s=' . $n
          . '&lop=' . urlencode($l['navn'] ?? '')
-         . '&dato=' . urlencode(substr($l['dato'] ?? '', 0, 10));
+         . '&dato=' . urlencode(substr($l['dato'] ?? '', 0, 10))
+         . '&guide=' . urlencode(guide9($l)['type'] ?? '');
 };
 // Knappene til butikkene, som på forsida. Klikket logges i treni.no/g med kanalen.
 // Odd 30.10.2026: samme profil og design som forsida (ny/side.css), tekstene etter budskapet for Treni.
 // Guidene (treni.no/guider, 1.11.2026, Odd «legg lenkene i løpskalenderen»): kalenderen er sida Google alt stoler på,
-// så løpene lenker til fagguidene. I dag finnes bare guide 1 (skader og overbelastning); fjell-, motbakke-, ultra- og
-// maratonløp får lenken. Når fjellguiden og maratonguiden kommer, byttes adressen per type her.
+// så løpene lenker til fagguidene. Fjell-, motbakke-, ultra- og maratonløp får lenken i lista. Typen følger med til
+// videre.php, som viser guiden som tips før løpssiden, og skadeguiden for alle andre løp (Odd 4.11.2026).
 function guide9(array $l): ?array {
     $n = mb_strtolower((string) ($l['navn'] ?? ''));
     if (preg_match('/fjell|\bopp\b|topp|trail|terreng|ultra|backyard|motbakke|stair|trapp/u', $n)) {
-        return ['type' => 'fjell', 'url' => '/guider/skader/unnga-overbelastning/', 'tekst' => 'Guide: høydemeter uten skade'];
+        return ['type' => 'fjell', 'url' => '/guider/fjell/fjellop-trening/', 'tekst' => 'Guide: høydemeter uten skade'];
     }
     if (preg_match('/maraton|marathon|mila\b|milen\b/u', $n)) {
-        return ['type' => 'lang', 'url' => '/guider/skader/unnga-overbelastning/', 'tekst' => 'Guide: øk uten å bli skadet'];
+        return ['type' => 'lang', 'url' => '/guider/lopeprogram/treningsprogram-halvmaraton-maraton/', 'tekst' => 'Guide: bygg ukene mot løpet'];
     }
     return null;
 }

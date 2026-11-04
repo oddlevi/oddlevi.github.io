@@ -28,6 +28,17 @@ if (!$gyldig) { header('Location: ' . ($type === 'gruppe' ? '/lopegrupper.php' :
 function e9(?string $s): string { return htmlspecialchars($s ?? '', ENT_QUOTES, 'UTF-8'); }
 $MND9 = [1 => 'januar', 'februar', 'mars', 'april', 'mai', 'juni', 'juli',
          'august', 'september', 'oktober', 'november', 'desember'];
+// Guiden som tips før løpssiden (Odd 4.11.2026, «gjelder for alle løp»). Typen settes av guide9 i lop.php;
+// løp uten egen type og gamle lenker får skadeguiden, som passer for alle.
+$GUIDER9 = [
+    'fjell' => ['/guider/fjell/fjellop-trening/', 'Fra vei til fjell: slik trener du for ditt første fjelløp',
+                'Tenk tid, ikke kilometer, tren høydemeter opp og ned hver for seg, og trapp riktig ned før løpet. Fagguide med fjelløper Eirik Haugsnes, 13 minutter.'],
+    'lang' => ['/guider/lopeprogram/treningsprogram-halvmaraton-maraton/', 'Treningsprogram til halvmaraton og maraton',
+               'Start fra der du er, bygg uka rundt langturen og én til to harde økter, og trapp riktig ned de siste ukene. Fagguide med trener Eirik Haugsnes, 13 minutter.'],
+    'alle' => ['/guider/skader/unnga-overbelastning/', 'Slik løper du for å unngå skader og overbelastning',
+               'Mønstrene som gir løpeskader, tegnene på overbelastning og sju grep som virker. Fagguide med trener Eirik Haugsnes som kilde, 9 minutter.'],
+];
+$guide9 = $GUIDER9[(string) ($_GET['guide'] ?? '')] ?? $GUIDER9['alle'];
 $dato_pen = $dato ? ((int) substr($dato, 8, 2)) . '. ' . $MND9[(int) substr($dato, 5, 2)] : '';
 // Knappene til butikkene, som på forsida. Klikket logges i treni.no/g med kanalen «lop-videre».
 // Odd 30.10.2026: samme profil og design som forsida (ny/side.css). «Gratis i testperioden» og
@@ -49,7 +60,7 @@ function butikkknapper8(string $k): string {
 <link rel="icon" href="/favicon.ico">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap">
-<link rel="stylesheet" href="/ny/side.css?v=3">
+<link rel="stylesheet" href="/ny/side.css?v=5">
 </head>
 <body>
 
@@ -92,6 +103,14 @@ function butikkknapper8(string $k): string {
     </div>
     <?= butikkknapper8('lop-videre') ?>
   </div>
+  <aside class="guide-boks" aria-labelledby="guide-boks-t">
+    <span class="etikett">Tips før løpet</span>
+    <div>
+      <b id="guide-boks-t"><a href="<?= e9($guide9[0]) ?>"><?= e9($guide9[1]) ?></a></b>
+      <p><?= e9($guide9[2]) ?></p>
+    </div>
+    <a class="k kant smal" href="<?= e9($guide9[0]) ?>">Les guiden →</a>
+  </aside>
   <p style="margin:28px 0 72px">
     <a class="k kant" href="<?= e9($til) ?>" target="_blank" rel="noopener nofollow">Nei takk, gå videre til påmeldingen hos arrangøren →</a></p>
 </section>
