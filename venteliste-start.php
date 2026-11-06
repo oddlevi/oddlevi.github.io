@@ -413,8 +413,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && $rad && !$vs_rate && trim($_POST["n
 <?php if ($EN): ?>
         <span><b>Yes, Treni may process health data about me.</b> This covers heart rate
           from my watch and what I tell you about injuries, illness and my body. The data is
-          used only for my training guidance, seen only by my coach and Eirik Haugsnes and
-          Odd Levi Paulsen, and sent as extracts to Anthropic to phrase the advice. I can
+          used only for my training guidance, seen only by my coach, Eirik Haugsnes and
+          Paulsen Utvikling, and sent as extracts to Anthropic to phrase the advice. I can
           withdraw consent at any time by writing to
           <a href="mailto:hei@treni.no">hei@treni.no</a> or in the chat on my page.
           <span class="vl-hint" style="display:block; margin-top:.4rem">Heart rate, injuries and
@@ -424,8 +424,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && $rad && !$vs_rate && trim($_POST["n
 <?php else: ?>
         <span><b>Ja, Treni kan behandle helseopplysninger om meg.</b> Det gjelder puls fra
           klokka og det jeg selv forteller om skader, sykdom og kroppen min. Opplysningene
-          brukes bare til treningsveiledningen min, sees bare av treneren min og
-          Eirik Haugsnes og Odd Levi Paulsen, og sendes som utdrag til Anthropic for å lage rådtekst. Jeg kan
+          brukes bare til treningsveiledningen min, sees bare av treneren min, Eirik Haugsnes og
+          Paulsen Utvikling, og sendes som utdrag til Anthropic for å lage rådtekst. Jeg kan
           trekke samtykket når som helst ved å skrive til
           <a href="mailto:hei@treni.no">hei@treni.no</a> eller i chatten på siden min.
           <span class="vl-hint" style="display:block; margin-top:.4rem">Puls, skader og sykdom
