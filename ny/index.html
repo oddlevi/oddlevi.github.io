@@ -61,7 +61,7 @@ header{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 88
 .meny{display:flex;gap:28px;align-items:center;font-size:15px;font-weight:600}
 .meny a{text-decoration:none;color:var(--muted)}
 .meny .liten{color:var(--primary-fg);background:var(--primary);padding:9px 16px;border-radius:999px;font-weight:800}
-@media (max-width:760px){.meny a:not(.liten){display:none}}
+@media (max-width:760px){.topp{flex-wrap:wrap;height:auto;gap:4px 0;padding-top:10px;padding-bottom:6px}.logo{flex:1 0 calc(100% - 130px)}.meny{display:contents}.meny .liten{order:2}.meny a:not(.liten){order:3;flex:1 1 auto;text-align:center;font-size:14px;padding:8px 4px}html{scroll-padding-top:110px}}
 html{scroll-behavior:smooth}
 #last,#slik,#eirik{scroll-margin-top:110px}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}

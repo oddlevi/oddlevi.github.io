@@ -121,7 +121,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <link rel="icon" href="/favicon.ico">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap">
-<link rel="stylesheet" href="/ny/side.css?v=3">
+<link rel="stylesheet" href="/ny/side.css?v=9">
 </head>
 <body>
 
