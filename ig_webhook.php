@@ -58,9 +58,9 @@ function klassifiser(string $t): string {
     return "annet";
 }
 $SVAR = [
-  "arrangor" => "Hei, og takk for meldingen! Arrangerer du et løp, finner du mer her: treni.no/arrangor. Skriv gjerne hvilket løp og når, så svarer Odd Levi deg her i løpet av dagen.",
-  "loper" => "Hei, og takk for meldingen! Vil du ha løpeplan hver uke, bygget på øktene du faktisk løper, laster du ned Treni her: treni.no/#last. Har du et spørsmål om treningen din, skriv det her, så svarer Odd Levi deg i løpet av dagen.",
-  "annet" => "Hei, og takk for meldingen! Odd Levi svarer deg her i løpet av dagen. Arrangerer du et løp: treni.no/arrangor. Vil du ha løpeplan: treni.no/#last.",
+  "arrangor" => "Hei, og takk for meldingen! Arrangerer du et løp, finner du mer her: treni.no/arrangor/?fra=ig-svar. Skriv gjerne hvilket løp og når, så svarer Odd Levi deg her i løpet av dagen.",
+  "loper" => "Hei, og takk for meldingen! Vil du ha løpeplan hver uke, bygget på øktene du faktisk løper, laster du ned Treni her: treni.no/?fra=ig-svar#last. Har du et spørsmål om treningen din, skriv det her, så svarer Odd Levi deg i løpet av dagen.",
+  "annet" => "Hei, og takk for meldingen! Odd Levi svarer deg her i løpet av dagen. Arrangerer du et løp: treni.no/arrangor/?fra=ig-svar. Vil du ha løpeplan: treni.no/?fra=ig-svar#last.",
 ];
 $st = json_decode((string) @file_get_contents($STATE), true) ?: ["svart" => [], "sett" => []];
 
