@@ -147,5 +147,6 @@ footer .c{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;pad
   <span>Treni · <a href="mailto:hei@treni.no">hei@treni.no</a></span>
   <nav aria-label="Bunnmeny"><a href="/lop.php">Løpskalender</a><a href="/lopegrupper.php">Løpegrupper</a><a href="/guider/">Guider</a><a href="/arrangor/">For arrangører</a><a href="/personvern.html">Personvern</a><a href="/vilkar.html">Vilkår</a><a href="/en/">English</a></nav>
 </div></footer>
+<script src="/besok.js" defer></script>
 </body>
 </html>
